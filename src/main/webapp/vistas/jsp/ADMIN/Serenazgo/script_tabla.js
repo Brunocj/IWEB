@@ -18,7 +18,7 @@ function Confirmacion() {
                 text: "El personal ha sido registrado con éxito",
                 icon: "success"
             }).then(() => {
-                window.location.href = "tabla_serenazgo.html";
+                window.location.href = "tabla_serenazgo.jsp";
             });
         }
     });
@@ -43,7 +43,7 @@ function Eliminacion() {
                 text: "El personal ha sido eliminado con éxito",
                 icon: "success"
             }).then(() => {
-                window.location.href = "tabla_serenazgo.html";
+                window.location.href = "tabla_serenazgo.jsp";
             });
         }
     });

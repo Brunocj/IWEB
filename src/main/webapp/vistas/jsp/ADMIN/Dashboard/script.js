@@ -18,7 +18,7 @@ menuToggle.addEventListener('click', function() {
             if (result.isConfirmed) {
                 // Aquí puedes poner el código para cerrar sesión
                 // Por ejemplo, redirigir a la página de inicio de sesión
-                window.location.href = "../LOGIN/login.html"; 
+                window.location.href = "../LOGIN/login.jsp";
             }
         });
     }

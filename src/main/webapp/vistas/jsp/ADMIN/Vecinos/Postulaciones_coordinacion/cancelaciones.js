@@ -15,7 +15,7 @@ function CancelarPagPrincipal(){
                 text: "Se ha cancelado satisfactoriamente",
                 icon: "success"
             }).then(() => {
-                window.location.href = "../../pag_principal.html ";
+                window.location.href = "../../pag_principal.jsp ";
             });
         }
     });
@@ -41,7 +41,7 @@ function CancelarDashboard() {
                 text: "Se ha cancelado satisfactoriamente",
                 icon: "success"
             }).then(() => {
-                window.location.href = "../../Dashboard/dashboard.html";
+                window.location.href = "../../Dashboard/dashboard.jsp";
             });
         }
     });
@@ -68,7 +68,7 @@ function CancelarSerenazgo() {
                 text: "Se ha cancelado satisfactoriamente",
                 icon: "success"
             }).then(() => {
-                window.location.href = "../../Serenazgo/tabla_serenazgo.html";
+                window.location.href = "../../Serenazgo/tabla_serenazgo.jsp";
             });
         }
     });
@@ -95,7 +95,7 @@ function CancelarProfesores() {
                 text: "Se ha cancelado satisfactoriamente",
                 icon: "success"
             }).then(() => {
-                window.location.href = "../../Profesores/tabla_profesor.html";
+                window.location.href = "../../Profesores/tabla_profesor.jsp";
             });
         }
     });
@@ -122,7 +122,7 @@ function CancelarSolAcceso() {
                 text: "Se ha cancelado satisfactoriamente",
                 icon: "success"
             }).then(() => {
-                window.location.href = "../../Vecinos/Solicitudes a acceso/tabla_solicitudes.html";
+                window.location.href = "../../Vecinos/Solicitudes a acceso/tabla_solicitudes.jsp";
             });
         }
     });
@@ -148,7 +148,7 @@ function CancelarSolCoordinacion() {
                 text: "Se ha cancelado satisfactoriamente",
                 icon: "success"
             }).then(() => {
-                window.location.href = "../../Vecinos/Postulaciones a coordinacion/tabla_postulaciones.html";
+                window.location.href = "../../Vecinos/Postulaciones a coordinacion/tabla_postulaciones.jsp";
             });
         }
     });
