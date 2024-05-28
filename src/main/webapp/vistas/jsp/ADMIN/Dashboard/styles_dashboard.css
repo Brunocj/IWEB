@@ -1,0 +1,508 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #FA9E9E;
+    color: #9e9ea4;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .charts {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+  }
+  
+  .charts-card {
+    margin: 0 10px; /* Añade un margen alrededor de cada tarjeta */
+  }
+  
+  .material-icons-outlined {
+    vertical-align: middle;
+    line-height: 1px;
+    font-size: 35px;
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto 1fr; /* Ajusta la primera columna al menú y el resto al contenido */
+    grid-template-areas:
+        'sidebar main'; /* Elimina áreas innecesarias */
+    height: 100vh;
+  }
+  
+  /* ---------- HEADER ---------- */
+  .Header {
+    align-items: center;
+    background: #740707;
+  
+    display: flex;
+    height: 100px;
+    justify-content:flex-end;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+  }
+  
+  .Header .logo a{
+    align-self: center;
+    display: flex;
+    height: 80px;
+    margin-right: 60px;
+    width: 80px;
+    
+  }
+  
+  .Header-nav {
+    display: flex;
+    gap:0;
+    height: 0;
+    justify-content: right;
+    overflow: hidden;
+    width: 100%;
+  }
+  
+  .Header-nav-item {
+    align-items: center;
+    align-self: center;
+    color: rgb(255, 255, 255);
+  
+    flex-shrink: 0;
+    font-size: 20px;
+    font-weight: bold;
+    
+    line-height: 32px;
+    margin: 0 40px;
+    transition: font-size 0.4s ease, padding 0.4s ease;
+  }
+  
+  @media screen and (min-width: 481px) {
+    .Header-nav {
+      height: auto;
+    }
+  }
+  
+  .Header-nav-item h2 {
+    z-index: 2; /* Cambia el orden del h2 */
+    display: flex; /* Cambia el orden del h5 */
+    height:35px;
+    margin: 0;
+    }
+    
+  .Header-nav-item h5 {
+    z-index: 1; /* Cambia el orden del h5 */
+    display: flex; /* Cambia el orden del h5 */
+    height:25px;
+    margin: 0;
+    }
+  
+    .nombreRol {
+      margin: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Centrar elementos horizontalmente */
+      justify-content: center; /* Centrar elementos verticalmente */
+      height: 100%; /* Ajustar la altura para ocupar todo el espacio vertical disponible */
+    }
+    #menuToggle
+    {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    position: fixed;
+    transform: translateY(-50%); /* Centrar verticalmente */
+    top: 50px;
+    left: 50px;
+    z-index: 100;
+    -webkit-user-select: none;
+    user-select: none;
+    font-weight:bold;
+    }
+    
+    
+    
+    
+    #menuToggle a
+    {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    transition: color 0.3s ease;
+    }
+    #menuToggle li{
+      width: 200px;
+      border-radius: 10px;
+    }
+    #menuToggle li:hover
+    {
+      background-color: rgba(255, 255, 255, 0.1); /*Cambiar color*/
+    }
+    
+    #menuToggle a:hover
+    {
+    color: rgb(164, 164, 164); /*cambiarcolor*/
+    }
+    .primero{
+      margin-top:50px;
+    
+      width: 117%;
+    }
+    .seleccionado{
+      background-color: rgba(255, 255, 255, 0.1);
+      width: 117%;
+      border-radius: 10px;
+    }
+    .seleccionado:hover{
+      width: 117%;
+    }
+    #menuToggle input
+    {
+    display: block;
+    width: 40px;
+    height: 30px;
+    position: absolute;
+    top: -7px;
+    left: -5px;
+    
+    cursor: pointer;
+    
+    opacity: 0; /* hide this */
+    z-index: 2; /* and place it over the hamburger */
+    
+    -webkit-touch-callout: none;
+    }
+  
+    #menuToggle span
+    {
+    display: block;
+    width: 33px;
+    height: 4px;
+    margin-bottom: 5px;
+    position: relative;
+    
+    background: rgb(255, 255, 255);
+    border-radius: 3px;
+    
+    z-index: 1;
+    
+    transform-origin: 4px 0px;
+    
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                opacity 0.55s ease;
+    }
+    
+    #menuToggle span:first-child
+    {
+    transform-origin: 0% 0%;
+    }
+    
+    #menuToggle span:nth-last-child(2)
+    {
+    transform-origin: 0% 100%;
+    }
+    
+    /* 
+    * Transform all the slices of hamburger
+    * into a crossmark.
+    */
+    #menuToggle input:checked ~ span
+    {
+    opacity: 1;
+    transform: rotate(45deg) translate(-2px, -1px);
+    background: rgb(255, 255, 255);
+    }
+    
+    /*
+    * But let's hide the middle one.
+    */
+    #menuToggle input:checked ~ span:nth-last-child(3)
+    {
+    opacity: 0;
+    transform: rotate(0deg) scale(0.2, 0.2);
+    }
+    
+    /*
+    * Ohyeah and the last one should go the other direction
+    */
+    #menuToggle input:checked ~ span:nth-last-child(2)
+    {
+    transform: rotate(-45deg) translate(0, -1px);
+    }
+    
+    
+    #menu
+    {
+    
+    position: absolute;
+    width: 300px;
+    margin: -100px 0 0 -50px;
+    padding: 50px;
+    padding-top: 125px;
+    
+    background: #740707;
+    list-style-type: none;
+    -webkit-font-smoothing: antialiased;
+    /* to stop flickering of text in safari */
+    
+    transform-origin: 0% 0%;
+    transform: translate(-100%, 0);
+    height: 2800px;
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+    }
+    
+    #menu li
+    {
+    position: inherit;
+    padding-top: 10px;
+    padding-bottom:10px;
+    padding-left: 150px;
+    font-size: 22px;
+    text-align: left;
+    }
+    
+    
+    #menuToggle input:checked ~ ul
+    {
+    transform: none;
+
+    }
+  
+  
+  .header {
+    grid-area: header;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px 0 30px;
+    box-shadow: 0 6px 7px -3px rgba(0, 0, 0, 0.35);
+  }
+  
+  .menu-icon {
+    display: none;
+  }
+  
+ 
+
+  
+  /* ---------- MAIN ---------- */
+  
+  .main-container {
+    grid-area: main;
+    overflow-y: auto;
+    margin: 0 auto;
+    padding: 20px 20px;
+    color:  rgba(0,0,0);
+  }
+  
+  .main-title {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .main-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    margin: 20px 0;
+  }
+  
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 25px;
+    margin-top: 45px;
+    border-radius: 5px;
+  }
+  
+  
+  .card:first-child {
+    background-color: #c2cadf;
+    border-color: #000f22;
+    border-width: 5px;
+  }
+
+  
+  
+  .card:nth-child(2) {
+    background-color: #f0b870;
+    border-color: #000f22;
+    border-width: 5px;
+  }
+  
+  .card:nth-child(3) {
+    background-color: #f86c6cd5;
+    border-color: #000f22;
+    border-width: 5px;
+  }
+  
+  .card:nth-child(4) {
+    background-color: #acf7ac;
+    border-color: #000f22;
+    border-width: 5px;
+  }
+  
+  .card:nth-child(5) {
+    background-color: #dac861;
+    border-color: #000f22;
+    border-width: 5px;
+  }
+  
+  .card:nth-child(6) {
+    background-color: #ce69d1;
+    border-color: #000f22;
+    border-width: 5px;
+  }
+  
+  .card:nth-child(7) {
+    background-color: #8ed1dd;
+    border-color: #000f22;
+    border-width: 5px;
+  }
+  
+  .card:nth-child(8) {
+    background-color: #dd8fca;
+    border-color: #000f22;
+    border-width: 5px;
+  }
+  
+  .card-inner > .material-icons-outlined {
+    font-size: 45px;
+  }
+  
+  .charts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 60px;
+    
+  }
+  
+  .charts-card {
+    background-color: #FF220044;
+    margin-bottom: 20px;
+    padding: 25px;
+    box-sizing: border-box;
+    -webkit-column-break-inside: avoid;
+    border-radius: 5px;
+    box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.2);
+    
+  }
+  
+  .chart-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  
+  /* Estilos para el nuevo gráfico de barras */
+  #bar-chart2 {
+    width: 100%;
+    height: 350px;
+    
+  }
+  
+  /* Estilos para el nuevo gráfico de pastel */
+  #pie-chart {
+    width: 100%;
+    height: 350px;
+  }
+  /* ---------- MEDIA QUERIES ---------- */
+  
+  /* Medium <= 992px */
+  
+  @media screen and (max-width: 992px) {
+    .grid-container {
+      grid-template-columns: 1fr;
+      grid-template-rows: 0.2fr 3fr;
+      grid-template-areas:
+        'header'
+        'main';
+    }
+  
+    #sidebar {
+      display: none;
+    }
+  
+    .menu-icon {
+      display: inline;
+    }
+  
+    .sidebar-title > span {
+      display: inline;
+    }
+  }
+  
+  /* Small <= 768px */
+  
+  @media screen and (max-width: 768px) {
+    .main-cards {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-bottom: 0;
+    }
+  
+    .charts {
+      grid-template-columns: 1fr;
+      margin-top: 30px;
+    }
+  }
+  
+  /* Extra Small <= 576px */
+  
+  @media screen and (max-width: 576px) {
+    .hedaer-left {
+      display: none;
+    }
+  }
+  
+  .filter {
+    font-weight:bold;
+    font-size:30px;
+  }
+  
+  #period {
+    font-size: 25px;
+  }
+  
+  
+  /* CSS del submenu vecino */
+  
+  .submenu {
+    display: none;
+    width: 200px; /* Ancho específico para que coincida con el menú principal */
+    padding-left: 0px;
+  }
+  
+  
+  .submenu.show {
+    display: block;
+  }
+  
+  
+  .submenu li {
+    margin-bottom: 5px; /* Añade margen inferior para separar las líneas */
+  }
+  
+  .submenu a {
+    display: block; /* Asegura que el enlace ocupe todo el ancho del contenedor li */
+    margin-bottom: 5px; /* Añade margen inferior para separar las líneas */
+  }
+  
+  #solicitudes {
+    font-size: 15px; /* Tamaño de letra deseado */
+    margin-left: 25px;
+  }
+  
+  #postulaciones {
+    font-size: 15px; /* Tamaño de letra deseado */
+    margin-left: 25px;
+  }
+
+  .sidebar-icon-only .sidebar .nav .nav-item.hover-open .nav-link .menu-title.vecinos,
+.sidebar-icon-only .sidebar .nav .nav-item.hover-open .collapse,
+.sidebar-icon-only .sidebar .nav .nav-item.hover-open .collapsing {
+  width: 250px !important;
+}

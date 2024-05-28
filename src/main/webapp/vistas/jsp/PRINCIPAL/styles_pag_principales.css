@@ -1,0 +1,309 @@
+.card-name {
+  text-align: center; /* Centra el texto horizontalmente */
+  margin-top: 10px; /* Espacio entre el texto y la carta */
+}
+.title-pp{
+  font-weight: bold;
+  color: black;
+  margin-bottom: 50px;
+  margin-top: 20px;
+}
+
+.underline-hover {
+  text-decoration: none; /* Elimina el subrayado predeterminado */
+  cursor: pointer; /* Cambia el cursor al pasar por el texto */
+}
+
+.underline-hover:hover {
+  text-decoration: underline; /* Agrega subrayado al pasar el cursor */
+}
+
+.noti-card {
+  position: relative;
+  display: inline-block; /* Asegura que el contenedor se ajuste al tamaño del contenido */
+}
+
+.notification-badge {
+  position: relative; /* Cambia a posición relativa para que el mensaje se posicione correctamente */
+  display: inline-block; /* Permite que el badge y el mensaje estén en línea */
+  margin-right: 10px; /* Espacio entre el badge y el mensaje */
+  left: 150px;
+  bottom: 0;
+  width: 25px;
+  height: 25px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 25px;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+
+.notification-message {
+  display: none;
+  position: absolute;
+  top: -40%;
+  transform: translateX(-50%);
+  left: calc(100% + 10px); /* Posición a la derecha del badge */
+  background-color: #fcfab2;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  color: #333;
+  white-space: nowrap; /* Evita que el texto se rompa */
+}
+
+.row-1 {
+
+  width: 100%;
+  gap: 20px;
+  flex-direction: row;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.row-2 {
+  width: 100%;
+  gap: 30px;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: -20px;
+  margin-bottom: -50px;
+}
+
+.row-3 {
+  width: 100%;
+  gap: 20px;
+  flex-direction: row;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.exclusive-card-content img {
+  max-width: 100%;
+  height: auto;
+}
+
+.exclusive-card{
+  width: 200px;
+  height: 200px;
+  position: relative;
+  perspective: 1000px;
+  margin-left: 10px;
+  border-radius: 15px;
+  bottom: 20px;
+
+}
+
+.card-1 {
+  width: 800px;
+  height: 300px;
+  position: relative;
+  perspective: 1000px;
+  margin-left: 10px;
+  border-radius: 15px;
+  bottom: 20px;
+}
+.card-2 {
+  width: 300px;
+  height: 300px;
+  right: -10px;
+  position: relative;
+  perspective: 1000px;
+  margin-left: 10px;
+  border-radius: 15px;
+}
+.card-ma{
+  width: 390px;
+  height: 200px;
+  right: -10px;
+  position: relative;
+  perspective: 1000px;
+  margin-left: 5px;
+  margin-top: -20px;
+  border-radius: 15px;
+}
+.card-mv{
+  width: 390px;
+  height: 200px;
+  right: 6px;
+  position: relative;
+  perspective: 1000px;
+  margin-left: 0;
+  margin-top: -20px;
+  border-radius: 15px;
+}
+.card-3 {
+  width: 300px;
+  height: 300px;
+  position: relative;
+  perspective: 1000px;
+  margin-left: 10px;
+  border-radius: 15px;
+  right: -10px;
+}
+
+.noti {
+  width: 210px;
+  height: 182px;
+  position: relative;
+  perspective: 1000px;
+  margin-left: 10px;
+  border-radius: 15px;
+  right: -40px;
+}
+
+.card-1 .font img {
+  /*width: 100%;*/
+  height: 100%;
+  object-fit: cover; /* Ajusta la imagen al tamaño del contenedor */
+  border-radius: 15px;
+}
+
+.card-2 .font img {
+  /*width: 100%;*/
+  height: 70%;
+  object-fit: cover; /* Ajusta la imagen al tamaño del contenedor */
+  border-radius: 15px;
+}
+
+.card-ma .font img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ajusta la imagen al tamaño del contenedor */
+  border-radius: 15px;
+}
+
+.card-mv .font img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ajusta la imagen al tamaño del contenedor */
+  border-radius: 15px;
+}
+
+.card-3 .font img {
+  /*width: 100%;*/
+  height: 70%;
+  object-fit: cover; /* Ajusta la imagen al tamaño del contenedor */
+  border-radius: 15px;
+}
+
+.noti .font img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ajusta la imagen al tamaño del contenedor */
+  border-radius: 15px;
+}
+
+
+
+.font{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 1s;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  display: flex;
+  flex-direction: column; /* Cambiar la dirección de flexión a columna */
+  align-items: center;
+  transition: 1s;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.card-1 .font {
+  background-color: white;
+}
+
+.card-ma .font{
+  background-color: white;
+}
+
+.card-mv .font{
+  background-color: white;
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+.exclusive-card:hover .font{
+  transform: rotateY(180deg);
+}
+
+.exclusive-card:hover .back{
+  transform: rotateY(360deg);
+}
+
+.card-ma:hover .font{
+  transform: rotateY(180deg);
+}
+
+.card-ma:hover .back{
+  transform: rotateY(360deg);
+}
+
+.card-mv:hover .font{
+  transform: rotateY(180deg);
+}
+
+.card-mv:hover .back{
+  transform: rotateY(360deg);
+}
+
+.card-2:hover .font {
+  transform: rotateY(180deg);
+}
+
+.card-2:hover .back {
+  transform: rotateY(360deg);
+}
+.card-3:hover .font {
+  transform: rotateY(180deg);
+}
+
+.card-3:hover .back {
+  transform: rotateY(360deg);
+}
+
+.card-2:hover {
+  z-index: 2; /* Aumenta el z-index para que esté por encima de las cartas de la tercera fila */
+}
+
+.card-3:hover {
+  z-index: 1; /* Disminuye el z-index para que esté por debajo de las cartas de la segunda fila */
+}
+
+.RowWrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}

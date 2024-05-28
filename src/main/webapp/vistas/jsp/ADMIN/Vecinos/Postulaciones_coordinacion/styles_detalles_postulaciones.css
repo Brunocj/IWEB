@@ -1,0 +1,151 @@
+.card1 {
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(216, 19, 19, 0.1);
+    background-color: rgb(244, 243, 250); /* Cambiado el fondo a blanco */
+    margin-top: 30px;
+}
+
+.wrapper {
+    text-align: center;
+}
+
+.wrapper h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.inputs {
+    margin-bottom: 20px;
+}
+
+.inputs input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc; /* Añadir un borde de 1px sólido con color #ccc */
+    border-radius: 5px;
+    outline: none;
+}
+
+.inputs input:focus {
+    border-color: #ccc;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttons input[type="submit"] {
+    width: 48%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.buttons input.green[type="submit"] {
+    background-color: #4caf50; /* Color verde */
+    color: #fff;
+}
+
+.buttons input.red[type="submit"] {
+    background-color: #f44336; /* Color rojo */
+    color: #fff;
+}
+
+.buttons input[type="submit"]:hover {
+    background-color: #000f22; /* Color más oscuro para ambos botones */
+}
+
+
+
+.inputs {
+    text-align: left; /* Alinear el texto a la izquierda */
+}
+
+.inputs label {
+    color: #808080; /* Color gris */
+    font-size: 14px; /* Tamaño de fuente más pequeño */
+    display: block; /* Para que cada etiqueta aparezca en una línea nueva */
+    margin-bottom: 5px; /* Añadir un pequeño espacio entre etiquetas */
+    margin-right: 5px; /* Ajustar el margen derecho de las etiquetas */
+}
+
+.main-panel {
+    background-color: #FFEBEE;
+}
+
+
+.header-container {
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.button {
+    background-color: #000f22;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    text-decoration: none; /* Evitar subrayado del texto */
+    transition: background-color 0.3s ease;
+    float: right; /* Para posicionar a la derecha */
+    margin-top: -22px;
+}
+
+.button:hover {
+    background-color: #193255; /* Color de fondo al pasar el cursor */
+    text-decoration: none; /* Evitar subrayado del texto en hover */
+    color: white;
+}
+
+@media screen and (max-width: 600px) {
+    .button {
+        float: none; /* Eliminar float en pantallas pequeñas */
+        margin-top: 10px; /* Ajustar margen superior para separación */
+        text-align: center; /* Centrar el botón en pantallas pequeñas */
+    }
+}
+
+
+.correo-cuerpo {
+    font-size: 14px;
+    margin-bottom: 10px;
+    width: calc(100% - 19px);
+    height: 150px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 3px;
+    overflow-y: auto;
+    margin-right: 20px;
+    text-align: justify;
+}
+
+.correo-cuerpo::-webkit-scrollbar {
+    width: 10px; /* Ancho de la barra de desplazamiento */
+
+}
+
+.correo-cuerpo::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* Color de fondo de la barra de desplazamiento */
+    border: 2px solid #ccc; /* Borde de la barra de desplazamiento */
+    border-radius: 4px; /* Radio de borde para el pulgar de la barra de desplazamiento */
+    cursor: pointer;
+}
+#titulo {
+    color: black
+}
+
+.sidebar-icon-only .sidebar .nav .nav-item.hover-open .nav-link .menu-title.vecinos,
+.sidebar-icon-only .sidebar .nav .nav-item.hover-open .collapse,
+.sidebar-icon-only .sidebar .nav .nav-item.hover-open .collapsing {
+  width: 250px !important;
+}

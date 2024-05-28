@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notificaciones</title>
+<style>
+  .notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #ff0000;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="notification" id="notification">
+  Notificaciones <span id="notification-count">0</span>
+</div>
+
+<script>
+  // Función para actualizar la cantidad de notificaciones
+  function actualizarNotificaciones(cantidad) {
+    var notificationCount = document.getElementById("notification-count");
+    notificationCount.textContent = cantidad;
+  }
+
+  // Simulación de cambio en la cantidad de notificaciones (puedes reemplazar esto con tu lógica real)
+  var cantidadNotificaciones = 5; // Por ejemplo, inicialmente hay 5 notificaciones
+  actualizarNotificaciones(cantidadNotificaciones);
+
+  // Ejemplo de cómo la cantidad de notificaciones puede cambiar dinámicamente (por ejemplo, cuando se hace clic en un botón)
+  document.getElementById("notification").addEventListener("click", function() {
+    cantidadNotificaciones--; // Simulación de una notificación vista
+    actualizarNotificaciones(cantidadNotificaciones);
+  });
+</script>
+
+</body>
+</html>

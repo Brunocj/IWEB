@@ -1,0 +1,67 @@
+/* Estilos para el contenedor principal */
+.content-wrapper {
+    background-color: #FFEBEE;
+    padding: 20px;
+}
+
+/* Estilos para la tarjeta */
+.card2 {
+    background-color: #dcdbf3;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgb(207, 209, 247);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilos para la imagen principal */
+.card img {
+    width: 100%;
+    
+    margin-bottom: 20px;
+}
+
+/* Estilos para el contenido principal */
+.cont-main {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 800px;
+}
+
+/* Estilos para el contenido de texto */
+.cont-text {
+    flex: 1;
+    padding-right: 20px;
+    text-align: justify;
+}
+
+.cont-text h1 {
+    font-size: 36px;
+    color: #333333;
+}
+
+.cont-text h3 {
+    font-size: 18px;
+    color: #666666;
+    margin-bottom: 10px;
+}
+
+/* Estilos para el contenido de imagen */
+.cont-img {
+    flex: 1;
+    text-align: center;
+}
+
+.cont-img img {
+    width: 100%;
+    max-width: 300px;
+}
+.sidebar-icon-only .sidebar .nav .nav-item.hover-open .nav-link .menu-title.vecinos,
+.sidebar-icon-only .sidebar .nav .nav-item.hover-open .collapse,
+.sidebar-icon-only .sidebar .nav .nav-item.hover-open .collapsing {
+  width: 250px !important;
+}
