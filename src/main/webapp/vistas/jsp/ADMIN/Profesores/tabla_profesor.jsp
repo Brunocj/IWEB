@@ -1,4 +1,5 @@
-<%--
+<%@ page import="org.example.webappsm.model.beans.Profesor" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: bruno
   Date: 27/05/2024
@@ -6,6 +7,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    ArrayList<Profesor> lista = (ArrayList<Profesor>) request.getAttribute("listaprofesor");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,18 +20,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Lista de profesores</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="styles_tabla.css">
-    <link rel="stylesheet" href="../../../../assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../../../../assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Profesores/styles_tabla.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/css/vendor.bundle.base.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End Plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="../../../../assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../LogoSM.png" /> <!--Cambiar la ubicacion del logo de la pagina aca tmb-->
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" />
     <!--JS para los popups-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -48,7 +54,7 @@
             <!-- Codigo para un item de la barra lateral que no tiene sublista -->
             <li class="nav-item menu-items "> <!-- la clase "active" solo se usa para la vista que está activa -->
 
-                <a class="nav-link" href="../pagina_principal_admin.jsp"> <!-- Cambiar href de acuerdo a lo necesario -->
+                <a class="nav-link" href="ProfesorPagPrincipal"> <!-- Cambiar href de acuerdo a lo necesario -->
                     <span class="menu-icon">
                 <i class="mdi mdi-home"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
@@ -142,7 +148,7 @@
                                     <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default; text-align: right;">ADMIN</h2>
                                     <h5 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 15px; font-weight:500; cursor: default;">Administrador de San Miguel</h5>
                                 </div>
-                                <img class="img-xs rounded-circle" src="../../LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
+                                <img class="img-xs rounded-circle" src="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
 
                             </div>
                         </a>
@@ -198,92 +204,46 @@
                             </div>
                         </div>
                     </div>
+
                     <table id="miTabla" class="table" style="margin-bottom:15px;">
                         <thead style="background-color: #ff8e9f;"> <!--Cambiar al color de fondo de la pagina, pero un poco mas oscuro-->
-                        <tr style="text-align: center; font-weight:800;">
-                            <th style ="color: white;font-size: 17px;cursor: pointer;">Apellidos</th>
-                            <th style ="color: white;font-size: 17px;cursor: pointer;">Nombres</th>
-                            <th style ="color: white;font-size: 17px;cursor: pointer;">Curso</th>
-                            <th style="width: 20px;color: white"></th>
-                            <th style="width: 20px;color: white"></th>
-                        </tr>
+                            <tr style="text-align: center; font-weight:800;">
+                                <th style ="color: white;font-size: 17px;cursor: pointer;">Apellidos</th>
+                                <th style ="color: white;font-size: 17px;cursor: pointer;">Nombres</th>
+                                <th style ="color: white;font-size: 17px;cursor: pointer;">Curso</th>
+                                <th style="width: 20px;color: white"></th>
+                                <th style="width: 20px;color: white"></th>
+                            </tr>
                         </thead>
                         <hr style="border: none; border-top: 3px solid black; margin-top: -55px; border-radius: 10px;">
 
                         <tbody style="text-align: center;color: black;">
-                        <tr style="text-align: center;">
-                            <td><a>Yarleque Medina</a></td>
-                            <td><a>Manuel Augusto</a></td>
-                            <td>Propa</td>
-                            <td><a href ="editarProfesor.jsp" class ="mdi mdi-lead-pencil" style ="color: #6c7293;font-size: 20px;"></a></td>
-                            <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-delete" style ="color: #6c7293;font-size: 20px;"></a></td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><a>López Pascual</a></td>
-                            <td><a>Adrián Alvaro</a></td>
-                            <td>Ajedrez</td>
-                            <td><a href ="editarProfesor.jsp" class ="mdi mdi-lead-pencil" style ="color: #6c7293;font-size: 20px;"></a></td>
-                            <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-delete" style ="color: #6c7293;font-size: 20px;"></a></td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><a>Coronado Maxwell</a></td>
-                            <td><a>Jorge</a></td>
-                            <td>Ondas</td>
-                            <td><a href ="editarProfesor.jsp" class ="mdi mdi-lead-pencil" style ="color: #6c7293;font-size: 20px;"></a></td>
-                            <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-delete" style ="color: #6c7293;font-size: 20px;"></a></td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td ><a>Bustamante Melo</a></td>
-                            <td><a>Pedro Miguel</a></td>
-                            <td>Ajedrez</td>
-                            <td><a href ="editarProfesor.jsp" class ="mdi mdi-lead-pencil" style ="color: #6c7293;font-size: 20px;"></a></td>
-                            <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-delete" style ="color: #6c7293;font-size: 20px;"></a></td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><a>Yarleque Medina</a></td>
-                            <td><a>Manuel Augusto</a></td>
-                            <td>Futbol</td>
-                            <td><a href ="editarProfesor.jsp" class ="mdi mdi-lead-pencil" style ="color: #6c7293;font-size: 20px;"></a></td>
-                            <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-delete" style ="color: #6c7293;font-size: 20px;"></a></td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><a>Yarleque Medina</a></td>
-                            <td><a>Manuel Augusto</a></td>
-                            <td>Natacion</td>
-                            <td><a href ="editarProfesor.jsp" class ="mdi mdi-lead-pencil" style ="color: #6c7293;font-size: 20px;"></a></td>
-                            <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-delete" style ="color: #6c7293;font-size: 20px;"></a></td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><a>Galarga Melo</a></td>
-                            <td><a>Elver Augusto</a></td>
-                            <td>Futbol</td>
-                            <td><a href ="editarProfesor.jsp" class ="mdi mdi-lead-pencil" style ="color: #6c7293;font-size: 20px;"></a></td>
-                            <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-delete" style ="color: #6c7293;font-size: 20px;"></a></td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><a>Calderon Rodriguez</a></td>
-                            <td><a>José Ricardo</a></td>
-                            <td>Yoga</td>
-                            <td><a href ="editarProfesor.jsp" class ="mdi mdi-lead-pencil" style ="color: #6c7293;font-size: 20px;"></a></td>
-                            <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-delete" style ="color: #6c7293;font-size: 20px;"></a></td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><a>garay Cruz</a></td>
-                            <td><a>Eduardo Daniel</a></td>
-                            <td>Ajedrez</td>
-                            <td><a href ="editarProfesor.jsp" class ="mdi mdi-lead-pencil" style ="color: #6c7293;font-size: 20px;"></a></td>
-                            <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-delete" style ="color: #6c7293;font-size: 20px;"></a></td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><a>Coronado Maxwell</a></td>
-                            <td><a>Jorge</a></td>
-                            <td>Propa</td>
-                            <td><a href ="editarProfesor.jsp" class ="mdi mdi-lead-pencil" style ="color: #6c7293;font-size: 20px;"></a></td>
-                            <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-delete" style ="color: #6c7293;font-size: 20px;"></a></td>
-                        </tr>
+
+                            <%
+                                if (lista != null) {
+                                    for (Profesor profesor : lista) {
+                            %>
+                            <tr style="text-align: center;">
+                                <td><a><%= profesor.getApellido() %></a></td>
+                                <td><a><%= profesor.getNombre() %></a></td>
+                                <td><%= profesor.getCurso() %></td>
+                                <td><a href ="editarProfesor.html" class ="mdi mdi-lead-pencil" style ="color: #6c7293;font-size: 20px;"></a></td>
+                                <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-delete" style ="color: #6c7293;font-size: 20px;"></a></td>
+                            </tr>
+
+                            <%
+                                }
+                            } else {
+                            %>
+                            <tr>
+                                <td colspan="5">No hay profesores disponibles.</td>
+                            </tr>
+                            <%
+                                }
+                            %>
+
                         </tbody>
                     </table>
-
                     <!-- content-wrapper ends -->
                     <!-- partial:../../partials/_footer.html -->
                     <!-- partial -->
@@ -296,16 +256,16 @@
 
         <!-- container-scroller -->
         <!-- plugins:js -->
-        <script src="../../../../assets/vendors/js/vendor.bundle.base.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
         <!-- endinject -->
         <!-- Plugin js for this page -->
         <!-- End plugin js for this page -->
         <!-- inject:js -->
-        <script src="../../../../assets/js/off-canvas.js"></script>
-        <script src="../../../../assets/js/hoverable-collapse.js"></script>
-        <script src="../../../../assets/js/misc.js"></script>
-        <script src="../../../../assets/js/settings.js"></script>
-        <script src="../../../../assets/js/todolist.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
         <!-- endinject -->
         <!-- Custom js for this page -->
         <script>
@@ -327,7 +287,7 @@
         </script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-        <script src = "script_tabla.js"></script>
+        <script src = "${pageContext.request.contextPath}/vistas/jsp/ADMIN/Profesores/script_tabla.js"></script>
 
         <!-- End custom js for this page -->
 </body>

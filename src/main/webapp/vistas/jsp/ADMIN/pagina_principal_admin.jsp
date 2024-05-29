@@ -14,18 +14,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Página Principal Admin</title>
   <!-- plugins:css -->
-  <link rel="stylesheet" href="../PRINCIPAL/styles_pag_principales.css">
-  <link rel="stylesheet" href="../../../assets/vendors/mdi/css/materialdesignicons.min.css">
-  <link rel="stylesheet" href="../../../assets/vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/styles_pag_principales.css"/>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/styles.css"/>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/css/vendor.bundle.base.css">
   <!-- endinject -->
   <!-- Plugin css for this page -->
   <!-- End Plugin css for this page -->
   <!-- inject:css -->
   <!-- endinject -->
   <!-- Layout styles -->
-  <link rel="stylesheet" href="../../../assets/css/style.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
   <!-- End layout styles -->
-  <link rel="shortcut icon" href="../LogoSM.png" />
+  <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" />
   <!--JS para los popups-->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -73,7 +74,7 @@
         </a>
       </li>
       <li class="nav-item menu-items">
-        <a class="nav-link" href="Profesores/tabla_profesor.jsp">
+        <a class="nav-link" href="ProfesorTablaServlet">
               <span class="menu-icon">
                 <i class="mdi mdi-teach"></i>
               </span>
@@ -138,7 +139,7 @@
                   <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default;">Pedro Bustamante</h2>
                   <h5 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 15px; font-weight:500; cursor: default;">Administrador de San Miguel, Lima</h5>
                 </div>
-                <img class="img-xs rounded-circle" src="../LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
+                <img class="img-xs rounded-circle" src="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
 
               </div>
             </a>
@@ -160,7 +161,7 @@
           <div class="row-1">
             <div class="card-1" style="color:black;">
               <div class="font">
-                <img src="../PRINCIPAL/adminn.jpg" alt="SanMiguel">
+                <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/adminn.jpg" alt="SanMiguel">
                 <div class="card-content">
                   <h3>¿Cuál es la función del administrador?</h3>
                   <p>Al ser administrador, deberás velar por el bienestar de todos los san miguelinos y promover una mejora en nuestra comunidad.</p>
@@ -170,10 +171,10 @@
             <div class="exclusive-card">
               <div class="exclusive-card-content">
                 <div class="front">
-                  <img src="../PRINCIPAL/logo_san_miguel_admin.png" alt="Logo">
+                  <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/logo_san_miguel_admin.png" alt="Logo">
                 </div>
                 <div class="back">
-                  <img src="../PRINCIPAL/ahora_eres_admin.png" alt="Ahora eres admin">
+                  <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/ahora_eres_admin.png" alt="Ahora eres admin">
                 </div>
               </div>
             </div>
@@ -184,14 +185,14 @@
             <div class="col-md-4">
               <div class="card-2">
                 <div class="font">
-                  <img src="../PRINCIPAL/users.png" alt="Vecinos">
+                  <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/users.png" alt="Vecinos">
                 </div>
                 <div class="back" style="padding: 10px;">
                       <span style="font-size: 16px; color: black;"> Podrás visualizar las lista de solicitudes de acceso a la plataforma y la lista de solicitudes a coordinador.
                         Debes estar atento a ellas para no dejar ninguna solicitud pendiente <br>
                         <span style="font-size: 10px; text-decoration: underline;">Haga click en el nombre Vecino Sanmiguelino para dirigirse automáticamente a las listas.</span>
                       </span>
-                  <img src="../PRINCIPAL/personas.png" alt="Small Image" style="max-width: 100%; max-height: 100px; margin-top: 10px;">
+                  <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/personas.png" alt="Small Image" style="max-width: 100%; max-height: 100px; margin-top: 10px;">
                 </div>
               </div>
               <div class="card-name">
@@ -201,13 +202,13 @@
             <div class="col-md-4">
               <div class="card-2">
                 <div class="font">
-                  <img src="../PRINCIPAL/pol.png" alt="Serenazgo">
+                  <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/pol.png" alt="Serenazgo">
                 </div>
                 <div class="back" style="padding: 10px;">
                       <span style="font-size: 16px; color: black;"> Podrás visualizar la lista de serenazgos para organizar estratégicamente el personal de seguridad del distrito. <br>
                         <span style="font-size: 10px; text-decoration: underline;">Haga click en el nombre Serenazgo Dispatcher para dirigirse automáticamente a la lista.</span>
                       </span>
-                  <img src="../PRINCIPAL/insignia.png" alt="Small Image" style="max-width: 100%; max-height: 100px; margin-top: 10px;">
+                  <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/insignia.png" alt="Small Image" style="max-width: 100%; max-height: 100px; margin-top: 10px;">
                 </div>
               </div>
               <div class="card-name">
@@ -217,13 +218,13 @@
             <div class="col-md-4">
               <div class="card-2">
                 <div class="font">
-                  <img src="../PRINCIPAL/prof.png" alt="Profesores">
+                  <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/prof.png" alt="Profesores">
                 </div>
                 <div class="back" style="padding: 10px;">
                       <span style="font-size: 16px; color: black;"> Podrás visualizar las lista de profesores, donde podrás administrarlos y derivarlos para cada tipo de evento, ya sea para Cultura o Deporte <br>
                         <span style="font-size: 10px; text-decoration: underline;">Haga click en el nombre Profesores para dirigirse automáticamente a la lista.</span>
                       </span>
-                  <img src="../PRINCIPAL/eventos.png" alt="Small Image" style="max-width: 100%; max-height: 100px; margin-top: 10px;">
+                  <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/eventos.png" alt="Small Image" style="max-width: 100%; max-height: 100px; margin-top: 10px;">
                 </div>
               </div>
               <div class="card-name">
@@ -240,17 +241,17 @@
 </div>
 <!-- container-scroller -->
 <!-- plugins:js -->
-<script src="../../../assets/vendors/js/vendor.bundle.base.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
 <!-- endinject -->
 <!-- Plugin js for this page -->
 <!-- End plugin js for this page -->
 <!-- inject:js -->
-<script src="../../../assets/js/off-canvas.js"></script>
-<script src="../../../assets/js/hoverable-collapse.js"></script>
-<script src="../../../assets/js/misc.js"></script>
-<script src="../../../assets/js/settings.js"></script>
-<script src="../../../assets/js/todolist.js"></script>
-<script src="../PRINCIPAL/paginas_principales.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
+<script src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/paginas_principales.js"></script>
 <!-- endinject -->
 <!-- Custom js for this page -->
 <script>
