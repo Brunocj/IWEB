@@ -54,7 +54,7 @@
             <!-- Codigo para un item de la barra lateral que no tiene sublista FIN-->
             <!-- Codigo para un item de la barra lateral que no tiene sublista -->
             <li class="nav-item menu-items">
-                <a class="nav-link" href="Miperfil.html">
+                <a class="nav-link" href="Miperfil.jsp">
               <span class="menu-icon">
                 <i class="mdi mdi-account"></i>
               </span>
@@ -70,7 +70,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="solicitarCoordinador.html">
+                <a class="nav-link" href="solicitud/solicitarCoordinador.jsp">
               <span class="menu-icon">
                 <i class="mdi mdi-key-change"></i>
               </span>
@@ -78,7 +78,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="eventos/eventos.html"> <!-- Cambiar href de acuerdo a lo necesario -->
+                <a class="nav-link" href="eventos/eventos.jsp"> <!-- Cambiar href de acuerdo a lo necesario -->
                     <span class="menu-icon">
                 <i class="mdi mdi-earth"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
@@ -86,7 +86,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="incidencias/incidencia_vecino.html"> <!-- Cambiar href de acuerdo a lo necesario -->
+                <a class="nav-link" href="incidencias/incidencia_vecino.jsp"> <!-- Cambiar href de acuerdo a lo necesario -->
                     <span class="menu-icon">
                 <i class="mdi mdi-alert"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
@@ -107,7 +107,7 @@
     </nav>
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
-        <!-- partial:../../partials/_navbar.html -->
+        <!-- partial:../../partials/_navbar.jsp -->
         <nav class="navbar p-0 fixed-top d-flex flex-row">
 
             <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch" style ="background-color: #000f22"> <!--Cambiar al color mas oscuro-->
@@ -192,7 +192,7 @@
                                 </div>
                             </div>
                             <div class="card-name">
-                                <a href="solicitarCoordinador.html" style="color: black; font-weight: bold;"> Solicitud para <br> Coordinador</a>
+                                <a href="solicitarCoordinador.jsp" style="color: black; font-weight: bold;"> Solicitud para <br> Coordinador</a>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -208,7 +208,7 @@
                                 </div>
                             </div>
                             <div class="card-name">
-                                <a href="eventos/eventos.html" style="color: black; font-weight: bold;"> Visualizar <br> Eventos</a>
+                                <a href="eventos/eventos.jsp" style="color: black; font-weight: bold;"> Visualizar <br> Eventos</a>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -224,13 +224,13 @@
                                 </div>
                             </div>
                             <div class="card-name">
-                                <a href="incidencias/incidencia_vecino.html" style="color: black; font-weight: bold;">Registrar <br> Incidencia </a>
+                                <a href="incidencias/incidencia_vecino.jsp" style="color: black; font-weight: bold;">Registrar <br> Incidencia </a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- content-wrapper ends -->
-                <!-- partial:../../partials/_footer.html -->
+                <!-- partial:../../partials/_footer.jsp -->
                 <!-- partial -->
 
             </div>
@@ -266,7 +266,7 @@
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "../LOGIN/login.html"; //Cambiar la ubicacion del login de acuerdo a lo necesario
+                    window.location.href = "../LOGIN/login.jsp"; //Cambiar la ubicacion del login de acuerdo a lo necesario
                 }
             });
         }
