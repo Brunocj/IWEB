@@ -65,7 +65,7 @@
 
 
             <li class="nav-item menu-items">
-                <a class="nav-link" href="../Dashboard/dashboard.jsp" >
+                <a class="nav-link" href="ProfesorPagPrincipal" >
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>
@@ -73,7 +73,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items ">
-                <a class="nav-link" href="../Serenazgo/tabla_serenazgo.jsp ">
+                <a class="nav-link" href="ProfesorPagPrincipal">
               <span class="menu-icon">
                 <i class="mdi mdi-security"></i>
               </span>
@@ -81,7 +81,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="../Profesores/tabla_profesor.jsp">
+                <a class="nav-link" href="ProfesorPagPrincipal">
               <span class="menu-icon">
                 <i class="mdi mdi-teach"></i>
               </span>

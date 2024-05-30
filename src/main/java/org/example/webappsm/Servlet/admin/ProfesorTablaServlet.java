@@ -18,7 +18,7 @@ public class ProfesorTablaServlet extends HttpServlet {
         ProfesorDao profesorDao = new ProfesorDao();
         ArrayList<Profesor> list = profesorDao.listarProfesoresTabla();
 
-
+        //OBJETO A ENVIAR
         request.setAttribute("listaprofesor",list);
 
         String vista = "vistas/jsp/ADMIN/Profesores/tabla_profesor.jsp";
