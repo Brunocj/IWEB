@@ -45,42 +45,39 @@
     <ul class="nav" style = "position: fixed;">
 
       <!-- Codigo para un item de la barra lateral que no tiene sublista -->
-      <li class="nav-item menu-items active"> <!-- la clase "active" solo se usa para la vista que está activa -->
-
-        <a class="nav-link" href="#"> <!-- Cambiar href de acuerdo a lo necesario -->
-          <span class="menu-icon">
-                <i class="mdi mdi-speedometer"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
-              </span>
-          <span class="menu-title" style="color: white;">Página principal</span> <!-- Cambiar color de texto de acuerdo a lo necesario -->
+      <li class="nav-item menu-items ${"pagPrincipal".equals(request.getParameter("action")) ? "active" : ""}">
+        <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=pagPrincipal">
+        <span class="menu-icon">
+            <i class="mdi mdi-home"></i>
+        </span>
+          <span class="menu-title" style="color: white;">Página principal</span>
         </a>
       </li>
-      <!-- Codigo para un item de la barra lateral que no tiene sublista FIN-->
-
-
-      <li class="nav-item menu-items">
-        <a class="nav-link" href="Dashboard/dashboard.jsp">
-              <span class="menu-icon">
-                <i class="mdi mdi-chart-bar"></i>
-              </span>
+      <li class="nav-item menu-items ${"dashboard".equals(request.getParameter("action")) ? "active" : ""}">
+        <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=dashboard">
+        <span class="menu-icon">
+            <i class="mdi mdi-chart-bar"></i>
+        </span>
           <span class="menu-title" style="color: white;">Dashboard</span>
         </a>
       </li>
-      <li class="nav-item menu-items ">
-        <a class="nav-link" href="Serenazgo/tabla_serenazgo.jsp ">
-              <span class="menu-icon">
-                <i class="mdi mdi-security"></i>
-              </span>
+      <li class="nav-item menu-items ${"tablaSerenazgo".equals(request.getParameter("action")) ? "active" : ""}">
+        <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=tablaSerenazgo">
+        <span class="menu-icon">
+            <i class="mdi mdi-security"></i>
+        </span>
           <span class="menu-title" style="color: white;">Serenazgo</span>
         </a>
       </li>
-      <li class="nav-item menu-items">
-        <a class="nav-link" href="ProfesorTablaServlet">
-              <span class="menu-icon">
-                <i class="mdi mdi-teach"></i>
-              </span>
+      <li class="nav-item menu-items ${"tablaProfesores".equals(request.getParameter("action")) ? "active" : ""}">
+        <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=tablaProfesores">
+        <span class="menu-icon">
+            <i class="mdi mdi-teach"></i>
+        </span>
           <span class="menu-title" style="color: white;">Profesores</span>
         </a>
       </li>
+
       <!-- Codigo para un item de la barra lateral que SI tiene sublista -->
       <li class="nav-item menu-items">
         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
@@ -94,12 +91,12 @@
         <div class="collapse" id="ui-basic">
           <ul class="nav flex-column sub-menu"><!-- Colocar items de la sublista -->
 
-            <li class="nav-item  "> <a class="nav-link" href="Vecinos/Solicitudes_acceso/tabla_solicitudes.jsp" style="color: white;">
+            <li class="nav-item ${"tablaAcceso".equals(request.getParameter("action")) ? "active" : ""}"> <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=tablaAcceso" style="color: white;">
                   <span class="menu-icon">
                     <i class="mdi mdi-account-alert"></i>
                   </span>
               Sol. de acceso</a></li>
-            <li class="nav-item "> <a class="nav-link " href="Vecinos/Postulaciones_coordinacion/tabla_postulaciones.jsp" style="color: white;">
+              <li class="nav-item ${"tablaCoordinador".equals(request.getParameter("action")) ? "active" : ""}"> <a class="nav-link " href="<%=request.getContextPath()%>/Admin?action=tablaCoordinador" style="color: white;">
                   <span class="menu-icon ">
                     <i class="mdi mdi-account-alert "></i>
                   </span>
