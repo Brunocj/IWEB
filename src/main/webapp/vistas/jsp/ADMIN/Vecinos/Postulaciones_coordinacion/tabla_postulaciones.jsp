@@ -14,18 +14,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Pagina en blanco</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="styles_tabla.css">
-    <link rel="stylesheet" href="../../../../../assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../../../../../assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/vistas/jsp/ADMIN/Vecinos/Postulaciones_coordinacion/styles_tabla.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/vendors/css/vendor.bundle.base.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End Plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="../../../../../assets/css/style.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../LogoSM.png" /> <!--Cambiar la ubicacion del logo de la pagina aca tmb-->
+    <link rel="shortcut icon" href="<%=request.getContextPath()%>/vistas/jsp/LogoSM.png" /> <!--Cambiar la ubicacion del logo de la pagina aca tmb-->
     <!--JS para los popups-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -46,9 +46,9 @@
         <ul class="nav" style="position: fixed;">
 
             <!-- Codigo para un item de la barra lateral que no tiene sublista -->
-            <li class="nav-item menu-items "> <!-- la clase "active" solo se usa para la vista que está activa -->
+            <li class="nav-item menu-items ${"pagPrincipal".equals(request.getParameter("action")) ? "active" : ""}"> <!-- la clase "active" solo se usa para la vista que está activa -->
 
-                <a class="nav-link" href="../../pag_principal.jsp"> <!-- Cambiar href de acuerdo a lo necesario -->
+                <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=pagPrincipal"> <!-- Cambiar href de acuerdo a lo necesario -->
                     <span class="menu-icon">
                 <i class="mdi mdi-home"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
@@ -59,7 +59,7 @@
 
 
             <li class="nav-item menu-items">
-                <a class="nav-link" href="../../Dashboard/dashboard.jsp">
+                <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=dashboard">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>
@@ -67,7 +67,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items ">
-                <a class="nav-link" href="../../Serenazgo/tabla_serenazgo.jsp">
+                <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=tablaSerenazgo">
               <span class="menu-icon">
                 <i class="mdi mdi-security"></i>
               </span>
@@ -75,7 +75,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="../../Profesores/tabla_profesor.jsp">
+                <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=tablaProfesores">
               <span class="menu-icon">
                 <i class="mdi mdi-teach"></i>
               </span>
@@ -95,13 +95,13 @@
                 <div class="collapse" id="ui-basic">
                     <ul class="nav flex-column sub-menu"><!-- Colocar items de la sublista -->
 
-                        <li class="nav-item "> <a class="nav-link" href="../../Vecinos/Solicitudes_acceso/tabla_solicitudes.jsp" style="color: white;">
+                        <li class="nav-item  "> <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=tablaAcceso" style="color: white;">
                   <span class="menu-icon">
-                    <i class="mdi mdi-account-alert "></i>
+                    <i class="mdi mdi-account-alert"></i>
                   </span>
                             Sol. de acceso</a></li>
-                        <li class="nav-item active"> <a class="nav-link " href="../../Vecinos/Postulaciones_coordinacion/tabla_postulaciones.jsp" style="color: white;">
-                  <span class="menu-icon ">
+                        <li class="nav-item "> <a class="nav-link " href="<%=request.getContextPath()%>/Admin?action=tablaCoordinador" style="color: white;">
+                    <span class="menu-icon ">
                     <i class="mdi mdi-account-alert "></i>
                   </span>
                             Sol. a coordinación</a></li>
@@ -142,7 +142,7 @@
                                     <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default; text-align: right;">ADMIN</h2>
                                     <h5 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 15px; font-weight:500; cursor: default;">Administrador de San Miguel</h5>
                                 </div>
-                                <img class="img-xs rounded-circle" src="../../../LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
+                                <img class="img-xs rounded-circle" src="<%=request.getContextPath()%>/vistas/jsp/LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
 
                             </div>
                         </a>
@@ -278,16 +278,16 @@
 
         <!-- container-scroller -->
         <!-- plugins:js -->
-        <script src="../../../../../assets/vendors/js/vendor.bundle.base.js"></script>
+        <script src="<%=request.getContextPath()%>/assets/vendors/js/vendor.bundle.base.js"></script>
         <!-- endinject -->
         <!-- Plugin js for this page -->
         <!-- End plugin js for this page -->
         <!-- inject:js -->
-        <script src="../../../../../assets/js/off-canvas.js"></script>
-        <script src="../../../../../assets/js/hoverable-collapse.js"></script>
-        <script src="../../../../../assets/js/misc.js"></script>
-        <script src="../../../../../assets/js/settings.js"></script>
-        <script src="../../../../../assets/js/todolist.js"></script>
+        <script src="<%=request.getContextPath()%>/assets/js/off-canvas.js"></script>
+        <script src="<%=request.getContextPath()%>/assets/js/hoverable-collapse.js"></script>
+        <script src="<%=request.getContextPath()%>/assets/js/misc.js"></script>
+        <script src="<%=request.getContextPath()%>/assets/js/settings.js"></script>
+        <script src="<%=request.getContextPath()%>/assets/js/todolist.js"></script>
         <!-- endinject -->
         <!-- Custom js for this page -->
         <script>
@@ -309,7 +309,7 @@
         </script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-        <script src = "script_tabla.js"></script>
+        <script src = "<%=request.getContextPath()%>/vistas/jsp/ADMIN/Vecinos/Postulaciones_coordinacion/script_tabla.js"></script>
 
         <!-- End custom js for this page -->
 </body>

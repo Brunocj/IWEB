@@ -14,9 +14,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Pagina en blanco</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="styles_tabla.css">
-    <link rel="stylesheet" href="../../../../assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../../../../assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Dashboard/styles_tabla.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/css/vendor.bundle.base.css">
 
     <!-- Montserrat Font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -25,7 +25,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles_dashboard.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Dashboard/styles_dashboard.css">
 
     <!-- endinject -->
     <!-- Plugin css for this page -->
@@ -33,9 +33,9 @@
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="../../../../assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../LogoSM.png" /> <!--Cambiar la ubicacion del logo de la pagina aca tmb-->
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" /> <!--Cambiar la ubicacion del logo de la pagina aca tmb-->
     <!--JS para los popups-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -58,7 +58,7 @@
             <!-- Codigo para un item de la barra lateral que no tiene sublista -->
             <li class="nav-item menu-items "> <!-- la clase "active" solo se usa para la vista que está activa -->
 
-                <a class="nav-link" href="../pagina_principal_admin.jsp"> <!-- Cambiar href de acuerdo a lo necesario -->
+                <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=pagPrincipal"> <!-- Cambiar href de acuerdo a lo necesario -->
                     <span class="menu-icon">
                 <i class="mdi mdi-home"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
@@ -69,7 +69,7 @@
 
 
             <li class="nav-item menu-items">
-                <a class="nav-link" href="../Dashboard/dashboard.jsp">
+                <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=dashboard">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>
@@ -77,7 +77,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items ">
-                <a class="nav-link" href="../Serenazgo/tabla_serenazgo.jsp">
+                <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=tablaSerenazgo">
               <span class="menu-icon">
                 <i class="mdi mdi-security"></i>
               </span>
@@ -85,7 +85,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="../Profesores/tabla_profesor.jsp">
+                <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=tablaProfesores">
               <span class="menu-icon">
                 <i class="mdi mdi-teach"></i>
               </span>
@@ -105,13 +105,13 @@
                 <div class="collapse" id="ui-basic">
                     <ul class="nav flex-column sub-menu"><!-- Colocar items de la sublista -->
 
-                        <li class="nav-item "> <a class="nav-link" href="../Vecinos/Solicitudes_acceso/tabla_solicitudes.jsp" style="color: white;">
+                        <li class="nav-item  "> <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=tablaAcceso" style="color: white;">
                   <span class="menu-icon">
-                    <i class="mdi mdi-account-alert "></i>
+                    <i class="mdi mdi-account-alert"></i>
                   </span>
                             Sol. de acceso</a></li>
-                        <li class="nav-item "> <a class="nav-link " href="../Vecinos/Postulaciones_coordinacion/tabla_postulaciones.jsp" style="color: white;">
-                  <span class="menu-icon ">
+                        <li class="nav-item "> <a class="nav-link " href="<%=request.getContextPath()%>/Admin?action=tablaCoordinador" style="color: white;">
+                    <span class="menu-icon ">
                     <i class="mdi mdi-account-alert "></i>
                   </span>
                             Sol. a coordinación</a></li>
@@ -152,7 +152,7 @@
                                     <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: -30px; font-size: 23px; font-weight:500; cursor: default; text-align: right;">ADMIN</h2>
                                     <h5 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: -30px; font-size: 15px; font-weight:500; cursor: default;">Administrador de San Miguel</h5>
                                 </div>
-                                <img class="img-xs rounded-circle" src="../../LogoSM.png" alt="" style ="height: 50px; width: 100%;margin-right: -17px;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
+                                <img class="img-xs rounded-circle" src="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" alt="" style ="height: 50px; width: 100%;margin-right: -17px;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
 
                             </div>
                         </a>
@@ -440,21 +440,21 @@
 
                 <!-- container-scroller -->
                 <!-- plugins:js -->
-                <script src="../../../../assets/vendors/js/vendor.bundle.base.js"></script>
+                <script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
                 <!-- endinject -->
                 <!-- Plugin js for this page -->
                 <!-- End plugin js for this page -->
                 <!-- inject:js -->
-                <script src="../../../../assets/js/off-canvas.js"></script>
-                <script src="../../../../assets/js/hoverable-collapse.js"></script>
-                <script src="../../../../assets/js/misc.js"></script>
-                <script src="../../../../assets/js/settings.js"></script>
-                <script src="../../../../assets/js/todolist.js"></script>
+                <script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
+                <script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
+                <script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
+                <script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
+                <script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
 
 
                 <!-- scripts de los cuadros -->
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
-                <script src="scripts_dashboard.js"></script>
+                <script src="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Dashboard/scripts_dashboard.js"></script>
 
 
                 <!-- acaba sripts cuadro -->
@@ -474,14 +474,14 @@
                             confirmButtonText: 'Sí, cerrar sesión'
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                window.location.href = "../../LOGIN/login.jsp"; //Cambiar la ubicacion del login de acuerdo a lo necesario
+                                window.location.href = "${pageContext.request.contextPath}/LOGIN/login.jsp"; //Cambiar la ubicacion del login de acuerdo a lo necesario
                             }
                         });
                     }
                 </script>
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-                <script src = "script_tabla.js"></script>
+                <script src = "${pageContext.request.contextPath}/vistas/jsp/ADMIN/Dashboard/script_tabla.js"></script>
 
                 <!-- End custom js for this page -->
 </body>

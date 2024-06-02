@@ -52,9 +52,9 @@
         <ul class="nav" style="position: fixed;">
 
             <!-- Codigo para un item de la barra lateral que no tiene sublista -->
-            <li class="nav-item menu-items "> <!-- la clase "active" solo se usa para la vista que está activa -->
+            <li class="nav-item menu-items ${"pagPrincipal".equals(request.getParameter("action")) ? "active" : ""}"> <!-- la clase "active" solo se usa para la vista que está activa -->
 
-                <a class="nav-link" href="ProfesorPagPrincipal"> <!-- Cambiar href de acuerdo a lo necesario -->
+                <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=pagPrincipal"> <!-- Cambiar href de acuerdo a lo necesario -->
                     <span class="menu-icon">
                 <i class="mdi mdi-home"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
@@ -65,7 +65,7 @@
 
 
             <li class="nav-item menu-items">
-                <a class="nav-link" href="ProfesorPagPrincipal" >
+                <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=dashboard">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>
@@ -73,7 +73,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items ">
-                <a class="nav-link" href="ProfesorPagPrincipal">
+                <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=tablaSerenazgo">
               <span class="menu-icon">
                 <i class="mdi mdi-security"></i>
               </span>
@@ -81,7 +81,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="ProfesorPagPrincipal">
+                <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=tablaProfesores">
               <span class="menu-icon">
                 <i class="mdi mdi-teach"></i>
               </span>
@@ -101,12 +101,12 @@
                 <div class="collapse" id="ui-basic">
                     <ul class="nav flex-column sub-menu"><!-- Colocar items de la sublista -->
 
-                        <li class="nav-item  "> <a class="nav-link" href="../Vecinos/Solicitudes_acceso/tabla_solicitudes.jsp" style="color: white;">
+                        <li class="nav-item  "> <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=tablaAcceso" style="color: white;">
                   <span class="menu-icon">
                     <i class="mdi mdi-account-alert"></i>
                   </span>
                             Sol. de acceso</a></li>
-                        <li class="nav-item "> <a class="nav-link " href="../Vecinos/Postulaciones_coordinacion/tabla_postulaciones.jsp" style="color: white;">
+                        <li class="nav-item "> <a class="nav-link " href="<%=request.getContextPath()%>/Admin?action=tablaCoordinador" style="color: white;">
                     <span class="menu-icon ">
                     <i class="mdi mdi-account-alert "></i>
                   </span>

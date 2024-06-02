@@ -21,7 +21,7 @@ public class ProfesorDao {
         //Parametros de conexion a que base de datos me quiero unir//
         String url ="jdbc:mysql://localhost:3306/sanmiguel";
         String username = "root";
-        String password = "root";
+        String password = "123456";
 
         String sql = " select * from Profesor";
 
