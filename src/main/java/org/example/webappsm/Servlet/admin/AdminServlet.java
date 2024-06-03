@@ -4,7 +4,9 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import org.example.webappsm.model.beans.Profesor;
+import org.example.webappsm.model.beans.Serenazgo;
 import org.example.webappsm.model.daos.ProfesorDao;
+import org.example.webappsm.model.daos.SerenazgoDao;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,6 +32,10 @@ public class AdminServlet extends HttpServlet {
                 rd.forward(request,response);
                 break;
             case "tablaSerenazgo":
+                SerenazgoDao serenazgoDao = new SerenazgoDao();
+                ArrayList<Serenazgo> listaserenazgo = serenazgoDao.listarSerenazgoTabla();
+
+                request.setAttribute("listaserenazgo",listaserenazgo);
                 vista = "vistas/jsp/ADMIN/Serenazgo/tabla_serenazgo.jsp";
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
