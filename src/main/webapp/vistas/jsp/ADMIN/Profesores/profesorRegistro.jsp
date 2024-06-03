@@ -74,7 +74,7 @@
                         </a>
                     </li>
                     <li class="nav-item menu-items active">
-                        <a class="nav-link" href="../Profesores/tabla_profesor.jsp"onclick="return CancelarProfesores();">
+                        <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=tablaProfesores" onclick="return CancelarProfesores('<%= request.getContextPath() %>');">
               <span class="menu-icon">
                 <i class="mdi mdi-teach"></i>
               </span>

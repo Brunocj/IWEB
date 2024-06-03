@@ -78,7 +78,7 @@ function CancelarSerenazgo() {
 }  
 
 
-function CancelarProfesores() {
+function CancelarProfesores(contextPath) {
     Swal.fire({
         title: "Estás seguro?",
         text: "Perdera todo su progreso",
@@ -95,7 +95,7 @@ function CancelarProfesores() {
                 text: "Se ha cancelado satisfactoriamente",
                 icon: "success"
             }).then(() => {
-                window.location.href = "../../ADMIN/Profesores/tabla_profesor.jsp";
+                window.location.href = contextPath+'/Admin?action=tablaProfesores';
             });
         }
     });
