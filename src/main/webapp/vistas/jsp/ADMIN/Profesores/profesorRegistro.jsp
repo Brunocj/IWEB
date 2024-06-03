@@ -166,7 +166,7 @@
                                 <hr style="border: none; border-top: 2px solid black;">
 
                                 <!-- Icon -->
-
+                                <!-- Icon -->
                                 <!-- Login Form -->
                                 <form action="${pageContext.request.contextPath}/Admin?action=registrarDocente" method="post">
 
@@ -254,6 +254,7 @@
                         }
                     });
 
+                    // Evitar que el formulario se envíe automáticamente
                     // Evitar que el formulario se envíe automáticamente
                     return false;
                 }
