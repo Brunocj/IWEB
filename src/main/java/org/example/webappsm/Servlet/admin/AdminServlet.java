@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 @WebServlet(name = "AdminServlet", value = "/Admin")
 public class AdminServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -51,6 +52,7 @@ public class AdminServlet extends HttpServlet {
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
+
             case "tablaAcceso":
                 vista = "vistas/jsp/ADMIN/Vecinos/Solicitudes_acceso/tabla_solicitudes.jsp";
                 rd = request.getRequestDispatcher(vista);
@@ -70,6 +72,8 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
+
+        // Verificar si la acción es registrar un nuevo profesor
         if(action.equals("registrarDocente")) {
             String apellido = request.getParameter("apellido");
             String nombre = request.getParameter("nombre");
@@ -90,10 +94,26 @@ public class AdminServlet extends HttpServlet {
             // Redireccionar a la página de tablaProfesores después de completar el registro
             response.sendRedirect(request.getContextPath() + "/Admin?action=tablaProfesores");
         }
+        // Verificar si la acción es eliminar un profesor
+        else if(action.equals("eliminarProfesor")) {
+            // Obtener el ID del profesor a eliminar
+            int idProfesor = Integer.parseInt(request.getParameter("id"));
+
+            // Crear una instancia de ProfesorDao
+            ProfesorDao profesorDao = new ProfesorDao();
+
+            // Eliminar al profesor con el ID especificado
+            profesorDao.eliminarProfesor(idProfesor);
+
+            // Redireccionar a la página de tablaProfesores después de completar la eliminación
+            response.sendRedirect(request.getContextPath() + "/Admin?action=tablaProfesores");
+        }
+        // Verificar otras acciones si es necesario
         else {
-            // Manejar otras acciones si es necesario
             response.sendRedirect(request.getContextPath() + "/Admin");
         }
     }
+
+
 
 }

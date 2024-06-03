@@ -221,6 +221,7 @@
                                 <tbody style="text-align: center;color: black;">
 
                                     <%
+
                                         if (lista != null) {
                                             for (Profesor profesor : lista) {
                                     %>
@@ -229,7 +230,7 @@
                                         <td><a><%= profesor.getNombre() %></a></td>
                                         <td><%= profesor.getCurso() %></td>
                                         <td><a href ="editarProfesor.html" class ="mdi mdi-lead-pencil" style ="color: #6c7293;font-size: 20px;"></a></td>
-                                        <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-delete" style ="color: #6c7293;font-size: 20px;"></a></td>
+                                        <td><a href ="#" onclick="return Eliminacion(<%= profesor.getIdProfesor() %>, '<%= request.getContextPath() %>');" class ="mdi mdi-delete" style ="color: #6c7293;font-size: 20px;"></a></td>
                                     </tr>
 
                                     <%
@@ -269,6 +270,7 @@
                 <script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
                 <!-- endinject -->
                 <!-- Custom js for this page -->
+
                 <script>
                     function mostrarPopupCerrarSesion() {
                         Swal.fire({
