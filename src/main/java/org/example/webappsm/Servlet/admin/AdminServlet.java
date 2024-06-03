@@ -69,6 +69,31 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if(action.equals("registrarDocente")) {
+            String apellido = request.getParameter("apellido");
+            String nombre = request.getParameter("nombre");
+            String curso = request.getParameter("curso");
 
+            // Establecer idArea como 1 por defecto
+            int idArea = 1;
+
+            Profesor nuevoProfesor = new Profesor();
+            nuevoProfesor.setApellido(apellido);
+            nuevoProfesor.setNombre(nombre);
+            nuevoProfesor.setCurso(curso);
+            nuevoProfesor.setIdArea(idArea);
+
+            ProfesorDao profesorDao = new ProfesorDao();
+            profesorDao.agregarProfesor(nuevoProfesor);
+
+            // Redireccionar a la página de tablaProfesores después de completar el registro
+            response.sendRedirect(request.getContextPath() + "/Admin?action=tablaProfesores");
+        }
+        else {
+            // Manejar otras acciones si es necesario
+            response.sendRedirect(request.getContextPath() + "/Admin");
+        }
     }
+
 }

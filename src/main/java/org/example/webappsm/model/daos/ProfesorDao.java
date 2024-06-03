@@ -46,10 +46,38 @@ public class ProfesorDao {
 
         return listaProfesores;
 
-
-
-
-
-
     }
+    public void agregarProfesor(Profesor profesor) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String url ="jdbc:mysql://localhost:3306/sanmiguel";
+        String username = "root";
+        String password = "123456";
+
+        String sql = "INSERT INTO Profesor (apellidos, nombres, curso, idArea) VALUES (?, ?, ?, 1)";
+
+        try (Connection conn= DriverManager.getConnection(url, username, password);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            if (profesor.getApellido() == null) {
+                throw new IllegalArgumentException("El apellido del profesor no puede ser nulo");
+            }
+
+            pstmt.setString(1, profesor.getApellido());
+            pstmt.setString(2, profesor.getNombre());
+            pstmt.setString(3, profesor.getCurso());
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
 }

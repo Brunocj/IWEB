@@ -192,9 +192,11 @@
                                         </button>
                                     </div>
                                     <div style="display: flex; align-items: center; justify-content: center;">
-                                        <a href ="profesorRegistro.jsp" style= "color: inherit; text-decoration: none;">
-                                            <button  class="btnTable" style="display: flex; align-items: center;" href ="profesorRegistro.jsp">
-                                                Agregar Docente
+                                        <a href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Profesores/profesorRegistro.jsp" style="color: inherit; text-decoration: none;">
+
+                                        <button class="btnTable" style="display: flex; align-items: center;" onclick="window.location.href = '${pageContext.request.contextPath}/vistas/jsp/ADMIN/Profesores/profesorRegistro.jsp';">
+
+                                            Agregar Docente
                                                 <a class="mdi mdi-account-plus" style="color: #ffffff; font-size: 20px; margin-left: 5px;"></a>
                                             </button>
                                         </a>
