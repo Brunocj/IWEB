@@ -25,6 +25,7 @@
   <!-- endinject -->
   <!-- Layout styles -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+
   <!-- End layout styles -->
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" />
   <!--JS para los popups-->
