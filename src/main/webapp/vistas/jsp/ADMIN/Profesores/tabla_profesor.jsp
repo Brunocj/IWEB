@@ -208,7 +208,7 @@
 
                             <table id="miTabla" class="table" style="margin-bottom:15px;">
                                 <thead style="background-color: #ff8e9f;"> <!--Cambiar al color de fondo de la pagina, pero un poco mas oscuro-->
-                                    <tr style="text-align: center; font-weight:800;">
+                                    <tr style="text-align: center; font-weight:800;"> <!--Cambiar al color de fondo de la pagina, pero un poco mas oscuro-->
                                         <th style ="color: white;font-size: 17px;cursor: pointer;">Apellidos</th>
                                         <th style ="color: white;font-size: 17px;cursor: pointer;">Nombres</th>
                                         <th style ="color: white;font-size: 17px;cursor: pointer;">Curso</th>
