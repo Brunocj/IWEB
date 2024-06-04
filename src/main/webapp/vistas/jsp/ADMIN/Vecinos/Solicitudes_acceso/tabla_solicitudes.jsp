@@ -1,3 +1,5 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="org.example.webappsm.model.beans.Usuario" %><%--
 <%--
   Created by IntelliJ IDEA.
   User: bruno
@@ -6,6 +8,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    ArrayList<Usuario> lista = (ArrayList<Usuario>) request.getAttribute("listaacceso");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -186,66 +191,26 @@
                         </thead>
                         <hr style="border: none; border-top: 3px solid black; margin-top: -15px; border-radius: 10px;">
                         <tbody style="text-align: center;color: black;">
-                        <tr style="text-align: center;">
-                            <td><a>Yarleque Medina</a></td>
-                            <td><a>Manuel Augusto</a></td>
-                            <td><a href ="detalles_solicitudes.jsp" class ="mdi mdi-account-details"  style ="color: #6c7293; font-size: 20px;"></a>
-                            </td>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><a>López Pascual</a></td>
-                            <td><a>Adrián Alvaro</a></td>
-                            <td><a href ="detalles_solicitudes.jsp" class ="mdi mdi-account-details"  style ="color: #6c7293; font-size: 20px;"></a>
-
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><a>Coronado Maxwell</a></td>
-                            <td><a>Jorge</a></td>
-                            <td><a href ="detalles_solicitudes.jsp" class ="mdi mdi-account-details"  style ="color: #6c7293; font-size: 20px;"></a>
-
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td ><a>Bustamante Melo</a></td>
-                            <td><a>Pedro Miguel</a></td>
-                            <td><a href ="detalles_solicitudes.jsp" class ="mdi mdi-account-details"  style ="color: #6c7293; font-size: 20px;"></a>
-
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><a>Yarleque Medina</a></td>
-                            <td><a>Manuel Augusto</a></td>
-                            <td><a href ="detalles_solicitudes.jsp" class ="mdi mdi-account-details"  style ="color: #6c7293; font-size: 20px;"></a>
-
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><a>Yarleque Medina</a></td>
-                            <td><a>Manuel Augusto</a></td>
-                            <td><a href ="detalles_solicitudes.jsp" class ="mdi mdi-account-details"  style ="color: #6c7293; font-size: 20px;"></a>
-
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><a>Galarga Melo</a></td>
-                            <td><a>Elver Augusto</a></td>
-                            <td><a href ="detalles_solicitudes.jsp" class ="mdi mdi-account-details"  style ="color: #6c7293; font-size: 20px;"></a>
-
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><a>Calderon Rodriguez</a></td>
-                            <td><a>José Ricardo</a></td>
-                            <td><a href ="detalles_solicitudes.jsp" class ="mdi mdi-account-details"  style ="color: #6c7293; font-size: 20px;"></a>
-
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><a>garay Cruz</a></td>
-                            <td><a>Eduardo Daniel</a></td>
-                            <td><a href ="detalles_solicitudes.jsp" class ="mdi mdi-account-details"  style ="color: #6c7293; font-size: 20px;"></a>
-
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><a>Coronado Maxwell</a></td>
-                            <td><a>Jorge</a></td>
-                            <td><a href ="detalles_solicitudes.jsp" class ="mdi mdi-account-details"  style ="color: #6c7293; font-size: 20px;"></a>
-
-                        </tr>
+                            <%
+                                if (lista != null) {
+                                    for (Usuario usuario : lista) {
+                            %>
+                            <tr style="text-align: center;">
+                                <td><a><%=usuario.getApellido() %></a></td>
+                                <td><a><%=usuario.getNombre() %></a></td>
+                                <td><a href ="detalles_solicitudes.jsp" class ="mdi mdi-account-details"  style ="color: #6c7293; font-size: 20px;"></a>
+                                </td>
+                            </tr>
+                            <%
+                                }
+                            } else {
+                            %>
+                            <tr>
+                                <td colspan="5">No hay Solicitudes pendientes.</td>
+                            </tr>
+                            <%
+                                }
+                            %>
                         </tbody>
                     </table>
 

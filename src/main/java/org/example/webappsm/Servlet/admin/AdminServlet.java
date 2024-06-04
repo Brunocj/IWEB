@@ -5,8 +5,10 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import org.example.webappsm.model.beans.Profesor;
 import org.example.webappsm.model.beans.Serenazgo;
+import org.example.webappsm.model.beans.Usuario;
 import org.example.webappsm.model.daos.ProfesorDao;
 import org.example.webappsm.model.daos.SerenazgoDao;
+import org.example.webappsm.model.daos.VecinosDao;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -55,12 +57,20 @@ public class AdminServlet extends HttpServlet {
                 rd.forward(request,response);
                 break;
 
-            case "tablaAcceso":
+             case "tablaAcceso":
+                VecinosDao vecinosDao = new VecinosDao();
+                ArrayList<Usuario> listaAcceso = vecinosDao.listarSoliAcceso();
+
+                request.setAttribute("listaacceso", listaAcceso);
                 vista = "vistas/jsp/ADMIN/Vecinos/Solicitudes_acceso/tabla_solicitudes.jsp";
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
             case "tablaCoordinador":
+                VecinosDao vecinosDao1 = new VecinosDao();
+                ArrayList<Usuario> listaCoord = vecinosDao1.listarSoliCord();
+
+                request.setAttribute("listacoord", listaCoord);
                 vista = "vistas/jsp/ADMIN/Vecinos/Postulaciones_coordinacion/tabla_postulaciones.jsp";
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);

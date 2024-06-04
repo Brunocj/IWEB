@@ -1,3 +1,5 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="org.example.webappsm.model.beans.Usuario" %>
 <%--
   Created by IntelliJ IDEA.
   User: bruno
@@ -6,6 +8,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    ArrayList<Usuario> lista = (ArrayList<Usuario>) request.getAttribute("listacoord");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -191,80 +196,39 @@
                     </div>
                     <table id="miTabla" class="table" style="margin-bottom:15px;">
                         <thead style="background-color: #ff8e9f;"> <!--Cambiar al color de fondo de la pagina, pero un poco mas oscuro-->
-                        <tr style="text-align: center; font-weight:800;">
-                            <th style ="color: white;font-size: 17px;cursor: pointer;">Apellidos</th>
-                            <th style ="color: white;font-size: 17px;cursor: pointer;">Nombres</th>
-                            <th style ="color: white;font-size: 17px;cursor: pointer;">Deporte/Cultura</th>
-                            <th style="color: white; font-size: 17px; cursor: pointer;">Ver Detalles
-                                <a class="mdi mdi-magnify" style="color: #ffffff; font-size: 20px;"></a>
-                            </th>
+                            <tr style="text-align: center; font-weight:800;">
+                                <th style ="color: white;font-size: 17px;cursor: pointer;">Apellidos</th>
+                                <th style ="color: white;font-size: 17px;cursor: pointer;">Nombres</th>
+                                <th style ="color: white;font-size: 17px;cursor: pointer;">Deporte/Cultura</th>
+                                <th style="color: white; font-size: 17px; cursor: pointer;">Ver Detalles
+                                    <a class="mdi mdi-magnify" style="color: #ffffff; font-size: 20px;"></a>
+                                </th>
 
-                        </tr>
+                            </tr>
                         </thead>
                         <hr style="border: none; border-top: 3px solid black; margin-top: -55px; border-radius: 10px;">
 
                         <tbody style="text-align: center;color: black;">
-                        <tr style="text-align: center;">
-                            <td><a>Yarleque Medina</a></td>
-                            <td><a>Manuel Augusto</a></td>
-                            <td>Deporte</td>
-                            <td><a href ="detalles_postulaciones.jsp" class ="mdi mdi-account-details"  style ="color: #6c7293; font-size: 20px;"></a>
-
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><a>López Pascual</a></td>
-                            <td><a>Adrián Alvaro</a></td>
-                            <td>Cultura</td>
-                            <td><a href ="detalles_postulaciones.jsp" class ="mdi mdi-account-details"  style ="color: #6c7293; font-size: 20px;"></a>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><a>Coronado Maxwell</a></td>
-                            <td><a>Jorge</a></td>
-                            <td>Deporte</td>
-                            <td><a href ="detalles_postulaciones.jsp" class ="mdi mdi-account-details"  style ="color: #6c7293; font-size: 20px;"></a>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td ><a>Bustamante Melo</a></td>
-                            <td><a>Pedro Miguel</a></td>
-                            <td>Cultura</td>
-                            <td><a href ="detalles_postulaciones.jsp" class ="mdi mdi-account-details"  style ="color: #6c7293; font-size: 20px;"></a>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><a>Yarleque Medina</a></td>
-                            <td><a>Manuel Augusto</a></td>
-                            <td>Deporte</td>
-                            <td><a href ="detalles_postulaciones.jsp" class ="mdi mdi-account-details"  style ="color: #6c7293; font-size: 20px;"></a>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><a>Yarleque Medina</a></td>
-                            <td><a>Manuel Augusto</a></td>
-                            <td>Cultura</td>
-                            <td><a href ="detalles_postulaciones.jsp" class ="mdi mdi-account-details"  style ="color: #6c7293; font-size: 20px;"></a>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><a>Galarga Melo</a></td>
-                            <td><a>Elver Augusto</a></td>
-                            <td>Deporte</td>
-                            <td><a href ="detalles_postulaciones.jsp" class ="mdi mdi-account-details"  style ="color: #6c7293; font-size: 20px;"></a>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><a>Calderon Rodriguez</a></td>
-                            <td><a>José Ricardo</a></td>
-                            <td>Cultura</td>
-                            <td><a href ="detalles_postulaciones.jsp" class ="mdi mdi-account-details"  style ="color: #6c7293; font-size: 20px;"></a>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><a>garay Cruz</a></td>
-                            <td><a>Eduardo Daniel</a></td>
-                            <td>Deporte</td>
-                            <td><a href ="detalles_postulaciones.jsp" class ="mdi mdi-account-details"  style ="color: #6c7293; font-size: 20px;"></a>
-                        </tr>
-                        <tr style="text-align: center;">
-                            <td><a>Coronado Maxwell</a></td>
-                            <td><a>Jorge</a></td>
-                            <td>Cultura</td>
-                            <td><a href ="detalles_postulaciones.jsp" class ="mdi mdi-account-details"  style ="color: #6c7293; font-size: 20px;"></a>
-                        </tr>
+                            <%
+                                if (lista != null) {
+                                    for (Usuario usuario : lista) {
+                            %>
+                            <tr style="text-align: center;">
+                                <td><a><%=usuario.getApellido() %></a></td>
+                                <td><a><%=usuario.getNombre() %></a></td>
+                                <td><a><%=usuario.getArea() %></a></td>
+                                <td><a href ="detalles_postulaciones.jsp" class ="mdi mdi-account-details"  style ="color: #6c7293; font-size: 20px;"></a>
+                            </tr>
+                            <%
+                                }
+                            } else {
+                            %>
+                            <tr>
+                                <td colspan="5">No hay Solicitudes pendientes.</td>
+                            </tr>
+                            <%
+                                }
+                            %>
                         </tbody>
                     </table>
 
