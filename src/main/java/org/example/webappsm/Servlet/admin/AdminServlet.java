@@ -5,8 +5,10 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import org.example.webappsm.model.beans.Profesor;
 import org.example.webappsm.model.beans.Serenazgo;
+import org.example.webappsm.model.beans.Usuario;
 import org.example.webappsm.model.daos.ProfesorDao;
 import org.example.webappsm.model.daos.SerenazgoDao;
+import org.example.webappsm.model.daos.VecinosDao;
 
 import java.io.IOException;
 import java.util.ArrayList;
