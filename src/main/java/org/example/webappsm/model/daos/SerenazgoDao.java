@@ -111,11 +111,16 @@ public class SerenazgoDao {
         String url ="jdbc:mysql://localhost:3306/sanmiguel";
         String username = "root";
         String password = "rootroot";
-        String query = "SELECT * FROM Serenazgo WHERE idSerenazgo = ?";
+        String query = "SELECT s.idSerenazgo, s.nombre, s.apellido, s.dni, s.direccion, s.telefono, s.fNacimiento, " +
+                "(SELECT ts.nombreTipo FROM Tiposerenazgo ts WHERE ts.idTipoSerenazgo = s.idTipoSerenazgo) AS tipo, " +
+                "(SELECT t.nombreTurno FROM Turno t WHERE t.idTurno = s.idTurno) AS turno " +
+                "FROM Serenazgo s " +
+                "WHERE s.idSerenazgo = ?";
+
         try (Connection conn= DriverManager.getConnection(url, username, password);
-             PreparedStatement pstmt = conn.prepareStatement(query);
-            ResultSet rs = pstmt.executeQuery()){
+             PreparedStatement pstmt = conn.prepareStatement(query)){
             pstmt.setInt(1, idSerenazgo);
+            ResultSet rs = pstmt.executeQuery();
                 if (rs.next()) {
                     serenazgo.setIdSerenazgo(rs.getInt("idSerenazgo"));
                     serenazgo.setNombre(rs.getString("nombre"));

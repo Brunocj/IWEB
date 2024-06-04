@@ -225,8 +225,8 @@
                             <td><a><%= serenazgo.getNombre() %></a></td>
                             <td><%= serenazgo.getTurno() %></td>
                             <td><%= serenazgo.getTipo() %></td>
-                            <td><a href="<%=request.getContextPath()%>/Admin?action=verSerenazgo&id=<%= serenazgo.getIdSerenazgo() %>" class="mdi mdi-eye" style="color: #6c7293; font-size: 20px;"></a></td>
-                            <td><a href="<%= request.getContextPath() %>/Admin?action=editarSerenazgo?id=<%= serenazgo.getIdSerenazgo() %>" class="mdi mdi-lead-pencil" style="color: #6c7293; font-size: 20px;"></a></td>
+                            <td><a href="<%=request.getContextPath()%>/Admin?action=verSerenazgo&idVer=<%= serenazgo.getIdSerenazgo() %>" class="mdi mdi-eye" style="color: #6c7293; font-size: 20px;"></a></td>
+                            <td><a href="<%= request.getContextPath() %>/Admin?action=editarSerenazgo?idEditar=<%= serenazgo.getIdSerenazgo() %>" class="mdi mdi-lead-pencil" style="color: #6c7293; font-size: 20px;"></a></td>
                             <td><a href="#" onclick="eliminarSerenazgo(<%= serenazgo.getIdSerenazgo() %>)" class="mdi mdi-delete" style="color: #6c7293; font-size: 20px;"></a></td>
                         </tr>
                         <%

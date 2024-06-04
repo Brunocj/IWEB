@@ -210,7 +210,7 @@
                 </div>
               </div>
               <div class="card-name">
-                <a href="Serenazgo/tabla_serenazgo.jsp" style="color: black; font-weight: bold;"> Serenazgo <br> Dispatcher</a>
+                <a href="${pageContext.request.contextPath}/Admin?action=tablaSerenazgo" style="color: black; font-weight: bold;"> Serenazgo <br> Dispatcher</a>
               </div>
             </div>
             <div class="col-md-4">

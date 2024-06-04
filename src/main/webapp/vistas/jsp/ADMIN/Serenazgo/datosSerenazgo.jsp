@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import ="org.example.webappsm.model.beans.Serenazgo" %>
-<%Serenazgo serenazgo = (Serenazgo) request.getAttribute("serenazgo");%>
+<%Serenazgo serenazgo = (Serenazgo) request.getAttribute("serenazgoVer");%>
 <!DOCTYPE html>
 <html lang="en">
 <head>

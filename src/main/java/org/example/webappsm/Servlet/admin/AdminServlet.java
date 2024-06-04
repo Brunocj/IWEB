@@ -46,24 +46,24 @@ public class AdminServlet extends HttpServlet {
                 rd.forward(request,response);
                 break;
             case "verSerenazgo":
-                int idSerenazgo = Integer.parseInt(request.getParameter("id"));
+                int idSerenazgo = Integer.parseInt(request.getParameter("idVer"));
 
                 SerenazgoDao serenazgoDaoVista = new SerenazgoDao();
 
-                Serenazgo serenazgo = serenazgoDaoVista.obtenerSerenazgoPorId(idSerenazgo);
-                request.setAttribute("serenazgo", serenazgo);
+                Serenazgo serenazgoVer = serenazgoDaoVista.obtenerSerenazgoPorId(idSerenazgo);
+                request.setAttribute("serenazgoVer", serenazgoVer);
 
                 vista = "vistas/jsp/ADMIN/Serenazgo/datosSerenazgo.jsp";
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
             case "editarSerenazgo":
-                int idSerenazgoEditar = Integer.parseInt(request.getParameter("id"));
+                int idSerenazgoEditar = Integer.parseInt(request.getParameter("idEditar"));
 
                 SerenazgoDao serenazgoDao = new SerenazgoDao();
                 Serenazgo serenazgoEdit = serenazgoDao.obtenerSerenazgoPorId(idSerenazgoEditar);
 
-                request.setAttribute("serenazgo", serenazgoEdit);
+                request.setAttribute("serenazgoEdit", serenazgoEdit);
 
                 RequestDispatcher dispatcher = request.getRequestDispatcher("editarSerenazgo.jsp");
                 dispatcher.forward(request, response);
