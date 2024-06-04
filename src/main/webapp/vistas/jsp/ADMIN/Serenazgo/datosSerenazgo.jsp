@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import ="org.example.webappsm.model.beans.Serenazgo" %>
+<%Serenazgo serenazgo = (Serenazgo) request.getAttribute("serenazgo");%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -163,47 +165,42 @@
                                 <tr>
                                     <td>Nombre(s)</td>
                                     <td>:</td>
-                                    <td>Manuel Augusto</td>
+                                    <td><%= serenazgo.getNombre() %></td>
                                 </tr>
                                 <tr>
                                     <td>Apellidos</td>
                                     <td>:</td>
-                                    <td>Yarlequé Medina</td>
-                                </tr>
-                                <tr>
-                                    <td>Correo</td>
-                                    <td>:</td>
-                                    <td>yarleque.thanos@gmail.com</td>
+                                    <td><%= serenazgo.getApellido() %></td>
                                 </tr>
                                 <tr>
                                     <td>DNI</td>
                                     <td>:</td>
-                                    <td>53856284</td>
+                                    <td><%= serenazgo.getDni() %></td>
                                 </tr>
                                 <tr>
                                     <td>Direccción</td>
                                     <td>:</td>
-                                    <td>Inras</td>
+                                    <td><%= serenazgo.getDireccion() %></td>
                                 </tr>
                                 <tr>
                                     <td>Número telefónico</td>
                                     <td>:</td>
-                                    <td>998503948</td>
+                                    <td><%= serenazgo.getTelefono() %></td>
                                 </tr>
                                 <tr>
                                     <td>Turno</td>
                                     <td>:</td>
-                                    <td>Mañana</td>
+                                    <td><%= serenazgo.getTurno() %></td>
                                 </tr>
                                 <tr>
                                     <td>Tipo</td>
                                     <td>:</td>
-                                    <td>militar</td>
+                                    <td><%= serenazgo.getTipo() %></td>
                                 </tr>
                                 <tr>
                                     <td>Fecha de Nacimiento</td>
                                     <td>:</td>
-                                    <td>66/66/6666</td>
+                                    <td><%= serenazgo.getFNacimiento() %></td>
                                 </tr>
                                 </tbody>
                             </table>
