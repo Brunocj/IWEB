@@ -53,12 +53,20 @@ public class AdminServlet extends HttpServlet {
                 rd.forward(request,response);
                 break;
 
-            case "tablaAcceso":
+             case "tablaAcceso":
+                VecinosDao vecinosDao = new VecinosDao();
+                ArrayList<Usuario> listaAcceso = vecinosDao.listarSoliAcceso();
+
+                request.setAttribute("listaacceso", listaAcceso);
                 vista = "vistas/jsp/ADMIN/Vecinos/Solicitudes_acceso/tabla_solicitudes.jsp";
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
             case "tablaCoordinador":
+                VecinosDao vecinosDao1 = new VecinosDao();
+                ArrayList<Usuario> listaCoord = vecinosDao1.listarSoliCord();
+
+                request.setAttribute("listacoord", listaCoord);
                 vista = "vistas/jsp/ADMIN/Vecinos/Postulaciones_coordinacion/tabla_postulaciones.jsp";
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
