@@ -9,8 +9,10 @@ import org.example.webappsm.model.daos.ProfesorDao;
 import org.example.webappsm.model.daos.SerenazgoDao;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.Date;
 @WebServlet(name = "AdminServlet", value = "/Admin")
 public class AdminServlet extends HttpServlet {
 
@@ -107,13 +109,100 @@ public class AdminServlet extends HttpServlet {
 
             // Redireccionar a la página de tablaProfesores después de completar la eliminación
             response.sendRedirect(request.getContextPath() + "/Admin?action=tablaProfesores");
-        }
-        // Verificar otras acciones si es necesario
-        else {
+        }else if(action.equals("registrarSerenazgo")) {
+            String nombreS = request.getParameter("apellidoS");
+            String apellidoS = request.getParameter("nombreS");
+            String dniS = request.getParameter("dniS");
+            String direccionS = request.getParameter("direccionS");
+            String telefonoS = request.getParameter("telefonoS");
+            String turnoS = request.getParameter("turnoS");
+            String tipoS = request.getParameter("tipoS");
+            String fNacimientoS = request.getParameter("fNacimientoS");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); // Define el formato de la fecha
+            Date fechaNacimiento = null;
+
+            try {
+                fechaNacimiento = formatter.parse(fNacimientoS);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            Serenazgo nuevoSerenazgo = new Serenazgo();
+            nuevoSerenazgo.setNombre(nombreS);
+            nuevoSerenazgo.setApellido(apellidoS);
+            nuevoSerenazgo.setDni(dniS);
+            nuevoSerenazgo.setDireccion(direccionS);
+            nuevoSerenazgo.setTelefono(telefonoS);
+            nuevoSerenazgo.setTurno(turnoS);
+            nuevoSerenazgo.setTipo(tipoS);
+            nuevoSerenazgo.setFNacimiento(fechaNacimiento);
+
+            SerenazgoDao serenazgoDao = new SerenazgoDao();
+            serenazgoDao.agregarSerenazgo(nuevoSerenazgo);
+
+            response.sendRedirect(request.getContextPath() + "/Admin?action=tablaSerenazgo");
+
+        }else if(action.equals("editarSerenazgo")){
+            SerenazgoDao serenazgoDao = new SerenazgoDao();
+            String idSerenazgoString = request.getParameter("idSerenazgo");
+            int idSerenazgo = Integer.parseInt(idSerenazgoString);
+            Serenazgo serenazgo = serenazgoDao.obtenerSerenazgoPorId(idSerenazgo);
+
+            String nombreS = request.getParameter("nombreS");
+            if (nombreS != null && !nombreS.isEmpty()) {
+                serenazgo.setNombre(nombreS);
+            }
+            String apellidoS = request.getParameter("apellidoS");
+            if (apellidoS != null && !apellidoS.isEmpty()) {
+                serenazgo.setNombre(apellidoS);
+            }
+            String dniS = request.getParameter("dniS");
+            if (dniS != null && !dniS.isEmpty()) {
+                serenazgo.setNombre(dniS);
+            }
+            String direccionS = request.getParameter("direccionS");
+            if (direccionS != null && !direccionS.isEmpty()) {
+                serenazgo.setNombre(direccionS);
+            }
+            String telefonoS = request.getParameter("telefonoS");
+            if (telefonoS != null && !telefonoS.isEmpty()) {
+                serenazgo.setNombre(telefonoS);
+            }
+            String turnoS = request.getParameter("turnoS");
+            if (turnoS != null && !turnoS.isEmpty()) {
+                serenazgo.setNombre(turnoS);
+            }
+            String tipoS = request.getParameter("tipoS");
+            if (tipoS != null && !tipoS.isEmpty()) {
+                serenazgo.setNombre(tipoS);
+            }
+            String fNacimientoS = request.getParameter("fNacimientoS");
+            if (fNacimientoS != null && !fNacimientoS.isEmpty()) {
+                serenazgo.setNombre(fNacimientoS);
+            }
+
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            Date fechaNacimiento = null;
+
+            try {
+                fechaNacimiento = formatter.parse(fNacimientoS);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            serenazgoDao.editarSerenazgo(serenazgo);
+            response.sendRedirect(request.getContextPath() + "/Admin?action=tablaSerenazgo");
+
+        }else if(action.equals("eliminarSerenazgo")){
+
+            int idSerenazgo = Integer.parseInt(request.getParameter("idS"));
+
+            SerenazgoDao serenazgoDao = new SerenazgoDao();
+            serenazgoDao.eliminarSerenazgo(idSerenazgo);
+
+            response.sendRedirect(request.getContextPath() + "/Admin?action=tablaSerenazgo");
+        }else{
             response.sendRedirect(request.getContextPath() + "/Admin");
         }
     }
-
-
 
 }

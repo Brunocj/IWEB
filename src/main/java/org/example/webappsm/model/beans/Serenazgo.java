@@ -6,6 +6,7 @@ import java.util.Date;
 
 @Data
 public class Serenazgo {
+    private int idSerenazgo;
     private String nombre;
     private String apellido;
     private String dni;
