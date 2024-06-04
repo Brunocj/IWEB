@@ -157,6 +157,7 @@
         <div class="main-panel">
             <div class="content-wrapper" style ="background-color: #FFEBEE;margin-top: -30px"> <!--Cambiar al color mas claro-->
                 <!--CONTENIDO-->
+                <!--CONTENIDO-->
 
                 <div class="card1">
                     <div class = "wrapper"id="formContent">

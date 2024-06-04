@@ -16,7 +16,7 @@ function Confirmacion() {
         text: "El personal ha sido registrado con éxito",
         icon: "success",
       }).then(() => {
-        window.location.href = "tabla_profesor.jsp";
+        document.querySelector("form").submit();
       });
     }
   });
@@ -25,7 +25,7 @@ function Confirmacion() {
   return false;
 }
 
-function Eliminacion() {
+function Eliminacion(id,contextPath) {
   Swal.fire({
     title: "Estás seguro?",
     text: "Una vez eliminado, la información asociada al personal será permanentemente eliminada del sistema",
@@ -36,13 +36,20 @@ function Eliminacion() {
     confirmButtonText: "Si, eliminar",
   }).then((result) => {
     if (result.isConfirmed) {
-      Swal.fire({
-        title: "Eliminado!",
-        text: "El personal ha sido eliminado con éxito",
-        icon: "success",
-      }).then(() => {
-        window.location.href = "tabla_profesor.jsp";
-      });
+      // Crear un formulario para enviar la solicitud POST
+      const form = document.createElement('form');
+      form.method = 'post';
+      form.action = contextPath+'/Admin?action=eliminarProfesor';
+
+      // Crear un input oculto para el ID del profesor
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'id';
+      input.value = id;
+
+      form.appendChild(input);
+      document.body.appendChild(form);
+      form.submit();
     }
   });
 
