@@ -37,13 +37,36 @@ public class AdminServlet extends HttpServlet {
                 rd.forward(request,response);
                 break;
             case "tablaSerenazgo":
-                SerenazgoDao serenazgoDao = new SerenazgoDao();
-                ArrayList<Serenazgo> listaserenazgo = serenazgoDao.listarSerenazgoTabla();
+                SerenazgoDao serenazgoDaoTabla = new SerenazgoDao();
+                ArrayList<Serenazgo> listaserenazgo = serenazgoDaoTabla.listarSerenazgoTabla();
 
                 request.setAttribute("listaserenazgo",listaserenazgo);
                 vista = "vistas/jsp/ADMIN/Serenazgo/tabla_serenazgo.jsp";
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
+                break;
+            case "verSerenazgo":
+                int idSerenazgo = Integer.parseInt(request.getParameter("id"));
+
+                SerenazgoDao serenazgoDaoVista = new SerenazgoDao();
+
+                Serenazgo serenazgo = serenazgoDaoVista.obtenerSerenazgoPorId(idSerenazgo);
+                request.setAttribute("serenazgo", serenazgo);
+
+                vista = "vistas/jsp/ADMIN/Serenazgo/datosSerenazgo.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+            case "editarSerenazgo":
+                int idSerenazgoEditar = Integer.parseInt(request.getParameter("id"));
+
+                SerenazgoDao serenazgoDao = new SerenazgoDao();
+                Serenazgo serenazgoEdit = serenazgoDao.obtenerSerenazgoPorId(idSerenazgoEditar);
+
+                request.setAttribute("serenazgo", serenazgoEdit);
+
+                RequestDispatcher dispatcher = request.getRequestDispatcher("editarSerenazgo.jsp");
+                dispatcher.forward(request, response);
                 break;
             case "tablaProfesores":
                 ProfesorDao profesorDao = new ProfesorDao();
@@ -158,45 +181,43 @@ public class AdminServlet extends HttpServlet {
             Serenazgo serenazgo = serenazgoDao.obtenerSerenazgoPorId(idSerenazgo);
 
             String nombreS = request.getParameter("nombreS");
+            String apellidoS = request.getParameter("apellidoS");
+            String dniS = request.getParameter("dniS");
+            String direccionS = request.getParameter("direccionS");
+            String telefonoS = request.getParameter("telefonoS");
+            String turnoS = request.getParameter("turnoS");
+            String tipoS = request.getParameter("tipoS");
+            String fNacimientoS = request.getParameter("fNacimientoS");
+
             if (nombreS != null && !nombreS.isEmpty()) {
                 serenazgo.setNombre(nombreS);
             }
-            String apellidoS = request.getParameter("apellidoS");
             if (apellidoS != null && !apellidoS.isEmpty()) {
-                serenazgo.setNombre(apellidoS);
+                serenazgo.setApellido(apellidoS);
             }
-            String dniS = request.getParameter("dniS");
             if (dniS != null && !dniS.isEmpty()) {
-                serenazgo.setNombre(dniS);
+                serenazgo.setDni(dniS);
             }
-            String direccionS = request.getParameter("direccionS");
             if (direccionS != null && !direccionS.isEmpty()) {
-                serenazgo.setNombre(direccionS);
+                serenazgo.setDireccion(direccionS);
             }
-            String telefonoS = request.getParameter("telefonoS");
             if (telefonoS != null && !telefonoS.isEmpty()) {
-                serenazgo.setNombre(telefonoS);
+                serenazgo.setTelefono(telefonoS);
             }
-            String turnoS = request.getParameter("turnoS");
             if (turnoS != null && !turnoS.isEmpty()) {
-                serenazgo.setNombre(turnoS);
+                serenazgo.setTurno(turnoS);
             }
-            String tipoS = request.getParameter("tipoS");
             if (tipoS != null && !tipoS.isEmpty()) {
-                serenazgo.setNombre(tipoS);
+                serenazgo.setTipo(tipoS);
             }
-            String fNacimientoS = request.getParameter("fNacimientoS");
             if (fNacimientoS != null && !fNacimientoS.isEmpty()) {
-                serenazgo.setNombre(fNacimientoS);
-            }
-
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            Date fechaNacimiento = null;
-
-            try {
-                fechaNacimiento = formatter.parse(fNacimientoS);
-            } catch (ParseException e) {
-                e.printStackTrace();
+                try {
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                    Date fechaNacimiento = formatter.parse(fNacimientoS);
+                    serenazgo.setFNacimiento(fechaNacimiento);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
 
             serenazgoDao.editarSerenazgo(serenazgo);
@@ -204,7 +225,7 @@ public class AdminServlet extends HttpServlet {
 
         }else if(action.equals("eliminarSerenazgo")){
 
-            int idSerenazgo = Integer.parseInt(request.getParameter("idS"));
+            int idSerenazgo = Integer.parseInt(request.getParameter("id"));
 
             SerenazgoDao serenazgoDao = new SerenazgoDao();
             serenazgoDao.eliminarSerenazgo(idSerenazgo);

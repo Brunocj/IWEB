@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import ="org.example.webappsm.model.beans.Serenazgo" %>
+<%Serenazgo serenazgo = (Serenazgo) request.getAttribute("serenazgo");%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -164,35 +166,32 @@
                         <form>
                             <div class="inputs">
                                 <label for="nombre">Nombre:</label>
-                                <input type="text" id="nombre" value="Manuel Augusto" style="margin-bottom: 0px;">
+                                <input type="text" id="nombre" value="<%= serenazgo.getNombre() %>" style="margin-bottom: 0px;">
 
                                 <label for="apellido">Apellidos:</label>
-                                <input type="text" id="apellido" value="Yarlequé Medina" style="margin-bottom: 0px;">
-
-                                <label for="correo">Correo:</label>
-                                <input type="text" id="correo" value="myarleq@pucp.edu.pe" style="margin-bottom: 0px;">
+                                <input type="text" id="apellido" value="<%= serenazgo.getApellido() %>" style="margin-bottom: 0px;">
 
                                 <label for="dni">DNI:</label>
-                                <input type="text" id="dni" value="32990451" style="margin-bottom: 0px;">
+                                <input type="text" id="dni" value="<%= serenazgo.getDni() %>" style="margin-bottom: 0px;">
 
                                 <label for="direccion">Dirección:</label>
-                                <input type="text" id="direccion" value="Inras/V" style="margin-bottom: 0px;">
+                                <input type="text" id="direccion" value="<%= serenazgo.getDireccion() %>" style="margin-bottom: 0px;">
 
                                 <label for="telefono">Teléfono:</label>
-                                <input type="text" id="telefono" value="915478952" style="margin-bottom: 0px;">
+                                <input type="text" id="telefono" value="<%= serenazgo.getTelefono() %>" style="margin-bottom: 0px;">
 
                                 <label for="turno">Turno:</label>
-                                <input type="text" id="turno" value="Mañana" style="margin-bottom: 0px;">
+                                <input type="text" id="turno" value="<%= serenazgo.getTurno() %>" style="margin-bottom: 0px;">
 
                                 <label for="tipo">Tipo:</label>
-                                <input type="text" id="tipo" value="no lo se" style="margin-bottom: 0px;">
+                                <input type="text" id="tipo" value="<%= serenazgo.getTipo() %>" style="margin-bottom: 0px;">
 
                                 <label for="nacimiento">Fecha de nacimiento:</label>
-                                <input type="text" id="nacimiento" value="66/66/6666" style="margin-bottom: 15px;">
+                                <input type="text" id="nacimiento" value="<%= serenazgo.getFNacimiento() %>" style="margin-bottom: 15px;">
                             </div>
 
                             <div class = "buttons">
-                                <input type="submit" class="green" value="Actualizar personal" onclick="return Actualizar();">
+                                <input type="submit" class="green" value="Actualizar personal" onclick="return Actualizar(<%= serenazgo.getIdSerenazgo() %>);">
                                 <input type="submit" class="red" value="Cancelar" onclick="return Cancelar();">
                             </div>
 
@@ -267,7 +266,7 @@
             return false;
         }
 
-        function Actualizar() {
+        function Actualizar(idSerenazgo) {
             Swal.fire({
                 title: "Estás seguro?",
                 text: "El proceso no podrá ser reversible",
@@ -283,7 +282,7 @@
                         text: "El personal ha sido actualizado con exito",
                         icon: "success"
                     }).then(() => {
-                        window.location.href = "tabla_serenazgo.jsp";
+                        window.location.href = "<%=request.getContextPath()%>/Admin?action=editarSerenazgo&id=" + idSerenazgo;
                     });
                 }
             });
