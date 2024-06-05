@@ -14,8 +14,10 @@ import org.example.webappsm.model.daos.VecinosDao;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
+
 @WebServlet(name = "AdminServlet", value = "/Admin")
 public class AdminServlet extends HttpServlet {
 
@@ -90,8 +92,22 @@ public class AdminServlet extends HttpServlet {
                 ProfesorDao profesorDao = new ProfesorDao();
                 ArrayList<Profesor> list = profesorDao.listarProfesoresTabla();
 
+                Set<String> cursosUnicos = new HashSet<>();
+                Set<String> areasUnicas = new HashSet<>();
+
+                for (Profesor profesor : list) {
+                    cursosUnicos.add(profesor.getCurso());
+                    areasUnicas.add(profesor.getNombreArea());
+                }
                 //OBJETO A ENVIAR
+                //OBJETO A ENVIAR
+                List<String> listaCursos = new ArrayList<>(cursosUnicos);
+                List<String> listaAreas = new ArrayList<>(areasUnicas);
+
+
                 request.setAttribute("listaprofesor",list);
+                request.setAttribute("listaCursos", listaCursos);
+                request.setAttribute("listaAreas", listaAreas);
 
                 vista = "vistas/jsp/ADMIN/Profesores/tabla_profesor.jsp";
                 rd = request.getRequestDispatcher(vista);
@@ -120,7 +136,7 @@ public class AdminServlet extends HttpServlet {
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID del profesor no es válido");
                 }
                 break;
-             case "tablaAcceso":
+            case "tablaAcceso":
                 VecinosDao vecinosDao = new VecinosDao();
                 ArrayList<Usuario> listaAcceso = vecinosDao.listarSoliAcceso();
 
@@ -282,14 +298,14 @@ public class AdminServlet extends HttpServlet {
         }else if(action.equals("eliminarSerenazgo")){
 
             String idParam = request.getParameter("id");
-                if (idParam != null) {
-                    int idSerenazgo = Integer.parseInt(idParam);
+            if (idParam != null) {
+                int idSerenazgo = Integer.parseInt(idParam);
 
-                    SerenazgoDao serenazgoDao = new SerenazgoDao();
-                    serenazgoDao.eliminarSerenazgo(idSerenazgo);
+                SerenazgoDao serenazgoDao = new SerenazgoDao();
+                serenazgoDao.eliminarSerenazgo(idSerenazgo);
 
-                    response.sendRedirect(request.getContextPath() + "/Admin?action=tablaSerenazgo");
-                }
+                response.sendRedirect(request.getContextPath() + "/Admin?action=tablaSerenazgo");
+            }
         }else{
             response.sendRedirect(request.getContextPath() + "/Admin");
         }

@@ -75,27 +75,44 @@ $(document).ready(function () {
       search: "Buscar:", // Cambia "Search" por "Buscar"
     },
   });
-  $("#filtroEstado").on("change", function () {
-    var estado = $(this).val();
-    table.column(2).search(estado).draw();
+
+  $("#filtroTipo").on("change", function () {
+    var tipo = $(this).val();
+    if (tipo === "curso") {
+      $("#filtroCursoDiv").css("display", "flex");
+      $("#filtroAreaDiv").css("display", "none");
+    } else if (tipo === "area") {
+      $("#filtroCursoDiv").css("display", "none");
+      $("#filtroAreaDiv").css("display", "flex");
+    } else {
+      $("#filtroCursoDiv").css("display", "none");
+      $("#filtroAreaDiv").css("display", "none");
+    }
+    filtrarTabla();
   });
+
+  $("#filtroCurso").on("change", filtrarTabla);
+  $("#filtroArea").on("change", filtrarTabla);
+
   $("#limpiarFiltros").on("click", function () {
-    $("#filtroEstado").val("");
-    table.search("").columns().search("").draw();
-  });
-
-  // Evento de cambio de filtro de turno
-  $("#filtroEstado").on("change", function () {
-    var estado = $(this).val();
-    table.column(2).search(estado).draw();
-  });
-
-  // Evento de limpiar filtros
-  $("#limpiarFiltros").on("click", function () {
-    $("#filtroEstado").val("");
-    table.search("").columns().search("").draw();
-
-    // Actualizar el contador después de limpiar los filtros
+    $("#filtroCurso").val("");
+    $("#filtroArea").val("");
+    $("#filtroTipo").val("");
+    $("#filtroCursoDiv").css("display", "none");
+    $("#filtroAreaDiv").css("display", "none");
+    filtrarTabla();
     actualizarContador();
   });
+
+  function filtrarTabla() {
+    var curso = $("#filtroCurso").val().toLowerCase();
+    var area = $("#filtroArea").val().toLowerCase();
+    table.columns().search("").draw(); // Limpiar todos los filtros de DataTables
+    table.column(2).search(curso).draw(); // Aplicar filtro por curso
+    table.column(3).search(area).draw(); // Aplicar filtro por área
+  }
+
+  function actualizarContador() {
+    // Aquí puedes agregar la lógica para actualizar el contador si es necesario
+  }
 });
