@@ -163,7 +163,9 @@
                         <!-- Icon -->
 
                         <!-- Login Form -->
-                        <form>
+                        <form action="${pageContext.request.contextPath}/Admin?action=editarSerenazgo" method="post">
+                            <input type="hidden" name="action" value="editarSerenazgo">
+                            <input type="hidden" name="idSerenazgo" value="<%= serenazgo.getIdSerenazgo() %>">
                             <div class="inputs">
                                 <label for="nombre">Nombre:</label>
                                 <input type="text" id="nombre" value="<%= serenazgo.getNombre() %>" style="margin-bottom: 0px;">
@@ -191,7 +193,7 @@
                             </div>
 
                             <div class = "buttons">
-                                <input type="submit" class="green" value="Actualizar personal" onclick="return Actualizar(<%= serenazgo.getIdSerenazgo() %>);">
+                                <input type="submit" class="green" value="Actualizar personal" onclick="return Actualizar();">
                                 <input type="submit" class="red" value="Cancelar" onclick="return Cancelar();">
                             </div>
 
@@ -277,21 +279,12 @@
                 confirmButtonText: "Si, actualizar"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    var form = document.getElementById("formularioEditarSerenazgo");
-
-                    var inputIdSerenazgo = document.createElement("input");
-                    inputIdSerenazgo.setAttribute("type", "hidden");
-                    inputIdSerenazgo.setAttribute("name", "idSerenazgo");
-                    inputIdSerenazgo.setAttribute("value", idSerenazgo);
-                    form.appendChild(inputIdSerenazgo);
-
-                    form.submit();
                     Swal.fire({
                         title: "Actualizado!",
                         text: "El personal ha sido actualizado con exito",
                         icon: "success"
                     }).then(() => {
-                        window.location.href = "<%=request.getContextPath()%>/Admin?action=editarSerenazgo&id=" + idSerenazgo;
+                        document.querySelector("form").submit();
                     });
                 }
             });
