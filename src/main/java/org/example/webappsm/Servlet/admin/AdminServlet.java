@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.*;
 import org.example.webappsm.model.beans.Profesor;
 import org.example.webappsm.model.beans.Serenazgo;
 import org.example.webappsm.model.beans.Usuario;
+import org.example.webappsm.model.daos.DashboardDao;
 import org.example.webappsm.model.daos.ProfesorDao;
 import org.example.webappsm.model.daos.SerenazgoDao;
 import org.example.webappsm.model.daos.VecinosDao;
@@ -32,6 +33,23 @@ public class AdminServlet extends HttpServlet {
                 rd.forward(request,response);
                 break;
             case "dashboard":
+                DashboardDao dashboardDao = new DashboardDao();
+                String totalBaneados = dashboardDao.totalBaneados();
+                String avgIncidencias = dashboardDao.avgIncidencias();
+                String totalIncidencias = dashboardDao.totalIncidencias();
+                String incidenciasComunMax = dashboardDao.incidenciaComunMax();
+                String incidenciasComunMin = dashboardDao.incidenciaComunMin();
+                String incidenciasPorAtender = dashboardDao.incidenciasPorAtender();
+                String incidenciasUrbMax = dashboardDao.incidenciasUrbMax();
+                String incidenciasUrbMin = dashboardDao.incidenciasUrbMin();
+                request.setAttribute("totalbaneados", totalBaneados);
+                request.setAttribute("avgincidencias", avgIncidencias);
+                request.setAttribute("totalincidencias", totalIncidencias);
+                request.setAttribute("incidenciascomunmax", incidenciasComunMax);
+                request.setAttribute("incidenciascomunmin",incidenciasComunMin);
+                request.setAttribute("incidenciasatender", incidenciasPorAtender);
+                request.setAttribute("incidenciasurbmax",incidenciasUrbMax);
+                request.setAttribute("incidenciasurbmin", incidenciasUrbMin);
                 vista = "vistas/jsp/ADMIN/Dashboard/dashboard.jsp";
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
@@ -102,7 +120,7 @@ public class AdminServlet extends HttpServlet {
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID del profesor no es válido");
                 }
                 break;
-             case "tablaAcceso":
+            case "tablaAcceso":
                 VecinosDao vecinosDao = new VecinosDao();
                 ArrayList<Usuario> listaAcceso = vecinosDao.listarSoliAcceso();
 
@@ -264,14 +282,14 @@ public class AdminServlet extends HttpServlet {
         }else if(action.equals("eliminarSerenazgo")){
 
             String idParam = request.getParameter("id");
-                if (idParam != null) {
-                    int idSerenazgo = Integer.parseInt(idParam);
+            if (idParam != null) {
+                int idSerenazgo = Integer.parseInt(idParam);
 
-                    SerenazgoDao serenazgoDao = new SerenazgoDao();
-                    serenazgoDao.eliminarSerenazgo(idSerenazgo);
+                SerenazgoDao serenazgoDao = new SerenazgoDao();
+                serenazgoDao.eliminarSerenazgo(idSerenazgo);
 
-                    response.sendRedirect(request.getContextPath() + "/Admin?action=tablaSerenazgo");
-                }
+                response.sendRedirect(request.getContextPath() + "/Admin?action=tablaSerenazgo");
+            }
         }else{
             response.sendRedirect(request.getContextPath() + "/Admin");
         }
