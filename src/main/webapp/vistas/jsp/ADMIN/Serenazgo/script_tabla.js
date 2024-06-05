@@ -27,7 +27,7 @@ function Confirmacion() {
     return false;
 }
 
-function Eliminacion() {
+function eliminarSerenazgo(idSerenazgo) {
     Swal.fire({
         title: "Estás seguro?",
         text: "Una vez eliminado, la información asociada al personal será permanentemente eliminada del sistema",
@@ -43,7 +43,7 @@ function Eliminacion() {
                 text: "El personal ha sido eliminado con éxito",
                 icon: "success"
             }).then(() => {
-                window.location.href = "tabla_serenazgo.jsp";
+                window.location.href = "<%=request.getContextPath()%>/Admin?action=eliminarSerenazgo&id=" + idSerenazgo;
             });
         }
     });

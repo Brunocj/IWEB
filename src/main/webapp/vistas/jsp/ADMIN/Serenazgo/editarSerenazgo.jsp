@@ -1,11 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: bruno
-  Date: 27/05/2024
-  Time: 22:19
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import ="org.example.webappsm.model.beans.Serenazgo" %>
+<%Serenazgo serenazgo = (Serenazgo) request.getAttribute("serenazgoEdit");%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,8 +33,8 @@
     <nav class="sidebar sidebar-offcanvas" id="sidebar" style ="background-color: #000f22;">  <!--Cambiar al color mas oscuro-->
 
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top" style ="background-color: #000f22;">
-            <h3 class="sidebar-brand brand-logo" style ="color:white; font-weight: 200px; cursor: default;">Menú</h3>
-            <h3 class="sidebar-brand brand-logo-mini" style ="color:white; font-weight: 200px; cursor: default;">M</h3>
+            <h3 class="sidebar-brand brand-logo" style ="color:white; font-weight: 200; cursor: default;">Menú</h3>
+            <h3 class="sidebar-brand brand-logo-mini" style ="color:white; font-weight: 200; cursor: default;">M</h3>
         </div>
 
 
@@ -122,7 +117,7 @@
         </ul>
     </nav>
     <!-- partial -->
-
+</div>
     <div class="container-fluid page-body-wrapper">
         <!-- partial:../../partials/_navbar.jsp -->
         <nav class="navbar p-0 fixed-top d-flex flex-row">
@@ -168,34 +163,33 @@
                         <!-- Icon -->
 
                         <!-- Login Form -->
-                        <form>
+                        <form action="${pageContext.request.contextPath}/Admin?action=editarSerenazgo" method="post">
+                            <input type="hidden" name="action" value="editarSerenazgo">
+                            <input type="hidden" name="idSerenazgo" value="<%= serenazgo.getIdSerenazgo() %>">
                             <div class="inputs">
                                 <label for="nombre">Nombre:</label>
-                                <input type="text" id="nombre" value="Manuel Augusto" style="margin-bottom: 0px;">
+                                <input type="text" id="nombre" value="<%= serenazgo.getNombre() %>" style="margin-bottom: 0px;">
 
                                 <label for="apellido">Apellidos:</label>
-                                <input type="text" id="apellido" value="Yarlequé Medina" style="margin-bottom: 0px;">
-
-                                <label for="correo">Correo:</label>
-                                <input type="text" id="correo" value="myarleq@pucp.edu.pe" style="margin-bottom: 0px;">
+                                <input type="text" id="apellido" value="<%= serenazgo.getApellido() %>" style="margin-bottom: 0px;">
 
                                 <label for="dni">DNI:</label>
-                                <input type="text" id="dni" value="32990451" style="margin-bottom: 0px;">
+                                <input type="text" id="dni" value="<%= serenazgo.getDni() %>" style="margin-bottom: 0px;">
 
                                 <label for="direccion">Dirección:</label>
-                                <input type="text" id="direccion" value="Inras/V" style="margin-bottom: 0px;">
+                                <input type="text" id="direccion" value="<%= serenazgo.getDireccion() %>" style="margin-bottom: 0px;">
 
                                 <label for="telefono">Teléfono:</label>
-                                <input type="text" id="telefono" value="915478952" style="margin-bottom: 0px;">
+                                <input type="text" id="telefono" value="<%= serenazgo.getTelefono() %>" style="margin-bottom: 0px;">
 
                                 <label for="turno">Turno:</label>
-                                <input type="text" id="turno" value="Mañana" style="margin-bottom: 0px;">
+                                <input type="text" id="turno" value="<%= serenazgo.getTurno() %>" style="margin-bottom: 0px;">
 
                                 <label for="tipo">Tipo:</label>
-                                <input type="text" id="tipo" value="no lo se" style="margin-bottom: 0px;">
+                                <input type="text" id="tipo" value="<%= serenazgo.getTipo() %>" style="margin-bottom: 0px;">
 
                                 <label for="nacimiento">Fecha de nacimiento:</label>
-                                <input type="text" id="nacimiento" value="66/66/6666" style="margin-bottom: 15px;">
+                                <input type="text" id="nacimiento" value="<%= serenazgo.getFNacimiento() %>" style="margin-bottom: 15px;">
                             </div>
 
                             <div class = "buttons">
@@ -274,7 +268,7 @@
             return false;
         }
 
-        function Actualizar() {
+        function Actualizar(idSerenazgo) {
             Swal.fire({
                 title: "Estás seguro?",
                 text: "El proceso no podrá ser reversible",
@@ -290,7 +284,7 @@
                         text: "El personal ha sido actualizado con exito",
                         icon: "success"
                     }).then(() => {
-                        window.location.href = "tabla_serenazgo.jsp";
+                        document.querySelector("form").submit();
                     });
                 }
             });

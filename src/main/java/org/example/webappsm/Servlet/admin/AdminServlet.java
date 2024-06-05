@@ -11,8 +11,10 @@ import org.example.webappsm.model.daos.SerenazgoDao;
 import org.example.webappsm.model.daos.VecinosDao;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.Date;
 @WebServlet(name = "AdminServlet", value = "/Admin")
 public class AdminServlet extends HttpServlet {
 
@@ -35,11 +37,34 @@ public class AdminServlet extends HttpServlet {
                 rd.forward(request,response);
                 break;
             case "tablaSerenazgo":
-                SerenazgoDao serenazgoDao = new SerenazgoDao();
-                ArrayList<Serenazgo> listaserenazgo = serenazgoDao.listarSerenazgoTabla();
+                SerenazgoDao serenazgoDaoTabla = new SerenazgoDao();
+                ArrayList<Serenazgo> listaserenazgo = serenazgoDaoTabla.listarSerenazgoTabla();
 
                 request.setAttribute("listaserenazgo",listaserenazgo);
                 vista = "vistas/jsp/ADMIN/Serenazgo/tabla_serenazgo.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+            case "verSerenazgo":
+                int idSerenazgo = Integer.parseInt(request.getParameter("idVer"));
+
+                SerenazgoDao serenazgoDaoVista = new SerenazgoDao();
+
+                Serenazgo serenazgoVer = serenazgoDaoVista.obtenerSerenazgoPorId(idSerenazgo);
+                request.setAttribute("serenazgoVer", serenazgoVer);
+
+                vista = "vistas/jsp/ADMIN/Serenazgo/datosSerenazgo.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+            case "editarSerenazgo":
+                int idSerenazgoEditar = Integer.parseInt(request.getParameter("idEditar"));
+
+                SerenazgoDao serenazgoDao = new SerenazgoDao();
+                Serenazgo serenazgoEdit = serenazgoDao.obtenerSerenazgoPorId(idSerenazgoEditar);
+
+                request.setAttribute("serenazgoEdit", serenazgoEdit);
+                vista = "vistas/jsp/ADMIN/Serenazgo/editarSerenazgo.jsp";
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
@@ -54,7 +79,29 @@ public class AdminServlet extends HttpServlet {
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
+            case "editarProfesor":
+                try {
+                    int idProfesor = Integer.parseInt(request.getParameter("id"));
+                    System.out.println("ID del profesor recibido: " + idProfesor);
 
+                    ProfesorDao profesorDaoEdit = new ProfesorDao();
+                    Profesor profesor = profesorDaoEdit.obtenerProfesorPorId(idProfesor);
+
+                    if (profesor == null) {
+                        System.out.println("Profesor no encontrado en la base de datos");
+                        response.sendError(HttpServletResponse.SC_NOT_FOUND, "No se encontró el profesor");
+                        return;
+                    }
+
+                    request.setAttribute("profesor", profesor);
+                    vista = "vistas/jsp/ADMIN/Profesores/editarProfesor.jsp";
+                    rd = request.getRequestDispatcher(vista);
+                    rd.forward(request, response);
+                } catch (NumberFormatException e) {
+                    System.out.println("ID del profesor no es un número válido");
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID del profesor no es válido");
+                }
+                break;
              case "tablaAcceso":
                 VecinosDao vecinosDao = new VecinosDao();
                 ArrayList<Usuario> listaAcceso = vecinosDao.listarSoliAcceso();
@@ -88,9 +135,8 @@ public class AdminServlet extends HttpServlet {
             String apellido = request.getParameter("apellido");
             String nombre = request.getParameter("nombre");
             String curso = request.getParameter("curso");
-
-            // Establecer idArea como 1 por defecto
-            int idArea = 1;
+            // Obtener el valor del parámetro "area" como un entero
+            int idArea = Integer.parseInt(request.getParameter("area"));
 
             Profesor nuevoProfesor = new Profesor();
             nuevoProfesor.setApellido(apellido);
@@ -117,13 +163,118 @@ public class AdminServlet extends HttpServlet {
 
             // Redireccionar a la página de tablaProfesores después de completar la eliminación
             response.sendRedirect(request.getContextPath() + "/Admin?action=tablaProfesores");
-        }
-        // Verificar otras acciones si es necesario
-        else {
+        }else if (action.equals("actualizarProfesor")) {
+            int idProfesor = Integer.parseInt(request.getParameter("idProfesor"));
+            String apellido = request.getParameter("apellido");
+            String nombre = request.getParameter("nombre");
+            String curso = request.getParameter("curso");
+            int idArea = Integer.parseInt(request.getParameter("area"));
+            ProfesorDao profesorDao = new ProfesorDao();
+            Profesor profesor = new Profesor();
+            profesor.setIdProfesor(idProfesor);
+            profesor.setApellido(apellido);
+            profesor.setNombre(nombre);
+            profesor.setCurso(curso);
+            profesor.setIdArea(idArea);
+            profesorDao.actualizarProfesor(profesor);
+
+            response.sendRedirect(request.getContextPath() + "/Admin?action=tablaProfesores");
+            // Verificar otras acciones si es necesario
+        }else if(action.equals("registrarSerenazgo")) {
+            String nombreS = request.getParameter("apellidoS");
+            String apellidoS = request.getParameter("nombreS");
+            String dniS = request.getParameter("dniS");
+            String direccionS = request.getParameter("direccionS");
+            String telefonoS = request.getParameter("telefonoS");
+            String turnoS = request.getParameter("turnoS");
+            String tipoS = request.getParameter("tipoS");
+            String fNacimientoS = request.getParameter("fNacimientoS");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); // Define el formato de la fecha
+            Date fechaNacimiento = null;
+
+            try {
+                fechaNacimiento = formatter.parse(fNacimientoS);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            Serenazgo nuevoSerenazgo = new Serenazgo();
+            nuevoSerenazgo.setNombre(nombreS);
+            nuevoSerenazgo.setApellido(apellidoS);
+            nuevoSerenazgo.setDni(dniS);
+            nuevoSerenazgo.setDireccion(direccionS);
+            nuevoSerenazgo.setTelefono(telefonoS);
+            nuevoSerenazgo.setTurno(turnoS);
+            nuevoSerenazgo.setTipo(tipoS);
+            nuevoSerenazgo.setFNacimiento(fechaNacimiento);
+
+            SerenazgoDao serenazgoDao = new SerenazgoDao();
+            serenazgoDao.agregarSerenazgo(nuevoSerenazgo);
+
+            response.sendRedirect(request.getContextPath() + "/Admin?action=tablaSerenazgo");
+
+        }else if(action.equals("editarSerenazgo")){
+            SerenazgoDao serenazgoDao = new SerenazgoDao();
+            String idSerenazgoString = request.getParameter("idSerenazgo");
+            int idSerenazgo = Integer.parseInt(idSerenazgoString);
+            Serenazgo serenazgo = serenazgoDao.obtenerSerenazgoPorId(idSerenazgo);
+
+            String nombreS = request.getParameter("nombreS");
+            String apellidoS = request.getParameter("apellidoS");
+            String dniS = request.getParameter("dniS");
+            String direccionS = request.getParameter("direccionS");
+            String telefonoS = request.getParameter("telefonoS");
+            String turnoS = request.getParameter("turnoS");
+            String tipoS = request.getParameter("tipoS");
+            String fNacimientoS = request.getParameter("fNacimientoS");
+
+            if (nombreS != null && !nombreS.isEmpty()) {
+                serenazgo.setNombre(nombreS);
+            }
+            if (apellidoS != null && !apellidoS.isEmpty()) {
+                serenazgo.setApellido(apellidoS);
+            }
+            if (dniS != null && !dniS.isEmpty()) {
+                serenazgo.setDni(dniS);
+            }
+            if (direccionS != null && !direccionS.isEmpty()) {
+                serenazgo.setDireccion(direccionS);
+            }
+            if (telefonoS != null && !telefonoS.isEmpty()) {
+                serenazgo.setTelefono(telefonoS);
+            }
+            if (turnoS != null && !turnoS.isEmpty()) {
+                serenazgo.setTurno(turnoS);
+            }
+            if (tipoS != null && !tipoS.isEmpty()) {
+                serenazgo.setTipo(tipoS);
+            }
+            if (fNacimientoS != null && !fNacimientoS.isEmpty()) {
+                try {
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                    Date fechaNacimiento = formatter.parse(fNacimientoS);
+                    serenazgo.setFNacimiento(fechaNacimiento);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            serenazgoDao.editarSerenazgo(serenazgo);
+            response.sendRedirect(request.getContextPath() + "/Admin?action=tablaSerenazgo");
+
+        }else if(action.equals("eliminarSerenazgo")){
+
+            String idParam = request.getParameter("id");
+                if (idParam != null) {
+                    int idSerenazgo = Integer.parseInt(idParam);
+
+                    SerenazgoDao serenazgoDao = new SerenazgoDao();
+                    serenazgoDao.eliminarSerenazgo(idSerenazgo);
+
+                    response.sendRedirect(request.getContextPath() + "/Admin?action=tablaSerenazgo");
+                }
+        }else{
             response.sendRedirect(request.getContextPath() + "/Admin");
         }
     }
-
-
 
 }
