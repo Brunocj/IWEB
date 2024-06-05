@@ -9,6 +9,7 @@ public class Usuario {
     private String apellido;
     private String rol;
     private String documento;
+    private String tipoDocumento;
     private String distrito;
     private String urbanizacion;
     private int falsasAlarmas;
