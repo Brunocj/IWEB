@@ -22,7 +22,7 @@ function CancelarPagPrincipal(){
 
     // Evitar que el formulario se envíe automáticamente
     return false;
-}  
+}
 
 function CancelarDashboard() {
     Swal.fire({
@@ -48,7 +48,7 @@ function CancelarDashboard() {
 
     // Evitar que el formulario se envíe automáticamente
     return false;
-}  
+}
 
 
 function CancelarSerenazgo() {
@@ -75,7 +75,7 @@ function CancelarSerenazgo() {
 
     // Evitar que el formulario se envíe automáticamente
     return false;
-}  
+}
 
 
 function CancelarProfesores(contextPath) {
@@ -102,7 +102,7 @@ function CancelarProfesores(contextPath) {
 
     // Evitar que el formulario se envíe automáticamente
     return false;
-}  
+}
 
 
 function CancelarSolAcceso() {
@@ -129,7 +129,7 @@ function CancelarSolAcceso() {
 
     // Evitar que el formulario se envíe automáticamente
     return false;
-}  
+}
 
 function CancelarSolCoordinacion() {
     Swal.fire({

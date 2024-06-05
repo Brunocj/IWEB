@@ -79,7 +79,29 @@ public class AdminServlet extends HttpServlet {
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
+            case "editarProfesor":
+                try {
+                    int idProfesor = Integer.parseInt(request.getParameter("id"));
+                    System.out.println("ID del profesor recibido: " + idProfesor);
 
+                    ProfesorDao profesorDaoEdit = new ProfesorDao();
+                    Profesor profesor = profesorDaoEdit.obtenerProfesorPorId(idProfesor);
+
+                    if (profesor == null) {
+                        System.out.println("Profesor no encontrado en la base de datos");
+                        response.sendError(HttpServletResponse.SC_NOT_FOUND, "No se encontró el profesor");
+                        return;
+                    }
+
+                    request.setAttribute("profesor", profesor);
+                    vista = "vistas/jsp/ADMIN/Profesores/editarProfesor.jsp";
+                    rd = request.getRequestDispatcher(vista);
+                    rd.forward(request, response);
+                } catch (NumberFormatException e) {
+                    System.out.println("ID del profesor no es un número válido");
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID del profesor no es válido");
+                }
+                break;
              case "tablaAcceso":
                 VecinosDao vecinosDao = new VecinosDao();
                 ArrayList<Usuario> listaAcceso = vecinosDao.listarSoliAcceso();
@@ -113,9 +135,8 @@ public class AdminServlet extends HttpServlet {
             String apellido = request.getParameter("apellido");
             String nombre = request.getParameter("nombre");
             String curso = request.getParameter("curso");
-
-            // Establecer idArea como 1 por defecto
-            int idArea = 1;
+            // Obtener el valor del parámetro "area" como un entero
+            int idArea = Integer.parseInt(request.getParameter("area"));
 
             Profesor nuevoProfesor = new Profesor();
             nuevoProfesor.setApellido(apellido);
@@ -142,6 +163,23 @@ public class AdminServlet extends HttpServlet {
 
             // Redireccionar a la página de tablaProfesores después de completar la eliminación
             response.sendRedirect(request.getContextPath() + "/Admin?action=tablaProfesores");
+        }else if (action.equals("actualizarProfesor")) {
+            int idProfesor = Integer.parseInt(request.getParameter("idProfesor"));
+            String apellido = request.getParameter("apellido");
+            String nombre = request.getParameter("nombre");
+            String curso = request.getParameter("curso");
+            int idArea = Integer.parseInt(request.getParameter("area"));
+            ProfesorDao profesorDao = new ProfesorDao();
+            Profesor profesor = new Profesor();
+            profesor.setIdProfesor(idProfesor);
+            profesor.setApellido(apellido);
+            profesor.setNombre(nombre);
+            profesor.setCurso(curso);
+            profesor.setIdArea(idArea);
+            profesorDao.actualizarProfesor(profesor);
+
+            response.sendRedirect(request.getContextPath() + "/Admin?action=tablaProfesores");
+            // Verificar otras acciones si es necesario
         }else if(action.equals("registrarSerenazgo")) {
             String nombreS = request.getParameter("apellidoS");
             String apellidoS = request.getParameter("nombreS");

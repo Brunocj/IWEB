@@ -226,7 +226,7 @@
                 </div>
               </div>
               <div class="card-name">
-                <a href="Profesores/tabla_profesor.jsp" style="color: black; font-weight: bold;">Profesores </a>
+                <a href="${pageContext.request.contextPath}/Admin?action=tablaProfesores" style="color: black; font-weight: bold;">Profesores </a>
               </div>
             </div>
           </div>
