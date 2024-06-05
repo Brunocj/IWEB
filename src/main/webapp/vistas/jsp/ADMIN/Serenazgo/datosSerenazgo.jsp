@@ -9,19 +9,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Pagina en blanco</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="styles_tabla.css">
-    <link rel="stylesheet" href="../../../../assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../../../../assets/vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="styles_datos_serenazgo.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Serenazgo/styles_tabla.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Serenazgo/styles_datos_serenazgo.css.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End Plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="../../../../assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../LogoSM.png"/><!--Cambiar la ubicacion del logo de la pagina aca tmb-->
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" /><!--Cambiar la ubicacion del logo de la pagina aca tmb-->
     <!--JS para los popups-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>

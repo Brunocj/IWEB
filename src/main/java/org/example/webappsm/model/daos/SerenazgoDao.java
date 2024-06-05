@@ -19,7 +19,7 @@ public class SerenazgoDao {
         //Parametros de conexion a que base de datos me quiero unir//
         String url ="jdbc:mysql://localhost:3306/sanmiguel";
         String username = "root";
-        String password = "rootroot";
+        String password = "123456";
         String sql = "SELECT  s.idSerenazgo, s.nombre, s.apellido, ts.nombreTipo AS tipo, t.nombreTurno AS turno " +
                 "FROM Serenazgo s " +
                 "JOIN TipoSerenazgo ts ON s.idTipoSerenazgo = ts.idTipoSerenazgo " +
@@ -58,7 +58,7 @@ public class SerenazgoDao {
 
         String url ="jdbc:mysql://localhost:3306/sanmiguel";
         String username = "root";
-        String password = "rootroot";
+        String password = "123456";
         String query = "INSERT INTO Serenazgo (nombre, apellido, dni, direccion, telefono, turno, tipo, fNacimiento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn= DriverManager.getConnection(url, username, password);
              PreparedStatement pstmt = conn.prepareStatement(query)){
@@ -90,7 +90,7 @@ public class SerenazgoDao {
 
         String url ="jdbc:mysql://localhost:3306/sanmiguel";
         String username = "root";
-        String password = "rootroot";
+        String password = "123456";
         String query = "DELETE FROM Serenazgo WHERE idSerenazgo = ?";
         try (Connection conn= DriverManager.getConnection(url, username, password);
              PreparedStatement pstmt = conn.prepareStatement(query)){
@@ -111,7 +111,7 @@ public class SerenazgoDao {
 
         String url ="jdbc:mysql://localhost:3306/sanmiguel";
         String username = "root";
-        String password = "rootroot";
+        String password = "123456";
         String query = "SELECT s.idSerenazgo, s.nombre, s.apellido, s.dni, s.direccion, s.telefono, s.fNacimiento, " +
                 "(SELECT ts.nombreTipo FROM Tiposerenazgo ts WHERE ts.idTipoSerenazgo = s.idTipoSerenazgo) AS tipo, " +
                 "(SELECT t.nombreTurno FROM Turno t WHERE t.idTurno = s.idTurno) AS turno " +
@@ -148,8 +148,17 @@ public class SerenazgoDao {
 
         String url ="jdbc:mysql://localhost:3306/sanmiguel";
         String username = "root";
-        String password = "rootroot";
-        String query = "UPDATE Serenazgo SET nombre = ?, apellido = ?, dni = ?, direccion = ?, telefono = ?, turno = ?, tipo = ?, fNacimiento = ? WHERE idSerenazgo = ?";
+        String password = "123456";
+        String query = "UPDATE Serenazgo AS S " +
+                "SET S.nombre = ?, " +
+                "    S.apellido = ?, " +
+                "    S.dni = ?, " +
+                "    S.direccion = ?, " +
+                "    S.telefono = ?, " +
+                "    S.idTurno = (SELECT idTurno FROM Turno WHERE nombreTurno = ?), " +
+                "    S.idTipoSerenazgo = (SELECT idTipoSerenazgo FROM tiposerenazgo WHERE nombreTipo = ?), " +
+                "    S.fNacimiento = ? " +
+                "WHERE S.idSerenazgo = ?";
         try (Connection conn= DriverManager.getConnection(url, username, password);
              PreparedStatement pstmt = conn.prepareStatement(query)){
             pstmt.setString(1, serenazgo.getNombre());
