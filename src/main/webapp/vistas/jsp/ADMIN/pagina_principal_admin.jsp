@@ -38,8 +38,8 @@
   <nav class="sidebar sidebar-offcanvas" id="sidebar" style ="background-color: #000f22;">  <!--Cambiar al color mas oscuro-->
 
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top" style ="background-color: #000f22;">
-      <h3 class="sidebar-brand brand-logo" style ="color:white; font-weight: 200px; cursor: default;">Menú</h3>
-      <h3 class="sidebar-brand brand-logo-mini" style ="color:white; font-weight: 200px; cursor: default;">M</h3>
+      <h3 class="sidebar-brand brand-logo" style ="color:white; font-weight: 200; cursor: default;">Menú</h3>
+      <h3 class="sidebar-brand brand-logo-mini" style ="color:white; font-weight: 200; cursor: default;">M</h3>
     </div>
 
 
@@ -210,7 +210,7 @@
                 </div>
               </div>
               <div class="card-name">
-                <a href="Serenazgo/tabla_serenazgo.jsp" style="color: black; font-weight: bold;"> Serenazgo <br> Dispatcher</a>
+                <a href="${pageContext.request.contextPath}/Admin?action=tablaSerenazgo" style="color: black; font-weight: bold;"> Serenazgo <br> Dispatcher</a>
               </div>
             </div>
             <div class="col-md-4">
@@ -226,7 +226,7 @@
                 </div>
               </div>
               <div class="card-name">
-                <a href="Profesores/tabla_profesor.jsp" style="color: black; font-weight: bold;">Profesores </a>
+                <a href="${pageContext.request.contextPath}/Admin?action=tablaProfesores" style="color: black; font-weight: bold;">Profesores </a>
               </div>
             </div>
           </div>

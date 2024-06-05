@@ -1,11 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: bruno
-  Date: 27/05/2024
-  Time: 22:19
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import ="org.example.webappsm.model.beans.Serenazgo" %>
+<%Serenazgo serenazgo = (Serenazgo) request.getAttribute("serenazgoVer");%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,8 +33,8 @@
     <nav class="sidebar sidebar-offcanvas" id="sidebar" style ="background-color: #000f22;">  <!--Cambiar al color mas oscuro-->
 
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top" style ="background-color: #000f22;">
-            <h3 class="sidebar-brand brand-logo" style ="color:white; font-weight: 200px; cursor: default;">Menú</h3>
-            <h3 class="sidebar-brand brand-logo-mini" style ="color:white; font-weight: 200px; cursor: default;">M</h3>
+            <h3 class="sidebar-brand brand-logo" style ="color:white; font-weight: 200; cursor: default;">Menú</h3>
+            <h3 class="sidebar-brand brand-logo-mini" style ="color:white; font-weight: 200; cursor: default;">M</h3>
         </div>
 
 
@@ -122,7 +117,7 @@
         </ul>
     </nav>
     <!-- partial -->
-
+</div>
     <div class="container-fluid page-body-wrapper">
         <!-- partial:../../partials/_navbar.jsp -->
         <nav class="navbar p-0 fixed-top d-flex flex-row">
@@ -170,47 +165,42 @@
                                 <tr>
                                     <td>Nombre(s)</td>
                                     <td>:</td>
-                                    <td>Manuel Augusto</td>
+                                    <td><%= serenazgo.getNombre() %></td>
                                 </tr>
                                 <tr>
                                     <td>Apellidos</td>
                                     <td>:</td>
-                                    <td>Yarlequé Medina</td>
-                                </tr>
-                                <tr>
-                                    <td>Correo</td>
-                                    <td>:</td>
-                                    <td>yarleque.thanos@gmail.com</td>
+                                    <td><%= serenazgo.getApellido() %></td>
                                 </tr>
                                 <tr>
                                     <td>DNI</td>
                                     <td>:</td>
-                                    <td>53856284</td>
+                                    <td><%= serenazgo.getDni() %></td>
                                 </tr>
                                 <tr>
                                     <td>Direccción</td>
                                     <td>:</td>
-                                    <td>Inras</td>
+                                    <td><%= serenazgo.getDireccion() %></td>
                                 </tr>
                                 <tr>
                                     <td>Número telefónico</td>
                                     <td>:</td>
-                                    <td>998503948</td>
+                                    <td><%= serenazgo.getTelefono() %></td>
                                 </tr>
                                 <tr>
                                     <td>Turno</td>
                                     <td>:</td>
-                                    <td>Mañana</td>
+                                    <td><%= serenazgo.getTurno() %></td>
                                 </tr>
                                 <tr>
                                     <td>Tipo</td>
                                     <td>:</td>
-                                    <td>militar</td>
+                                    <td><%= serenazgo.getTipo() %></td>
                                 </tr>
                                 <tr>
                                     <td>Fecha de Nacimiento</td>
                                     <td>:</td>
-                                    <td>66/66/6666</td>
+                                    <td><%= serenazgo.getFNacimiento() %></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -267,5 +257,6 @@
     <script src = "script_tabla.js"></script>
 
     <!-- End custom js for this page -->
+
 </body>
 </html>

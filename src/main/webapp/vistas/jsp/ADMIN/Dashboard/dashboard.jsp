@@ -6,6 +6,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String totalBaneados = (String) request.getAttribute("totalbaneados");
+    String avgIncidencias = (String) request.getAttribute("avgincidencias");
+    String totalIncidencias = (String) request.getAttribute("totalincidencias");
+    String incidenciasComunMax = (String) request.getAttribute("incidenciascomunmax");
+    String incidenciasComunMin = (String) request.getAttribute("incidenciascomunmin");
+    String incidenciasPorAtender = (String) request.getAttribute("incidenciasatender");
+    String incidenciasUrbMax = (String) request.getAttribute("incidenciasurbmax");
+    String incidenciasUrbMin = (String) request.getAttribute("incidenciasurbmin");
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -185,7 +196,7 @@
                                             <h3 style="margin-bottom: 25px; text-align: center;">Cantidad total de incidencias </h3>
                                             <span class="material-icons-outlined" style="display: flex; justify-content: center; align-items: center;">addchart</span>
                                         </div>
-                                        <h1 style="margin-top: 20px;text-align: center; color: #000f22;">318 incidencias</h1>
+                                        <h1 style="margin-top: 20px;text-align: center; color: #000f22;"><%=totalIncidencias%> incidencias</h1>
                                     </div>
 
 
@@ -196,7 +207,7 @@
                                             <h3 style="margin-bottom: 25px; text-align: center;">Promedio de incidencias por día</h3>
                                             <span class="material-icons-outlined" style="display: flex; justify-content: center; align-items: center;">query_stats</span>
                                         </div>
-                                        <h1 style="margin-top: 20px; text-align: center;">14.54 incidencias</h1>
+                                        <h1 style="margin-top: 20px; text-align: center;"><%=avgIncidencias%> incidencias</h1>
                                     </div>
 
                                     <!-- tercer card -->
@@ -205,7 +216,7 @@
                                             <h3 style="margin-bottom: 25px; text-align: center;">Urbanización con mayor incidencia</h3>
                                             <span class="material-icons-outlined" style="display: flex; justify-content: center; align-items: center;">maps_home_work</span>
                                         </div>
-                                        <h1 style="margin-top: 20px; text-align: center;font-size: 30px;">Urbanización Pando</h1>
+                                        <h1 style="margin-top: 20px; text-align: center;font-size: 30px;">Urbanización <%=incidenciasUrbMax%></h1>
                                     </div>
 
                                     <!-- cuarto card -->
@@ -214,7 +225,7 @@
                                             <h3 style="margin-bottom: 25px; text-align: center;">Urbanización con menor incidencias</h3>
                                             <span class="material-icons-outlined" style="display: flex; justify-content: center; align-items: center;">maps_home_work</span>
                                         </div>
-                                        <h1 style="margin-top: 50px; text-align: center; font-size: 30px;">Urbanización Maranga</h1>
+                                        <h1 style="margin-top: 50px; text-align: center; font-size: 30px;">Urbanización <%=incidenciasUrbMin%></h1>
                                     </div>
 
                                     <!-- quinto card -->
@@ -223,7 +234,7 @@
                                             <h3 style="margin-bottom: 50px;margin-top: 10px; text-align: center;">Cantidad de solicitudes por atender</h3>
                                             <span class="material-icons-outlined" style="display: flex; justify-content: center; align-items: center;">error</span>
                                         </div>
-                                        <h1 style="margin-top: 40px; text-align: center;">535 solicitudes</h1>
+                                        <h1 style="margin-top: 40px; text-align: center;"><%=incidenciasPorAtender%> solicitudes</h1>
                                     </div>
 
                                     <!-- sexto card -->
@@ -232,16 +243,16 @@
                                             <h3 style="margin-bottom: 50px; margin-top: 10px;text-align: center;">Tipo de incidencia más comun</h3>
                                             <span class="material-icons-outlined" style="display: flex; justify-content: center; align-items: center;">trending_up</span>
                                         </div>
-                                        <h1 style="margin-top: 40px; text-align: center;">hurtos</h1>
+                                        <h1 style="margin-top: 40px; text-align: center;"><%=incidenciasComunMax%></h1>
                                     </div>
 
                                     <!-- sétimo card -->
                                     <div class="card">
                                         <div class="card-inner">
-                                            <h3 style="margin-bottom: 40px; margin-top: 10px;text-align: center;">Tipo de incidencia ménos comun</h3>
+                                            <h3 style="margin-bottom: 40px; margin-top: 10px;text-align: center;">Tipo de incidencia más comun</h3>
                                             <span class="material-icons-outlined" style="display: flex; justify-content: center; align-items: center;">trending_down</span>
                                         </div>
-                                        <h1 style="margin-top: 40px; text-align: center;">robos</h1>
+                                        <h1 style="margin-top: 40px; text-align: center;"><%=incidenciasComunMin%></h1>
 
                                     </div>
                                     <!-- octavo card -->
@@ -252,7 +263,7 @@
                     </span>
                                             </span>
                                         </div>
-                                        <h1 style="margin-top: 40px; text-align: center;">21 vecinos</h1>
+                                        <h1 style="margin-top: 40px; text-align: center;"><%=totalBaneados%> vecinos</h1>
                                     </div>
 
                                 </div>
@@ -350,8 +361,7 @@
                                         <th style ="color: white;font-size: 17px;cursor: pointer;">Apellidos</th>
                                         <th style ="color: white;font-size: 17px;cursor: pointer;">Nombres</th>
                                         <th style ="color: white;font-size: 17px;cursor: pointer;">DNI</th>
-                                        <th style="color: white; font-size: 17px; cursor: pointer;">Fecha de sanción</th>
-                                        <th style="color: white; font-size: 17px; cursor: pointer;">Valor de la multa</th>
+                                        <th style ="color: white;font-size: 17px;cursor: pointer;">Administrar sanción</th>
 
                                     </tr>
                                     </thead>
@@ -361,71 +371,7 @@
                                         <td><a>Yarleque Medina</a></td>
                                         <td><a>Manuel Augusto</a></td>
                                         <td>75849544</td>
-                                        <td>04/05/2024</td>
-                                        <td>S/ 50.00</td>
-                                    </tr>
-                                    <tr style="text-align: center;">
-                                        <td><a>López Pascual</a></td>
-                                        <td><a>Adrián Alvaro</a></td>
-                                        <td>75849544</td>
-                                        <td>05/05/2024</td>
-                                        <td>S/ 90.00</td>
-                                    </tr>
-                                    <tr style="text-align: center;">
-                                        <td><a>Coronado Maxwell</a></td>
-                                        <td><a>Jorge</a></td>
-                                        <td>37501028</td>
-                                        <td>05/05/2024</td>
-                                        <td>S/ 80.00</td>
-                                    </tr>
-                                    <tr style="text-align: center;">
-                                        <td><a>Bustamante Melo</a></td>
-                                        <td><a>Pedro Miguel</a></td>
-                                        <td>67483592</td>
-                                        <td>05/05/2024</td>
-                                        <td>S/ 40.00</td>
-                                    </tr>
-                                    <tr style="text-align: center;">
-                                        <td><a>Ramírez Mendoza</a></td>
-                                        <td><a>Luis Alberto</a></td>
-                                        <td>46781947</td>
-                                        <td>04/05/2024</td>
-                                        <td>S/ 20.00</td>
-                                    </tr>
-                                    <tr style="text-align: center;">
-                                        <td><a>Flores Rojas</a></td>
-                                        <td><a>Miguel Angel</a></td>
-                                        <td>58291027</td>
-                                        <td>09/05/2024</td>
-                                        <td>S/ 60.00</td>
-                                    </tr>
-                                    <tr style="text-align: center;">
-                                        <td><a>Valdez Ríos</a></td>
-                                        <td><a>Carlos Antonio</a></td>
-                                        <td>28674918</td>
-                                        <td>10/05/2024</td>
-                                        <td>S/ 50.00</td>
-                                    </tr>
-                                    <tr style="text-align: center;">
-                                        <td><a>Rojas Sánchez</a></td>
-                                        <td><a>José Luis</a></td>
-                                        <td>87469203</td>
-                                        <td>10/05/2024</td>
-                                        <td>S/ 70.00</td>
-                                    </tr>
-                                    <tr style="text-align: center;">
-                                        <td><a>Martínez Díaz</a></td>
-                                        <td><a>Juan Carlos</a></td>
-                                        <td>56291038</td>
-                                        <td>10/05/2024</td>
-                                        <td>S/ 30.00</td>
-                                    </tr>
-                                    <tr style="text-align: center;">
-                                        <td><a>García Torres</a></td>
-                                        <td><a>Roberto Carlos</a></td>
-                                        <td>37856194</td>
-                                        <td>10/05/2024</td>
-                                        <td>S/ 40.00</td>
+                                        <td><a class = "mdi mdi-lock-open"></a></td>
                                     </tr>
                                     </tbody>
                                 </table>
