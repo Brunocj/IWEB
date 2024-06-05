@@ -277,6 +277,15 @@
                 confirmButtonText: "Si, actualizar"
             }).then((result) => {
                 if (result.isConfirmed) {
+                    var form = document.getElementById("formularioEditarSerenazgo");
+
+                    var inputIdSerenazgo = document.createElement("input");
+                    inputIdSerenazgo.setAttribute("type", "hidden");
+                    inputIdSerenazgo.setAttribute("name", "idSerenazgo");
+                    inputIdSerenazgo.setAttribute("value", idSerenazgo);
+                    form.appendChild(inputIdSerenazgo);
+
+                    form.submit();
                     Swal.fire({
                         title: "Actualizado!",
                         text: "El personal ha sido actualizado con exito",

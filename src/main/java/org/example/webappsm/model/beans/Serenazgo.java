@@ -3,7 +3,6 @@ package org.example.webappsm.model.beans;
 import lombok.Data;
 
 import java.util.Date;
-
 @Data
 public class Serenazgo {
     private int idSerenazgo;

@@ -20,7 +20,7 @@ public class SerenazgoDao {
         String url ="jdbc:mysql://localhost:3306/sanmiguel";
         String username = "root";
         String password = "rootroot";
-        String sql = "SELECT s.nombre, s.apellido, ts.nombreTipo AS tipo, t.nombreTurno AS turno " +
+        String sql = "SELECT  s.idSerenazgo, s.nombre, s.apellido, ts.nombreTipo AS tipo, t.nombreTurno AS turno " +
                 "FROM Serenazgo s " +
                 "JOIN TipoSerenazgo ts ON s.idTipoSerenazgo = ts.idTipoSerenazgo " +
                 "JOIN Turno t ON s.idTurno = t.idTurno";
@@ -32,6 +32,7 @@ public class SerenazgoDao {
             while (rs.next()){
                 Serenazgo serenazgo = new Serenazgo();
 
+                serenazgo.setIdSerenazgo(rs.getInt("idSerenazgo"));
                 serenazgo.setNombre(rs.getString("nombre"));
                 serenazgo.setApellido(rs.getString("apellido"));
                 serenazgo.setTipo(rs.getString("tipo"));

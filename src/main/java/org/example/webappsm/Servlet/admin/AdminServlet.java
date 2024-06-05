@@ -64,9 +64,9 @@ public class AdminServlet extends HttpServlet {
                 Serenazgo serenazgoEdit = serenazgoDao.obtenerSerenazgoPorId(idSerenazgoEditar);
 
                 request.setAttribute("serenazgoEdit", serenazgoEdit);
-
-                RequestDispatcher dispatcher = request.getRequestDispatcher("editarSerenazgo.jsp");
-                dispatcher.forward(request, response);
+                vista = "vistas/jsp/ADMIN/Serenazgo/editarSerenazgo.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
                 break;
             case "tablaProfesores":
                 ProfesorDao profesorDao = new ProfesorDao();
@@ -225,12 +225,15 @@ public class AdminServlet extends HttpServlet {
 
         }else if(action.equals("eliminarSerenazgo")){
 
-            int idSerenazgo = Integer.parseInt(request.getParameter("id"));
+            String idParam = request.getParameter("id");
+                if (idParam != null) {
+                    int idSerenazgo = Integer.parseInt(idParam);
 
-            SerenazgoDao serenazgoDao = new SerenazgoDao();
-            serenazgoDao.eliminarSerenazgo(idSerenazgo);
+                    SerenazgoDao serenazgoDao = new SerenazgoDao();
+                    serenazgoDao.eliminarSerenazgo(idSerenazgo);
 
-            response.sendRedirect(request.getContextPath() + "/Admin?action=tablaSerenazgo");
+                    response.sendRedirect(request.getContextPath() + "/Admin?action=tablaSerenazgo");
+                }
         }else{
             response.sendRedirect(request.getContextPath() + "/Admin");
         }
