@@ -336,20 +336,7 @@
                                         <div style="display: flex; flex-direction: column; ">
                                             <h2 class="tabla-title" style ="color:#000f22;">Usuarios sancionados por falsas alarmas</h2>  <!--Cambiar el titulo de la tabla-->
 
-                                            <div style="display: flex; gap:30px;margin-top: 10px;">
-                                                <div style="display: flex; gap:10px;">
-                                                    <p style="color:black; align-self: center; margin-bottom: 0px; font-size: 15px;">Filtrar por fecha:</p>
-                                                    <input type="date" id="filtroFecha" style="border-color: #DFDFDF; border-radius: 6px; padding:5px; outline: none; height: 40px; margin-top:0px; ">
-                                                    <span class="calendar-icon"><i class="fas fa-calendar" ></i></span>
 
-                                                </div>
-                                                <div style="display: flex; align-items: center; justify-content: center;">
-                                                    <button id="limpiarFiltros" class="btnTable" style="display: flex; align-items: center;">
-                                                        Limpiar Filtros
-                                                        <a class="mdi mdi-filter-remove" style="color: #ffffff; font-size: 20px; margin-left: 5px;"></a>
-                                                    </button>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -371,7 +358,7 @@
                                         <td><a>Yarleque Medina</a></td>
                                         <td><a>Manuel Augusto</a></td>
                                         <td>75849544</td>
-                                        <td><a class = "mdi mdi-lock-open"></a></td>
+                                        <td><a class = "mdi mdi-lock-open" style="color:black;"></a></td>
                                     </tr>
                                     </tbody>
                                 </table>

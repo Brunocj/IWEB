@@ -3,6 +3,7 @@ package org.example.webappsm.Servlet.admin;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.example.webappsm.model.beans.Incidencia;
 import org.example.webappsm.model.beans.Profesor;
 import org.example.webappsm.model.beans.Serenazgo;
 import org.example.webappsm.model.beans.Usuario;
@@ -42,6 +43,8 @@ public class AdminServlet extends HttpServlet {
                 String incidenciasPorAtender = dashboardDao.incidenciasPorAtender();
                 String incidenciasUrbMax = dashboardDao.incidenciasUrbMax();
                 String incidenciasUrbMin = dashboardDao.incidenciasUrbMin();
+                ArrayList<Incidencia> listaIncidencias = dashboardDao.listarIncidenciasDashboard();
+                ArrayList<Usuario> listaBaneados = dashboardDao.listarBaneados();
                 request.setAttribute("totalbaneados", totalBaneados);
                 request.setAttribute("avgincidencias", avgIncidencias);
                 request.setAttribute("totalincidencias", totalIncidencias);

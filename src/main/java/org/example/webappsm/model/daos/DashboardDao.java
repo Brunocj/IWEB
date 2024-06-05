@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class DashboardDao {
-    public ArrayList<Incidencia> listarIncidencias(){
+    public ArrayList<Incidencia> listarIncidenciasDashboard(){
         ArrayList<Incidencia> listaIncidencias = new ArrayList<>();
 
         try {
@@ -22,7 +22,19 @@ public class DashboardDao {
         String username = "root";
         String password = "123456";
 
-        String sql = "";
+        String sql = "SELECT " +
+                "    TipoIncidencia.nombreTipo AS tipo_incidencia, " +
+                "    Urbanizacion.nombreUrbanizacion AS urbanizacion, " +
+                "    EstadoIncidencia.nombreEstado AS estado, " +
+                "    Incidencia.fecha AS fecha_registro " +
+                "FROM " +
+                "    Incidencia " +
+                "JOIN " +
+                "    TipoIncidencia ON Incidencia.idTipoIncidencia = TipoIncidencia.idTipoIncidencia " +
+                "JOIN " +
+                "    Urbanizacion ON Incidencia.idUrbanizacion = Urbanizacion.idUrbanizacion" +
+                "JOIN " +
+                "    EstadoIncidencia ON Incidencia.idEstado = EstadoIncidencia.idEstado;";
 
 
         try (Connection conn= DriverManager.getConnection(url, username, password);
@@ -31,7 +43,10 @@ public class DashboardDao {
 
             while (rs.next()){
                 Incidencia incidencia = new Incidencia();
-
+                incidencia.setTipo(rs.getString("tipo_incidencia"));
+                incidencia.setUrbanizacion(rs.getString("urbanizacion"));
+                incidencia.setEstado(rs.getString("estado"));
+                incidencia.setFechaIncidencia(rs.getTimestamp("fecha_registro"));
 
                 listaIncidencias.add(incidencia);
 
@@ -485,5 +500,81 @@ public class DashboardDao {
 
         return incidenciasPorUrbanizacion;
     }
+
+
+    //Tabla 3
+    public ArrayList<String> ListaEstado(){
+        ArrayList<String> listaStatus = new ArrayList<>();
+
+        try {
+            Class.forName( "com.mysql.cj.jdbc.Driver");
+
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        //Parametros de conexion a que base de datos me quiero unir//
+        String url ="jdbc:mysql://localhost:3306/sanmiguel";
+        String username = "root";
+        String password = "123456";
+
+
+        String sql = "SELECT nombreEstado " +
+                "FROM EstadoIncidencia;";
+
+        try (Connection conn = DriverManager.getConnection(url, username, password);
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                listaStatus.add(rs.getString("nombreEstado"));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        return listaStatus;
+    }
+    public ArrayList<String> cantIncidenciasEstado(){
+        ArrayList<String> cantIncidenciasEstado = new ArrayList<>();
+
+        try {
+            Class.forName( "com.mysql.cj.jdbc.Driver");
+
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        //Parametros de conexion a que base de datos me quiero unir//
+        String url ="jdbc:mysql://localhost:3306/sanmiguel";
+        String username = "root";
+        String password = "123456";
+
+
+        String sql = "SELECT EstadoIncidencia.nombreEstado, COUNT(Incidencia.idIncidencia) AS cantidad_incidencias " +
+                "FROM Incidencia " +
+                "JOIN EstadoIncidencia ON Incidencia.idEstado = EstadoIncidencia.idEstado " +
+                "GROUP BY EstadoIncidencia.nombreEstado;";
+
+        try (Connection conn = DriverManager.getConnection(url, username, password);
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                cantIncidenciasEstado.add(Integer.toString(rs.getInt("cantidad_incidencias")));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return cantIncidenciasEstado;
+
+    }
+
+
+
 
 }

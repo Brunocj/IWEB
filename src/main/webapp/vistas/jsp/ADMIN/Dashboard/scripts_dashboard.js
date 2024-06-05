@@ -7,7 +7,6 @@ const etiquetas = {
 
 const tiposIncidencia = {
   incidencias : ['Hurto','Discriminación','Disturbios','Vandalismo','Drogas','Extorsión','Secuestro','Acoso','Fraudes','Violación','Homicidio','Ruido','Otros']
-  
 }
 
 const urbanizaciones = {
@@ -40,19 +39,14 @@ function actualizarDatosAreaChart(selectedPeriod) {
 }
 
 // Función para actualizar el gráfico de barras 2 según el periodo seleccionado
-function actualizarDatosBarChart2(selectedPeriod) {
-  let arregloUrba = [];
-  // Generar datos de prueba según el periodo seleccionado
-  if (selectedPeriod === 'mes') {
-    arregloUrba = [50, 60,70,40,35,40,50, 60];
-    barChart2.updateOptions({ xaxis: { categories: etiquetas.mes } }); // Actualizar etiquetas del eje X
-  } else if (selectedPeriod === 'semana') {
-    arregloUrba = [30, 20,10,30,20,15,25, 30,];
-    barChart2.updateOptions({ xaxis: { categories: etiquetas.semana } }); // Actualizar etiquetas del eje X
-  } else if (selectedPeriod === 'dia') {
-    arregloUrba = [20, 10,8,13,10,13,13, 15];
-    barChart2.updateOptions({ xaxis: { categories: etiquetas.dia } }); // Actualizar etiquetas del eje X
-  }
+function actualizarDatosBarChart2(incidenciasPorUrbanizacion) {
+  let arregloUrba = incidenciasPorUrbanizacion.map(urb => parseInt(urb.split(': ')[1]));
+  let categories = incidenciasPorUrbanizacion.map(urb => urb.split(': ')[0]);
+
+  barChart2.updateOptions({
+    xaxis: { categories: categories }
+  });
+
   // Actualizar datos de la gráfica de barras 2
   barChart2.updateSeries([{ data: arregloUrba }]);
 }
@@ -73,19 +67,14 @@ function actualizarDatosPieChart(selectedPeriod) {
 }
 
 // Función para actualizar el gráfico de barras según el periodo seleccionado
-function actualizarDatosBarChart(selectedPeriod) {
-  let listabarra = [];
-  // Generar datos de prueba según el periodo seleccionado
-  if (selectedPeriod === 'mes') {
-    listabarra = [10, 20, 30, 40, 50,10, 20, 30, 40, 50,10, 20,25];
-    barChart.updateOptions({ xaxis: { categories: tiposIncidencia.incidencias } }); 
-  } else if (selectedPeriod === 'semana') {
-    listabarra = [8, 18, 25, 20, 25,9, 10, 20, 20, 28,10, 15,18];
-    barChart.updateOptions({ xaxis: { categories: tiposIncidencia.incidencias } }); 
-  } else if (selectedPeriod === 'dia') {
-    listabarra = [2,14, 10, 2, 12,5, 7, 17, 15, 10,8, 13,11];
-    barChart.updateOptions({ xaxis: { categories: tiposIncidencia.incidencias } });
-  }
+function actualizarDatosBarChart(incidenciasPorTipo) {
+  let listabarra = incidenciasPorTipo.map(incidencia => parseInt(incidencia.split(': ')[1]));
+  let categories = incidenciasPorTipo.map(incidencia => incidencia.split(': ')[0]);
+
+  barChart.updateOptions({
+    xaxis: { categories: categories }
+  });
+
   // Actualizar datos de la gráfica de barras
   barChart.updateSeries([{ data: listabarra }]);
 }
@@ -96,7 +85,7 @@ function actualizarDatosBarChart(selectedPeriod) {
 const barChartOptions = {
   series: [
     {
-      data:[10, 20, 30, 40, 50,10, 20, 30, 40, 50,10, 20,25] ,
+      data: [],
       name: 'Tipos incidencias de la semana',
     },
   ],
@@ -143,7 +132,7 @@ const barChartOptions = {
     offsetY: 10,
   },
   xaxis: {
-    categories: tiposIncidencia.incidencias, // Cambiado a tipos de incidencia por defecto
+    categories: [], // Se inicializa vacío, se actualizará dinámicamente
     labels: {
       style: {
         colors: '#bfc9d4',
@@ -270,7 +259,7 @@ pieChart.render();
 const barChart2Options = {
   series: [
     {
-      data: [50, 60,70,40,35,40,50, 60],
+      data: [],
       name: 'Urbanizaciones',
     },
   ],
@@ -317,7 +306,7 @@ const barChart2Options = {
     offsetY: 10,
   },
   xaxis: {
-    categories: urbanizaciones.urbanizacion, // Cambiado a urbanizaciones por defecto
+    categories: [], // Se inicializa vacío, se actualizará dinámicamente
     labels: {
       style: {
         colors: '#bfc9d4',
@@ -347,7 +336,7 @@ barChart2.render();
 const periodSelectBarChart = document.getElementById('periodBarChart');
 periodSelectBarChart.addEventListener('change', function() {
   const selectedPeriod = periodSelectBarChart.value;
-  actualizarDatosBarChart(selectedPeriod);
+  actualizarDatosBarChart(incidenciasPorTipo);
   actualizarDatosAreaChart(selectedPeriod); // Agregar esta línea para actualizar el gráfico de área
 });
 
@@ -360,16 +349,11 @@ periodSelectAreaChart.addEventListener('change', function() {
 const periodSelectBarChart2 = document.getElementById('periodBarChart2');
 periodSelectBarChart2.addEventListener('change', function() {
   const selectedPeriod = periodSelectBarChart2.value;
-  actualizarDatosBarChart2(selectedPeriod);
-  
+  actualizarDatosBarChart2(incidenciasPorUrbanizacion);
 });
 
 const periodSelectPieChart = document.getElementById('periodPieChart');
 periodSelectPieChart.addEventListener('change', function() {
   const selectedPeriod = periodSelectPieChart.value;
   actualizarDatosPieChart(selectedPeriod);
-  
 });
-
-// actualizarDatosAreaChart(selectedPeriod); // Agregar esta línea para actualizar el gráfico de área
-// actualizarDatosAreaChart(selectedPeriod); // Agregar esta línea para actualizar el gráfico de área
