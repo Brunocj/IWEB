@@ -25,6 +25,7 @@
   <!-- endinject -->
   <!-- Layout styles -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+
   <!-- End layout styles -->
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" />
   <!--JS para los popups-->
@@ -37,50 +38,47 @@
   <nav class="sidebar sidebar-offcanvas" id="sidebar" style ="background-color: #000f22;">  <!--Cambiar al color mas oscuro-->
 
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top" style ="background-color: #000f22;">
-      <h3 class="sidebar-brand brand-logo" style ="color:white; font-weight: 200px; cursor: default;">Menú</h3>
-      <h3 class="sidebar-brand brand-logo-mini" style ="color:white; font-weight: 200px; cursor: default;">M</h3>
+      <h3 class="sidebar-brand brand-logo" style ="color:white; font-weight: 200; cursor: default;">Menú</h3>
+      <h3 class="sidebar-brand brand-logo-mini" style ="color:white; font-weight: 200; cursor: default;">M</h3>
     </div>
 
 
     <ul class="nav" style = "position: fixed;">
 
       <!-- Codigo para un item de la barra lateral que no tiene sublista -->
-      <li class="nav-item menu-items active"> <!-- la clase "active" solo se usa para la vista que está activa -->
-
-        <a class="nav-link" href="#"> <!-- Cambiar href de acuerdo a lo necesario -->
-          <span class="menu-icon">
-                <i class="mdi mdi-speedometer"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
-              </span>
-          <span class="menu-title" style="color: white;">Página principal</span> <!-- Cambiar color de texto de acuerdo a lo necesario -->
+      <li class="nav-item menu-items ${"pagPrincipal".equals(request.getParameter("action")) ? "active" : ""}">
+        <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=pagPrincipal">
+        <span class="menu-icon">
+            <i class="mdi mdi-home"></i>
+        </span>
+          <span class="menu-title" style="color: white;">Página principal</span>
         </a>
       </li>
-      <!-- Codigo para un item de la barra lateral que no tiene sublista FIN-->
-
-
-      <li class="nav-item menu-items">
-        <a class="nav-link" href="Dashboard/dashboard.jsp">
-              <span class="menu-icon">
-                <i class="mdi mdi-chart-bar"></i>
-              </span>
+      <li class="nav-item menu-items ${"dashboard".equals(request.getParameter("action")) ? "active" : ""}">
+        <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=dashboard">
+        <span class="menu-icon">
+            <i class="mdi mdi-chart-bar"></i>
+        </span>
           <span class="menu-title" style="color: white;">Dashboard</span>
         </a>
       </li>
-      <li class="nav-item menu-items ">
-        <a class="nav-link" href="Serenazgo/tabla_serenazgo.jsp ">
-              <span class="menu-icon">
-                <i class="mdi mdi-security"></i>
-              </span>
+      <li class="nav-item menu-items ${"tablaSerenazgo".equals(request.getParameter("action")) ? "active" : ""}">
+        <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=tablaSerenazgo">
+        <span class="menu-icon">
+            <i class="mdi mdi-security"></i>
+        </span>
           <span class="menu-title" style="color: white;">Serenazgo</span>
         </a>
       </li>
-      <li class="nav-item menu-items">
-        <a class="nav-link" href="ProfesorTablaServlet">
-              <span class="menu-icon">
-                <i class="mdi mdi-teach"></i>
-              </span>
+      <li class="nav-item menu-items ${"tablaProfesores".equals(request.getParameter("action")) ? "active" : ""}">
+        <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=tablaProfesores">
+        <span class="menu-icon">
+            <i class="mdi mdi-teach"></i>
+        </span>
           <span class="menu-title" style="color: white;">Profesores</span>
         </a>
       </li>
+
       <!-- Codigo para un item de la barra lateral que SI tiene sublista -->
       <li class="nav-item menu-items">
         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
@@ -94,12 +92,12 @@
         <div class="collapse" id="ui-basic">
           <ul class="nav flex-column sub-menu"><!-- Colocar items de la sublista -->
 
-            <li class="nav-item  "> <a class="nav-link" href="Vecinos/Solicitudes_acceso/tabla_solicitudes.jsp" style="color: white;">
+            <li class="nav-item ${"tablaAcceso".equals(request.getParameter("action")) ? "active" : ""}"> <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=tablaAcceso" style="color: white;">
                   <span class="menu-icon">
                     <i class="mdi mdi-account-alert"></i>
                   </span>
               Sol. de acceso</a></li>
-            <li class="nav-item "> <a class="nav-link " href="Vecinos/Postulaciones_coordinacion/tabla_postulaciones.jsp" style="color: white;">
+              <li class="nav-item ${"tablaCoordinador".equals(request.getParameter("action")) ? "active" : ""}"> <a class="nav-link " href="<%=request.getContextPath()%>/Admin?action=tablaCoordinador" style="color: white;">
                   <span class="menu-icon ">
                     <i class="mdi mdi-account-alert "></i>
                   </span>
@@ -212,7 +210,7 @@
                 </div>
               </div>
               <div class="card-name">
-                <a href="Serenazgo/tabla_serenazgo.jsp" style="color: black; font-weight: bold;"> Serenazgo <br> Dispatcher</a>
+                <a href="${pageContext.request.contextPath}/Admin?action=tablaSerenazgo" style="color: black; font-weight: bold;"> Serenazgo <br> Dispatcher</a>
               </div>
             </div>
             <div class="col-md-4">
@@ -228,7 +226,7 @@
                 </div>
               </div>
               <div class="card-name">
-                <a href="Profesores/tabla_profesor.jsp" style="color: black; font-weight: bold;">Profesores </a>
+                <a href="${pageContext.request.contextPath}/Admin?action=tablaProfesores" style="color: black; font-weight: bold;">Profesores </a>
               </div>
             </div>
           </div>

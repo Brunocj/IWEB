@@ -22,7 +22,7 @@ function CancelarPagPrincipal(){
 
     // Evitar que el formulario se envíe automáticamente
     return false;
-}  
+}
 
 function CancelarDashboard() {
     Swal.fire({
@@ -48,7 +48,7 @@ function CancelarDashboard() {
 
     // Evitar que el formulario se envíe automáticamente
     return false;
-}  
+}
 
 
 function CancelarSerenazgo() {
@@ -75,10 +75,10 @@ function CancelarSerenazgo() {
 
     // Evitar que el formulario se envíe automáticamente
     return false;
-}  
+}
 
 
-function CancelarProfesores() {
+function CancelarProfesores(contextPath) {
     Swal.fire({
         title: "Estás seguro?",
         text: "Perdera todo su progreso",
@@ -95,14 +95,14 @@ function CancelarProfesores() {
                 text: "Se ha cancelado satisfactoriamente",
                 icon: "success"
             }).then(() => {
-                window.location.href = "../../ADMIN/Profesores/tabla_profesor.jsp";
+                window.location.href = contextPath+'/Admin?action=tablaProfesores';
             });
         }
     });
 
     // Evitar que el formulario se envíe automáticamente
     return false;
-}  
+}
 
 
 function CancelarSolAcceso() {
@@ -129,7 +129,7 @@ function CancelarSolAcceso() {
 
     // Evitar que el formulario se envíe automáticamente
     return false;
-}  
+}
 
 function CancelarSolCoordinacion() {
     Swal.fire({

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="org.example.webappsm.model.beans.Profesor" %><%--
   Created by IntelliJ IDEA.
   User: bruno
   Date: 27/05/2024
@@ -12,12 +12,12 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Pagina en blanco</title>
+    <title>Registro del Docente</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="styles_tabla.css">
-    <link rel="stylesheet" href="../../../../assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../../../../assets/vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="styles_profesor_registro.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Profesores/styles_tabla.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Profesores/styles_profesor_registro.css">
 
     <!-- endinject -->
     <!-- Plugin css for this page -->
@@ -25,9 +25,9 @@
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="../../../../assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../LogoSM.png" /><!--Cambiar la ubicacion del logo de la pagina aca tmb-->
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" /><!--Cambiar la ubicacion del logo de la pagina aca tmb-->
     <!--JS para los popups-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -42,12 +42,12 @@
         </div>
 
 
-        <ul class="nav"style="position: fixed;">
+        <ul class="nav">
 
             <!-- Codigo para un item de la barra lateral que no tiene sublista -->
             <li class="nav-item menu-items "> <!-- la clase "active" solo se usa para la vista que está activa -->
 
-                <a class="nav-link" href="../pagina_principal_admin.jsp"onclick="return CancelarPagPrincipal();"> <!-- Cambiar href de acuerdo a lo necesario -->
+                <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/pagina_principal_admin.jsp" onclick="return CancelarPagPrincipal();"> <!-- Cambiar href de acuerdo a lo necesario -->
                     <span class="menu-icon">
                 <i class="mdi mdi-home"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
@@ -58,7 +58,7 @@
 
 
             <li class="nav-item menu-items">
-                <a class="nav-link" href="../Dashboard/dashboard.jsp"onclick="return CancelarDashboard();">
+                <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Dashboard/dashboard.jsp" onclick="return CancelarDashboard();">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>
@@ -66,7 +66,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items ">
-                <a class="nav-link" href="tabla_serenazgo.jsp"onclick="return CancelarSerenazgo();">
+                <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Serenazgo/tabla_serenazgo.jsp" onclick="return CancelarSerenazgo();">
               <span class="menu-icon">
                 <i class="mdi mdi-security"></i>
               </span>
@@ -74,7 +74,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items active">
-                <a class="nav-link" href="../Profesores/tabla_profesor.jsp"onclick="return CancelarProfesores();">
+                <a class="nav-link" href="${pageContext.request.contextPath}/Admin?action=tablaProfesores" onclick="return CancelarProfesores('<%= request.getContextPath() %>');">
               <span class="menu-icon">
                 <i class="mdi mdi-teach"></i>
               </span>
@@ -94,16 +94,16 @@
                 <div class="collapse" id="ui-basic">
                     <ul class="nav flex-column sub-menu"><!-- Colocar items de la sublista -->
 
-                        <li class="nav-item"> <a class="nav-link" href="../Vecinos/Solicitudes_acceso/tabla_solicitudes.jsp" style="color: white;"onclick="return CancelarSolAcceso();">
+                        <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Vecinos/Postulaciones_coordinacion/tabla_postulaciones.jsp" style="color: white;"onclick="return CancelarSolAcceso();">
                   <span class="menu-icon">
                     <i class="mdi mdi-account-alert"></i>
                   </span>
-                            Sol. de acceso</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="../Vecinos/Postulaciones_coordinacion/tabla_postulaciones.jsp" style="color: white;"onclick="return CancelarSolCoordinacion();">
-                  <span class="menu-icon">
+                            Solicitudes de acceso</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Vecinos/Solicitudes_acceso/tabla_solicitudes.jsp" style="color: white;"onclick="return CancelarSolCoordinacion();">
+                    <span class="menu-icon">
                     <i class="mdi mdi-account-alert"></i>
                   </span>
-                            Sol. a coordinación</a></li>
+                            Solicitudes a coordinación</a></li>
                     </ul>
                 </div>
             </li>
@@ -120,6 +120,7 @@
             <!-- Codigo para un item de la barra lateral que SI tiene sublista FIN -->
         </ul>
     </nav>
+
     <!-- partial -->
 
     <div class="container-fluid page-body-wrapper">
@@ -166,18 +167,26 @@
                         <hr style="border: none; border-top: 2px solid black;">
 
                         <!-- Icon -->
-
+                        <!-- Icon -->
                         <!-- Login Form -->
-                        <form>
+                        <form action="${pageContext.request.contextPath}/Admin?action=registrarDocente" method="post">
+
                             <div class="inputs">
                                 <label for="nombre">Nombre:</label>
-                                <input type="text" id="nombre" placeholder="Nombre" >
+                                <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
 
                                 <label for="apellido">Apellidos:</label>
-                                <input type="text" id="apellido" placeholder="Apellidos">
+                                <input type="text" id="apellido" name="apellido" placeholder="Apellidos" required>
 
-                                <label for="correo">Curso/Actividad:</label>
-                                <input type="text" id="correo" placeholder="Curso/Actividad">
+                                <label for="curso">Curso/Actividad:</label>
+                                <input type="text" id="curso" name="curso" placeholder="Curso/Actividad" required>
+
+                                <label for="area">Área:</label>
+                                <select id="area" name="area" style="text-align: center" required>
+                                    <option value="" disabled selected>Seleccionar opción</option>
+                                    <option name="area" value="1">Cultura</option>
+                                    <option name="area" value="2">Deportes</option>
+                                </select>
 
                             </div>
 
@@ -199,7 +208,6 @@
         </div>
         <!-- page-body-wrapper ends -->
     </div>
-
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="../../../../assets/vendors/js/vendor.bundle.base.js"></script>
@@ -248,11 +256,12 @@
                         text: "Se ha cancelado satisfactoriamente",
                         icon: "success"
                     }).then(() => {
-                        window.location.href = "tabla_profesor.jsp";
+                        window.location.href = "${pageContext.request.contextPath}/Admin?action=tablaProfesores";
                     });
                 }
             });
 
+            // Evitar que el formulario se envíe automáticamente
             // Evitar que el formulario se envíe automáticamente
             return false;
         }
