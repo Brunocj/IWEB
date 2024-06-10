@@ -12,6 +12,7 @@ import org.example.webappsm.model.daos.ProfesorDao;
 import org.example.webappsm.model.daos.SerenazgoDao;
 import org.example.webappsm.model.daos.VecinosDao;
 
+import javax.lang.model.type.ArrayType;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,8 +44,17 @@ public class AdminServlet extends HttpServlet {
                 String incidenciasPorAtender = dashboardDao.incidenciasPorAtender();
                 String incidenciasUrbMax = dashboardDao.incidenciasUrbMax();
                 String incidenciasUrbMin = dashboardDao.incidenciasUrbMin();
-                ArrayList<Incidencia> listaIncidencias = dashboardDao.listarIncidenciasDashboard();
                 ArrayList<Usuario> listaBaneados = dashboardDao.listarBaneados();
+                ArrayList<String> tipoIncidencias = new ArrayList<>();
+                ArrayList<Integer> cantidadTipo = new ArrayList<>();
+                dashboardDao.incidenciasPorTipo(tipoIncidencias, cantidadTipo);
+                ArrayList<String> urbanizaciones = new ArrayList<>();
+                ArrayList<Integer> cantidadUrbanizacion = new ArrayList<>();
+                dashboardDao.incidenciasPorUrbanizacion(urbanizaciones, cantidadUrbanizacion);
+                ArrayList<String> estados = new ArrayList<>();
+                ArrayList<Double> porcentajes = new ArrayList<>();
+                dashboardDao.incidenciasPorEstado(estados, porcentajes);
+
                 request.setAttribute("totalbaneados", totalBaneados);
                 request.setAttribute("avgincidencias", avgIncidencias);
                 request.setAttribute("totalincidencias", totalIncidencias);
@@ -53,6 +63,14 @@ public class AdminServlet extends HttpServlet {
                 request.setAttribute("incidenciasatender", incidenciasPorAtender);
                 request.setAttribute("incidenciasurbmax",incidenciasUrbMax);
                 request.setAttribute("incidenciasurbmin", incidenciasUrbMin);
+                request.setAttribute("listabaneados", listaBaneados);
+                request.setAttribute("tipoincidencias", tipoIncidencias);
+                request.setAttribute("cantidadtipo", cantidadTipo);
+                request.setAttribute("urbanizaciones", urbanizaciones);
+                request.setAttribute("cantidadurbanizacion", cantidadUrbanizacion);
+                request.setAttribute("estados", estados);
+                request.setAttribute("porcentajes", porcentajes);
+
                 vista = "vistas/jsp/ADMIN/Dashboard/dashboard.jsp";
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
