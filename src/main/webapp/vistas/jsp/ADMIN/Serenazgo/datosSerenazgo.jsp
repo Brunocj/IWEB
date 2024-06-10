@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Serenazgo/styles_tabla.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Serenazgo/styles_datos_serenazgo.css.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Serenazgo/styles_datos_serenazgo.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End Plugin css for this page -->
@@ -137,7 +137,7 @@
                                     <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default; text-align: right;">ADMIN</h2>
                                     <h5 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 15px; font-weight:500; cursor: default;">Administrador de San Miguel</h5>
                                 </div>
-                                <img class="img-xs rounded-circle" src="../../LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
+                                <img class="img-xs rounded-circle" src="<%=request.getContextPath()%>/vistas/jsp/LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
 
                             </div>
                         </a>
@@ -219,16 +219,16 @@
 
     <!-- container-scroller -->
     <!-- plugins:js -->
-    <script src="../../../../assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="<%=request.getContextPath()%>/assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <!-- End plugin js for this page -->
     <!-- inject:js -->
-    <script src="../../../../assets/js/off-canvas.js"></script>
-    <script src="../../../../assets/js/hoverable-collapse.js"></script>
-    <script src="../../../../assets/js/misc.js"></script>
-    <script src="../../../../assets/js/settings.js"></script>
-    <script src="../../../../assets/js/todolist.js"></script>
+    <script src="<%=request.getContextPath()%>/assets/js/off-canvas.js"></script>
+    <script src="<%=request.getContextPath()%>/assets/js/hoverable-collapse.js"></script>
+    <script src="<%=request.getContextPath()%>/assets/js/misc.js"></script>
+    <script src="<%=request.getContextPath()%>/assets/js/settings.js"></script>
+    <script src="<%=request.getContextPath()%>/assets/js/todolist.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script>
@@ -254,7 +254,7 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script src = "script_tabla.js"></script>
+    <script src = "<%=request.getContextPath()%>/vistas/jsp/ADMIN/Serenazgo/script_tabla.js"></script>
 
     <!-- End custom js for this page -->
 
