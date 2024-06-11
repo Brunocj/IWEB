@@ -24,6 +24,18 @@ public class VecinoServlet extends HttpServlet {
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
+            case "miPerfil":
+
+                break;
+            case "solCoordinador":
+
+                break;
+            case "Eventos":
+
+                break;
+            case "incidencias":
+
+                break;
 
         }
 

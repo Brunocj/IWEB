@@ -42,9 +42,9 @@
 
         <ul class="nav" style="position: fixed">
             <!-- Codigo para un item de la barra lateral que no tiene sublista -->
-            <li class="nav-item menu-items active"> <!-- la clase "active" solo se usa para la vista que está activa -->
+            <li class="nav-item menu-items ${"pagPrincipal".equals(request.getParameter("action")) ? "active" : ""}""> <!-- la clase "active" solo se usa para la vista que está activa -->
 
-                <a class="nav-link" href="#"> <!-- Cambiar href de acuerdo a lo necesario -->
+                <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=pagPrincipal"> <!-- Cambiar href de acuerdo a lo necesario -->
                     <span class="menu-icon">
                 <i class="mdi mdi-home"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
