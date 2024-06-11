@@ -51,7 +51,7 @@
             <!-- Codigo para un item de la barra lateral que no tiene sublista -->
             <li class="nav-item menu-items "> <!-- la clase "active" solo se usa para la vista que está activa -->
 
-                <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/pagina_principal_admin.jsp" onclick="return CancelarPagPrincipal();"> <!-- Cambiar href de acuerdo a lo necesario -->
+                <a class="nav-link" href="${pageContext.request.contextPath}/Admin" onclick="return CancelarPagPrincipal();"> <!-- Cambiar href de acuerdo a lo necesario -->
                     <span class="menu-icon">
                 <i class="mdi mdi-home"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>

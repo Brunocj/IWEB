@@ -9,19 +9,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Pagina en blanco</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="styles_tabla.css">
-    <link rel="stylesheet" href="../../../../assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../../../../assets/vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="styles_serenazgo_registro.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/vistas/jsp/ADMIN/Serenazgo/styles_tabla.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Serenazgo/styles_serenazgo_registro.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End Plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="../../../../assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../LogoSM.png" /> <!--Cambiar la ubicacion del logo de la pagina aca tmb-->
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" /><!--Cambiar la ubicacion del logo de la pagina aca tmb-->
     <!--JS para los popups-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -165,31 +165,31 @@
                         <!-- Login Form -->
                         <form action="${pageContext.request.contextPath}/Admin?action=editarSerenazgo" method="post">
                             <input type="hidden" name="action" value="editarSerenazgo">
-                            <input type="hidden" name="idSerenazgo" value="<%= serenazgo.getIdSerenazgo() %>">
+                            <input type="hidden" name="idSerenazgo"  value="<%= serenazgo.getIdSerenazgo() %>">
                             <div class="inputs">
                                 <label for="nombre">Nombre:</label>
-                                <input type="text" id="nombre" value="<%= serenazgo.getNombre() %>" style="margin-bottom: 0px;">
+                                <input type="text" id="nombre" name="nombreS" value="<%= serenazgo.getNombre() %>" style="margin-bottom: 0px;">
 
                                 <label for="apellido">Apellidos:</label>
-                                <input type="text" id="apellido" value="<%= serenazgo.getApellido() %>" style="margin-bottom: 0px;">
+                                <input type="text" id="apellido" name="apellidoS" value="<%= serenazgo.getApellido() %>" style="margin-bottom: 0px;">
 
                                 <label for="dni">DNI:</label>
-                                <input type="text" id="dni" value="<%= serenazgo.getDni() %>" style="margin-bottom: 0px;">
+                                <input type="text" id="dni" name="dniS" value="<%= serenazgo.getDni() %>" style="margin-bottom: 0px;">
 
                                 <label for="direccion">Dirección:</label>
-                                <input type="text" id="direccion" value="<%= serenazgo.getDireccion() %>" style="margin-bottom: 0px;">
+                                <input type="text" id="direccion" name="direccionS" value="<%= serenazgo.getDireccion() %>" style="margin-bottom: 0px;">
 
                                 <label for="telefono">Teléfono:</label>
-                                <input type="text" id="telefono" value="<%= serenazgo.getTelefono() %>" style="margin-bottom: 0px;">
+                                <input type="text" id="telefono" name="telefonoS" value="<%= serenazgo.getTelefono() %>" style="margin-bottom: 0px;">
 
                                 <label for="turno">Turno:</label>
-                                <input type="text" id="turno" value="<%= serenazgo.getTurno() %>" style="margin-bottom: 0px;">
+                                <input type="text" id="turno" name="turnoS" value="<%= serenazgo.getTurno() %>" style="margin-bottom: 0px;">
 
                                 <label for="tipo">Tipo:</label>
-                                <input type="text" id="tipo" value="<%= serenazgo.getTipo() %>" style="margin-bottom: 0px;">
+                                <input type="text" id="tipo" name="tipoS" value="<%= serenazgo.getTipo() %>" style="margin-bottom: 0px;">
 
                                 <label for="nacimiento">Fecha de nacimiento:</label>
-                                <input type="text" id="nacimiento" value="<%= serenazgo.getFNacimiento() %>" style="margin-bottom: 15px;">
+                                <input type="text" id="nacimiento" name="fNacimientoS" value="<%= serenazgo.getFNacimiento() %>" style="margin-bottom: 15px;">
                             </div>
 
                             <div class = "buttons">
@@ -213,16 +213,16 @@
 
     <!-- container-scroller -->
     <!-- plugins:js -->
-    <script src="../../../../assets/vendors/js/vendor.bundle.base.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <!-- End plugin js for this page -->
     <!-- inject:js -->
-    <script src="../../../../assets/js/off-canvas.js"></script>
-    <script src="../../../../assets/js/hoverable-collapse.js"></script>
-    <script src="../../../../assets/js/misc.js"></script>
-    <script src="../../../../assets/js/settings.js"></script>
-    <script src="../../../../assets/js/todolist.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script>
@@ -259,7 +259,7 @@
                         text: "Se ha cancelado satisfactoriamente",
                         icon: "success"
                     }).then(() => {
-                        window.location.href = "../../ADMIN/Serenazgo/tabla_serenazgo.jsp";
+                        window.location.href = "${pageContext.request.contextPath}/Admin?action=tablaSerenazgo";
                     });
                 }
             });
@@ -268,7 +268,7 @@
             return false;
         }
 
-        function Actualizar(idSerenazgo) {
+        function Actualizar() {
             Swal.fire({
                 title: "Estás seguro?",
                 text: "El proceso no podrá ser reversible",

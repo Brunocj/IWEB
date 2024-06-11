@@ -27,7 +27,7 @@ function Confirmacion() {
     return false;
 }
 
-function eliminarSerenazgo(idSerenazgo) {
+function eliminarSerenazgo(id,contextPath) {
     Swal.fire({
         title: "Estás seguro?",
         text: "Una vez eliminado, la información asociada al personal será permanentemente eliminada del sistema",
@@ -38,13 +38,20 @@ function eliminarSerenazgo(idSerenazgo) {
         confirmButtonText: "Si, eliminar"
     }).then((result) => {
         if (result.isConfirmed) {
-            Swal.fire({
-                title: "Eliminado!",
-                text: "El personal ha sido eliminado con éxito",
-                icon: "success"
-            }).then(() => {
-                window.location.href = "<%=request.getContextPath()%>/Admin?action=eliminarSerenazgo&id=" + idSerenazgo;
-            });
+            // Crear un formulario para enviar la solicitud POST
+            const form = document.createElement('form');
+            form.method = 'post';
+            form.action = contextPath+'/Admin?action=eliminarSerenazgo';
+
+            // Crear un input oculto para el ID del profesor
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'id';
+            input.value = id;
+
+            form.appendChild(input);
+            document.body.appendChild(form);
+            form.submit();
         }
     });
 

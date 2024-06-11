@@ -2,6 +2,7 @@ package org.example.webappsm.model.beans;
 
 import lombok.Data;
 
+import java.sql.Timestamp;
 import java.util.Date;
 @Data
 public class Incidencia {
@@ -14,7 +15,7 @@ public class Incidencia {
     private String contactoO;
     private byte[] imgEvidencia; //Almacenar la imagen
     private boolean ambulanciaI; //si al registrar la incidencia requeria ambulancia
-    private Date fechaIncidencia;
+    private Timestamp fechaIncidencia;
     private int idRegistro;
     private String estado;
     private String clasificacion;

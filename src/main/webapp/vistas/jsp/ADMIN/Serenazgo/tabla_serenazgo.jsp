@@ -192,7 +192,7 @@
                                         </button>
                                     </div>
                                     <div style="display: flex; align-items: center; justify-content: center;">
-                                        <button id="agregarPersonal" class="btnTable" style="display: flex; align-items: center;" onclick="window.location.href='serenazgoRegistro.jsp'">
+                                        <button id="agregarPersonal" class="btnTable" style="display: flex; align-items: center;" onclick="window.location.href='${pageContext.request.contextPath}/vistas/jsp/ADMIN/Serenazgo/serenazgoRegistro.jsp';">
                                             Agregar Personal
                                             <a class="mdi mdi-account-plus" style="color: #ffffff; font-size: 20px; margin-left: 5px;"></a>
                                         </button>
@@ -226,8 +226,8 @@
                             <td><%= serenazgo.getTurno() %></td>
                             <td><%= serenazgo.getTipo() %></td>
                             <td><a href="<%=request.getContextPath()%>/Admin?action=verSerenazgo&idVer=<%= serenazgo.getIdSerenazgo() %>" class="mdi mdi-eye" style="color: #6c7293; font-size: 20px;"></a></td>
-                            <td><a href="<%= request.getContextPath() %>/Admin?action=editarSerenazgo?idEditar=<%= serenazgo.getIdSerenazgo() %>" class="mdi mdi-lead-pencil" style="color: #6c7293; font-size: 20px;"></a></td>
-                            <td><a href="#" onclick="eliminarSerenazgo(<%= serenazgo.getIdSerenazgo() %>)" class="mdi mdi-delete" style="color: #6c7293; font-size: 20px;"></a></td>
+                            <td><a href="${pageContext.request.contextPath}/Admin?action=editarSerenazgo&idEditar=<%= serenazgo.getIdSerenazgo() %>" class="mdi mdi-lead-pencil" style="color: #6c7293; font-size: 20px;"></a></td>
+                            <td><a href="#" onclick="eliminarSerenazgo(<%= serenazgo.getIdSerenazgo() %>, '<%= request.getContextPath() %>')" class="mdi mdi-delete" style="color: #6c7293; font-size: 20px;"></a></td>
                         </tr>
                         <%
                             }
