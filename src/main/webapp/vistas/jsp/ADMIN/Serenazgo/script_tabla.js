@@ -1,24 +1,23 @@
 
-
-
-
-function Confirmacion() {
+function Cancelar() {
     Swal.fire({
-        title: "¿Estás seguro?",
-        text: "El proceso no podrá ser reversible",
+        title: "Estás seguro?",
+        text: "Perdera todo su progreso",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#00913f",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Sí, registrar"
+        confirmButtonText: "Sí, cancelar",
+        cancelButtonText: "Cancelar",
     }).then((result) => {
         if (result.isConfirmed) {
             Swal.fire({
-                title: "¡Registrado!",
-                text: "El personal ha sido registrado con éxito",
+                title: "Cancelado!",
+                text: "Se ha cancelado satisfactoriamente",
                 icon: "success"
             }).then(() => {
-                window.location.href = "tabla_serenazgo.jsp";
+                window.location.href = "${pageContext.request.contextPath}/Admin?action=tablaSerenazgo";
+
             });
         }
     });
@@ -26,6 +25,7 @@ function Confirmacion() {
     // Evitar que el formulario se envíe automáticamente
     return false;
 }
+
 
 function eliminarSerenazgo(id,contextPath) {
     Swal.fire({
