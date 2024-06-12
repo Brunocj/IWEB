@@ -54,6 +54,10 @@ public class AdminServlet extends HttpServlet {
                 ArrayList<String> estados = new ArrayList<>();
                 ArrayList<Double> porcentajes = new ArrayList<>();
                 dashboardDao.incidenciasPorEstado(estados, porcentajes);
+                ArrayList<String> labelsChart2 = new ArrayList<>();
+                ArrayList<Integer> incidenciasReportadas = new ArrayList<>();
+                ArrayList<Integer> incidenciasResueltas = new ArrayList<>();
+                dashboardDao.incidenciasRegistradas(labelsChart2, incidenciasReportadas, incidenciasResueltas);
 
                 request.setAttribute("totalbaneados", totalBaneados);
                 request.setAttribute("avgincidencias", avgIncidencias);
@@ -70,7 +74,9 @@ public class AdminServlet extends HttpServlet {
                 request.setAttribute("cantidadurbanizacion", cantidadUrbanizacion);
                 request.setAttribute("estados", estados);
                 request.setAttribute("porcentajes", porcentajes);
-
+                request.setAttribute("labels", labelsChart2);
+                request.setAttribute("incidenciasReportadas", incidenciasReportadas);
+                request.setAttribute("incidenciasResueltas", incidenciasResueltas);
                 vista = "vistas/jsp/ADMIN/Dashboard/dashboard.jsp";
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
