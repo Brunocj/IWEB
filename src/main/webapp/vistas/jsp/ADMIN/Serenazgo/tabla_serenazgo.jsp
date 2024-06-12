@@ -192,7 +192,7 @@
                                         </button>
                                     </div>
                                     <div style="display: flex; align-items: center; justify-content: center;">
-                                        <button id="agregarPersonal" class="btnTable" style="display: flex; align-items: center;" onclick="window.location.href='${pageContext.request.contextPath}/vistas/jsp/ADMIN/Serenazgo/serenazgoRegistro.jsp';">
+                                        <button id="agregarPersonal" class="btnTable" style="display: flex; align-items: center;">
                                             Agregar Personal
                                             <a class="mdi mdi-account-plus" style="color: #ffffff; font-size: 20px; margin-left: 5px;"></a>
                                         </button>
@@ -282,6 +282,9 @@
             }
         });
     }
+    document.getElementById("agregarPersonal").addEventListener("click", function() {
+        window.location.href = "<%=request.getContextPath()%>/Admin?action=agregarSerenazgo";
+    });
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
