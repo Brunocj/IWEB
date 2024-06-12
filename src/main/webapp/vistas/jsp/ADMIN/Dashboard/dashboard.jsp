@@ -26,7 +26,9 @@
     ArrayList<Integer> cantidadUrbanizacion = (ArrayList<Integer>) request.getAttribute("cantidadurbanizacion");
     ArrayList<String> estados = (ArrayList<String>) request.getAttribute("estados");
     ArrayList<Double> porcentajes = (ArrayList<Double>) request.getAttribute("porcentajes");
-
+    ArrayList<String> labelsCh = (ArrayList<String>) request.getAttribute("labels");
+    ArrayList<Integer> incidenciasReportadas = (ArrayList<Integer>) request.getAttribute("incidenciasReportadas");
+    ArrayList<Integer> incidenciasResueltas = (ArrayList<Integer>) request.getAttribute("incidenciasResueltas");
     //JSON
     String tipoIncidenciasJSON = new Gson().toJson(tipoIncidencias);
     String cantidadTipoJSON = new Gson().toJson(cantidadTipo);
@@ -34,7 +36,9 @@
     String cantidadUrbanizacionJSON = new Gson().toJson(cantidadUrbanizacion);
     String estadosJSON = new Gson().toJson(estados);
     String porcentajesJSON = new Gson().toJson(porcentajes);
-
+    String labelsChJSON = new Gson().toJson(labelsCh);
+    String incidenciasReportadasJSON = new Gson().toJson(incidenciasReportadas);
+    String incidenciasResueltasJSON = new Gson().toJson(incidenciasResueltas);
 %>
 
 <!DOCTYPE html>
@@ -611,18 +615,18 @@
 
 
                 var multiAreaData = {
-                    labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"],
+                    labels: JSON.parse('<%= labelsChJSON%>'),
                     datasets: [{
-                        label: 'Facebook',
-                        data: [8, 11, 13, 15, 12, 13, 16, 15, 13, 19, 11, 14],
+                        label: 'Incidencias Reportadas',
+                        data: JSON.parse('<%= incidenciasReportadasJSON%>'),
                         borderColor: ['rgba(255, 99, 132, 0.5)'],
                         backgroundColor: ['rgba(255, 99, 132, 0.5)'],
                         borderWidth: 1,
                         fill: true
                     },
                         {
-                            label: 'Twitter',
-                            data: [7, 17, 12, 16, 14, 18, 16, 12, 15, 11, 13, 9],
+                            label: 'Incidencias Resueltas',
+                            data: JSON.parse('<%= incidenciasResueltasJSON%>'),
                             borderColor: ['rgba(54, 162, 235, 0.5)'],
                             backgroundColor: ['rgba(54, 162, 235, 0.5)'],
                             borderWidth: 1,

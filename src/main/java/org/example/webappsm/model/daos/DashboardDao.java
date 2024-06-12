@@ -569,7 +569,56 @@ public class DashboardDao {
 
     }
 
+    public void incidenciasRegistradas (ArrayList<String> Labels, ArrayList<Integer>IncidenciasRegistradas, ArrayList<Integer>IncidenciasResueltas){
+        try {
+            Class.forName( "com.mysql.cj.jdbc.Driver");
 
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        //Parametros de conexion a que base de datos me quiero unir//
+        String url ="jdbc:mysql://localhost:3306/sanmiguel";
+        String username = "root";
+        String password = "123456";
+        String sql = "WITH Days AS (" +
+                "SELECT 1 AS DayNumber, 'Lunes' AS DayName " +
+                "UNION ALL SELECT 2, 'Martes' " +
+                "UNION ALL SELECT 3, 'Miercoles' " +
+                "UNION ALL SELECT 4, 'Jueves' " +
+                "UNION ALL SELECT 5, 'Viernes' " +
+                "UNION ALL SELECT 6, 'Sábado' " +
+                "UNION ALL SELECT 7, 'Domingo' " +
+                ") " +
+                "SELECT " +
+                "d.DayName AS Dia, " +
+                "COALESCE(SUM(CASE WHEN DAYOFWEEK(i.fecha) = d.DayNumber THEN 1 ELSE 0 END), 0) AS IncidenciasReportadas, " +
+                "COALESCE(SUM(CASE WHEN i.idEstado IN (3, 4) AND DAYOFWEEK(i.fecha) = d.DayNumber THEN 1 ELSE 0 END), 0) AS IncidenciasResueltas " +
+                "FROM " +
+                "Days d " +
+                "LEFT JOIN " +
+                "Incidencia i ON YEARWEEK(i.fecha, 1) = YEARWEEK(CURDATE(), 1) AND DAYOFWEEK(i.fecha) = d.DayNumber " +
+                "GROUP BY " +
+                "d.DayNumber, d.DayName " +
+                "ORDER BY " +
+                "d.DayNumber;";
+
+        try (Connection conn = DriverManager.getConnection(url, username, password);
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Labels.add(rs.getString(1));
+                IncidenciasRegistradas.add(rs.getInt(2));
+                IncidenciasResueltas.add(rs.getInt(3));
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
 
 
