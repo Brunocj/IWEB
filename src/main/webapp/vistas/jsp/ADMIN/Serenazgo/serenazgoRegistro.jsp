@@ -63,7 +63,7 @@
                     <span class="menu-title" style="color: white;">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item menu-items ">
+            <li class="nav-item menu-items active">
                 <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Serenazgo/tabla_serenazgo.jsp" onclick="return CancelarSerenazgo();">
               <span class="menu-icon">
                 <i class="mdi mdi-security"></i>
@@ -71,7 +71,7 @@
                     <span class="menu-title" style="color: white;">Serenazgo</span>
                 </a>
             </li>
-            <li class="nav-item menu-items active">
+            <li class="nav-item menu-items ">
                 <a class="nav-link" href="${pageContext.request.contextPath}/Admin?action=tablaProfesores" onclick="return CancelarProfesores();">
               <span class="menu-icon">
                 <i class="mdi mdi-teach"></i>
@@ -161,7 +161,7 @@
                     <div class = "wrapper"id="formContent">
                         <!-- Tabs Titles -->
                         <h2 style="margin-top: 0; margin-bottom: 20px; text-align: left;font-size: 30px;">Registrar Serenazgo</h2>
-                        <a href="tabla_serenazgo.jsp" class="button" onclick="return Cancelar();">Regresar</a>
+                        <a href="#" class="button" onclick="return Cancelar();">Regresar</a>
                         <hr style="border: none; border-top: 2px solid black;">
                         <!-- Icon -->
 
@@ -184,8 +184,8 @@
                                 <input type="text" id="telefono" name="telefonoS" placeholder="Teléfono">
 
                                 <div class="form-group">
-                                    <label for="turno">Turno:</label>
-                                    <select id="turno" name="turno" class="form-control" required>
+                                    <label for="turnoS">Turno:</label>
+                                    <select id="turnoS" name="turnoS" class="form-control" required>
                                         <option value="null">--Seleccione un turno--</option>
                                         <%
                                             for (Turno turno : listaTurnos) {
@@ -198,8 +198,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="tipo">Tipo:</label>
-                                    <select id="tipo" name="tipo" class="form-control" required>
+                                    <label for="tipoS">Tipo:</label>
+                                    <select id="tipoS" name="tipoS" class="form-control" required>
                                         <option value="null">--Seleccione un tipo de serenazgo--</option>
                                         <%
                                             for (TipoSerenazgo tipo : listaTipos) {
@@ -266,7 +266,7 @@
             });
         }
 
-        function Actualizar() {
+        function Confirmacion() {
             Swal.fire({
                 title: "Estás seguro?",
                 text: "El proceso no podrá ser reversible",
@@ -274,12 +274,12 @@
                 showCancelButton: true,
                 confirmButtonColor: "#00913f",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Si, actualizar"
+                confirmButtonText: "Sí, registrar"
             }).then((result) => {
                 if (result.isConfirmed) {
                     Swal.fire({
-                        title: "Actualizado!",
-                        text: "El personal ha sido actualizado con exito",
+                        title: "¡Registrado!",
+                        text: "El personal ha sido registrado con éxito",
                         icon: "success"
                     }).then(() => {
                         document.querySelector("form").submit();
