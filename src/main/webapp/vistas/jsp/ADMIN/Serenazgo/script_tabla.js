@@ -26,7 +26,31 @@ function Confirmacion() {
     // Evitar que el formulario se envíe automáticamente
     return false;
 }
+function Cancelar() {
+    Swal.fire({
+        title: "Estás seguro?",
+        text: "Perdera todo su progreso",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#00913f",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, cancelar",
+        cancelButtonText: "Cancelar",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: "Cancelado!",
+                text: "Se ha cancelado satisfactoriamente",
+                icon: "success"
+            }).then(() => {
+                window.location.href = "${pageContext.request.contextPath}/Admin?action=tablaSerenazgo";
+            });
+        }
+    });
 
+    // Evitar que el formulario se envíe automáticamente
+    return false;
+}
 function eliminarSerenazgo(id,contextPath) {
     Swal.fire({
         title: "Estás seguro?",

@@ -117,7 +117,6 @@
         </ul>
     </nav>
     <!-- partial -->
-</div>
     <div class="container-fluid page-body-wrapper">
         <!-- partial:../../partials/_navbar.jsp -->
         <nav class="navbar p-0 fixed-top d-flex flex-row">

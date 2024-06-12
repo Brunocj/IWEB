@@ -1,5 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>}
-<%@ page import="org.example.webappsm.model.beans.Serenazgo" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import ="org.example.webappsm.model.beans.Serenazgo" %>
+<%Serenazgo serenazgo = (Serenazgo) request.getAttribute("serenazgoEdit");%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,10 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Pagina en blanco</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Serenazgo/styles_tabla.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Serenazgo/styles_serenazgo_registro.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Profesores/styles_profesor_registro.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End Plugin css for this page -->
@@ -27,8 +27,6 @@
 <body>
 <div class="container-scroller">
     <!-- partial:../../partials/_sidebar.html -->
-
-
     <nav class="sidebar sidebar-offcanvas" id="sidebar" style ="background-color: #000f22;">  <!--Cambiar al color mas oscuro-->
 
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top" style ="background-color: #000f22;">
@@ -37,12 +35,12 @@
         </div>
 
 
-        <ul class="nav"style="position: fixed;">
+        <ul class="nav">
 
             <!-- Codigo para un item de la barra lateral que no tiene sublista -->
             <li class="nav-item menu-items "> <!-- la clase "active" solo se usa para la vista que está activa -->
 
-                <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/pagina_principal_admin.jsp"> <!-- Cambiar href de acuerdo a lo necesario -->
+                <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/pagina_principal_admin.jsp" onclick="return CancelarPagPrincipal();"> <!-- Cambiar href de acuerdo a lo necesario -->
                     <span class="menu-icon">
                 <i class="mdi mdi-home"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
@@ -53,23 +51,23 @@
 
 
             <li class="nav-item menu-items">
-                <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Dashboard/dashboard.jsp"onclick="return CancelarDashboard();">
+                <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Dashboard/dashboard.jsp" onclick="return CancelarDashboard();">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>
                     <span class="menu-title" style="color: white;">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item menu-items active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Serenazgo/tabla_serenazgo.jsp"onclick="return CancelarSerenazgo();">
+            <li class="nav-item menu-items ">
+                <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Serenazgo/tabla_serenazgo.jsp" onclick="return CancelarSerenazgo();">
               <span class="menu-icon">
                 <i class="mdi mdi-security"></i>
               </span>
                     <span class="menu-title" style="color: white;">Serenazgo</span>
                 </a>
             </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="${pageContext.request.contextPath}/Admin?action=tablaProfesores"onclick="return CancelarProfesores();">
+            <li class="nav-item menu-items active">
+                <a class="nav-link" href="${pageContext.request.contextPath}/Admin?action=tablaProfesores" onclick="return CancelarProfesores();">
               <span class="menu-icon">
                 <i class="mdi mdi-teach"></i>
               </span>
@@ -93,12 +91,12 @@
                   <span class="menu-icon">
                     <i class="mdi mdi-account-alert"></i>
                   </span>
-                            Sol. de acceso</a></li>
+                            Solicitudes de acceso</a></li>
                         <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Vecinos/Solicitudes_acceso/tabla_solicitudes.jsp" style="color: white;"onclick="return CancelarSolCoordinacion();">
-                  <span class="menu-icon">
+                    <span class="menu-icon">
                     <i class="mdi mdi-account-alert"></i>
                   </span>
-                            Sol. a coordinación</a></li>
+                            Solicitudes a coordinación</a></li>
                     </ul>
                 </div>
             </li>
@@ -115,6 +113,7 @@
             <!-- Codigo para un item de la barra lateral que SI tiene sublista FIN -->
         </ul>
     </nav>
+
     <!-- partial -->
 
     <div class="container-fluid page-body-wrapper">
@@ -156,10 +155,9 @@
                 <div class="card1">
                     <div class = "wrapper"id="formContent">
                         <!-- Tabs Titles -->
-                        <h2 style="margin-top: 0; margin-bottom: 20px; text-align: left;  font-size: 30px;">Registro de Personal</h2>
+                        <h2 style="margin-top: 0; margin-bottom: 20px; text-align: left;font-size: 30px;">Registrar Serenazgo</h2>
                         <a href="tabla_serenazgo.jsp" class="button" onclick="return Cancelar();">Regresar</a>
                         <hr style="border: none; border-top: 2px solid black;">
-
                         <!-- Icon -->
 
                         <!-- Login Form -->
@@ -240,24 +238,23 @@
             });
         }
 
-        function Cancelar() {
+        function Actualizar() {
             Swal.fire({
                 title: "Estás seguro?",
-                text: "Perdera todo su progreso",
+                text: "El proceso no podrá ser reversible",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#00913f",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Sí, cancelar",
-                cancelButtonText: "Cancelar",
+                confirmButtonText: "Si, actualizar"
             }).then((result) => {
                 if (result.isConfirmed) {
                     Swal.fire({
-                        title: "Cancelado!",
-                        text: "Se ha cancelado satisfactoriamente",
+                        title: "Actualizado!",
+                        text: "El personal ha sido actualizado con exito",
                         icon: "success"
                     }).then(() => {
-                        window.location.href = "tabla_serenazgo.jsp";
+                        document.querySelector("form").submit();
                     });
                 }
             });
@@ -270,9 +267,8 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script src = "script_tabla.js"></script>
+    <script src ="script_tabla.js"></script>
     <script src="cancelaciones.js"></script>
-
     <!-- End custom js for this page -->
 </body>
 </html>
