@@ -64,5 +64,17 @@ public class VecinoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        String action = request.getParameter("action");
+        UserDao userDao = new UserDao();
+        switch (action){
+            case "enviarSolicitud":
+                int idArea = Integer.parseInt(request.getParameter("idArea"));
+                int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+                userDao.enviarSolicitud(idUsuario, idArea);
+                response.sendRedirect(request.getContextPath() + "/Vecino?action=solCoordinador");
+                break;
+        }
+
     }
 }
