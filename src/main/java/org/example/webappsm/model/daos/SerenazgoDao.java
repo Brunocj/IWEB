@@ -1,6 +1,8 @@
 package org.example.webappsm.model.daos;
 
 import org.example.webappsm.model.beans.Serenazgo;
+import org.example.webappsm.model.beans.Turno;
+import org.example.webappsm.model.beans.TipoSerenazgo;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ public class SerenazgoDao {
         //Parametros de conexion a que base de datos me quiero unir//
         String url ="jdbc:mysql://localhost:3306/sanmiguel";
         String username = "root";
-        String password = "123456";
+        String password = "rootroot";
         String sql = "SELECT  s.idSerenazgo, s.nombre, s.apellido, ts.nombreTipo AS tipo, t.nombreTurno AS turno " +
                 "FROM Serenazgo s " +
                 "JOIN TipoSerenazgo ts ON s.idTipoSerenazgo = ts.idTipoSerenazgo " +
@@ -48,7 +50,7 @@ public class SerenazgoDao {
 
         return listaSerenazgo;
     }
-    public void agregarSerenazgo(Serenazgo serenazgo){
+    public void agregarSerenazgo(Serenazgo serenazgo, Integer turnoId, Integer tipoId){
         try {
             Class.forName( "com.mysql.cj.jdbc.Driver");
 
@@ -58,7 +60,7 @@ public class SerenazgoDao {
 
         String url ="jdbc:mysql://localhost:3306/sanmiguel";
         String username = "root";
-        String password = "123456";
+        String password = "rootroot";
         String query = "INSERT INTO Serenazgo (nombre, apellido, dni, direccion, telefono, turno, tipo, fNacimiento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn= DriverManager.getConnection(url, username, password);
              PreparedStatement pstmt = conn.prepareStatement(query)){
@@ -72,8 +74,16 @@ public class SerenazgoDao {
             pstmt.setString(3,serenazgo.getDni());
             pstmt.setString(4,serenazgo.getDireccion());
             pstmt.setString(5,serenazgo.getTelefono());
-            pstmt.setString(6,serenazgo.getTurno());
-            pstmt.setString(7,serenazgo.getTipo());
+            if (turnoId != null) {
+                pstmt.setInt(8, turnoId);
+            } else {
+                pstmt.setNull(8, Types.INTEGER);
+            }
+            if (tipoId != null) {
+                pstmt.setInt(8, tipoId);
+            } else {
+                pstmt.setNull(8, Types.INTEGER);
+            }
             pstmt.setDate(8,new java.sql.Date(serenazgo.getFNacimiento().getTime()));
             pstmt.executeUpdate();
         }catch( SQLException e){
@@ -90,7 +100,7 @@ public class SerenazgoDao {
 
         String url ="jdbc:mysql://localhost:3306/sanmiguel";
         String username = "root";
-        String password = "123456";
+        String password = "rootroot";
         String query = "DELETE FROM Serenazgo WHERE idSerenazgo = ?";
         try (Connection conn= DriverManager.getConnection(url, username, password);
              PreparedStatement pstmt = conn.prepareStatement(query)){
@@ -111,7 +121,7 @@ public class SerenazgoDao {
 
         String url ="jdbc:mysql://localhost:3306/sanmiguel";
         String username = "root";
-        String password = "123456";
+        String password = "rootroot";
         String query = "SELECT s.idSerenazgo, s.nombre, s.apellido, s.dni, s.direccion, s.telefono, s.fNacimiento, " +
                 "(SELECT ts.nombreTipo FROM Tiposerenazgo ts WHERE ts.idTipoSerenazgo = s.idTipoSerenazgo) AS tipo, " +
                 "(SELECT t.nombreTurno FROM Turno t WHERE t.idTurno = s.idTurno) AS turno " +
@@ -138,7 +148,7 @@ public class SerenazgoDao {
         }
         return serenazgo;
     }
-    public void editarSerenazgo(Serenazgo serenazgo){
+    public void editarSerenazgo(Serenazgo serenazgo, Integer turnoId, Integer tipoId){
         try {
             Class.forName( "com.mysql.cj.jdbc.Driver");
 
@@ -148,15 +158,15 @@ public class SerenazgoDao {
 
         String url ="jdbc:mysql://localhost:3306/sanmiguel";
         String username = "root";
-        String password = "123456";
+        String password = "rootroot";
         String query = "UPDATE Serenazgo AS S " +
                 "SET S.nombre = ?, " +
                 "    S.apellido = ?, " +
                 "    S.dni = ?, " +
                 "    S.direccion = ?, " +
                 "    S.telefono = ?, " +
-                "    S.idTurno = (SELECT idTurno FROM Turno WHERE nombreTurno = ?), " +
-                "    S.idTipoSerenazgo = (SELECT idTipoSerenazgo FROM tiposerenazgo WHERE nombreTipo = ?), " +
+                "    S.idTurno = ?, " +
+                "    S.idTipoSerenazgo = ?, " +
                 "    S.fNacimiento = ? " +
                 "WHERE S.idSerenazgo = ?";
         try (Connection conn= DriverManager.getConnection(url, username, password);
@@ -166,8 +176,8 @@ public class SerenazgoDao {
             pstmt.setString(3, serenazgo.getDni());
             pstmt.setString(4, serenazgo.getDireccion());
             pstmt.setString(5, serenazgo.getTelefono());
-            pstmt.setString(6, serenazgo.getTurno());
-            pstmt.setString(7, serenazgo.getTipo());
+            pstmt.setInt(6, turnoId);
+            pstmt.setInt(7, tipoId);
             pstmt.setDate(8, new java.sql.Date(serenazgo.getFNacimiento().getTime()));
             pstmt.setInt(9, serenazgo.getIdSerenazgo());
             pstmt.executeUpdate();
@@ -175,4 +185,75 @@ public class SerenazgoDao {
             throw new RuntimeException(e);
         }
     }
+    public ArrayList<Turno> listarTurnos(){
+        ArrayList<Turno> listaTurnos = new ArrayList<>();
+
+        try {
+            Class.forName( "com.mysql.cj.jdbc.Driver");
+
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        //Parametros de conexion a que base de datos me quiero unir//
+        String url ="jdbc:mysql://localhost:3306/sanmiguel";
+        String username = "root";
+        String password = "rootroot";
+        String sql = "SELECT * from Turno";
+
+        try (Connection conn= DriverManager.getConnection(url, username, password);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()){
+                Turno turno = new Turno();
+
+                turno.setIdTurno(rs.getInt("idTurno"));
+                turno.setNombreTurno(rs.getString("nombreTurno"));
+                listaTurnos.add(turno);
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return listaTurnos;
+    }
+    public ArrayList<TipoSerenazgo> listarTipos(){
+        ArrayList<TipoSerenazgo> listaTipos = new ArrayList<>();
+
+        try {
+            Class.forName( "com.mysql.cj.jdbc.Driver");
+
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        //Parametros de conexion a que base de datos me quiero unir//
+        String url ="jdbc:mysql://localhost:3306/sanmiguel";
+        String username = "root";
+        String password = "rootroot";
+        String sql = "SELECT * from Tiposerenazgo";
+
+        try (Connection conn= DriverManager.getConnection(url, username, password);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()){
+                TipoSerenazgo tipo = new TipoSerenazgo();
+
+                tipo.setIdTipoSerenazgo(rs.getInt("idTipoSerenazgo"));
+                tipo.setNombreTipo(rs.getString("nombreTipo"));
+                listaTipos.add(tipo);
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return listaTipos;
+    }
 }
+
