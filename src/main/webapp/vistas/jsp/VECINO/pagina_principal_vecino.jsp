@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    int idProvisional = 10;
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,8 +45,7 @@
 
         <ul class="nav" style="position: fixed">
             <!-- Codigo para un item de la barra lateral que no tiene sublista -->
-            <li class="nav-item menu-items ${"pagPrincipal".equals(request.getParameter("action")) ? "active" : ""}""> <!-- la clase "active" solo se usa para la vista que está activa -->
-
+            <li class="nav-item menu-items ${"pagPrincipal".equals(request.getParameter("action")) ? "active" : ""}">
                 <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=pagPrincipal"> <!-- Cambiar href de acuerdo a lo necesario -->
                     <span class="menu-icon">
                 <i class="mdi mdi-home"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
@@ -53,8 +55,8 @@
             </li>
             <!-- Codigo para un item de la barra lateral que no tiene sublista FIN-->
             <!-- Codigo para un item de la barra lateral que no tiene sublista -->
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="Miperfil.jsp">
+            <li class="nav-item menu-items ${"miPerfil".equals(request.getParameter("action")) ? "active" : ""}">
+                <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=miPerfil&id=<%=idProvisional%>">
               <span class="menu-icon">
                 <i class="mdi mdi-account"></i>
               </span>
@@ -69,24 +71,24 @@
                     <span class="menu-title" style="color: white;">Correo</span>
                 </a>
             </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="solicitud/solicitarCoordinador.jsp">
+            <li class="nav-item menu-items ${"solCoordinador".equals(request.getParameter("action")) ? "active" : ""}">
+                <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=solCoordinador">
               <span class="menu-icon">
                 <i class="mdi mdi-key-change"></i>
               </span>
                     <span class="menu-title" style="color: white;">Sol. coordinador(a)</span>
                 </a>
             </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="eventos/eventos.jsp"> <!-- Cambiar href de acuerdo a lo necesario -->
+            <li class="nav-item menu-items ${"eventos".equals(request.getParameter("action")) ? "active" : ""}">
+                <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=eventos"><!-- Cambiar href de acuerdo a lo necesario -->
                     <span class="menu-icon">
                 <i class="mdi mdi-earth"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
                     <span class="menu-title" style="color: white;">Eventos</span>
                 </a>
             </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="incidencias/incidencia_vecino.jsp"> <!-- Cambiar href de acuerdo a lo necesario -->
+            <li class="nav-item menu-items ${"incidencias".equals(request.getParameter("action")) ? "active" : ""}">
+                <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=incidencias"> <!-- Cambiar href de acuerdo a lo necesario -->
                     <span class="menu-icon">
                 <i class="mdi mdi-alert"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
