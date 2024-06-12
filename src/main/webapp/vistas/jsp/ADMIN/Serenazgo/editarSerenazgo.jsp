@@ -63,7 +63,7 @@
                     <span class="menu-title" style="color: white;">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item menu-items ">
+            <li class="nav-item menu-items active">
                 <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Serenazgo/tabla_serenazgo.jsp" onclick="return CancelarSerenazgo();">
               <span class="menu-icon">
                 <i class="mdi mdi-security"></i>
@@ -71,7 +71,7 @@
                     <span class="menu-title" style="color: white;">Serenazgo</span>
                 </a>
             </li>
-            <li class="nav-item menu-items active">
+            <li class="nav-item menu-items ">
                 <a class="nav-link" href="${pageContext.request.contextPath}/Admin?action=tablaProfesores" onclick="return CancelarProfesores();">
               <span class="menu-icon">
                 <i class="mdi mdi-teach"></i>
@@ -186,8 +186,8 @@
                                 <input type="text" id="telefono" name="telefonoS" value="<%= serenazgo.getTelefono() %>" style="margin-bottom: 0px;">
 
                                 <div class="form-group">
-                                    <label for="turno">Turno:</label>
-                                    <select id="turno" name="turno" class="form-control" required>
+                                    <label for="turnoS">Turno:</label>
+                                    <select id="turnoS" name="turnoS" class="form-control" required>
                                         <% for (Turno turno : listaTurnos) { %>
                                             <option value="<%= turno.getIdTurno() %>" <%= serenazgo.getTurno().equals(turno.getNombreTurno()) ? "selected" : "" %>><%=turno.getNombreTurno()%></option>
                                         <%
@@ -197,8 +197,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="tipo">Tipo:</label>
-                                    <select id="tipo" name="tipo" class="form-control" required>
+                                    <label for="tipoS">Tipo:</label>
+                                    <select id="tipoS" name="tipoS" class="form-control" required>
                                         <% for (TipoSerenazgo tipo : listaTipos) { %>
                                         <option value="<%= tipo.getIdTipoSerenazgo() %>" <%= serenazgo.getTipo().equals(tipo.getNombreTipo()) ? "selected" : "" %>><%=tipo.getNombreTipo()%></option>
                                         <%
