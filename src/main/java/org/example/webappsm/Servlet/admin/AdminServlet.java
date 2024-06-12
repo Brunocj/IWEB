@@ -309,8 +309,25 @@ public class AdminServlet extends HttpServlet {
             if (telefonoS != null && !telefonoS.isEmpty()) {
                 serenazgo.setTelefono(telefonoS);
             }
-            int turnoId = Integer.parseInt(turnoS);
-            int tipoId = Integer.parseInt(tipoS);
+            Integer turnoId = null;
+            if (turnoS != null && !turnoS.isEmpty()) {
+                try {
+                    turnoId = Integer.parseInt(turnoS);
+                } catch (NumberFormatException e) {
+                    // Manejar el caso en que turnoS no sea un valor numérico válido
+                    e.printStackTrace(); // o puedes imprimir un mensaje de error
+                }
+            }
+            Integer tipoId = null;
+            if (tipoS != null && !tipoS.isEmpty()) {
+                try {
+                    tipoId = Integer.parseInt(tipoS);
+                } catch (NumberFormatException e) {
+                    // Manejar el caso en que turnoS no sea un valor numérico válido
+                    e.printStackTrace(); // o puedes imprimir un mensaje de error
+                }
+            }
+
             if (fNacimientoS != null && !fNacimientoS.isEmpty()) {
                 try {
                     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -341,3 +358,4 @@ public class AdminServlet extends HttpServlet {
     }
 
 }
+
