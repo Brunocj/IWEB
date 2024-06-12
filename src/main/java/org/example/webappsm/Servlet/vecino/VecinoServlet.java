@@ -7,11 +7,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.webappsm.model.beans.Incidencia;
 import org.example.webappsm.model.beans.Usuario;
 import org.example.webappsm.model.daos.UserDao;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet(name ="VecinoServlet" , value = "/Vecino")
 public class VecinoServlet extends HttpServlet {
@@ -37,8 +39,6 @@ public class VecinoServlet extends HttpServlet {
                 rd.forward(request,response);
                 break;
             case "solCoordinador":
-
-
                 vista = "vistas/jsp/VECINO/solicitud/solicitarCoordinador.jsp";
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
@@ -51,7 +51,8 @@ public class VecinoServlet extends HttpServlet {
                 rd.forward(request,response);
                 break;
             case "incidencias":
-
+                ArrayList<Incidencia> listaIncidencias = userDao.listarIncidencias();
+                request.setAttribute("listaincidencias", listaIncidencias);
 
                 vista = "vistas/jsp/VECINO/incidencias/incidencia_vecino.jsp";
                 rd = request.getRequestDispatcher(vista);
