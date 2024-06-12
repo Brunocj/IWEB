@@ -31,4 +31,20 @@ public class UserDao extends BaseDao{
         return usuario;
     }
 
+
+    public void enviarSolicitud(int idUsuario, int idArea){
+        String sql = "INSERT INTO SolicitudCoordinador (idUsuario, idArea, estado) VALUES (?, ?, 0)";
+        try (Connection conn = this.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idUsuario);
+            stmt.setInt(2, idArea);
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 }
