@@ -175,6 +175,30 @@ public class AdminServlet extends HttpServlet {
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
+            case "solicitudAcceso":
+                int idUsuario = Integer.parseInt(request.getParameter("id")); // Asegúrate de que el nombre del parámetro sea "id"
+
+                VecinosDao vecinosDao2 = new VecinosDao();
+
+                Usuario usuario = vecinosDao2.obtenerUsuarioPorId(idUsuario);
+                request.setAttribute("usuarioVer", usuario);
+
+                vista = "vistas/jsp/ADMIN/Vecinos/Solicitudes_acceso/detalles_solicitudes.jsp";
+                RequestDispatcher rs = request.getRequestDispatcher(vista);
+                rs.forward(request, response);
+                break;
+
+            case "deleteVecino":
+
+                VecinosDao vecinosDao3 = new VecinosDao();
+
+                int id_usuario = Integer.parseInt(request.getParameter("id1"));
+                int opcion_boton = Integer.parseInt(request.getParameter("id2"));
+
+                vecinosDao3.borrar_vecino(id_usuario,opcion_boton);
+
+
+                break;
         }
 
 
