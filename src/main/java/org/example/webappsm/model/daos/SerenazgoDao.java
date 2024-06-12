@@ -40,9 +40,9 @@ public class SerenazgoDao extends DaoBaseSerenazgo {
         return listaSerenazgo;
     }
     public void agregarSerenazgo(Serenazgo serenazgo, Integer turnoId, Integer tipoId){
-        
-        String query = "INSERT INTO Serenazgo (nombre, apellido, dni, direccion, telefono, turno, tipo, fNacimiento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        
+
+        String query = "INSERT INTO Serenazgo (nombre, apellido, dni, direccion, telefono, idTurno, idTipoSerenazgo, fNacimiento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)){
 
@@ -56,14 +56,14 @@ public class SerenazgoDao extends DaoBaseSerenazgo {
             pstmt.setString(4,serenazgo.getDireccion());
             pstmt.setString(5,serenazgo.getTelefono());
             if (turnoId != null) {
-                pstmt.setInt(8, turnoId);
+                pstmt.setInt(6, turnoId);
             } else {
-                pstmt.setNull(8, Types.INTEGER);
+                pstmt.setNull(6, Types.INTEGER);
             }
             if (tipoId != null) {
-                pstmt.setInt(8, tipoId);
+                pstmt.setInt(7, tipoId);
             } else {
-                pstmt.setNull(8, Types.INTEGER);
+                pstmt.setNull(7, Types.INTEGER);
             }
             pstmt.setDate(8,new java.sql.Date(serenazgo.getFNacimiento().getTime()));
             pstmt.executeUpdate();
@@ -72,9 +72,9 @@ public class SerenazgoDao extends DaoBaseSerenazgo {
         }
     }
     public void eliminarSerenazgo(int idSerenazgo){
-        
+
         String query = "DELETE FROM Serenazgo WHERE idSerenazgo = ?";
-        
+
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)){
             pstmt.setInt(1, idSerenazgo);
@@ -85,7 +85,7 @@ public class SerenazgoDao extends DaoBaseSerenazgo {
     }
     public Serenazgo obtenerSerenazgoPorId(int idSerenazgo){
         Serenazgo serenazgo = new Serenazgo();
-        
+
         String query = "SELECT s.idSerenazgo, s.nombre, s.apellido, s.dni, s.direccion, s.telefono, s.fNacimiento, " +
                 "(SELECT ts.nombreTipo FROM Tiposerenazgo ts WHERE ts.idTipoSerenazgo = s.idTipoSerenazgo) AS tipo, " +
                 "(SELECT t.nombreTurno FROM Turno t WHERE t.idTurno = s.idTurno) AS turno " +
@@ -113,7 +113,7 @@ public class SerenazgoDao extends DaoBaseSerenazgo {
         return serenazgo;
     }
     public void editarSerenazgo(Serenazgo serenazgo, Integer turnoId, Integer tipoId){
-        
+
         String query = "UPDATE Serenazgo AS S " +
                 "SET S.nombre = ?, " +
                 "    S.apellido = ?, " +
@@ -124,7 +124,7 @@ public class SerenazgoDao extends DaoBaseSerenazgo {
                 "    S.idTipoSerenazgo = ?, " +
                 "    S.fNacimiento = ? " +
                 "WHERE S.idSerenazgo = ?";
-        
+
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)){
             pstmt.setString(1, serenazgo.getNombre());
@@ -132,8 +132,18 @@ public class SerenazgoDao extends DaoBaseSerenazgo {
             pstmt.setString(3, serenazgo.getDni());
             pstmt.setString(4, serenazgo.getDireccion());
             pstmt.setString(5, serenazgo.getTelefono());
-            pstmt.setInt(6, turnoId);
-            pstmt.setInt(7, tipoId);
+
+            if (turnoId != null) {
+                pstmt.setInt(6, turnoId.intValue());
+            } else {
+                pstmt.setNull(6, Types.INTEGER);
+            }
+            if (tipoId != null) {
+                pstmt.setInt(7, tipoId.intValue());
+            } else {
+                pstmt.setNull(7, Types.INTEGER);
+            }
+
             pstmt.setDate(8, new java.sql.Date(serenazgo.getFNacimiento().getTime()));
             pstmt.setInt(9, serenazgo.getIdSerenazgo());
             pstmt.executeUpdate();
@@ -143,7 +153,7 @@ public class SerenazgoDao extends DaoBaseSerenazgo {
     }
     public ArrayList<Turno> listarTurnos(){
         ArrayList<Turno> listaTurnos = new ArrayList<>();
-        
+
         String sql = "SELECT * from Turno";
 
         try (Connection conn = this.getConnection();
@@ -167,7 +177,7 @@ public class SerenazgoDao extends DaoBaseSerenazgo {
     }
     public ArrayList<TipoSerenazgo> listarTipos(){
         ArrayList<TipoSerenazgo> listaTipos = new ArrayList<>();
-        
+
         String sql = "SELECT * from Tiposerenazgo";
 
         try (Connection conn = this.getConnection();
