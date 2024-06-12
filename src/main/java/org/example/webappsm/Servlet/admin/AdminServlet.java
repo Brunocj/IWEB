@@ -3,10 +3,7 @@ package org.example.webappsm.Servlet.admin;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import org.example.webappsm.model.beans.Incidencia;
-import org.example.webappsm.model.beans.Profesor;
-import org.example.webappsm.model.beans.Serenazgo;
-import org.example.webappsm.model.beans.Usuario;
+import org.example.webappsm.model.beans.*;
 import org.example.webappsm.model.daos.DashboardDao;
 import org.example.webappsm.model.daos.ProfesorDao;
 import org.example.webappsm.model.daos.SerenazgoDao;
@@ -102,12 +99,25 @@ public class AdminServlet extends HttpServlet {
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
+            case "agregarSerenazgo":
+                SerenazgoDao serenazgoDao = new SerenazgoDao();
+                ArrayList<Turno> listaTurnos = serenazgoDao.listarTurnos();
+                ArrayList<TipoSerenazgo> listaTipos = serenazgoDao.listarTipos();
+                request.setAttribute("listaTurnos", listaTurnos);
+                request.setAttribute("listaTipos", listaTipos);
+                vista = "vistas/jsp/ADMIN/Serenazgo/serenazgoRegistro.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
             case "editarSerenazgo":
                 int idSerenazgoEditar = Integer.parseInt(request.getParameter("idEditar"));
 
-                SerenazgoDao serenazgoDao = new SerenazgoDao();
-                Serenazgo serenazgoEdit = serenazgoDao.obtenerSerenazgoPorId(idSerenazgoEditar);
-
+                SerenazgoDao serenazgoDaoE = new SerenazgoDao();
+                Serenazgo serenazgoEdit = serenazgoDaoE.obtenerSerenazgoPorId(idSerenazgoEditar);
+                ArrayList<Turno> listaTurnosE = serenazgoDaoE.listarTurnos();
+                ArrayList<TipoSerenazgo> listaTiposE = serenazgoDaoE.listarTipos();
+                request.setAttribute("listaTurnos", listaTurnosE);
+                request.setAttribute("listaTipos", listaTiposE);
                 request.setAttribute("serenazgoEdit", serenazgoEdit);
                 vista = "vistas/jsp/ADMIN/Serenazgo/editarSerenazgo.jsp";
                 rd = request.getRequestDispatcher(vista);
@@ -248,12 +258,24 @@ public class AdminServlet extends HttpServlet {
             nuevoSerenazgo.setDni(dniS);
             nuevoSerenazgo.setDireccion(direccionS);
             nuevoSerenazgo.setTelefono(telefonoS);
-            nuevoSerenazgo.setTurno(turnoS);
-            nuevoSerenazgo.setTipo(tipoS);
+            Integer turnoId = null;;
+            if ("null".equals(turnoS)) {
+                turnoId = null;
+            } else if (turnoS != null && !turnoS.isEmpty()) {
+                turnoId = Integer.parseInt(turnoS);
+            } else {
+            }
+            Integer tipoId = null;;
+            if ("null".equals(tipoS)) {
+                tipoId = null;
+            } else if (tipoS != null && !tipoS.isEmpty()) {
+                tipoId = Integer.parseInt(tipoS);
+            } else {
+            }
             nuevoSerenazgo.setFNacimiento(fechaNacimiento);
 
             SerenazgoDao serenazgoDao = new SerenazgoDao();
-            serenazgoDao.agregarSerenazgo(nuevoSerenazgo);
+            serenazgoDao.agregarSerenazgo(nuevoSerenazgo, turnoId, tipoId);
 
             response.sendRedirect(request.getContextPath() + "/Admin?action=tablaSerenazgo");
 
@@ -287,12 +309,8 @@ public class AdminServlet extends HttpServlet {
             if (telefonoS != null && !telefonoS.isEmpty()) {
                 serenazgo.setTelefono(telefonoS);
             }
-            if (turnoS != null && !turnoS.isEmpty()) {
-                serenazgo.setTurno(turnoS);
-            }
-            if (tipoS != null && !tipoS.isEmpty()) {
-                serenazgo.setTipo(tipoS);
-            }
+            int turnoId = Integer.parseInt(turnoS);
+            int tipoId = Integer.parseInt(tipoS);
             if (fNacimientoS != null && !fNacimientoS.isEmpty()) {
                 try {
                     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -303,7 +321,7 @@ public class AdminServlet extends HttpServlet {
                 }
             }
 
-            serenazgoDao.editarSerenazgo(serenazgo);
+            serenazgoDao.editarSerenazgo(serenazgo, turnoId, tipoId);
             response.sendRedirect(request.getContextPath() + "/Admin?action=tablaSerenazgo");
 
         }else if(action.equals("eliminarSerenazgo")){
