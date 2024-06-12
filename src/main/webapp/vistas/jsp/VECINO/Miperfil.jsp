@@ -8,7 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Usuario usuario = (Usuario) request.getAttribute("usuario");
+    int idProvisional = 10;
 %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,7 +58,7 @@
             <!-- Codigo para un item de la barra lateral que no tiene sublista FIN-->
             <!-- Codigo para un item de la barra lateral que no tiene sublista -->
             <li class="nav-item menu-items ${"miPerfil".equals(request.getParameter("action")) ? "active" : ""}">
-                <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=miPerfil">
+                <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=miPerfil&id=<%=idProvisional%>">
               <span class="menu-icon">
                 <i class="mdi mdi-account"></i>
               </span>

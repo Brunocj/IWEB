@@ -1,5 +1,6 @@
 package org.example.webappsm.model.daos;
 
+import org.example.webappsm.model.beans.Incidencia;
 import org.example.webappsm.model.beans.Usuario;
 import java.sql.*;
 
@@ -47,4 +48,36 @@ public class UserDao extends BaseDao{
 
     }
 
+    public ArrayList<Incidencia> listarIncidencias(){
+        ArrayList<Incidencia> listaIncidencias = new ArrayList<>();
+        String sql = "SELECT " +
+                "i.idIncidencia, " +
+                "i.nombre, " +
+                "DATE(i.fecha) AS fecha, " +
+                "e.nombreEstado AS estado " +
+                "FROM " +
+                "incidencia i " +
+                "JOIN " +
+                "estado e ON i.idEstado = e.idEstado; ";
+        try(Connection conn = this.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+        ){
+
+
+            while (rs.next()) {
+                Incidencia incidencia = new Incidencia();
+                incidencia.setIdIncidencia(rs.getInt("idIncidencia"));
+                incidencia.setNombre(rs.getString("nombre"));
+                incidencia.setFechaIncidencia(rs.getTimestamp("fecha"));
+                incidencia.setEstado(rs.getString("estado"));
+                listaIncidencias.add(incidencia);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return  listaIncidencias;
+    }
 }
