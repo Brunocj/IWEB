@@ -1,4 +1,4 @@
-<%--
+<%@ page import="org.example.webappsm.model.beans.Evento" %><%--
   Created by IntelliJ IDEA.
   User: bruno
   Date: 28/05/2024
@@ -14,18 +14,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Mi perfil</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="../../../../assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../../../../assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/css/vendor.bundle.base.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End Plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="../../../../assets/css/style.css">
-    <link rel="stylesheet" href="styles_eventos.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/VECINO/eventos/styles_eventos.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../LogoSM.png" />
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" />
     <!--JS para los popups-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -139,23 +139,29 @@
         </nav>
         <!-- partial -->
         <div class="main-panel">
+            <%
+                Evento evento = (Evento) request.getAttribute("evento");
+                if (evento == null) {
+                    out.print("<p>Error: No se encontró el evento.</p>");
+                } else {
+            %>
             <div class="content-wrapper" style ="background-color: #d6e9ff;"> <!--Cambiar al color mas claro-->
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="custom-container rounded-3" id="container-image">
                                 <div class="event-image-container">
-                                    <img id="evento-imagen" src="fotos/foto2.jpg" alt="Imagen del Evento" class="event-image img-fluid mb-4">
+                                    <img id="evento-imagen" src="data:image/jpeg;base64, <%= new String(org.apache.commons.codec.binary.Base64.encodeBase64(evento.getImagenes())) %>" alt="Imagen del Evento" class="event-image img-fluid mb-4">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="custom-container rounded-3" id="fechas" style="font-size: 28px;">
-                                <h4 class="mb-4 center-text">Nombre del evento</h4>
-                                <p><strong>Fecha:</strong> 16 de Abril de 2024</p>
+                                <h4 class="mb-4 center-text"><%=evento.getTitulo()%></h4>
+                                <p><strong>Fecha:</strong> <%=evento.getFechaYHora()%></p>
                                 <p><strong>Hora:</strong> 08:00 AM a 10:00 AM </p>
-                                <p><strong>Lugar:</strong> Nombre del Lugar</p>
-                                <p><strong>Recurrencia:</strong> Evento único</p>
+                                <p><strong>Lugar:</strong> <%=evento.getUbicacion()%></p>
+                                <p><strong>Recurrencia:</strong><%=evento.getRecurrencia()%></p>
                                 <div class="text-center">
                                     <button type="button" class="btn btn-primary custom-btn" style="right: 1px; font-size: 18px; font-weight: bold;" id="btn-inscribirse" onclick="return InscribirPopUp();">Inscribirse</button>
                                 </div>
@@ -164,11 +170,11 @@
                         <div class="col-md-6">
                             <div class="custom-container rounded-3" id="descripcion">
                                 <h4 class="mb-4">Descripción del Evento</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida eros sit amet erat fringilla, sed fermentum nisi tristique. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida eros sit amet erat fringilla, sed fermentum nisi tristique.</p>
+                                <p><%=evento.getDescripcion()%></p>
                                 <h4 class="mb-4">Materiales</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida eros sit amet erat fringilla, sed fermentum nisi tristique. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida eros sit amet erat fringilla, sed fermentum nisi tristique.</p>
+                                <p>Te odio Bruno has bien tus base de datos la csmr</p>
                                 <h4 class="mb-4">Profesor</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida eros sit amet erat fringilla, sed fermentum nisi tristique.</p>
+                                <p><%=evento.getIdProfesor()%></p>
                             </div>
                         </div>
                     </div>
@@ -176,6 +182,7 @@
                 </div>
 
             </div>
+            <% } %>
         </div>
 
 
@@ -191,16 +198,16 @@
 </div>
 <!-- container-scroller -->
 <!-- plugins:js -->
-<script src="../../../../assets/vendors/js/vendor.bundle.base.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
 <!-- endinject -->
 <!-- Plugin js for this page -->
 <!-- End plugin js for this page -->
 <!-- inject:js -->
-<script src="../../../../assets/js/off-canvas.js"></script>
-<script src="../../../../assets/js/hoverable-collapse.js"></script>
-<script src="../../../../assets/js/misc.js"></script>
-<script src="../../../../assets/js/settings.js"></script>
-<script src="../../../../assets/js/todolist.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
 <!-- endinject -->
 <!-- Custom js for this page -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -208,7 +215,7 @@
 
 
 
-<script src="scripts_detalles_evento.js">  </script>
+<script src="${pageContext.request.contextPath}/vistas/jsp/VECINO/eventos/scripts_detalles_evento.js">  </script>
 <!-- End custom js for this page -->
 </body>
 </html>
