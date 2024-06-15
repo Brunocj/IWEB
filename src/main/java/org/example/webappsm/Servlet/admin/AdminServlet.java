@@ -35,9 +35,9 @@ public class AdminServlet extends HttpServlet {
                 DashboardDao dashboardDao = new DashboardDao();
                 String totalBaneados = dashboardDao.totalBaneados();
                 String avgIncidencias = dashboardDao.avgIncidencias();
-                String totalIncidencias = dashboardDao.totalIncidencias();
-                String incidenciasComunMax = dashboardDao.incidenciaComunMax();
-                String incidenciasComunMin = dashboardDao.incidenciaComunMin();
+                String incidenciasMes = dashboardDao.incidenciasMes();
+                String incidenciasSemana = dashboardDao.incidenciasSemana();
+                String incidenciasHoy = dashboardDao.incidenciasHoy();
                 String incidenciasPorAtender = dashboardDao.incidenciasPorAtender();
                 String incidenciasUrbMax = dashboardDao.incidenciasUrbMax();
                 String incidenciasUrbMin = dashboardDao.incidenciasUrbMin();
@@ -58,9 +58,9 @@ public class AdminServlet extends HttpServlet {
 
                 request.setAttribute("totalbaneados", totalBaneados);
                 request.setAttribute("avgincidencias", avgIncidencias);
-                request.setAttribute("totalincidencias", totalIncidencias);
-                request.setAttribute("incidenciascomunmax", incidenciasComunMax);
-                request.setAttribute("incidenciascomunmin",incidenciasComunMin);
+                request.setAttribute("incidenciasmes", incidenciasMes);
+                request.setAttribute("incidenciassemana", incidenciasSemana);
+                request.setAttribute("incidenciashoy",incidenciasHoy);
                 request.setAttribute("incidenciasatender", incidenciasPorAtender);
                 request.setAttribute("incidenciasurbmax",incidenciasUrbMax);
                 request.setAttribute("incidenciasurbmin", incidenciasUrbMin);
