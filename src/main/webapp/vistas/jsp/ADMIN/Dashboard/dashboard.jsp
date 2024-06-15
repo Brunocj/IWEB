@@ -13,9 +13,9 @@
 <%
     String totalBaneados = (String) request.getAttribute("totalbaneados");
     String avgIncidencias = (String) request.getAttribute("avgincidencias");
-    String totalIncidencias = (String) request.getAttribute("totalincidencias");
-    String incidenciasComunMax = (String) request.getAttribute("incidenciascomunmax");
-    String incidenciasComunMin = (String) request.getAttribute("incidenciascomunmin");
+    String incidenciasMes = (String) request.getAttribute("incidenciasmes");
+    String incidenciasSemana = (String) request.getAttribute("incidenciassemana");
+    String incidenciasHoy = (String) request.getAttribute("incidenciashoy");
     String incidenciasPorAtender = (String) request.getAttribute("incidenciasatender");
     String incidenciasUrbMax = (String) request.getAttribute("incidenciasurbmax");
     String incidenciasUrbMin = (String) request.getAttribute("incidenciasurbmin");
@@ -199,14 +199,14 @@
                                                 <div class="row">
                                                     <div class="col-9">
                                                         <div class="d-flex align-items-center align-self-start">
-                                                            <h3 class="mb-0"><%=totalIncidencias%></h3>
+                                                            <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 3vh !important; font-weight: 500 !important;"><%=incidenciasMes%></h4>
                                                         </div>
                                                     </div>
                                                     <div class="col-3">
-                                                        <h1><span class="mdi mdi-chart-areaspline"></span></h1>
+                                                        <h1 style="margin-bottom: 20px;"><span class="mdi mdi-calendar-blank" ></span></h1>
                                                     </div>
                                                 </div>
-                                                <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 3vh !important; font-weight: 500 !important;">Cantidad total de incidencias</h4>
+                                                <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 2.7vh !important; font-weight: 500 !important;">Incidencias en el último mes</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -217,14 +217,14 @@
                                                 <div class="row">
                                                     <div class="col-9">
                                                         <div class="d-flex align-items-center align-self-start">
-                                                            <h3 class="mb-0"><%=avgIncidencias%></h3>
+                                                            <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 3vh !important; font-weight: 500 !important;"><%=incidenciasSemana%></h4>
                                                         </div>
                                                     </div>
                                                     <div class="col-3">
-                                                        <h1><span class="mdi mdi-chart-bar"></span></h1>
+                                                        <h1 style="margin-bottom: 20px;"><span class="mdi mdi-calendar-blank"></span></h1>
                                                     </div>
                                                 </div>
-                                                <h4 class="text-muted font-weight-normal">Promedio de incidencias por día</h4>
+                                                <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 2.7vh !important; font-weight: 500 !important;">Incidencias en la última semana</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -235,17 +235,20 @@
                                                 <div class="row">
                                                     <div class="col-9">
                                                         <div class="d-flex align-items-center align-self-start">
-                                                            <h3 class="mb-0"><%=incidenciasUrbMax%></h3>
+                                                            <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 3vh !important; font-weight: 500 !important;"><%=incidenciasHoy%></h4>
                                                         </div>
                                                     </div>
                                                     <div class="col-3">
-                                                        <h1><span class="mdi mdi-home-modern"></span></h1>
+                                                        <h1 style="margin-bottom: 20px;"><span class="mdi mdi-calendar-blank"></span></h1>
                                                     </div>
                                                 </div>
-                                                <h4 class="text-muted font-weight-normal">Urbanizacion con más incidencias</h4>
+                                                <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 2.7vh !important; font-weight: 500 !important;">Incidencias hoy</h4>
                                             </div>
                                         </div>
                                     </div>
+
+
+
 
                                     <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
                                         <div class="card">
@@ -253,17 +256,19 @@
                                                 <div class="row">
                                                     <div class="col-9">
                                                         <div class="d-flex align-items-center align-self-start">
-                                                            <h3 class="mb-0"><%=incidenciasUrbMin%></h3>
+                                                            <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 3vh !important; font-weight: 500 !important;"><%=avgIncidencias%></h4>
                                                         </div>
                                                     </div>
                                                     <div class="col-3">
-                                                        <h1><span class="mdi mdi-home-modern"></span></h1>
+                                                        <h1 style="margin-bottom: 20px;"><span class="mdi mdi-chart-bar"></span></h1>
                                                     </div>
                                                 </div>
-                                                <h4 class="text-muted font-weight-normal">Urbanizacion con menos incidencias</h4>
+                                                <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 2.7vh !important; font-weight: 500 !important;" >Promedio de incidencias por día</h4>
                                             </div>
                                         </div>
                                     </div>
+
+
 
                                 </div>
 
@@ -275,14 +280,14 @@
                                                 <div class="row">
                                                     <div class="col-9">
                                                         <div class="d-flex align-items-center align-self-start">
-                                                            <h3 class="mb-0"><%=incidenciasPorAtender%></h3>
+                                                            <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 3vh !important; font-weight: 500 !important;"><%=incidenciasUrbMax%></h4>
                                                         </div>
                                                     </div>
                                                     <div class="col-3">
-                                                        <h1><span class="mdi mdi-alert"></span></h1>
+                                                        <h1 style="margin-bottom: 20px;"><span class="mdi mdi-home-modern"></span></h1>
                                                     </div>
                                                 </div>
-                                                <h4 class="text-muted font-weight-normal">Cantidad de incidencias por atender</h4>
+                                                <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 2.7vh !important; font-weight: 500 !important;">Urbanizacion con más incidencias</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -293,14 +298,14 @@
                                                 <div class="row">
                                                     <div class="col-9">
                                                         <div class="d-flex align-items-center align-self-start">
-                                                            <h3 class="mb-0"><%=incidenciasComunMax%></h3>
+                                                            <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 3vh !important; font-weight: 500 !important;"><%=incidenciasUrbMin%></h4>
                                                         </div>
                                                     </div>
                                                     <div class="col-3">
-                                                        <h1><span class="mdi mdi-arrow-top-right"></span></h1>
+                                                        <h1 style="margin-bottom: 20px;"><span class="mdi mdi-home-modern"></span></h1>
                                                     </div>
                                                 </div>
-                                                <h4 class="text-muted font-weight-normal">Tipo de incidencia más común</h4>
+                                                <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 2.7vh !important; font-weight: 500 !important;">Urbanizacion con menos incidencias</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -311,17 +316,19 @@
                                                 <div class="row">
                                                     <div class="col-9">
                                                         <div class="d-flex align-items-center align-self-start">
-                                                            <h3 class="mb-0"><%=incidenciasComunMin%></h3>
+                                                            <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 3vh !important; font-weight: 500 !important;"><%=incidenciasPorAtender%></h4>
                                                         </div>
                                                     </div>
                                                     <div class="col-3">
-                                                        <h1><span class="mdi mdi-arrow-bottom-right"></span></h1>
+                                                        <h1 style="margin-bottom: 20px;"><span class="mdi mdi-alert"></span></h1>
                                                     </div>
                                                 </div>
-                                                <h4 class="text-muted font-weight-normal">Tipo de incidencia menos común</h4>
+                                                <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 2.7vh !important; font-weight: 500 !important;">Cantidad de incidencias por atender</h4>
                                             </div>
                                         </div>
                                     </div>
+
+
 
                                     <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
                                         <div class="card">
@@ -329,17 +336,19 @@
                                                 <div class="row">
                                                     <div class="col-9">
                                                         <div class="d-flex align-items-center align-self-start">
-                                                            <h3 class="mb-0"><%=totalBaneados%></h3>
+                                                            <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 3vh !important; font-weight: 500 !important;"><%=totalBaneados%></h4>
                                                         </div>
                                                     </div>
                                                     <div class="col-3">
-                                                        <h1><span class="mdi mdi-account-off"></span></h1>
+                                                        <h1 style="margin-bottom: 20px;"><span class="mdi mdi-account-off"></span></h1>
                                                     </div>
                                                 </div>
-                                                <h4 class="text-muted font-weight-normal">Cantidad de vecinos sancionados</h4>
+                                                <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 2.7vh !important; font-weight: 500 !important;">Cantidad de vecinos sancionados</h4>
                                             </div>
                                         </div>
                                     </div>
+
+
 
                                 </div>
 
@@ -347,9 +356,9 @@
                                 <div class="row">
 
                                     <div class="col-lg-6 grid-margin stretch-card">
-                                        <div class="card">
+                                        <div class="card" >
                                             <div class="card-body">
-                                                <h2 class="card-title" style="color: #000000">Tipos de incidencias reportadas</h2>
+                                                <h2 class="card-title" style="color: #000000">Tipo de incidencias reportadas</h2>
                                                 <canvas id="barChart" style="height:230px"></canvas>
                                             </div>
                                         </div>

@@ -121,7 +121,7 @@ public class DashboardDao {
         return avgIncidencias;
     }
 
-    public String totalIncidencias(){
+    public String incidenciasMes(){
         String totalIncidencias ="";
 
         try {
@@ -136,15 +136,16 @@ public class DashboardDao {
         String username = "root";
         String password = "123456";
 
-        String sql = "SELECT COUNT(*) AS cantidad_total_incidencias " +
-                "FROM Incidencia;";
+        String sql = "SELECT COUNT(*) AS total_incidencias_ultimo_mes " +
+                "FROM incidencia " +
+                "WHERE fecha >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH);";
 
         try (Connection conn= DriverManager.getConnection(url, username, password);
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()){
-                totalIncidencias = Integer.toString(rs.getInt("cantidad_total_incidencias"));
+                totalIncidencias = Integer.toString(rs.getInt(1));
 
             }
 
@@ -155,7 +156,7 @@ public class DashboardDao {
         return totalIncidencias;
     }
 
-    public String incidenciaComunMax(){
+    public String incidenciasSemana(){
         String maxComun = "";
 
         try {
@@ -170,19 +171,16 @@ public class DashboardDao {
         String username = "root";
         String password = "123456";
 
-        String sql = "SELECT nombreTipo, COUNT(*) AS cantidad_incidencias " +
-                "FROM Incidencia " +
-                "JOIN TipoIncidencia ON Incidencia.idTipoIncidencia = TipoIncidencia.idTipoIncidencia " +
-                "GROUP BY nombreTipo " +
-                "ORDER BY cantidad_incidencias DESC " +
-                "LIMIT 1;";
+        String sql = "SELECT COUNT(*) AS total_incidencias_esta_semana " +
+                "FROM incidencia " +
+                "WHERE YEARWEEK(fecha, 1) = YEARWEEK(CURDATE(), 1);";
 
         try (Connection conn= DriverManager.getConnection(url, username, password);
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()){
-                maxComun = (rs.getString("nombreTipo"));
+                maxComun = (rs.getString(1));
 
             }
 
@@ -193,7 +191,7 @@ public class DashboardDao {
         return maxComun;
     }
 
-    public String incidenciaComunMin(){
+    public String incidenciasHoy(){
         String minComun = "";
 
         try {
@@ -208,19 +206,16 @@ public class DashboardDao {
         String username = "root";
         String password = "123456";
 
-        String sql = "SELECT nombreTipo, COUNT(*) AS cantidad_incidencias " +
-                "FROM Incidencia " +
-                "JOIN TipoIncidencia ON Incidencia.idTipoIncidencia = TipoIncidencia.idTipoIncidencia " +
-                "GROUP BY nombreTipo " +
-                "ORDER BY cantidad_incidencias ASC " +
-                "LIMIT 1;";
+        String sql = "SELECT COUNT(*) AS total_incidencias_hoy " +
+                "FROM incidencia " +
+                "WHERE DATE(fecha) = CURDATE();";
 
         try (Connection conn= DriverManager.getConnection(url, username, password);
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()){
-                minComun = (rs.getString("nombreTipo"));
+                minComun = (rs.getString(1));
 
             }
 
