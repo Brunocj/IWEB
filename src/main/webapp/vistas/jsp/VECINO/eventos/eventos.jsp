@@ -149,13 +149,13 @@
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-md-4">
-                                <a href="mis_eventos.jsp" class="btn btn-primary btn-lg d-block mb-3" style ="background-color: #000f22;">Mis Eventos</a>
+                                <a href="${pageContext.request.contextPath}/Vecino?action=misEventos" class="btn btn-primary btn-lg d-block mb-3" style ="background-color: #000f22;">Mis Eventos</a>
                             </div>
                             <div class="col-md-4">
-                                <a href="#" class="btn btn-primary btn-lg d-block mb-3 topBtn" style ="background-color: #183d6c;">Eventos</a> <!--Cambiar el color de acuerdo al que este seleccionado (el codigo de color de estalinea es el que se debe usar para cuando se encuentra una pestaña seleccionada; en coordinador, usar otro color, pero que sea más oscuro)-->
+                                <a href="${pageContext.request.contextPath}/Vecino?action=eventos" class="btn btn-primary btn-lg d-block mb-3 topBtn" style ="background-color: #183d6c;">Eventos</a> <!--Cambiar el color de acuerdo al que este seleccionado (el codigo de color de estalinea es el que se debe usar para cuando se encuentra una pestaña seleccionada; en coordinador, usar otro color, pero que sea más oscuro)-->
                             </div>
                             <div class="col-md-4">
-                                <a href="eventos_pasados.jsp" class="btn btn-primary btn-lg d-block mb-3" style ="background-color: #000f22;">Eventos Pasados</a>
+                                <a href="${pageContext.request.contextPath}/vistas/jsp/VECINO/eventos/eventos_pasados.jsp" class="btn btn-primary btn-lg d-block mb-3" style ="background-color: #000f22;">Eventos Pasados</a>
                             </div>
                         </div>
                     </div>

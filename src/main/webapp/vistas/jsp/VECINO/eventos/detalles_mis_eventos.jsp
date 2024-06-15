@@ -6,6 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="org.example.webappsm.model.beans.Evento" %>
+<%
+    int idProvisional = 10;
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,10 +26,10 @@
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="../../../../assets/css/style.css">
-    <link rel="stylesheet" href="styles_eventos.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/VECINO/eventos/styles_eventos.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../LogoSM.png" />
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" />
     <!--JS para los popups-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -125,7 +129,7 @@
                                     <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default;">Manuel Yarleque</h2>
                                     <h5 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 15px; font-weight:500; cursor: default;">Vecino sanmiguelino</h5>
                                 </div>
-                                <img class="img-xs rounded-circle" src="../LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
+                                <img class="img-xs rounded-circle" src="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
 
                             </div>
                         </a>
@@ -139,24 +143,35 @@
         </nav>
         <!-- partial -->
         <div class="main-panel">
+            <%
+                Evento evento = (Evento) request.getAttribute("evento");
+                if (evento == null) {
+                    out.print("<p>Error: No se encontró el evento.</p>");
+                } else {
+            %>
             <div class="content-wrapper" style ="background-color: #d6e9ff;"> <!--Cambiar al color mas claro-->
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="custom-container rounded-3" id="container-image">
                                 <div class="event-image-container">
-                                    <center><img id="evento-imagen" src="fotos/foto9.jpg" alt="Imagen del Evento" class="event-image img-fluid mb-4"></center>
+                                    <img id="evento-imagen" src="data:image/jpeg;base64, <%= new String(org.apache.commons.codec.binary.Base64.encodeBase64(evento.getImagenes())) %>" alt="Imagen del Evento" class="event-image img-fluid mb-4">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="custom-container rounded-3" id="fechas" style="font-size: 28px;">
-                                <h4 class="mb-4 center-text">Nombre del evento</h4>
-                                <p><strong>Fecha:</strong> 16 de Abril de 2024</p>
+                                <h4 class="mb-4 center-text"><%=evento.getTitulo()%></h4>
+                                <p><strong>Fecha:</strong> <%=evento.getFechaYHora()%></p>
                                 <p><strong>Hora:</strong> 08:00 AM a 10:00 AM </p>
-                                <p><strong>Lugar:</strong> Nombre del Lugar</p>
-                                <p><strong>Recurrencia:</strong> Evento único</p>
+                                <p><strong>Lugar:</strong> <%=evento.getUbicacion()%></p>
+                                <p><strong>Recurrencia:</strong><%=evento.getRecurrencia()%></p>
                                 <div class="text-center">
+                                    <form id="desinscripcionForm" action="<%= request.getContextPath() %>/Vecino" method="POST" style="display:none;">
+                                        <input type="hidden" name="action" value="desinscribir">
+                                        <input type="hidden" name="idUsuario" value="<%= idProvisional %>">
+                                        <input type="hidden" name="idEvento" value="<%= evento.getIdEvento() %>">
+                                    </form>
                                     <button type="button" class="btn btn-danger custom-btn" style="right: 1px; font-size: 18px; font-weight: bold;" id="btn-inscribirse" onclick="return AnularPopUp();">Anular Inscripción</button>
                                 </div>
                             </div>
@@ -164,18 +179,19 @@
                         <div class="col-md-6">
                             <div class="custom-container rounded-3" id="descripcion">
                                 <h4 class="mb-4">Descripción del Evento</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida eros sit amet erat fringilla, sed fermentum nisi tristique. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida eros sit amet erat fringilla, sed fermentum nisi tristique.</p>
+                                <p><%=evento.getDescripcion()%></p>
                                 <h4 class="mb-4">Materiales</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida eros sit amet erat fringilla, sed fermentum nisi tristique. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida eros sit amet erat fringilla, sed fermentum nisi tristique.</p>
+                                <p>Te odio Bruno has bien tus base de datos la csmr</p>
                                 <h4 class="mb-4">Profesor</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida eros sit amet erat fringilla, sed fermentum nisi tristique.</p>
+                                <p><%=evento.getIdProfesor()%></p>
                             </div>
                         </div>
                     </div>
-                    <a href="mis_eventos.jsp" class="btn btn-primary fixed-button" style="position: absolute; bottom: 20px; right: 20px; font-size: 18px; font-weight: bold;">Volver a Mis Eventos</a> <!-- Alineación del botón a la derecha -->
+                    <a href="${pageContext.request.contextPath}/Vecino?action=misEventos" class="btn btn-primary fixed-button" style="position: absolute; bottom: 20px; right: 20px; font-size: 18px; font-weight: bold;">Volver a Mis Eventos</a> <!-- Alineación del botón a la derecha -->
                 </div>
 
             </div>
+            <% } %>
         </div>
 
 
@@ -191,16 +207,16 @@
 </div>
 <!-- container-scroller -->
 <!-- plugins:js -->
-<script src="../../../../assets/vendors/js/vendor.bundle.base.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
 <!-- endinject -->
 <!-- Plugin js for this page -->
 <!-- End plugin js for this page -->
 <!-- inject:js -->
-<script src="../../../../assets/js/off-canvas.js"></script>
-<script src="../../../../assets/js/hoverable-collapse.js"></script>
-<script src="../../../../assets/js/misc.js"></script>
-<script src="../../../../assets/js/settings.js"></script>
-<script src="../../../../assets/js/todolist.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
 <!-- endinject -->
 <!-- Custom js for this page -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -208,7 +224,7 @@
 
 
 
-<script src="scripts_detalles_mi_evento.js">  </script>
+<script src="${pageContext.request.contextPath}/vistas/jsp/VECINO/eventos/scripts_detalles_mi_evento.js">  </script>
 <!-- End custom js for this page -->
 </body>
 </html>

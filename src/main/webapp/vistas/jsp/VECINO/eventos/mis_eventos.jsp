@@ -1,4 +1,5 @@
-<%--
+<%@ page import="org.example.webappsm.model.beans.Evento" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: bruno
   Date: 28/05/2024
@@ -14,18 +15,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Mi perfil</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="../../../../assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../../../../assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/css/vendor.bundle.base.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End Plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="../../../../assets/css/style.css">
-    <link rel="stylesheet" href="styles_eventos.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/VECINO/eventos/styles_eventos.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../LogoSM.png" />
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" />
     <!--JS para los popups-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -145,10 +146,10 @@
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-md-4">
-                                <a href="#" class="btn btn-primary btn-lg d-block mb-3" style ="background-color:  #183d6c;">Mis Eventos</a>
+                                <a href="${pageContext.request.contextPath}/Vecino?action=misEventos" class="btn btn-primary btn-lg d-block mb-3" style ="background-color:  #183d6c;">Mis Eventos</a>
                             </div>
                             <div class="col-md-4">
-                                <a href="eventos.jsp" class="btn btn-primary btn-lg d-block mb-3 topBtn" style ="background-color: #000f22;">Eventos</a> <!--Cambiar el color de acuerdo al que este seleccionado (el codigo de color de estalinea es el que se debe usar para cuando se encuentra una pestaña seleccionada; en coordinador, usar otro color, pero que sea más oscuro)-->
+                                <a href="${pageContext.request.contextPath}/Vecino?action=eventos" class="btn btn-primary btn-lg d-block mb-3 topBtn" style ="background-color: #000f22;">Eventos</a> <!--Cambiar el color de acuerdo al que este seleccionado (el codigo de color de estalinea es el que se debe usar para cuando se encuentra una pestaña seleccionada; en coordinador, usar otro color, pero que sea más oscuro)-->
                             </div>
                             <div class="col-md-4">
                                 <a href= "eventos_pasados.jsp" class="btn btn-primary btn-lg d-block mb-3" style ="background-color:  #000f22;">Eventos Pasados</a>
@@ -157,165 +158,41 @@
                     </div>
                 </section>
                 <section class="py-5" >
+                    <%
+                        // Suponiendo que eventos es un ArrayList<Evento> que proviene del servlet o controlador
+                        ArrayList<Evento> eventos = (ArrayList<Evento>) request.getAttribute("listaMisEventos");
+
+                        int columnasPorFila = 4;
+                        int contador = 0;
+
+                        // Iterar sobre la lista de eventos
+                        for (Evento evento : eventos) {
+                            // Abrir un nuevo container y row cada 4 eventos
+                            if (contador % columnasPorFila == 0) {
+                    %>
                     <div class="container" style ="padding-top: 0px;">
                         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                            <% } %>
                             <div class="col">
-                                <div class="cardEvent" data-event-id="24">
-                                    <img src="fotos/foto9.jpg" class="card-img-top" alt="...">
+                                <div class="cardEvent" data-event-id="<%= evento.getIdEvento() %>">
+                                    <img  src="data:image/jpeg;base64, <%= new String(org.apache.commons.codec.binary.Base64.encodeBase64(evento.getImagenes())) %>" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="card-title">Título de la Tarjeta</h5>
+                                            <h5 class="card-title"><%= evento.getTitulo() %></h5>
                                         </div>
-                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        <p class="card-text"><%= evento.getDescripcion() %></p>
                                         <!-- Botón en la parte inferior derecha -->
-                                        <a href ="detalles_mis_eventos.jsp?eventId=24" class="btn btn-primary btn-sm btn-bottom-right">Ver mi evento</a>
+                                        <a href ="${pageContext.request.contextPath}/Vecino?action=verMiEvento&id=<%= evento.getIdEvento() %>" class="btn btn-primary btn-sm btn-bottom-right">Ver mi evento</a>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col">
-                                <div class="cardEvent" data-event-id="25" >
-                                    <img src="fotos/foto9.jpg" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="card-title">Título de la Tarjeta</h5>
-                                        </div>
-                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        <a href ="detalles_mis_eventos.jsp?eventId=25" class="btn btn-primary btn-sm btn-bottom-right">Ver mi evento</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="cardEvent" data-event-id="26">
-
-                                    <img src="fotos/foto9.jpg" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="card-title">Título de la Tarjeta</h5>
-                                        </div>
-                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        <a href="detalles_mis_eventos.jsp?eventId=26" class="btn btn-primary btn-sm btn-bottom-right">Ver mi evento</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="cardEvent" data-event-id="27">
-
-                                    <img src="fotos/foto9.jpg" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="card-title">Título de la Tarjeta</h5>
-                                        </div>
-                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        <a href="detalles_mis_eventos.jsp?eventId=27" class="btn btn-primary btn-sm btn-bottom-right">Ver mi evento</a>
-                                    </div>
-                                </div>
-                            </div>
+                            <% if ((contador + 1) % columnasPorFila == 0 || contador == eventos.size() - 1) { %>
                         </div>
-
                     </div>
+                    <% } %>
 
-                    <div class="container">
-                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-                            <div class="col">
-                                <div class="cardEvent" data-event-id="28">
-
-                                    <img src="fotos/foto10.jpg" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="card-title">Título de la Tarjeta</h5>
-                                        </div>
-                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        <a href="detalles_mis_eventos.jsp?eventId=28" class="btn btn-primary btn-sm btn-bottom-right">Ver mi evento</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="cardEvent" data-event-id="29">
-
-                                    <img src="fotos/foto10.jpg" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="card-title">Título de la Tarjeta</h5>
-                                        </div>
-                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        <a href="detalles_mis_eventos.jsp?eventId=29" class="btn btn-primary btn-sm btn-bottom-right">Ver mi evento</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="cardEvent" data-event-id="30">
-
-                                    <img src="fotos/foto10.jpg" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="card-title">Título de la Tarjeta</h5>
-                                        </div>
-                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        <a href="detalles_mis_eventos.jsp?eventId=30" class="btn btn-primary btn-sm btn-bottom-right">Ver mi evento</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="cardEvent" data-event-id="31">
-
-                                    <img src="fotos/foto10.jpg" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="card-title">Título de la Tarjeta</h5>
-                                        </div>
-                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        <a href="detalles_mis_eventos.jsp?eventId=31" class="btn btn-primary btn-sm btn-bottom-right">Ver mi evento</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="container">
-                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-                            <div class="col">
-                                <div class="cardEvent" data-event-id="9">
-
-                                    <img src="fotos/foto3.jpg" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="card-title">Título de la Tarjeta</h5>
-                                        </div>
-                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        <a href="detalles_mis_eventos.jsp?eventId=9" class="btn btn-primary btn-sm btn-bottom-right">Ver mi evento</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="cardEvent" data-event-id="10">
-
-                                    <img src="fotos/foto3.jpg" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="card-title">Título de la Tarjeta</h5>
-                                        </div>
-                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        <a href="detalles_mis_eventos.jsp?eventId=10" class="btn btn-primary btn-sm btn-bottom-right">Ver mi evento</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="cardEvent" data-event-id="11">
-
-                                    <img src="fotos/foto3.jpg" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="card-title">Título de la Tarjeta</h5>
-                                        </div>
-                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        <a href="detalles_mis_eventos.jsp?eventId=11" class="btn btn-primary btn-sm btn-bottom-right">Ver mi evento</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                    <% contador++;
+                    } %>
                 </section>
                 <nav>
                     <ul class="pagination justify-content-center">
@@ -342,21 +219,21 @@
 </div>
 <!-- container-scroller -->
 <!-- plugins:js -->
-<script src="../../../../assets/vendors/js/vendor.bundle.base.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
 <!-- endinject -->
 <!-- Plugin js for this page -->
 <!-- End plugin js for this page -->
 <!-- inject:js -->
-<script src="../../../../assets/js/off-canvas.js"></script>
-<script src="../../../../assets/js/hoverable-collapse.js"></script>
-<script src="../../../../assets/js/misc.js"></script>
-<script src="../../../../assets/js/settings.js"></script>
-<script src="../../../../assets/js/todolist.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
 <!-- endinject -->
 <!-- Custom js for this page -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script src = "script_eventos.js"></script>
+<script src = "${pageContext.request.contextPath}/vistas/jsp/VECINO/eventos/script_eventos.js"></script>
 <!-- End custom js for this page -->
 </body>
 </html>

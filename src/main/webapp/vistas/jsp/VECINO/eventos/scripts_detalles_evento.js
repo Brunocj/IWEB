@@ -88,25 +88,27 @@ document.addEventListener("DOMContentLoaded", function() {
 
                                           
                          // Funciones para mostrar un mensaje de confirmación al hacer clic en el botón "Inscribirse"
-                         function InscribirPopUp() {
-                                                  Swal.fire({
-                                                      title: '¿Estás seguro de que deseas inscribirte a este evento?',
-                                                      icon: 'question',
-                                                      showCancelButton: true,
-                                                      confirmButtonColor: '#00913f',
-                                                      cancelButtonColor: '#d33',
-                                                      confirmButtonText: 'Confirmar',
-                                                      cancelButtonText: 'Cancelar'
-                                                  }).then((result) => {
-                                                      if (result.isConfirmed) {
-                                                          // Aquí iría el código para enviar la solicitud
-                                                          Swal.fire({
-                                                              title: 'Tu inscripción ha sido procesada correctamente.',
-                                                              icon: 'success'
-                                                          });
-                                                      }
-                                                  });
-                         }
+function InscribirPopUp() {
+    Swal.fire({
+        title: '¿Estás seguro de que deseas inscribirte a este evento?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#00913f',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Confirmar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: "¡Inscrito!",
+                text: "Usted se ha registrado con éxito",
+                icon: "success",
+            }).then(() => {
+                document.querySelector("form").submit();
+            });
+        }
+    });
+}
                                           
                                               // Función para mostrar el cuadro de diálogo de confirmación al hacer clic en el botón "Inscribirse"
                          document.getElementById("btn-inscribirse").addEventListener("click", function() {
