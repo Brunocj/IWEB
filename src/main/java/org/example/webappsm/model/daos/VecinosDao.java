@@ -16,7 +16,6 @@ public class VecinosDao {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-
         //Parametros de conexion a que base de datos me quiero unir//
         String url ="jdbc:mysql://localhost:3306/sanmiguel";
         String username = "root";
