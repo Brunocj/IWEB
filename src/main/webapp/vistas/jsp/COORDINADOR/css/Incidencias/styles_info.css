@@ -1,0 +1,64 @@
+.card {
+    position: relative; /* Agrega posición relativa para el contenedor de la tarjeta */
+    border: 1px solid #ccc;
+    border-radius: 25px !important;
+    padding: 20px;
+    background-color: #f9f9f9; /* Mantengo el fondo original */
+    width: 80%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+  
+  .card-table {
+    overflow-x: auto;
+  }
+  
+  .card-body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  table td,
+  table th {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+
+  .button-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    margin: 15px;
+  }
+  
+  .button {
+    background-color: #225496;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #225496; /* Color de fondo al pasar el cursor */
+    text-decoration: none;
+    color: white;
+  }
+  .content-wrapper {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+
+  }
