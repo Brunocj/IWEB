@@ -187,7 +187,7 @@
 
                                 <div class="form-group">
                                     <label for="turnoS">Turno:</label>
-                                    <select id="turnoS" name="turnoS" class="form-control" required>
+                                    <select id="turnoS" name="turnoS" class="form-combo" required>
                                         <% for (Turno turno : listaTurnos) { %>
                                             <option value="<%= turno.getIdTurno() %>" <%= serenazgo.getTurno().equals(turno.getNombreTurno()) ? "selected" : "" %>><%=turno.getNombreTurno()%></option>
                                         <%
@@ -198,7 +198,7 @@
 
                                 <div class="form-group">
                                     <label for="tipoS">Tipo:</label>
-                                    <select id="tipoS" name="tipoS" class="form-control" required>
+                                    <select id="tipoS" name="tipoS" class="form-combo" required>
                                         <% for (TipoSerenazgo tipo : listaTipos) { %>
                                         <option value="<%= tipo.getIdTipoSerenazgo() %>" <%= serenazgo.getTipo().equals(tipo.getNombreTipo()) ? "selected" : "" %>><%=tipo.getNombreTipo()%></option>
                                         <%

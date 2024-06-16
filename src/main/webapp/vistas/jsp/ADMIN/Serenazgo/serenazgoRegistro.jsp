@@ -185,7 +185,7 @@
 
                                 <div class="form-group">
                                     <label for="turnoS">Turno:</label>
-                                    <select id="turnoS" name="turnoS" class="form-control" required>
+                                    <select id="turnoS" name="turnoS" class="form-combo" required>
                                         <option value="null">--Seleccione un turno--</option>
                                         <%
                                             for (Turno turno : listaTurnos) {
@@ -199,7 +199,7 @@
 
                                 <div class="form-group">
                                     <label for="tipoS">Tipo:</label>
-                                    <select id="tipoS" name="tipoS" class="form-control" required>
+                                    <select id="tipoS" name="tipoS" class="form-combo" required>
                                         <option value="null">--Seleccione un tipo de serenazgo--</option>
                                         <%
                                             for (TipoSerenazgo tipo : listaTipos) {
