@@ -1,0 +1,55 @@
+/* Estilos para la tarjeta */
+.card2 {
+    background-color: #85ea96;
+   
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    max-width: 1350px;
+    margin: 0 auto; /* Centra la tarjeta horizontalmente */
+}
+
+/* Estilos para el contenido principal */
+.cont-main {
+    display: flex;
+    flex-direction: column; /* Cambiado a columna para disposición vertical */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilos para el contenido de texto */
+.cont-text {
+    text-align: center; /* Centra el texto horizontalmente */
+}
+
+/* Estilos para el título principal h1 */
+.cont-text h1 {
+    font-size: 40px; /* Tamaño más grande */
+    color: #333333;
+    margin-bottom: 20px; /* Aumenta el espacio inferior */
+    font-weight: bold; /* Hace el texto más audaz */
+    text-transform: uppercase; /* Convierte el texto a mayúsculas */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Agrega sombra al texto */
+    letter-spacing: 2px; /* Aumenta el espaciado entre letras */
+
+}
+
+/* Estilos para los títulos secundarios h3 */
+.cont-text h3 {
+    font-size: 20px; /* Tamaño más grande */
+    color: #080808;
+    margin-bottom: 20px; /* Aumenta el espacio inferior */
+    line-height: 1.6; /* Ajusta el espaciado entre líneas */
+    font-family: 'Roboto', sans-serif; /* Utiliza la fuente Roboto */
+}
+
+
+/* Estilos para el contenido de imagen */
+.cont-img img {
+    width: 100%; /* La imagen ocupa el 100% del ancho del contenedor */
+    max-width: 100%; /* La imagen no supera su tamaño natural */
+    height: auto; /* La altura se ajusta automáticamente para mantener la proporción */
+    border-radius: 10px; /* Se mantiene el borde redondeado */
+    margin-bottom: 35px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega sombra a la imagen */
+}

@@ -1,0 +1,102 @@
+.dataTables_wrapper .dataTables_filter input {
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    padding: 0px;
+    background-color: white;
+    margin-left: 3px;
+    margin-bottom: 14px;
+    border: 2px solid black;
+    border-radius: 6px;
+}
+.container-tabla{
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    width: 80%; 
+    margin: 0 auto; /* Centra horizontalmente */
+    
+}
+@media (min-width: 768px) {
+    .container-tabla {
+        display: table;
+    }
+}
+.tabla-title {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+
+}
+.img-table{
+    margin-top: 10px;
+    align-items: center;
+}
+.botones-container {
+    display: flex;
+    align-items: center;
+    
+}
+.dataTables_info{
+    color: black;
+
+  }
+#miTabla_filter{
+    color: black;
+    float: right;
+    
+}
+.btnTable{
+    border-radius: 5px;
+    background-color: #000f22;
+    color: white;
+    padding: 5px;
+    height: 40px;
+    font-size:15px;
+    border: transparent;
+    align-self: center;
+}
+#filtroEstado{
+    align-self: center;
+    margin-top: 0px !important;
+}
+#miTabla_paginate{
+    float: right;
+    display: flex;
+    gap:20px;
+    align-items: center;
+    color: inherit; /* Mantiene el color del texto heredado */
+    text-decoration: none; /* Elimina la subrayado por defecto */
+    cursor: default; /* Mantiene el cursor predeterminado */
+}
+.paginate_button{
+    flex-direction: row;
+    padding:8px;
+    background: #000f22;
+    margin-right: 10px;
+    margin-left:10px;
+    border-radius: 5px;
+    color: inherit; /* Mantiene el color del texto heredado */
+    text-decoration: none; /* Elimina la subrayado por defecto */
+    cursor: default; /* Mantiene el cursor predeterminado */
+}
+
+.paginate_button.current{
+    background: #193255;
+
+}
+
+#miTabla_paginate:hover {
+    color: inherit; /* Mantiene el color del texto al pasar el mouse */
+  }
+.paginate_button:hover{
+    cursor: pointer;
+    background: #3b4c63;
+    color: white;
+    text-decoration: none;
+}
+.paginate_button.disabled:hover{
+    cursor: default;
+    background: #000f22;
+}
+.sorting::after,.sorting::before{
+    cursor: pointer;
+}
