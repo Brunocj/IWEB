@@ -37,16 +37,14 @@
 <div class="container-scroller">
     <!-- partial:../../partials/_sidebar.html -->
     <%
-        String userRole = (String) session.getAttribute("userRole");
-        if (userRole == null) {
-            userRole = "vecino"; // Por defecto, si no hay rol en la sesión
-        }
+        //String userRole = (String) session.getAttribute("userRole"); ->Usar cuando empecemos con las sessions
 
-        String menuvecino = "/vistas/jsp/VECINO/Utilidades/menu_" + userRole + ".jsp";
+        String userRole = "Vecino";
+        String menu = "/vistas/jsp/Utilidades/menu_" + userRole + ".jsp";
     %>
 
     <%-- Incluir el menú y pasar el parámetro de la página activa --%>
-    <jsp:include page="<%= menuvecino %>">
+    <jsp:include page="<%= menu %>">
         <jsp:param name="activePage" value="eventos"/>
     </jsp:include>
         <!-- partial -->
