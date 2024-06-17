@@ -39,7 +39,7 @@
     <%
         //String userRole = (String) session.getAttribute("userRole"); ->Usar cuando empecemos con las sessions
 
-        String userRole = "Vecino";
+        String userRole = "Vecino"; //Cambiar de acuerdo al rol (hasta que obtengamos el userRole mediante querys
         String menu = "/vistas/jsp/Utilidades/menu_" + userRole + ".jsp";
     %>
 
