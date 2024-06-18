@@ -183,6 +183,7 @@ public class AdminServlet extends HttpServlet {
                 Usuario usuario = vecinosDao2.obtenerUsuarioPorId(idUsuario);
 
                 request.setAttribute("usuarioVer", usuario);
+                request.setAttribute("id",idUsuario);
 
                 vista = "vistas/jsp/ADMIN/Vecinos/Solicitudes_acceso/detalles_solicitudes.jsp";
                 rd = request.getRequestDispatcher(vista);
@@ -392,18 +393,18 @@ public class AdminServlet extends HttpServlet {
             }
         }else if(action.equals("opcionAcceso")){
             String opcionSeleccionada = request.getParameter("opcionSeleccionada");
-            int id = Integer.parseInt(request.getParameter("id"));
+            int id = Integer.parseInt(request.getParameter("idUser"));
+
             VecinosDao vecinosDao = new VecinosDao();
 
-            if (opcionSeleccionada != null) {
-                if (opcionSeleccionada.equals("aprobar")) {
-                    vecinosDao.editarEstadoAprobado(id);
+            if (opcionSeleccionada.equals("aprobar")) {
+                vecinosDao.editarEstadoAprobado(id);
 
-                } else if (opcionSeleccionada.equals("denegar")) {
-                    vecinosDao.eliminarUsuarioPorId(id);
+            } else if (opcionSeleccionada.equals("denegar")) {
+                vecinosDao.eliminarUsuarioPorId(id);
 
-                }
             }
+
             response.sendRedirect(request.getContextPath() + "/Admin?action=tablaAcceso");
         }else{
             response.sendRedirect(request.getContextPath() + "/Admin");
