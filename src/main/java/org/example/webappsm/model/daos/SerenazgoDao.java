@@ -6,8 +6,8 @@ import org.example.webappsm.model.beans.TipoSerenazgo;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
-public class SerenazgoDao extends DaoBaseSerenazgo {
+
+public class SerenazgoDao extends BaseDao {
     public ArrayList<Serenazgo> listarSerenazgoTabla(){
         ArrayList<Serenazgo> listaSerenazgo = new ArrayList<>();
 

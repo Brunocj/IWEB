@@ -6,26 +6,17 @@ import org.example.webappsm.model.beans.Usuario;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class VecinosDao {
+public class VecinosDao extends BaseDao{
     public ArrayList<Usuario> listarSoliAcceso(){
         ArrayList<Usuario> listaSoli = new ArrayList<>();
 
-        try {
-            Class.forName( "com.mysql.cj.jdbc.Driver");
 
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        //Parametros de conexion a que base de datos me quiero unir//
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "rootroot";
         String sql = "SELECT u.idUsuario, u.nombres, u.apellidos, e.nombreEstado AS estado " +
                 "FROM Usuario u " +
                 "JOIN Estado e ON u.Estado_idEstado = e.idEstado " +
                 "WHERE e.nombreEstado = 'pendiente'";
 
-        try (Connection conn= DriverManager.getConnection(url, username, password);
+        try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -50,17 +41,7 @@ public class VecinosDao {
     public ArrayList<Usuario> listarSoliCord(){
         ArrayList<Usuario> listaCoord = new ArrayList<>();
 
-        try {
-            Class.forName( "com.mysql.cj.jdbc.Driver");
 
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        //Parametros de conexion a que base de datos me quiero unir//
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "rootroot";
         String sql = "SELECT " +
                 "u.idUsuario," +
                 "u.nombres, " +
@@ -73,7 +54,7 @@ public class VecinosDao {
                 "WHERE " +
                 "sc.estado = 0";
 
-        try (Connection conn= DriverManager.getConnection(url, username, password);
+        try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -95,36 +76,14 @@ public class VecinosDao {
         return listaCoord;
     }
 
-    public void darAcceso(){
-
-        try {
-            Class.forName( "com.mysql.cj.jdbc.Driver");
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "rootroot";
-
-    }
 
     public Usuario obtenerUsuarioPorId(int id) {
         Usuario usuario = null;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
 
-        String url = "jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "rootroot";
 
         String sql = "SELECT * FROM Usuario WHERE idUsuario = ?";
 
-        try (Connection conn = DriverManager.getConnection(url, username, password);
+        try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, id);
@@ -149,18 +108,9 @@ public class VecinosDao {
         return usuario;
     }
     public void aprobarSol(int idUsuario){
-        try {
-            Class.forName( "com.mysql.cj.jdbc.Driver");
 
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "rootroot";
         String query = "DELETE FROM Usuario WHERE idUsuario = ?";
-        try (Connection conn= DriverManager.getConnection(url, username, password);
+        try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)){
             pstmt.setInt(1, idUsuario);
             pstmt.executeUpdate();
@@ -171,16 +121,6 @@ public class VecinosDao {
 
     public void borrar_vecino(int id_usuario, int opcion_boton){
 
-        try {
-            Class.forName( "com.mysql.cj.jdbc.Driver");
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "rootroot";
 
 
         if (opcion_boton == 1){
@@ -190,7 +130,7 @@ public class VecinosDao {
         }
 
         String query = "DELETE FROM Usuario";
-        try (Connection conn= DriverManager.getConnection(url, username, password);
+        try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)){
 
 
