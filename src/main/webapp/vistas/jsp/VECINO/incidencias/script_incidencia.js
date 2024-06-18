@@ -1,27 +1,4 @@
-function Eliminacion() {
-    Swal.fire({
-      title: "Estás seguro?",
-      text: "Una vez eliminado, la información asociada al personal será permanentemente eliminada del sistema",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#00913f",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Si, eliminar",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: "Eliminado!",
-          text: "El personal ha sido eliminado con éxito",
-          icon: "success",
-        }).then(() => {
-          window.location.href = "tabla.html"; //Cambiar href de acuerdo a lo necesrio
-        });
-      }
-    });
-  
-    // Evitar que el formulario se envíe automáticamente
-    return false;
-  }
+
   
   $(document).ready(function () {
     var table = $("#miTabla").DataTable({

@@ -49,12 +49,10 @@
         </div>
 
 
-        <ul class="nav">
-
+        <ul class="nav" style="position: fixed">
             <!-- Codigo para un item de la barra lateral que no tiene sublista -->
-            <li class="nav-item menu-items"> <!-- la clase "active" solo se usa para la vista que está activa -->
-
-                <a class="nav-link" href="../pagina_principal_vecino.jsp"> <!-- Cambiar href de acuerdo a lo necesario -->
+            <li class="nav-item menu-items ${"pagPrincipal".equals(request.getParameter("action")) ? "active" : ""}">
+                <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=pagPrincipal"> <!-- Cambiar href de acuerdo a lo necesario -->
                     <span class="menu-icon">
                 <i class="mdi mdi-home"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
@@ -62,10 +60,9 @@
                 </a>
             </li>
             <!-- Codigo para un item de la barra lateral que no tiene sublista FIN-->
-
-
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="../Miperfil.jsp">
+            <!-- Codigo para un item de la barra lateral que no tiene sublista -->
+            <li class="nav-item menu-items ${"miPerfil".equals(request.getParameter("action")) ? "active" : ""}">
+                <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=miPerfil&id=<%=idProvisional%>">
               <span class="menu-icon">
                 <i class="mdi mdi-account"></i>
               </span>
@@ -80,24 +77,24 @@
                     <span class="menu-title" style="color: white;">Correo</span>
                 </a>
             </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="../solicitud/solicitarCoordinador.jsp">
+            <li class="nav-item menu-items ${"solCoordinador".equals(request.getParameter("action")) ? "active" : ""}">
+                <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=solCoordinador">
               <span class="menu-icon">
                 <i class="mdi mdi-key-change"></i>
               </span>
                     <span class="menu-title" style="color: white;">Sol. coordinador(a)</span>
                 </a>
             </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="../eventos/eventos.jsp"> <!-- Cambiar href de acuerdo a lo necesario -->
+            <li class="nav-item menu-items ${"eventos".equals(request.getParameter("action")) ? "active" : ""}">
+                <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=eventos"><!-- Cambiar href de acuerdo a lo necesario -->
                     <span class="menu-icon">
                 <i class="mdi mdi-earth"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
                     <span class="menu-title" style="color: white;">Eventos</span>
                 </a>
             </li>
-            <li class="nav-item menu-items active">
-                <a class="nav-link" href="#"> <!-- Cambiar href de acuerdo a lo necesario -->
+            <li class="nav-item menu-items ${"incidencias".equals(request.getParameter("action")) ? "active" : ""}">
+                <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=incidencias"> <!-- Cambiar href de acuerdo a lo necesario -->
                     <span class="menu-icon">
                 <i class="mdi mdi-alert"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
@@ -112,6 +109,9 @@
                     <span class="menu-title" style="color: white;">Cerrar sesión</span>
                 </a>
             </li>
+
+            <!-- Codigo para un item de la barra lateral que SI tiene sublista FIN -->
+            <!-- Codigo para un item de la barra lateral que SI tiene sublista FIN -->
         </ul>
     </nav>
     <!-- partial -->
@@ -153,7 +153,7 @@
 
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                     <h2 class="tabla-title" style="color: #000f22; margin-bottom: 0px;">Incidencias</h2>
-                    <button class="btnTable" style="display: flex; align-items: center;" onclick="window.location.href='registrar_incidencia.jsp';">
+                    <button class="btnTable" style="display: flex; align-items: center;" onclick="window.location.href='<%=request.getContextPath()%>/Vecino?action=registroIncidencia';">
                         Agregar Incidencia
                         <a class="mdi mdi-plus" style="color: #ffffff; font-size: 20px; margin-left: 5px;"></a>
                     </button>
@@ -185,7 +185,7 @@
                         <td><%=incidencia.getNombre()%></td>
                         <td><%=fechaFormateada %></td>
                         <td><%=incidencia.getEstado()%></td>
-                        <td><a href="incidencia_info.jsp"><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
+                        <td><a href='<%=request.getContextPath()%>/Vecino?action=infoIncidencia&idIncidencia=<%=incidencia.getIdIncidencia()%>'><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
                     </tr>
                     <%
                             }
