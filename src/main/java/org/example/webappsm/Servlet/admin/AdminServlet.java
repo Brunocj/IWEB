@@ -188,7 +188,20 @@ public class AdminServlet extends HttpServlet {
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
+            case "solicitudCoordi":
 
+                idUsuario = Integer.parseInt(request.getParameter("id")); // Asegúrate de que el nombre del parámetro sea "id"
+
+                VecinosDao vecinosDaoS = new VecinosDao();
+
+                Usuario usuario1 = vecinosDaoS.obtenerUsuarioPorId(idUsuario);
+
+                request.setAttribute("usuarioVerCoordi", usuario1);
+
+                vista = "vistas/jsp/ADMIN/Vecinos/Postulaciones_coordinacion/detalles_postulaciones.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
             case "deleteVecino":
 
                 VecinosDao vecinosDao3 = new VecinosDao();
@@ -377,6 +390,21 @@ public class AdminServlet extends HttpServlet {
 
                 response.sendRedirect(request.getContextPath() + "/Admin?action=tablaSerenazgo");
             }
+        }else if(action.equals("opcionAcceso")){
+            String opcionSeleccionada = request.getParameter("opcionSeleccionada");
+            int id = Integer.parseInt(request.getParameter("id"));
+            VecinosDao vecinosDao = new VecinosDao();
+
+            if (opcionSeleccionada != null) {
+                if (opcionSeleccionada.equals("aprobar")) {
+                    vecinosDao.editarEstadoAprobado(id);
+
+                } else if (opcionSeleccionada.equals("denegar")) {
+                    vecinosDao.eliminarUsuarioPorId(id);
+
+                }
+            }
+            response.sendRedirect(request.getContextPath() + "/Admin?action=tablaAcceso");
         }else{
             response.sendRedirect(request.getContextPath() + "/Admin");
         }
