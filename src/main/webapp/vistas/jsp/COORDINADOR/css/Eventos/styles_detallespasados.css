@@ -1,0 +1,476 @@
+body{
+  background-color: #90DFB2;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+.nombreRol {
+margin: 10px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+height: 100%;
+color: white; /* Color del texto */
+}
+
+.container {
+  margin-top: -100px;
+}
+
+.custom-container  {
+  border: 1px solid rgba(0, 0, 0, 0.5); /* Color del borde con transparencia */
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: rgba(248, 249, 250, 0.5); /* Color de fondo con transparencia */
+  border-radius: 10px; /* Borde redondeado */
+  width: 600;
+}
+#container-image.custom-container  {
+  border: none; /* Quitamos el borde */
+  background-color: transparent; /* Hacemos el fondo transparente */
+}
+.event-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px; /* Borde redondeado */
+}
+#fechas.custom-container{
+    margin-top: 20px;
+    height: 350px;
+    color: #000;
+}
+/* Tamaño de fuente más grande */
+.custom-container p {
+  font-size: 22px; /* Cambia este valor según tu preferencia */
+}
+#descripcion{
+  color: #000;
+}
+.custom-container h4{
+    font-weight: bold;
+    font-size: 27px;
+}
+.custom-btn {
+  font-weight: bold; /* Texto en negrita */
+  width: 300px; /* Ancho personalizado */
+  height: 50px; /* Alto personalizado */
+  font-size: 20px;
+  background-color: green;
+}
+#btn-vacantes{
+  font-weight: bold; /* Texto en negrita */
+  width: 300px; /* Ancho personalizado */
+  height: 50px; /* Alto personalizado */
+  font-size: 17px;
+  background-color: green;
+}
+.custom-container h4.center-text {
+  text-align: center; /* Centramos el texto */
+}
+/* Estilo para el botón fuera de los contenedores */
+.fixed-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-weight: bold;
+}
+/* Estilo para el cuadro de diálogo de confirmación */
+.confirmation-dialog {
+  display: none;
+  position: fixed; /* Fijar la posición */
+  top: 50%; /* Centrar verticalmente */
+  left: 50%; /* Centrar horizontalmente */
+  transform: translate(-50%, -50%); /* Centrar completamente */
+  z-index: 9999; /* Establecer una alta z-index para asegurar que esté por encima de otros elementos */
+  background-color: #fff; /* Color de fondo */
+  padding: 20px; /* Espaciado interno */
+  border-radius: 10px; /* Borde redondeado */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Sombra */
+  max-width: 345px; /* Ancho máximo */
+}
+.confirmation-dialog h3 {
+  color: #333;
+  margin-bottom: 15px;
+}
+.confirmation-dialog p {
+  color: #666;
+  margin-bottom: 20px;
+}
+.confirmation-dialog .btn {
+  font-weight: bold;
+  width: 150px;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+* {
+
+  font-family: "Poppins", sans-serif;
+}
+* {
+  font-family: "Poppins", sans-serif;;
+}
+
+
+.Header {
+  align-items: center;
+  background: #2E9A5D;
+
+  display: flex;
+  height: 100px;
+  justify-content:flex-end;
+  position: fixed;
+  text-align: center;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+
+
+.Header-inner {
+  display: flex;
+  justify-content: space-between;
+  transition: height 0.4s ease;
+  width: 80vw;
+}
+
+.Header .logo a{
+  align-self: center;
+  display: flex;
+  height: 80px;
+  margin-right: 60px;
+  width: 80px;
+  
+}
+
+.Header-nav {
+  display: flex;
+  gap:0;
+  height: 0;
+  justify-content: right;
+
+
+  overflow: hidden;
+  width: 100%;
+}
+
+.Header-nav-item {
+  align-items: center;
+  align-self: center;
+  color: rgb(255, 255, 255);
+
+  flex-shrink: 0;
+  font-size: 20px;
+  font-weight: bold;
+  
+  line-height: 32px;
+  margin: 0 40px;
+  transition: font-size 0.4s ease, padding 0.4s ease;
+}
+
+
+.Header-nav-item:last-child {
+  margin-right: 0;
+}
+
+
+
+
+@media screen and (min-width: 481px) {
+  .Header-nav {
+    height: auto;
+  }
+}
+
+.Header-nav-item h2 {
+z-index: 2; /* Cambia el orden del h2 */
+display: flex; /* Cambia el orden del h5 */
+height:35px;
+margin: 0;
+}
+
+.Header-nav-item h5 {
+z-index: 1; /* Cambia el orden del h5 */
+display: flex; /* Cambia el orden del h5 */
+height:25px;
+margin: 0;
+}
+.nombreRol {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrar elementos horizontalmente */
+  justify-content: center; /* Centrar elementos verticalmente */
+  height: 100%; /* Ajustar la altura para ocupar todo el espacio vertical disponible */
+}
+#menuToggle
+{
+display: flex;
+flex-direction: column; 
+align-items: center;
+position: fixed;
+transform: translateY(-50%); /* Centrar verticalmente */
+top: 50px;
+left: 50px;
+z-index: 100;
+-webkit-user-select: none;
+user-select: none;
+font-weight:bold;
+}
+
+
+
+
+#menuToggle a
+{
+text-decoration: none;
+color: rgb(255, 255, 255);
+transition: color 0.3s ease;
+}
+#menuToggle li{
+  width: 250px;
+  border-radius: 10px;
+}
+#menuToggle li:hover
+{
+  background-color: rgba(255, 255, 255, 0.1); /*Cambiar color*/
+}
+
+#menuToggle a:hover
+{
+color: rgb(164, 164, 164); /*cambiarcolor*/
+}
+.primero{
+  margin-top:50px;
+}
+.seleccionado{
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 117%;
+  border-radius: 10px;
+}
+.seleccionado:hover{
+  width: 117%;
+}
+#menuToggle input
+{
+display: block;
+width: 40px;
+height: 30px;
+position: absolute;
+top: -7px;
+left: -5px;
+
+cursor: pointer;
+
+opacity: 0; /* hide this */
+z-index: 2; /* and place it over the hamburger */
+
+-webkit-touch-callout: none;
+}
+
+/*
+* Just a quick hamburger
+*/
+#menuToggle span
+{
+display: block;
+width: 33px;
+height: 4px;
+margin-bottom: 5px;
+position: relative;
+
+background: rgb(255, 255, 255);
+border-radius: 3px;
+
+z-index: 1;
+
+transform-origin: 4px 0px;
+
+transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+            background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+            opacity 0.55s ease;
+}
+
+#menuToggle span:first-child
+{
+transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2)
+{
+transform-origin: 0% 100%;
+}
+
+/* 
+* Transform all the slices of hamburger
+* into a crossmark.
+*/
+#menuToggle input:checked ~ span
+{
+opacity: 1;
+transform: rotate(45deg) translate(-2px, -1px);
+background: rgb(255, 255, 255);
+}
+
+/*
+* But let's hide the middle one.
+*/
+#menuToggle input:checked ~ span:nth-last-child(3)
+{
+opacity: 0;
+transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+/*
+* Ohyeah and the last one should go the other direction
+*/
+#menuToggle input:checked ~ span:nth-last-child(2)
+{
+transform: rotate(-45deg) translate(0, -1px);
+}
+
+
+#menu
+{
+
+position: absolute;
+width: 350px;
+margin: -100px 0 0 -50px;
+padding: 100px;
+padding-top: 125px;
+padding-left: 120px;
+
+background: #2E9A5D;
+list-style-type: none;
+-webkit-font-smoothing: antialiased;
+/* to stop flickering of text in safari */
+
+transform-origin: 0% 0%;
+transform: translate(-100%, 0);
+height: 2800px;
+transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+#menu li
+{
+position: inherit;
+padding-top: 10px;
+padding-bottom:10px;
+padding-left: 50px;
+font-size: 22px;
+text-align: left;
+}
+
+#menuToggle input:checked ~ ul
+{
+transform: none;
+}
+#container-image.custom-container  {
+position: relative; /* Añadimos posición relativa */
+border: none; /* Quitamos el borde */
+background-color: transparent; /* Hacemos el fondo transparente */
+}
+
+#botoncarga {
+position: absolute;
+top: 30px; /* Ajusta la distancia desde la parte superior */
+left: 30px; /* Ajusta la distancia desde el lado izquierdo */
+font-weight: bold;
+font-size: 24px;
+background-color: rgb(160, 158, 158);
+border-radius: 10px;
+color: #000;
+cursor: pointer;
+z-index: 1; /* Añadimos z-index para que esté por encima de la imagen */
+width: 150px;
+}
+#botoncarga i {
+margin-right: 5px;
+}
+.options-bar {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin-top: 110px;
+}
+.option {
+  cursor: pointer;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-size: 1em; /* Tamaño de fuente relativo */
+  margin: 0 5px; /* Ajuste el margen horizontal */
+  transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.option:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+.verde {
+  background-color: #4CAF50;
+  color: white;
+  margin-right: 10em; /* Ajuste el margen derecho para el botón verde */
+}
+.azul {
+  background-color: #3498DB;
+  color: white;
+}
+.rojo {
+  background-color: #E74C3C;
+  color: white;
+  margin-left: 10em; /* Ajuste el margen izquierdo para el botón rojo */
+}
+   
+.fixed-buttons {
+position: fixed;
+bottom: 20px;
+right: 20px;
+display: flex;
+gap: 10px; /* Espacio entre los botones */
+}
+
+.btn-custom-success {
+background-color: rgb(78, 78, 245);
+color: white;
+border: none;
+border-radius: 8px;
+padding: 10px 20px  ;
+font-size: 18px;
+cursor: pointer;
+transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+#danger {
+background-color: blue;
+color: white;
+border: none;
+border-radius: 8px;
+padding: 10px 20px;
+font-size: 18px;
+cursor: pointer;
+transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+#danger:hover{
+background-color: rgb(78, 78, 245);
+color: white;
+transform: translateY(-3px);
+box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+.btn-custom-danger:hover {
+background-color: blue;
+color: white;
+transform: translateY(-3px);
+box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para el enlace */
+#profesores-link a {
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    color: inherit; /* Usa el color del texto heredado */
+}
+
+/* Estilos para el enlace cuando se hace clic */
+#profesores-link a:active {
+    color: inherit; /* Mantén el color del texto cuando se hace clic */
+}

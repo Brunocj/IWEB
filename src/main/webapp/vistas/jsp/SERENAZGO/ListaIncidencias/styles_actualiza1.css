@@ -1,0 +1,106 @@
+
+/* ---------------------------------------------------------- */
+.container {
+  margin-top: 50px; /* Ajusta el margen superior según sea necesario */
+  align-items: center; /* Centra verticalmente el contenido */
+  background-color: #fffff6; /* Cambia el color de fondo del contenedor */
+  display: flex;
+  border-radius: 20px;
+  flex-direction: column;
+  justify-content: center; /* Centra verticalmente el contenido */
+  height: 50vh; /* Aumenta la altura del contenedor */
+  width: 100%; /* El contenedor ocupa todo el ancho disponible */
+}
+
+.container .card {
+  margin-top: -500px;
+  background-color: #000f22; /* Cambia el color de fondo de la tarjeta */
+  border-radius: 20px;
+  color: #ffffff; /* Cambia el color de las letras a negro */
+  flex-shrink: 0;
+  margin-bottom: 30px; /* Aumenta el margen inferior de la tarjeta */
+  padding: 20px; /* Agrega espacio interno a la tarjeta */
+  width: 90%; /* Reduce el ancho de la tarjeta para que no ocupe todo el ancho del contenedor */
+  height: 250px;
+}
+
+
+/* ---------------------------------------------------------- */
+.botones-container {
+  position: absolute; /* Establece posicionamiento absoluto para el contenedor de los botones */
+  bottom: 20px; /* Coloca el contenedor 20px desde la parte inferior */
+  right: 20px; /* Coloca el contenedor 20px desde la derecha */
+  display: flex;
+  justify-content: space-around; /* Distribuye los botones horizontalmente con espacio */
+}
+
+.boton-cancelar {
+  background-color: #d33; /* Color de fondo del botón Cancelar */
+  color: #fff; /* Color del texto del botón Cancelar */
+  border: none;
+  padding: 10px 20px; /* Ajusta el espaciado interno del botón */
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Transición suave al pasar el mouse */
+  margin: 0 5px;
+}
+
+.boton-cancelar:hover {
+  background-color: #c00; /* Color de fondo al pasar el mouse sobre Cancelar */
+}
+
+.boton-confirmar {
+  background-color: #00913f; /* Color de fondo del botón Confirmar */
+  color: #fff; /* Color del texto del botón Confirmar */
+  border: none;
+  padding: 10px 20px; /* Ajusta el espaciado interno del botón */
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Transición suave al pasar el mouse */
+  margin: 0 5px;
+}
+
+.boton-confirmar:hover {
+  background-color: #007c3a; /* Color de fondo al pasar el mouse sobre Confirmar */
+}
+/* ---------------------------------------------------------- */
+
+#nombre {
+  width: 80%; /* Aumenta el ancho del recuadro de texto para que ocupe todo el ancho disponible */
+  height: 250px; /* Ajusta la altura del recuadro de texto según sea necesario */
+}
+
+.opciones {
+  display: flex; /* Utiliza flexbox para distribuir horizontalmente */
+  justify-content: space-around; /* Distribuye las opciones con espacio alrededor */
+}
+
+
+
+
+
+
+
+
+.container {
+  position: relative; /* Establece posicionamiento relativo para el contenedor */
+  z-index: 1; /* Establece el orden de apilamiento */
+  /* Otros estilos */
+}
+
+.bloque-contraste {
+  position: absolute; /* Establece posicionamiento absoluto para el bloque */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f0f0f0; /* Color de fondo del bloque */
+  opacity: 0.5; /* Cambia la opacidad del bloque según sea necesario */
+  z-index: 0; /* Coloca el bloque detrás del contenedor */
+}
+
+h3 {
+  color: #f0f0f0; /* Color del texto */
+  font-size: 1rem; /* Tamaño del texto (aquí he disminuido el tamaño) */
+  text-align: justify; /* Justifica el texto */
+}

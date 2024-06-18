@@ -1,0 +1,114 @@
+.opcion label{
+    color: black;
+}
+
+/* Estilos generales para el contenedor del formulario */
+.opciones-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Espacio entre columnas */
+    padding: 20px; /* Espacio interior */
+  }
+  
+  /* Estilos para cada opción del formulario */
+  .opcion {
+    flex: 1 1 calc(33.333% - 40px); /* Tres columnas iguales con espacio entre ellas */
+    box-sizing: border-box;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .opcion label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+  }
+  
+  .form-ambulancia, .form-policia {
+    margin-top: 20px;
+  }
+  
+  .form-ambulancia .form-section, .form-policia .inputs {
+    margin-bottom: 15px;
+  }
+  
+  .form-ambulancia input, .form-policia input, .form-policia select, .serenazgoSelector select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  /* Estilos para los botones de opción */
+  .opcion input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  
+  /* Estilos específicos para la sección de la ambulancia */
+  .form-ambulancia .inWrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Estilos específicos para la sección de la policía */
+  .form-policia .inputs {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-policia select {
+    padding: 10px;
+  }
+  
+  /* Ajustes de estilo para móviles */
+  @media (max-width: 768px) {
+    .opcion {
+      flex: 1 1 100%; /* Colapsar a una sola columna en pantallas pequeñas */
+    }
+  }
+  .autoridad{
+    color:black;
+    width: 100%;
+    margin-top: 45px;
+    font-weight:400 !important;
+    height: 30px !important;
+  }
+  .botones-container {
+    position: absolute; /* Establece posicionamiento absoluto para el contenedor de los botones */
+    bottom: 20px; /* Coloca el contenedor 20px desde la parte inferior */
+    right: 20px; /* Coloca el contenedor 20px desde la derecha */
+    display: flex;
+    justify-content: space-around; /* Distribuye los botones horizontalmente con espacio */
+  }
+  
+  .boton-cancelar {
+    background-color: #d33; /* Color de fondo del botón Cancelar */
+    color: #fff; /* Color del texto del botón Cancelar */
+    border: none;
+    padding: 10px 20px; /* Ajusta el espaciado interno del botón */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transición suave al pasar el mouse */
+    margin: 0 5px;
+  }
+  
+  .boton-cancelar:hover {
+    background-color: #c00; /* Color de fondo al pasar el mouse sobre Cancelar */
+  }
+  
+  .boton-confirmar {
+    background-color: #00913f; /* Color de fondo del botón Confirmar */
+    color: #fff; /* Color del texto del botón Confirmar */
+    border: none;
+    padding: 10px 20px; /* Ajusta el espaciado interno del botón */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transición suave al pasar el mouse */
+    margin: 0 5px;
+  }
+  
+  .boton-confirmar:hover {
+    background-color: #007c3a; /* Color de fondo al pasar el mouse sobre Confirmar */
+  }

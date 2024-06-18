@@ -16,7 +16,7 @@ function Confirmacion() {
         text: "El personal ha sido registrado con éxito",
         icon: "success",
       }).then(() => {
-        window.location.href = "tabla_profesor.jsp";
+        document.querySelector("form").submit();
       });
     }
   });
@@ -25,7 +25,7 @@ function Confirmacion() {
   return false;
 }
 
-function Eliminacion() {
+function Eliminacion(id,contextPath) {
   Swal.fire({
     title: "Estás seguro?",
     text: "Una vez eliminado, la información asociada al personal será permanentemente eliminada del sistema",
@@ -36,13 +36,20 @@ function Eliminacion() {
     confirmButtonText: "Si, eliminar",
   }).then((result) => {
     if (result.isConfirmed) {
-      Swal.fire({
-        title: "Eliminado!",
-        text: "El personal ha sido eliminado con éxito",
-        icon: "success",
-      }).then(() => {
-        window.location.href = "tabla_profesor.jsp";
-      });
+      // Crear un formulario para enviar la solicitud POST
+      const form = document.createElement('form');
+      form.method = 'post';
+      form.action = contextPath+'/Admin?action=eliminarProfesor';
+
+      // Crear un input oculto para el ID del profesor
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'id';
+      input.value = id;
+
+      form.appendChild(input);
+      document.body.appendChild(form);
+      form.submit();
     }
   });
 
@@ -68,27 +75,44 @@ $(document).ready(function () {
       search: "Buscar:", // Cambia "Search" por "Buscar"
     },
   });
-  $("#filtroEstado").on("change", function () {
-    var estado = $(this).val();
-    table.column(2).search(estado).draw();
+
+  $("#filtroTipo").on("change", function () {
+    var tipo = $(this).val();
+    if (tipo === "curso") {
+      $("#filtroCursoDiv").css("display", "flex");
+      $("#filtroAreaDiv").css("display", "none");
+    } else if (tipo === "area") {
+      $("#filtroCursoDiv").css("display", "none");
+      $("#filtroAreaDiv").css("display", "flex");
+    } else {
+      $("#filtroCursoDiv").css("display", "none");
+      $("#filtroAreaDiv").css("display", "none");
+    }
+    filtrarTabla();
   });
+
+  $("#filtroCurso").on("change", filtrarTabla);
+  $("#filtroArea").on("change", filtrarTabla);
+
   $("#limpiarFiltros").on("click", function () {
-    $("#filtroEstado").val("");
-    table.search("").columns().search("").draw();
-  });
-
-  // Evento de cambio de filtro de turno
-  $("#filtroEstado").on("change", function () {
-    var estado = $(this).val();
-    table.column(2).search(estado).draw();
-  });
-
-  // Evento de limpiar filtros
-  $("#limpiarFiltros").on("click", function () {
-    $("#filtroEstado").val("");
-    table.search("").columns().search("").draw();
-
-    // Actualizar el contador después de limpiar los filtros
+    $("#filtroCurso").val("");
+    $("#filtroArea").val("");
+    $("#filtroTipo").val("");
+    $("#filtroCursoDiv").css("display", "none");
+    $("#filtroAreaDiv").css("display", "none");
+    filtrarTabla();
     actualizarContador();
   });
+
+  function filtrarTabla() {
+    var curso = $("#filtroCurso").val().toLowerCase();
+    var area = $("#filtroArea").val().toLowerCase();
+    table.columns().search("").draw(); // Limpiar todos los filtros de DataTables
+    table.column(2).search(curso).draw(); // Aplicar filtro por curso
+    table.column(3).search(area).draw(); // Aplicar filtro por área
+  }
+
+  function actualizarContador() {
+    // Aquí puedes agregar la lógica para actualizar el contador si es necesario
+  }
 });

@@ -8,7 +8,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     ArrayList<Profesor> lista = (ArrayList<Profesor>) request.getAttribute("listaprofesor");
 %>
@@ -33,28 +32,26 @@
     <!-- End layout styles -->
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" />
     <!--JS para los popups-->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 <body>
 <div class="container-scroller">
     <!-- partial:../../partials/_sidebar.html -->
 
-
-
     <nav class="sidebar sidebar-offcanvas" id="sidebar" style ="background-color: #000f22;">  <!--Cambiar al color mas oscuro-->
 
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top" style ="background-color: #000f22;">
-            <h3 class="sidebar-brand brand-logo" style ="color:white; font-weight: 200px; cursor: default;">Menú</h3>
-            <h3 class="sidebar-brand brand-logo-mini" style ="color:white; font-weight: 200px; cursor: default;">M</h3>
+            <h3 class="sidebar-brand brand-logo" style ="color:white; font-weight: 200; cursor: default;">Menú</h3>
+            <h3 class="sidebar-brand brand-logo-mini" style ="color:white; font-weight: 200; cursor: default;">M</h3>
         </div>
 
 
-        <ul class="nav" style="position: fixed;">
+        <ul class="nav">
 
             <!-- Codigo para un item de la barra lateral que no tiene sublista -->
             <li class="nav-item menu-items "> <!-- la clase "active" solo se usa para la vista que está activa -->
 
-                <a class="nav-link" href="ProfesorPagPrincipal"> <!-- Cambiar href de acuerdo a lo necesario -->
+                <a class="nav-link" href="${pageContext.request.contextPath}/Admin" onclick="return CancelarPagPrincipal();"> <!-- Cambiar href de acuerdo a lo necesario -->
                     <span class="menu-icon">
                 <i class="mdi mdi-home"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
@@ -65,7 +62,7 @@
 
 
             <li class="nav-item menu-items">
-                <a class="nav-link" href="ProfesorPagPrincipal" >
+                <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Dashboard/dashboard.jsp" onclick="return CancelarDashboard();">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>
@@ -73,15 +70,15 @@
                 </a>
             </li>
             <li class="nav-item menu-items ">
-                <a class="nav-link" href="ProfesorPagPrincipal">
+                <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Serenazgo/tabla_serenazgo.jsp" onclick="return CancelarSerenazgo();">
               <span class="menu-icon">
                 <i class="mdi mdi-security"></i>
               </span>
                     <span class="menu-title" style="color: white;">Serenazgo</span>
                 </a>
             </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="ProfesorPagPrincipal">
+            <li class="nav-item menu-items active">
+                <a class="nav-link" href="${pageContext.request.contextPath}/Admin?action=tablaProfesores" onclick="return CancelarProfesores();">
               <span class="menu-icon">
                 <i class="mdi mdi-teach"></i>
               </span>
@@ -101,16 +98,16 @@
                 <div class="collapse" id="ui-basic">
                     <ul class="nav flex-column sub-menu"><!-- Colocar items de la sublista -->
 
-                        <li class="nav-item  "> <a class="nav-link" href="../Vecinos/Solicitudes_acceso/tabla_solicitudes.jsp" style="color: white;">
+                        <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Vecinos/Postulaciones_coordinacion/tabla_postulaciones.jsp" style="color: white;"onclick="return CancelarSolAcceso();">
                   <span class="menu-icon">
                     <i class="mdi mdi-account-alert"></i>
                   </span>
-                            Sol. de acceso</a></li>
-                        <li class="nav-item "> <a class="nav-link " href="../Vecinos/Postulaciones_coordinacion/tabla_postulaciones.jsp" style="color: white;">
-                    <span class="menu-icon ">
-                    <i class="mdi mdi-account-alert "></i>
+                            Solicitudes de acceso</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Vecinos/Solicitudes_acceso/tabla_solicitudes.jsp" style="color: white;"onclick="return CancelarSolCoordinacion();">
+                    <span class="menu-icon">
+                    <i class="mdi mdi-account-alert"></i>
                   </span>
-                            Sol. a coordinación</a></li>
+                            Solicitudes a coordinación</a></li>
                     </ul>
                 </div>
             </li>
@@ -127,6 +124,8 @@
             <!-- Codigo para un item de la barra lateral que SI tiene sublista FIN -->
         </ul>
     </nav>
+
+
     <!-- partial -->
 
     <div class="container-fluid page-body-wrapper">
@@ -193,8 +192,10 @@
                                         </button>
                                     </div>
                                     <div style="display: flex; align-items: center; justify-content: center;">
-                                        <a href ="profesorRegistro.jsp" style= "color: inherit; text-decoration: none;">
-                                            <button  class="btnTable" style="display: flex; align-items: center;" href ="profesorRegistro.jsp">
+                                        <a href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Profesores/profesorRegistro.jsp" style="color: inherit; text-decoration: none;">
+
+                                            <button class="btnTable" style="display: flex; align-items: center;" onclick="window.location.href = '${pageContext.request.contextPath}/vistas/jsp/ADMIN/Profesores/profesorRegistro.jsp';">
+
                                                 Agregar Docente
                                                 <a class="mdi mdi-account-plus" style="color: #ffffff; font-size: 20px; margin-left: 5px;"></a>
                                             </button>
@@ -207,40 +208,43 @@
 
                     <table id="miTabla" class="table" style="margin-bottom:15px;">
                         <thead style="background-color: #ff8e9f;"> <!--Cambiar al color de fondo de la pagina, pero un poco mas oscuro-->
-                            <tr style="text-align: center; font-weight:800;">
-                                <th style ="color: white;font-size: 17px;cursor: pointer;">Apellidos</th>
-                                <th style ="color: white;font-size: 17px;cursor: pointer;">Nombres</th>
-                                <th style ="color: white;font-size: 17px;cursor: pointer;">Curso</th>
-                                <th style="width: 20px;color: white"></th>
-                                <th style="width: 20px;color: white"></th>
-                            </tr>
+                        <tr style="text-align: center; font-weight:800;"> <!--Cambiar al color de fondo de la pagina, pero un poco mas oscuro-->
+                            <th style ="color: white;font-size: 17px;cursor: pointer;">Nombres</th>
+                            <th style ="color: white;font-size: 17px;cursor: pointer;">Apellidos</th>
+                            <th style ="color: white;font-size: 17px;cursor: pointer;">Curso</th>
+                            <th style ="color: white;font-size: 17px;cursor: pointer;">Area</th>
+                            <th style="width: 20px;color: white"></th>
+                            <th style="width: 20px;color: white"></th>
+                        </tr>
                         </thead>
                         <hr style="border: none; border-top: 3px solid black; margin-top: -55px; border-radius: 10px;">
 
                         <tbody style="text-align: center;color: black;">
 
-                            <%
-                                if (lista != null) {
-                                    for (Profesor profesor : lista) {
-                            %>
-                            <tr style="text-align: center;">
-                                <td><a><%= profesor.getApellido() %></a></td>
-                                <td><a><%= profesor.getNombre() %></a></td>
-                                <td><%= profesor.getCurso() %></td>
-                                <td><a href ="editarProfesor.html" class ="mdi mdi-lead-pencil" style ="color: #6c7293;font-size: 20px;"></a></td>
-                                <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-delete" style ="color: #6c7293;font-size: 20px;"></a></td>
-                            </tr>
+                        <%
 
-                            <%
-                                }
-                            } else {
-                            %>
-                            <tr>
-                                <td colspan="5">No hay profesores disponibles.</td>
-                            </tr>
-                            <%
-                                }
-                            %>
+                            if (lista != null) {
+                                for (Profesor profesor : lista) {
+                        %>
+                        <tr style="text-align: center;">
+                            <td><a><%= profesor.getApellido() %></a></td>
+                            <td><a><%= profesor.getNombre() %></a></td>
+                            <td><%= profesor.getCurso() %></td>
+                            <td><%= profesor.getNombreArea() %></td>
+                                <td><a href ="${pageContext.request.contextPath}/Admin?action=editarProfesor&id=<%= profesor.getIdProfesor() %>" class ="mdi mdi-lead-pencil" style ="color: #6c7293;font-size: 20px;"></a></td>
+                            <td><a href ="#" onclick="return Eliminacion(<%= profesor.getIdProfesor() %>, '<%= request.getContextPath() %>');" class ="mdi mdi-delete" style ="color: #6c7293;font-size: 20px;"></a></td>
+                        </tr>
+
+                        <%
+                            }
+                        } else {
+                        %>
+                        <tr>
+                            <td colspan="5">No hay profesores disponibles.</td>
+                        </tr>
+                        <%
+                            }
+                        %>
 
                         </tbody>
                     </table>
@@ -268,6 +272,7 @@
         <script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
         <!-- endinject -->
         <!-- Custom js for this page -->
+
         <script>
             function mostrarPopupCerrarSesion() {
                 Swal.fire({
@@ -289,6 +294,7 @@
         <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
         <script src = "${pageContext.request.contextPath}/vistas/jsp/ADMIN/Profesores/script_tabla.js"></script>
 
+        <!-- End custom js for this page -->
         <!-- End custom js for this page -->
 </body>
 </html>

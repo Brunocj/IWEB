@@ -1,0 +1,258 @@
+
+  
+  .nombreRol {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #000; /* Color del texto */
+  }
+  
+  .container {
+    margin-top: -100px;
+  }
+  
+  .custom-container  {
+    border: 1px solid rgba(0, 0, 0, 0.5); /* Color del borde con transparencia */
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: rgba(248, 249, 250, 0.5); /* Color de fondo con transparencia */
+    border-radius: 10px; /* Borde redondeado */
+    width: 600;
+  }
+  #container-image.custom-container  {
+    border: none; /* Quitamos el borde */
+    background-color: transparent; /* Hacemos el fondo transparente */
+  }
+  .event-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px; /* Borde redondeado */
+  }
+  #fechas.custom-container{
+      margin-top: 20px;
+      height: 350px;
+      color: #000;
+  }
+  #descripcion{
+    color: #000;
+  }
+  /* Tamaño de fuente más grande */
+  .custom-container p {
+    font-size: 22px; /* Cambia este valor según tu preferencia */
+  }
+  .custom-container h4{
+      font-weight: bold;
+      font-size: 27px;
+  }
+  .custom-btn {
+    font-weight: bold; /* Texto en negrita */
+    width: 300px; /* Ancho personalizado */
+    height: 50px; /* Alto personalizado */
+    font-size: 20px;
+    background-color: green;
+  }
+  
+  #btn-inscribirse{
+    
+    font-weight: bold; /* Texto en negrita */
+    width: 180px; /* Ancho personalizado */
+    height: 50px; /* Alto personalizado */
+    font-size: 17px;
+    background-color: green;
+    border-radius: 50px;
+    justify-content: right;
+    border: none;
+  }
+  .custom-container h4.center-text {
+    text-align: center; /* Centramos el texto */
+  }
+  /* Estilo para el botón fuera de los contenedores */
+  .fixed-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-weight: bold;
+  }
+  #boton{
+    justify-content: right;
+  }
+  /* Estilo para el cuadro de diálogo de confirmación */
+  .confirmation-dialog {
+    display: none;
+    position: fixed; /* Fijar la posición */
+    top: 50%; /* Centrar verticalmente */
+    left: 50%; /* Centrar horizontalmente */
+    transform: translate(-50%, -50%); /* Centrar completamente */
+    z-index: 9999; /* Establecer una alta z-index para asegurar que esté por encima de otros elementos */
+    background-color: #fff; /* Color de fondo */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 10px; /* Borde redondeado */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Sombra */
+    max-width: 345px; /* Ancho máximo */
+  }
+  .confirmation-dialog h3 {
+    color: #333;
+    margin-bottom: 15px;
+  }
+  .confirmation-dialog p {
+    color: #666;
+    margin-bottom: 20px;
+  }
+  .confirmation-dialog .btn {
+    font-weight: bold;
+    width: 150px;
+  }
+  
+
+
+
+  
+  #container-image.custom-container  {
+  position: relative; /* Añadimos posición relativa */
+  border: none; /* Quitamos el borde */
+  background-color: transparent; /* Hacemos el fondo transparente */
+  }
+  
+  #botoncarga {
+  position: absolute;
+  top: 30px; /* Ajusta la distancia desde la parte superior */
+  left: 30px; /* Ajusta la distancia desde el lado izquierdo */
+  font-weight: bold;
+  font-size: 24px;
+  background-color: rgb(160, 158, 158);
+  border-radius: 10px;
+  color: #000;
+  cursor: pointer;
+  z-index: 1; /* Añadimos z-index para que esté por encima de la imagen */
+  width: 150px;
+  }
+  #botoncarga i {
+  margin-right: 5px;
+  }
+  .options-bar {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin-top: 110px;
+  }
+  .option {
+    cursor: pointer;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 1em; /* Tamaño de fuente relativo */
+    margin: 0 5px; /* Ajuste el margen horizontal */
+    transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  .option:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+  .verde {
+    background-color: green;
+    color: white;
+    margin-right: 10em; /* Ajuste el margen derecho para el botón verde */
+  }
+  .azul {
+    background-color: #3498DB;
+    color: white;
+  }
+  .rojo {
+    background-color: #E74C3C;
+    color: white;
+    margin-left: 10em; /* Ajuste el margen izquierdo para el botón rojo */
+  }
+     
+  .fixed-buttons {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px; /* Espacio entre los botones */
+  }
+  
+  #success {
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px  ;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  #danger {
+    background-color: #E74C3C;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+  }   
+  #success:hover{
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+  #danger:hover {
+    background-color: #E74C3C;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilos para el enlace */
+  #profesores-link a {
+      text-decoration: none; /* Elimina el subrayado del enlace */
+      color: inherit; /* Usa el color del texto heredado */
+  }
+  
+  /* Estilos para el enlace cuando se hace clic */
+  #profesores-link a:active {
+      color: inherit; /* Mantén el color del texto cuando se hace clic */
+  }
+  .vacantes p{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+  }
+  textarea {
+    font-size: 16px;
+    padding: 5px;
+    width: 100%; /* El textarea ocupa todo el ancho disponible */
+    max-width: 100%; /* Limita el ancho al 100% del contenedor padre */
+    box-sizing: border-box;
+    display: block;
+    word-wrap: break-word;
+    resize: none; /* Deshabilita el redimensionamiento manual */
+    overflow: hidden; /* Oculta el scroll */
+}
+
+.hidden {
+  display: none;
+}
+#lista-materiales {
+  list-style-type: disc;
+  padding-left: 20px; /* Ensure list indentation */
+}
+.material-item {
+  display: list-item; /* Ensure list-item display to show bullets */
+  list-style-position: inside; /* Ensures bullets are inside the list item */
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.remove-btn {
+  margin-left: 10px;
+  color: red;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 16px;
+}

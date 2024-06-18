@@ -1,0 +1,159 @@
+.dataTables_wrapper .dataTables_filter input {
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  padding: 4px;
+  background-color: white;
+  margin-left: 3px;
+  margin-bottom: 14px;
+  border: 2px solid black;
+  border-radius: 6px;
+}
+.container-tabla {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  width: 100%;
+  margin: 0 auto; /* Centra horizontalmente */
+}
+
+.container1 {
+  background-color: #fffff7;
+  width: 80%;
+  justify-content: center;
+  display: flex;
+}
+
+.main-panel {
+  background-color: #fffff7;
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  width: 50%;
+  margin: 0 auto; /* Centra horizontalmente */
+}
+
+@media (min-width: 768px) {
+  .container-tabla {
+    display: table;
+  }
+}
+.tabla-title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.img-table {
+  margin-top: 10px;
+  align-items: center;
+}
+.botones-container {
+  display: flex;
+  align-items: center;
+}
+.dataTables_info {
+  color: black;
+}
+#miTabla_filter {
+  color: black;
+  float: right;
+}
+.btnTable {
+  border-radius: 5px;
+  background-color: #000f22;
+  color: white;
+  padding: 5px;
+  height: 40px;
+  font-size: 15px;
+  border: transparent;
+  align-self: center;
+}
+#filtroEstado {
+  align-self: center;
+  margin-top: 0px !important;
+}
+#miTabla_paginate {
+  float: right;
+  display: flex;
+  align-items: center;
+  color: inherit; /* Mantiene el color del texto heredado */
+  text-decoration: none; /* Elimina la subrayado por defecto */
+  cursor: default; /* Mantiene el cursor predeterminado */
+}
+.paginate_button {
+  flex-direction: row;
+  padding: 8px;
+  background: #000f22;
+  margin-right: 10px;
+  margin-left: 10px;
+  border-radius: 5px;
+  color: inherit; /* Mantiene el color del texto heredado */
+  text-decoration: none; /* Elimina la subrayado por defecto */
+  cursor: default; /* Mantiene el cursor predeterminado */
+}
+
+.paginate_button.current {
+  background: #193255;
+}
+
+#miTabla_paginate:hover {
+  color: inherit; /* Mantiene el color del texto al pasar el mouse */
+}
+.paginate_button:hover {
+  cursor: pointer;
+  background: #193255;
+  color: white;
+  text-decoration: none;
+}
+.paginate_button.disabled:hover {
+  cursor: default;
+  background: #000f22;
+}
+.sorting::after,
+.sorting::before {
+  cursor: pointer;
+}
+
+#agregarPersonal {
+  border-radius: 5px;
+  background-color: #000f22;
+
+  color: white;
+  padding: 5px;
+  height: 40px;
+  font-size: 15px;
+  border: transparent;
+  align-self: center;
+}
+
+#contadorTurnos {
+  border: 1px solid #ccc; /* Borde sólido de 1px color gris claro */
+  border-radius: 6px; /* Bordes redondeados */
+  padding: 10px; /* Relleno interno de 10px */
+  box-shadow: 0px 0px 5px rgba(218, 15, 15, 0.1); /* Sombra ligera */
+  width: fit-content; /* Ancho ajustado al contenido */
+  margin-top: 5px; /* Margen superior de 20px */
+  background-color: #000f22;
+  color: white;
+}
+
+#filtroEstado:hover {
+  cursor: pointer;
+}
+
+.main-panel {
+  background-color: #fffff7;
+}
+
+.btnTable:hover {
+  background-color: #193255; /* Cambiar al color rojo deseado */
+  color: white; /* Cambiar el color del texto a blanco o cualquier otro color que contraste */
+}
+
+#agregarPersonal:hover {
+  background-color: #193255; /* Cambiar al color rojo deseado */
+  color: white; /* Cambiar el color del texto a blanco o cualquier otro color que contraste */
+}
+
+.sidebar-icon-only .sidebar .nav .nav-item.hover-open .nav-link .menu-title.vecinos,
+.sidebar-icon-only .sidebar .nav .nav-item.hover-open .collapse,
+.sidebar-icon-only .sidebar .nav .nav-item.hover-open .collapsing {
+  width: 250px !important;
+}

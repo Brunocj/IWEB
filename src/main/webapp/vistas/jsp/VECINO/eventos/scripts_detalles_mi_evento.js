@@ -9,13 +9,15 @@ function AnularPopUp() {
     cancelButtonText: 'Cancelar'
 
 }).then((result) => {
-    if (result.isConfirmed) {
-        // Aquí iría el código para enviar la solicitud
-        Swal.fire({
-        title: 'Tu inscripción ha sido anulada correctamente.',
-        icon: 'success'
-    });
-} 
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: "¡Inscripción Anulada!",
+                text: "Se ha anulado su inscripción con éxito",
+                icon: "success",
+            }).then(() => {
+                document.querySelector("form").submit();
+            });
+        }
 });
 }
 
