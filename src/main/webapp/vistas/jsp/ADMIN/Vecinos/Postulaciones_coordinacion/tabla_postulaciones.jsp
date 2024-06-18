@@ -217,7 +217,7 @@
                                 <td><a><%=usuario.getApellido() %></a></td>
                                 <td><a><%=usuario.getNombre() %></a></td>
                                 <td><a><%=usuario.getArea() %></a></td>
-                                <td><a href ="detalles_postulaciones.jsp" class ="mdi mdi-account-details"  style ="color: #6c7293; font-size: 20px;"></a>
+                                <td><a href="<%=request.getContextPath()%>/Admin?action=solicitudCoordi&id=<%=usuario.getId()%>" class="mdi mdi-account-details" style="color: #6c7293; font-size: 20px;"></a>
                             </tr>
                             <%
                                 }
