@@ -3,6 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <% Usuario usuario=(Usuario) request.getAttribute("usuarioVer");%>
+<% int idUser =(int) request.getAttribute("id");%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -169,7 +170,10 @@
                         <!-- Icon -->
 
                         <!-- Login Form -->
-                        <form>
+                        <form id="miFormulario" action="${pageContext.request.contextPath}/Admin?action=opcionAcceso" method="post">
+                            <input type="hidden" name="action" value="opcionAcceso">
+                            <input type="hidden" id="idUser" name="idUser" value="<%=idUser%>">
+                            <input type="hidden" id="opcionSeleccionada" name="opcionSeleccionada" value="">
                             <div class="inputs">
                                 <label for="nombre" style="font-size: 12px; color: gray;">Nombres:</label>
                                 <input type="text" id="nombre" value="<%=usuario.getNombre()%>" disabled style="margin-bottom: 5px; background-color: rgb(241, 241, 241);">
@@ -189,8 +193,6 @@
                                 <label for="telefono" style="font-size: 12px; color: gray;">Número de Teléfono</label>
                                 <input type="text" id="telefono" value="<%=usuario.getNumContacto()%>" style="margin-bottom: 5px;background-color: rgb(241, 241, 241);">
 
-                                <label for="telefono" style="font-size: 12px; color: gray;">Cantidad de falsas alarmas</label>
-                                <input type="text" id="falsasAlarmas" value="<%=usuario.getFalsasAlarmas()%>" style="margin-bottom: 5px;background-color: rgb(241, 241, 241);">
 
                             </div>
 
@@ -198,14 +200,15 @@
                             <hr style="margin-top: 60px;margin-bottom: 0px; ">
 
                             <label style="color: black; float:left; cursor: pointer;">
-                                <input type="radio" name="opcion" style="margin-top: 15px;cursor: pointer;" onclick="showApproveContent()"> Aprobar
+                                <input type="radio" name="opcion" value="aprobar" style="margin-top: 15px;cursor: pointer;" onclick="showApproveContent()"> Aprobar
                             </label>
 
                             <label style="color: black; float:left; margin-left: 20px; cursor: pointer;">
-                                <input type="radio" name="opcion" style="margin-left: 5px;margin-top: 15px;cursor: pointer;" onclick="showDenyContent()"> Denegar
+                                <input type="radio" name="opcion" value="denegar" style="margin-left: 5px;margin-top: 15px;cursor: pointer;" onclick="showDenyContent()"> Denegar
                             </label>
                             <br>
                             <br>
+
 
                             <a class="mdi mdi-alert-box" style="color: rgb(182, 1, 1); font-size: 20px; vertical-align: middle; float:left;"></a>
 
@@ -260,6 +263,7 @@
         /* Funciones para que el texto cambie de acuerdo a lo indicado*/
 
         function showApproveContent() {
+            document.getElementById("opcionSeleccionada").value = "aprobar";
             var titulo = document.getElementById("titulo");
             var cuerpo = document.getElementById("cuerpo");
 
@@ -275,6 +279,7 @@
         }
 
         function showDenyContent() {
+            document.getElementById("opcionSeleccionada").value = "denegar";
             var titulo = document.getElementById("titulo");
             var cuerpo = document.getElementById("cuerpo");
 
@@ -335,30 +340,53 @@
         }
 
         function Guardar() {
+            // Obtener el valor de la opción seleccionada del campo oculto
+            var opcionSeleccionada = document.getElementById("opcionSeleccionada").value;
+            console.log("Opción seleccionada:", opcionSeleccionada);
+            var id = document.getElementById("idUser").value;
+            // Verificar si se ha seleccionado alguna opción
+            if (!opcionSeleccionada) {
+                // Mostrar un mensaje de error si no se ha seleccionado ninguna opción
+                console.log("Error: No se ha seleccionado ninguna opción.");
+                Swal.fire({
+                    title: "Error",
+                    text: "Por favor, selecciona una opción antes de guardar",
+                    icon: "error",
+                    confirmButtonColor: "#00913f",
+                });
+                return false; // Prevenir el envío del formulario
+            }
+
+            // Mostrar el popup de confirmación
+            console.log("Mostrando popup de confirmación...");
             Swal.fire({
-                title: "Estás seguro?",
+                title: "¿Estás seguro?",
                 text: "El proceso no podrá ser reversible",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#00913f",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Si, guardar y enviar",
+                confirmButtonText: "Sí, guardar y enviar",
                 cancelButtonText: "Cancelar",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Swal.fire({
-                        title: "Guardado y enviado!",
-                        text: "Se ha guardado con éxito",
-                        icon: "success"
-                    }).then(() => {
-                        window.location.href = "${pageContext.request.contextPath}/Admin?action=tablaAcceso";
-                    });
+                    // Enviar el formulario
+                    var idInput = document.createElement("input");
+                    idInput.type = "hidden";
+                    idInput.name = "id";
+                    idInput.value = id;
+                    document.getElementById("miFormulario").appendChild(idInput);
+                    console.log("Enviando formulario...");
+                    document.getElementById("miFormulario").submit();
+                } else {
+                    console.log("Operación cancelada.");
                 }
             });
 
-            // Evitar que el formulario se envíe automáticamente
+            // Prevenir el envío automático del formulario
             return false;
         }
+
 
 
     </script>
