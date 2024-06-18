@@ -138,20 +138,24 @@
                 </button>
 
                 <ul class="navbar-nav navbar-nav-right">
-
-
                     <li class="nav-item dropdown">
                         <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                             <div class="navbar-profile">
                                 <div class="Header-nav-item">
-                                    <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default; text-align: right;">ADMIN</h2>
-                                    <h5 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 15px; font-weight:500; cursor: default;">Administrador de San Miguel</h5>
+                                    <h2 class="mb-0 d-none d-sm-block navbar-profile-name"
+                                        style="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default; text-align: right;">
+                                        ADMIN
+                                    </h2>
+                                    <h5 class="mb-0 d-none d-sm-block navbar-profile-name"
+                                        style="margin-right: 10px; font-size: 15px; font-weight:500; cursor: default;">
+                                        Administrador de San Miguel
+                                    </h5>
                                 </div>
-                                <img class="img-xs rounded-circle" src="../../LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
-
+                                <img class="img-xs rounded-circle" src="<%=request.getContextPath()%>/vistas/jsp/LogoSM.png" alt=""
+                                     style="height: 50px; width: 100%;">
+                                <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
                             </div>
                         </a>
-
                     </li>
                 </ul>
                 <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">

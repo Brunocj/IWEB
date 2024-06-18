@@ -64,7 +64,7 @@
 
 
             <li class="nav-item menu-items">
-                <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=dashboard">
+                <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Dashboard/dashboard.jsp" onclick="return CancelarDashboard();">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>

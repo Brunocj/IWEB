@@ -54,11 +54,11 @@
           <span class="menu-title" style="color: white;">Página principal</span>
         </a>
       </li>
-      <li class="nav-item menu-items ${"dashboard".equals(request.getParameter("action")) ? "active" : ""}">
-        <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=dashboard">
-        <span class="menu-icon">
-            <i class="mdi mdi-chart-bar"></i>
-        </span>
+      <li class="nav-item menu-items">
+        <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Dashboard/dashboard.jsp" onclick="return CancelarDashboard();">
+              <span class="menu-icon">
+                <i class="mdi mdi-chart-bar"></i>
+              </span>
           <span class="menu-title" style="color: white;">Dashboard</span>
         </a>
       </li>
