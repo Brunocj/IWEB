@@ -3,9 +3,11 @@ package org.example.webappsm.Servlet.serenazgo;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.example.webappsm.model.beans.Incidencia;
 import org.example.webappsm.model.beans.Serenazgo;
 import org.example.webappsm.model.beans.Usuario;
 import org.example.webappsm.model.daos.DashboardDao;
+import org.example.webappsm.model.daos.IncidenciasDao;
 import org.example.webappsm.model.daos.SerenazgoDao;
 import org.example.webappsm.model.daos.VecinosDao;
 
@@ -86,6 +88,36 @@ public class SerenazgoServlet extends HttpServlet {
                 request.setAttribute("listaVecinos",listaVecinos);
 
                 vista = "vistas/jsp/SERENAZGO/ListaVecinos/tabla_vecinos.jsp";
+
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+
+            case "listaIncidenciasPasadas":
+
+                IncidenciasDao incidenciasDao = new IncidenciasDao();
+
+                ArrayList<Incidencia> listaIncidenciasPasadas = incidenciasDao.listarIncidenciasPasadas();
+
+                request.setAttribute("listaIncidenciasPas",listaIncidenciasPasadas);
+
+                vista = "vistas/jsp/SERENAZGO/ListaPasadas/tabla_pasadas.jsp";
+
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+
+            case "mostrarDescripcion":
+
+                IncidenciasDao daoMostrarDescripcion = new IncidenciasDao();
+                String idIncidenciaString = request.getParameter("idIncidencia");
+                int idIncidencia = Integer.parseInt(idIncidenciaString);
+
+                Incidencia incidencia = daoMostrarDescripcion.descripcion(idIncidencia);
+
+                request.setAttribute("incidencia",incidencia);
+
+                vista = "vistas/jsp/SERENAZGO/ListaPasadas/infoDescripcionPasada.jsp";
 
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);

@@ -19,4 +19,5 @@ public class Incidencia {
     private int idRegistro;
     private String estado;
     private String clasificacion;
+    private String descripcion;
 }

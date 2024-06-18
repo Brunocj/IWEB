@@ -58,7 +58,7 @@ $(document).ready(function () {
     language: {
       emptyTable: "No hay registros disponibles",
       zeroRecords: "No se encontraron registros coincidentes",
-      infoEmpty: "Aún no se ingresan entradas a las tabla",
+      infoEmpty: "Aún no se ingresan entradas a la tabla",
       paginate: {
         first: "Primero",
         last: "Último",
@@ -69,27 +69,14 @@ $(document).ready(function () {
       search: "Buscar:", // Cambia "Search" por "Buscar"
     },
   });
+
   $("#filtroEstado").on("change", function () {
     var estado = $(this).val();
-    table.column(2).search(estado).draw();
+    table.column(1).search(estado).draw();  // Filtra la columna 2 (índice 1) por clasificación
   });
+
   $("#limpiarFiltros").on("click", function () {
     $("#filtroEstado").val("");
     table.search("").columns().search("").draw();
-  });
-
-  // Evento de cambio de filtro de turno
-  $("#filtroEstado").on("change", function () {
-    var estado = $(this).val();
-    table.column(2).search(estado).draw();
-  });
-
-  // Evento de limpiar filtros
-  $("#limpiarFiltros").on("click", function () {
-    $("#filtroEstado").val("");
-    table.search("").columns().search("").draw();
-
-    // Actualizar el contador después de limpiar los filtros
-    actualizarContador();
   });
 });
