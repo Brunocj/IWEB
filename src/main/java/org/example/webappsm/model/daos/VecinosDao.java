@@ -14,7 +14,7 @@ public class VecinosDao extends BaseDao{
         String sql = "SELECT u.idUsuario, u.nombres, u.apellidos, e.nombreEstado AS estado " +
                 "FROM Usuario u " +
                 "JOIN Estado e ON u.Estado_idEstado = e.idEstado " +
-                "WHERE e.nombreEstado = 'pendiente'";
+                "WHERE u.Estado_idEstado = 1";
 
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
@@ -106,6 +106,52 @@ public class VecinosDao extends BaseDao{
             throw new RuntimeException(e);
         }
         return usuario;
+    }
+    public void  eliminarUsuarioPorId(int idUsuario) {
+
+        try (Connection conn = this.getConnection()) {
+            //Para este caso particular de eliminar empleados, al existir la posibilidad de que algunos empleados
+            //sean manager, debemos "quitarlos" de ese cargo antes de eliminarlos de la tabla empleados.
+            //Es por eso que primero se actualiza todos los empleados que hayan tenido de manager al empleado que
+            //será eliminado, mostrarán el valor de "Sin Jefe".
+            String updIncidencias = "DELETE FROM incidencia WHERE idUsuario = ?";
+            try (PreparedStatement pstmtUpdEmployees = conn.prepareStatement(updIncidencias);) {
+                pstmtUpdEmployees.setInt(1,idUsuario );
+                pstmtUpdEmployees.executeUpdate();
+            }
+            // Ahora, quitamos el valor de manager para el departamento al cual pertenecía
+            String updSol = "DELETE FROM solicitudcoordinador WHERE idUsuario = ?";
+            try (PreparedStatement pstmtUpdDepartments = conn.prepareStatement(updSol);) {
+                pstmtUpdDepartments.setInt(1, idUsuario);
+                pstmtUpdDepartments.executeUpdate();
+            }
+
+            String sql = "DELETE FROM Usuario WHERE idUsuario = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql);) {
+
+                    pstmt.setInt(1, idUsuario);
+                    pstmt.executeUpdate();
+            }
+        }catch( SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    public void editarEstadoAprobado(int idUsuario){
+        int idAprobado = 2;
+        String query = "UPDATE Usuario AS U " +
+                "SET U.Estado_idEstado = ? " +
+                "WHERE U.idUsuario = ?";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)){
+            pstmt.setInt(1, idAprobado);
+            pstmt.setInt(2, idUsuario);
+
+
+            pstmt.executeUpdate();
+        }catch( SQLException e){
+            throw new RuntimeException(e);
+        }
     }
     public void aprobarSol(int idUsuario){
 
