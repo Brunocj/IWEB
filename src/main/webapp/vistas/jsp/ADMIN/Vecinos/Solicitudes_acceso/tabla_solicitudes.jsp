@@ -191,26 +191,27 @@
                         </thead>
                         <hr style="border: none; border-top: 3px solid black; margin-top: -15px; border-radius: 10px;">
                         <tbody style="text-align: center;color: black;">
-                            <%
-                                if (lista != null) {
-                                    for (Usuario usuario : lista) {
-                            %>
-                            <tr style="text-align: center;">
-                                <td><a><%=usuario.getApellido() %></a></td>
-                                <td><a><%=usuario.getNombre() %></a></td>
-                                <td><a href ="detalles_solicitudes.jsp" class ="mdi mdi-account-details"  style ="color: #6c7293; font-size: 20px;"></a>
-                                </td>
-                            </tr>
-                            <%
-                                }
-                            } else {
-                            %>
-                            <tr>
-                                <td colspan="5">No hay Solicitudes pendientes.</td>
-                            </tr>
-                            <%
-                                }
-                            %>
+                        <%
+                            if (lista != null) {
+                                for (Usuario usuario : lista) {
+                        %>
+                        <tr style="text-align: center;">
+                            <td><a><%=usuario.getApellido() %></a></td>
+                            <td><a><%=usuario.getNombre() %></a></td>
+                            <td><a href="<%=request.getContextPath()%>/Admin?action=solicitudAcceso&id=<%=usuario.getId()%>" class="mdi mdi-account-details" style="color: #6c7293; font-size: 20px;"></a>
+
+                            </td>
+                        </tr>
+                        <%
+                            }
+                        } else {
+                        %>
+                        <tr>
+                            <td colspan="5">No hay Solicitudes pendientes.</td>
+                        </tr>
+                        <%
+                            }
+                        %>
                         </tbody>
                     </table>
 

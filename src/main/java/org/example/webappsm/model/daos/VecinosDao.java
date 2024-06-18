@@ -19,7 +19,7 @@ public class VecinosDao {
         //Parametros de conexion a que base de datos me quiero unir//
         String url ="jdbc:mysql://localhost:3306/sanmiguel";
         String username = "root";
-        String password = "root";
+        String password = "rootroot";
         String sql = "SELECT u.idUsuario, u.nombres, u.apellidos, e.nombreEstado AS estado " +
                 "FROM Usuario u " +
                 "JOIN Estado e ON u.Estado_idEstado = e.idEstado " +
@@ -60,7 +60,7 @@ public class VecinosDao {
         //Parametros de conexion a que base de datos me quiero unir//
         String url ="jdbc:mysql://localhost:3306/sanmiguel";
         String username = "root";
-        String password = "root";
+        String password = "rootroot";
         String sql = "SELECT " +
                 "u.idUsuario," +
                 "u.nombres, " +
@@ -106,7 +106,7 @@ public class VecinosDao {
 
         String url ="jdbc:mysql://localhost:3306/sanmiguel";
         String username = "root";
-        String password = "root";
+        String password = "rootroot";
 
     }
 
@@ -120,7 +120,7 @@ public class VecinosDao {
 
         String url = "jdbc:mysql://localhost:3306/sanmiguel";
         String username = "root";
-        String password = "root";
+        String password = "rootroot";
 
         String sql = "SELECT * FROM Usuario WHERE idUsuario = ?";
 
@@ -131,13 +131,15 @@ public class VecinosDao {
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     usuario = new Usuario();
-                    usuario .setNombre(rs.getString("nombres"));
-                    usuario .setApellido(rs.getString("apellidos"));
-                    usuario .setDocumento(rs.getString("nroDocumento"));
-                    usuario .setDireccion(rs.getString("direccion"));
-                    usuario .setDistrito(rs.getString("distrito"));
-                    usuario .setUrbanizacion(rs.getString(8));
-                    usuario .setCorreoE(rs.getString("correo"));
+                    usuario.setNombre(rs.getString("nombres"));
+                    usuario.setApellido(rs.getString("apellidos"));
+                    usuario.setDocumento(rs.getString("nroDocumento"));
+                    usuario.setDireccion(rs.getString("direccion"));
+                    usuario.setNumContacto(rs.getString("numeroContacto"));
+                    usuario.setFalsasAlarmas(rs.getInt("falsasAlarmas"));
+                    usuario.setDistrito(rs.getString("distrito"));
+                    usuario.setUrbanizacion(rs.getString("urbanización"));
+                    usuario.setCorreoE(rs.getString("correo"));
 
                 }
             }
@@ -156,7 +158,7 @@ public class VecinosDao {
 
         String url ="jdbc:mysql://localhost:3306/sanmiguel";
         String username = "root";
-        String password = "root";
+        String password = "rootroot";
         String query = "DELETE FROM Usuario WHERE idUsuario = ?";
         try (Connection conn= DriverManager.getConnection(url, username, password);
              PreparedStatement pstmt = conn.prepareStatement(query)){
@@ -178,7 +180,7 @@ public class VecinosDao {
 
         String url ="jdbc:mysql://localhost:3306/sanmiguel";
         String username = "root";
-        String password = "root";
+        String password = "rootroot";
 
 
         if (opcion_boton == 1){

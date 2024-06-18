@@ -181,11 +181,12 @@ public class AdminServlet extends HttpServlet {
                 VecinosDao vecinosDao2 = new VecinosDao();
 
                 Usuario usuario = vecinosDao2.obtenerUsuarioPorId(idUsuario);
+
                 request.setAttribute("usuarioVer", usuario);
 
                 vista = "vistas/jsp/ADMIN/Vecinos/Solicitudes_acceso/detalles_solicitudes.jsp";
-                RequestDispatcher rs = request.getRequestDispatcher(vista);
-                rs.forward(request, response);
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
                 break;
 
             case "deleteVecino":
