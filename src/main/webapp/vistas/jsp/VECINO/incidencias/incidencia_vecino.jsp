@@ -1,4 +1,6 @@
-<%--
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="org.example.webappsm.model.beans.Incidencia" %><%--
   Created by IntelliJ IDEA.
   User: bruno
   Date: 28/05/2024
@@ -6,6 +8,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    int idProvisional = 10;
+    ArrayList<Incidencia> listaIncidencias = (ArrayList<Incidencia>) request.getAttribute("listaincidencias");
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,19 +22,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Solicitud</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="styles_incidencia.css">
-    <link rel="stylesheet" href="../../../../assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../../../../assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/VECINO/incidencias/styles_incidencia.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/css/vendor.bundle.base.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End Plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="../../../../assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
 
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../LogoSM.png" />
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" />
     <!--JS para los popups-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -126,7 +134,7 @@
                                     <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default;">Manuel Yarleque</h2>
                                     <h5 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 15px; font-weight:500; cursor: default;">Vecino sanmiguelino</h5>
                                 </div>
-                                <img class="img-xs rounded-circle" src="../LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
+                                <img class="img-xs rounded-circle" src="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
 
                             </div>
                         </a>
@@ -163,72 +171,27 @@
                     </tr>
                     </thead>
                     <tbody style="text-align: center; color: black;">
+                    <%
+                        if (listaIncidencias == null || listaIncidencias.isEmpty()) {
+                    %>
+                    <p>No hay incidencias registradas</p>
+                    <%
+                    } else {
+                            for(Incidencia incidencia : listaIncidencias){
+                                String fechaFormateada = sdf.format(incidencia.getFechaIncidencia());
+
+                    %>
                     <tr style="text-align: center;">
-                        <td>Asalto a la altura de la puerta Riva Agüero de la PUCP</a></td>
-                        <td>12/04/2024</a></td>
-                        <td>Resuelto</td>
+                        <td><%=incidencia.getNombre()%></td>
+                        <td><%=fechaFormateada %></td>
+                        <td><%=incidencia.getEstado()%></td>
                         <td><a href="incidencia_info.jsp"><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
                     </tr>
-                    <tr>
-                        <td>Robo en el parque Juan Pablo II</a></td>
-                        <td>13/03/2024</a></td>
-                        <td>Pendiente</td>
-                        <td><a href="incidencia_info.jsp"><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
-                    </tr>
-                    <tr>
-                        <td>Escape de los leones del Parque de las Leyendas</a></td>
-                        <td>11/01/2024</a></td>
-                        <td>Resuelto</td>
-                        <td><a href="incidencia_info.jsp"><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
-                    </tr>
-                    <tr>
-                        <td>Lab2 de IWEB y GTICS (los patos abusaron de los alumnos)</a></td>
-                        <td>10/04/2024</a></td>
-                        <td>Resuelto</td>
-                        <td><a href="incidencia_info.jsp"><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
-                    </tr>
-                    <tr>
-                        <td>Choque en el cruce de las avenidas Universitaria con La Marina</a></td>
-                        <td>22/04/2024</a></td>
-                        <td>Pendiente</td>
-                        <td><a href="incidencia_info.jsp"><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
-                    </tr>
-                    <tr>
-                        <td>Lab2 de IWEB y GTICS (los patos abusaron de los alumnos)</a></td>
-                        <td>10/04/2024</a></td>
-                        <td>Resuelto</td>
-                        <td><a href="incidencia_info.jsp"><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
-                    </tr>
-                    <tr>
-                        <td>Lab2 de IWEB y GTICS (los patos abusaron de los alumnos)</a></td>
-                        <td>10/04/2024</a></td>
-                        <td>Resuelto</td>
-                        <td><a href="incidencia_info.jsp"><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
-                    </tr>
-                    <tr>
-                        <td>Lab2 de IWEB y GTICS (los patos abusaron de los alumnos)</a></td>
-                        <td>10/04/2024</a></td>
-                        <td>Resuelto</td>
-                        <td><a href="incidencia_info.jsp"><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
-                    </tr>
-                    <tr>
-                        <td>Lab2 de IWEB y GTICS (los patos abusaron de los alumnos)</a></td>
-                        <td>10/04/2024</a></td>
-                        <td>Resuelto</td>
-                        <td><a href="incidencia_info.jsp"><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
-                    </tr>
-                    <tr>
-                        <td>Lab2 de IWEB y GTICS (los patos abusaron de los alumnos)</td>
-                        <td>10/04/2024</td>
-                        <td>Resuelto</td>
-                        <td><a href="incidencia_info.jsp"><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
-                    </tr>
-                    <tr>
-                        <td>Lab2 de IWEB y GTICS (los patos abusaron de los alumnos)</a></td>
-                        <td>10/04/2024</a></td>
-                        <td>Resuelto</td>
-                        <td><a href="incidencia_info.jsp"><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
-                    </tr>
+                    <%
+                            }
+                        }
+                    %>
+
                     </tbody>
                 </table>
             </div>
@@ -242,16 +205,16 @@
 </div>
 <!-- container-scroller -->
 <!-- plugins:js -->
-<script src="../../../../assets/vendors/js/vendor.bundle.base.js"></script>
+<script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
 <!-- endinject -->
 <!-- Plugin js for this page -->
 <!-- End plugin js for this page -->
 <!-- inject:js -->
-<script src="../../../../assets/js/off-canvas.js"></script>
-<script src="../../../../assets/js/hoverable-collapse.js"></script>
-<script src="../../../../assets/js/misc.js"></script>
-<script src="../../../../assets/js/settings.js"></script>
-<script src="../../../../assets/js/todolist.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
 <!-- endinject -->
 <!-- Custom js for this page -->
 <script>
@@ -275,6 +238,6 @@
 <!-- End custom js for this page -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<script src ="script_incidencia.js"></script>
+<script src ="${pageContext.request.contextPath}/vistas/jsp/VECINO/incidencias/script_incidencia.js"></script>
 </body>
 </html>

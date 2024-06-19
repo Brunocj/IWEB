@@ -6,6 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+int idProvisional = 12;
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,18 +18,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Página Principal Vecino</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="../PRINCIPAL/styles_pag_principales.css">
-    <link rel="stylesheet" href="../../../assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../../../assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/styles_pag_principales.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/css/vendor.bundle.base.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End Plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="../../../assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../LogoSM.png" />
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" />
     <!--JS para los popups-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -42,9 +46,8 @@
 
         <ul class="nav" style="position: fixed">
             <!-- Codigo para un item de la barra lateral que no tiene sublista -->
-            <li class="nav-item menu-items active"> <!-- la clase "active" solo se usa para la vista que está activa -->
-
-                <a class="nav-link" href="#"> <!-- Cambiar href de acuerdo a lo necesario -->
+            <li class="nav-item menu-items ${"pagPrincipal".equals(request.getParameter("action")) ? "active" : ""}">
+                <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=pagPrincipal"> <!-- Cambiar href de acuerdo a lo necesario -->
                     <span class="menu-icon">
                 <i class="mdi mdi-home"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
@@ -53,8 +56,8 @@
             </li>
             <!-- Codigo para un item de la barra lateral que no tiene sublista FIN-->
             <!-- Codigo para un item de la barra lateral que no tiene sublista -->
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="Miperfil.jsp">
+            <li class="nav-item menu-items ${"miPerfil".equals(request.getParameter("action")) ? "active" : ""}">
+                <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=miPerfil&id=<%=idProvisional%>">
               <span class="menu-icon">
                 <i class="mdi mdi-account"></i>
               </span>
@@ -69,24 +72,24 @@
                     <span class="menu-title" style="color: white;">Correo</span>
                 </a>
             </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="solicitud/solicitarCoordinador.jsp">
+            <li class="nav-item menu-items ${"solCoordinador".equals(request.getParameter("action")) ? "active" : ""}">
+                <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=solCoordinador">
               <span class="menu-icon">
                 <i class="mdi mdi-key-change"></i>
               </span>
                     <span class="menu-title" style="color: white;">Sol. coordinador(a)</span>
                 </a>
             </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="eventos/eventos.jsp"> <!-- Cambiar href de acuerdo a lo necesario -->
+            <li class="nav-item menu-items ${"eventos".equals(request.getParameter("action")) ? "active" : ""}">
+                <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=eventos"><!-- Cambiar href de acuerdo a lo necesario -->
                     <span class="menu-icon">
                 <i class="mdi mdi-earth"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
                     <span class="menu-title" style="color: white;">Eventos</span>
                 </a>
             </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="incidencias/incidencia_vecino.jsp"> <!-- Cambiar href de acuerdo a lo necesario -->
+            <li class="nav-item menu-items ${"incidencias".equals(request.getParameter("action")) ? "active" : ""}">
+                <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=incidencias"> <!-- Cambiar href de acuerdo a lo necesario -->
                     <span class="menu-icon">
                 <i class="mdi mdi-alert"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
@@ -102,6 +105,7 @@
                 </a>
             </li>
 
+            <!-- Codigo para un item de la barra lateral que SI tiene sublista FIN -->
             <!-- Codigo para un item de la barra lateral que SI tiene sublista FIN -->
         </ul>
     </nav>
@@ -125,7 +129,7 @@
                                     <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default;">Manuel Yarlequé</h2>
                                     <h5 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 15px; font-weight:500; cursor: default;">Vecino sanmiguelino</h5>
                                 </div>
-                                <img class="img-xs rounded-circle" src="../LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
+                                <img class="img-xs rounded-circle" src="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
 
                             </div>
                         </a>
@@ -147,7 +151,7 @@
                     <div class="row-1">
                         <div class="card-1" style ="color:black;">
                             <div class="font">
-                                <img src="../PRINCIPAL/adminn.jpg" alt="SanMiguel">
+                                <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/adminn.jpg" alt="SanMiguel">
                                 <div class="card-content">
                                     <h3>¿Cuál es tu función como vecino?</h3>
                                     <p>Tu función como vecino se basa en brindar todo tu apoyo para mantener un ambiente armonioso y agradable en nuestro distrito. </p>
@@ -158,22 +162,22 @@
                     <div class="row-2">
                         <div class="card-ma" style ="color:black;" >
                             <div class="font">
-                                <img src="../PRINCIPAL/medio_ambiente_vecino.png" alt="Cuidado Ambientes" style= "max-width: 100%; max-height: 100px; margin-top: 10px;">
+                                <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/medio_ambiente_vecino.png" alt="Cuidado Ambientes" style= "max-width: 100%; max-height: 100px; margin-top: 10px;">
                                 <span style="font-size: 16px; font-weight: bold;">¡Cuidemos nuestras áreas verdes para una mejor imagen de nuestra comunidad!</span>
                             </div>
                             <div class="back" style="background-color: white; padding: 10px;">
                                 <span style="font-size: 16px;"> Ayúdanos a mantener nuestros distintos ambientes libres de basura.</span>
-                                <img src="../PRINCIPAL/no_botar_basura.png" alt="No Botar Basura" style= "max-width: 100%; max-height: 100px; margin-top: 10px;">
+                                <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/no_botar_basura.png" alt="No Botar Basura" style= "max-width: 100%; max-height: 100px; margin-top: 10px;">
                             </div>
                         </div>
                         <div class="card-mv" style ="color:black;">
                             <div class="font">
-                                <img src="../PRINCIPAL/unidad_vecinal_1.png" alt="Vecinos">
+                                <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/unidad_vecinal_1.png" alt="Vecinos">
                                 <span style="font-size: 16px; font-weight: bold;">¡Consolidemos nuestra unión como distrito apoyándonos unos a otros!</span>
                             </div>
                             <div class="back" style="background-color: white; padding: 10px;">
                                 <span style="font-size: 16px;"> Avisemos cualquier problema o inconveniente que observemos, así no seamos nosotros los afectados.</span>
-                                <img src="../PRINCIPAL/unidad_vecinal_2.png" alt="Small Image" style= "max-width: 100%; max-height: 100px; margin-top: 10px;">
+                                <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/unidad_vecinal_2.png" alt="Small Image" style= "max-width: 100%; max-height: 100px; margin-top: 10px;">
                             </div>
                         </div>
                     </div>
@@ -182,13 +186,13 @@
                         <div class="col-md-4">
                             <div class="card-2">
                                 <div class="font">
-                                    <img src="../PRINCIPAL/solicitud2.png" alt="Solicitud Coordinador">
+                                    <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/solicitud2.png" alt="Solicitud Coordinador">
                                 </div>
                                 <div class="back" style="padding: 10px;">
                           <span style="font-size: 16px; color: black;"> Podrás enviar una solicitud al administrador para volverte coordinador de una de las dos áreas y comenzar a organizar eventos. <br>
                             <span style="font-size: 10px; text-decoration: underline;">Haga click en "Solicitud para coordinador" para dirigirse automáticamente a la página de la solicitud.</span>
                           </span>
-                                    <img src="../PRINCIPAL/solicitud_2.png" alt="Small Image" style="max-width: 100%; max-height: 100px; margin-top: 10px;">
+                                    <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/solicitud_2.png" alt="Small Image" style="max-width: 100%; max-height: 100px; margin-top: 10px;">
                                 </div>
                             </div>
                             <div class="card-name">
@@ -198,13 +202,13 @@
                         <div class="col-md-4">
                             <div class="card-2">
                                 <div class="font">
-                                    <img src="../PRINCIPAL/eventoo.png" alt="Eventos">
+                                    <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/eventoo.png" alt="Eventos">
                                 </div>
                                 <div class="back" style="padding: 10px;">
                           <span style="font-size: 16px; color: black;"> Podrás visualizar la lista de eventos para que puedas inscribirte y participar en los eventos que te agraden.<br>
                             <span style="font-size: 10px; text-decoration: underline;">Haga click en "Visualizar eventos" para dirigirse automáticamente a la lista de eventos.</span>
                           </span>
-                                    <img src="../PRINCIPAL/eventos_2.png" alt="Small Image" style="max-width: 100%; max-height: 100px; margin-top: 10px;">
+                                    <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/eventos_2.png" alt="Small Image" style="max-width: 100%; max-height: 100px; margin-top: 10px;">
                                 </div>
                             </div>
                             <div class="card-name">
@@ -214,13 +218,13 @@
                         <div class="col-md-4">
                             <div class="card-2">
                                 <div class="font">
-                                    <img src="../PRINCIPAL/registro_incidencia.png" alt="Incidencias">
+                                    <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/registro_incidencia.png" alt="Incidencias">
                                 </div>
                                 <div class="back" style="padding: 10px;">
                           <span style="font-size: 16px; color: black;"> Podrás visualizar la lista de incidencias donde podrás registrar una incidencia si has sufrido o visto algún problema en el distrito.<br><span style="color: red;">No olvides que serás penalizado si registras más de 5 falsas alarmas.</span>
                             <span style="font-size: 10px; text-decoration: underline;">Haga click en "Registrar Incidencia" para dirigirse automáticamente a la lista de incidencias.</span>
                           </span>
-                                    <img src="../PRINCIPAL/incidencia_2.png" alt="Small Image" style="max-width: 100%; max-height: 100px; margin-top: 10px;">
+                                    <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/incidencia_2.png" alt="Small Image" style="max-width: 100%; max-height: 100px; margin-top: 10px;">
                                 </div>
                             </div>
                             <div class="card-name">
@@ -240,17 +244,17 @@
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
-    <script src="../../../assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <!-- End plugin js for this page -->
     <!-- inject:js -->
-    <script src="../../../assets/js/off-canvas.js"></script>
-    <script src="../../../assets/js/hoverable-collapse.js"></script>
-    <script src="../../../assets/js/misc.js"></script>
-    <script src="../../../assets/js/settings.js"></script>
-    <script src="../../../assets/js/todolist.js"></script>
-    <script src="../PRINCIPAL/paginas_principales.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
+    <script src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/paginas_principales.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script>
