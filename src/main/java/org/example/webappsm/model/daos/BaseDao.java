@@ -13,7 +13,7 @@ public class BaseDao {
             ex.printStackTrace();
         }
         String user = "root";
-        String pass = "PoCoYo137F";
+        String pass = "rootroot";
         String url = "jdbc:mysql://localhost:3306/sanmiguel";
 
         return DriverManager.getConnection(url, user, pass);

@@ -362,7 +362,7 @@
             }
 
             // Mostrar el popup de confirmación
-            console.log("Mostrando popup de confirmación...");
+            console.log("Mostrando pop-up de confirmación...");
             Swal.fire({
                 title: "¿Estás seguro?",
                 text: "El proceso no podrá ser reversible",

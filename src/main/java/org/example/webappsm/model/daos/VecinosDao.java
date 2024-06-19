@@ -76,12 +76,48 @@ public class VecinosDao extends BaseDao{
         return listaCoord;
     }
 
-
     public Usuario obtenerUsuarioPorId(int id) {
         Usuario usuario = null;
 
 
         String sql = "SELECT * FROM Usuario WHERE idUsuario = ?";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, id);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    usuario = new Usuario();
+                    usuario.setId(id);
+                    usuario.setNombre(rs.getString("nombres"));
+                    usuario.setApellido(rs.getString("apellidos"));
+                    usuario.setDocumento(rs.getString("nroDocumento"));
+                    usuario.setDireccion(rs.getString("direccion"));
+                    usuario.setNumContacto(rs.getString("numeroContacto"));
+                    usuario.setFalsasAlarmas(rs.getInt("falsasAlarmas"));
+                    usuario.setDistrito(rs.getString("distrito"));
+                    usuario.setUrbanizacion(rs.getString("urbanización"));
+                    usuario.setCorreoE(rs.getString("correo"));
+
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return usuario;
+    }
+    public Usuario obtenerSolCoordiPorId(int id) {
+        Usuario usuario = null;
+
+        String sql = "SELECT s.idUsuario, s.nombres, s.apellidos, s.nroDocumento, s.direccion, s.numeroContacto, s.falsasAlarmas, " +
+                "s.distrito, s.urbanización, s.correo, " +
+                "(SELECT a.nombreArea FROM Area a WHERE a.idArea = " +
+                "(SELECT sc.idArea " +
+                "FROM solicitudCoordinador sc " +
+                "WHERE sc.idUsuario = s.idUsuario)) AS area " +
+                "FROM Usuario s " +
+                "WHERE s.idUsuario = ?";
 
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -99,6 +135,7 @@ public class VecinosDao extends BaseDao{
                     usuario.setDistrito(rs.getString("distrito"));
                     usuario.setUrbanizacion(rs.getString("urbanización"));
                     usuario.setCorreoE(rs.getString("correo"));
+                    usuario.setArea(rs.getString("area"));
 
                 }
             }
@@ -153,13 +190,39 @@ public class VecinosDao extends BaseDao{
             throw new RuntimeException(e);
         }
     }
-    public void aprobarSol(int idUsuario){
+    public void editarRol(int idUsuario){
+        int idNuevoRol = 4;
+        int idEstado = 1;
 
-        String query = "DELETE FROM Usuario WHERE idUsuario = ?";
+        try (Connection conn = this.getConnection()){
+            String queryRol = "UPDATE Usuario AS U " +
+                    "SET U.idRol = ? " +
+                    "WHERE U.idUsuario = ?";
+            try (PreparedStatement pstmtRol = conn.prepareStatement(queryRol);) {
+                pstmtRol.setInt(1,idNuevoRol);
+                pstmtRol.setInt(2,idUsuario );
+                pstmtRol.executeUpdate();
+            }
+            String queryEstado = "UPDATE solicitudCoordinador SET estado = ? WHERE idUsuario = ?";
+            try (PreparedStatement pstmtEstado = conn.prepareStatement(queryEstado);) {
+                pstmtEstado.setInt(1,idEstado);
+                pstmtEstado.setInt(2,idUsuario );
+                pstmtEstado.executeUpdate();
+            }
+        }catch( SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    public void  eliminarSolicitud(int idUsuario) {
+
+        String sql = "DELETE FROM solicitudcoordinador WHERE idUsuario = ?";
+
         try (Connection conn = this.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)){
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setInt(1, idUsuario);
             pstmt.executeUpdate();
+
+
         }catch( SQLException e){
             throw new RuntimeException(e);
         }

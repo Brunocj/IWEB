@@ -191,13 +191,14 @@ public class AdminServlet extends HttpServlet {
                 break;
             case "solicitudCoordi":
 
-                idUsuario = Integer.parseInt(request.getParameter("id")); // Asegúrate de que el nombre del parámetro sea "id"
+                int idUsuarioCoordi = Integer.parseInt(request.getParameter("id")); // Asegúrate de que el nombre del parámetro sea "id"
 
                 VecinosDao vecinosDaoS = new VecinosDao();
 
-                Usuario usuario1 = vecinosDaoS.obtenerUsuarioPorId(idUsuario);
+                Usuario usuario1 = vecinosDaoS.obtenerSolCoordiPorId(idUsuarioCoordi);
 
                 request.setAttribute("usuarioVerCoordi", usuario1);
+                request.setAttribute("id",idUsuarioCoordi);
 
                 vista = "vistas/jsp/ADMIN/Vecinos/Postulaciones_coordinacion/detalles_postulaciones.jsp";
                 rd = request.getRequestDispatcher(vista);
@@ -406,6 +407,21 @@ public class AdminServlet extends HttpServlet {
             }
 
             response.sendRedirect(request.getContextPath() + "/Admin?action=tablaAcceso");
+        }else if(action.equals("opcionSoli")){
+            String opcionSeleccionada = request.getParameter("opcionSeleccionada");
+            int id = Integer.parseInt(request.getParameter("idUser"));
+
+            VecinosDao vecinosDao = new VecinosDao();
+
+            if (opcionSeleccionada.equals("aprobar")) {
+                vecinosDao.editarRol(id);
+
+            } else if (opcionSeleccionada.equals("denegar")) {
+                vecinosDao.eliminarSolicitud(id);
+
+            }
+
+            response.sendRedirect(request.getContextPath() + "/Admin?action=tablaCoordinador");
         }else{
             response.sendRedirect(request.getContextPath() + "/Admin");
         }
