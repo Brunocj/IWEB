@@ -25,7 +25,8 @@ function Confirmacion() {
   return false;
 }
 
-function eliminarIncidenciaPasada(id,contextPath) {
+
+function eliminarpas(id,contextPath) {
   Swal.fire({
     title: "Estás seguro?",
     text: "Una vez eliminado, la información asociada a la incidencia será permanentemente eliminada del sistema",
@@ -34,7 +35,7 @@ function eliminarIncidenciaPasada(id,contextPath) {
     confirmButtonColor: "#00913f",
     cancelButtonColor: "#d33",
     confirmButtonText: "Si, eliminar",
-    cancelButtonText: "Cancelar"
+    cancelButtonText: "Cancelar",
 
   }).then((result) => {
     if (result.isConfirmed) {
@@ -58,6 +59,7 @@ function eliminarIncidenciaPasada(id,contextPath) {
   // Evitar que el formulario se envíe automáticamente
   return false;
 }
+
 
 $(document).ready(function () {
   var table = $("#miTabla").DataTable({

@@ -214,8 +214,10 @@
                   <td><%= incidencia.getNombre() %></td>
                   <td><%= incidencia.getClasificacion() %></td>
                   <td><a href="Serenazgo?action=mostrarDescripcion&idIncidencia=<%= incidencia.getIdIncidencia() %>">Leer descripción</a></td>
-                  <td><a href="#" onclick="return eliminarIncidenciaPasada(<%= incidencia.getIdIncidencia() %>, '<%= request.getContextPath() %>');"
+
+                  <td><a href="#" onclick="return eliminarpas(<%= incidencia.getIdIncidencia() %>, '<%= request.getContextPath() %>');"
                          class="mdi mdi-delete" style="color: #6c7293; font-size: 20px;"></a></td>
+
                 </tr>
                 <% }
                 } else { %>
@@ -270,6 +272,7 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+
         <script src = "${pageContext.request.contextPath}/vistas/jsp/SERENAZGO/ListaPasadas/script_tabla.js"></script>
 
     <!-- End custom js for this page -->

@@ -73,7 +73,22 @@ public class IncidenciasDao extends BaseDao{
         String username = "root";
         String password = "123456";
 
-        String sql = "HACER EL MALDITO QUERY";
+        String sql = "SELECT \n" +
+                "    i.idIncidencia,\n" +
+                "    e.nombreEstado,\n" +
+                "    c.nombreClasificacion,\n" +
+                "    u.nombres,\n" +
+                "    u.apellidos\n" +
+                "FROM \n" +
+                "    incidencia i\n" +
+                "JOIN \n" +
+                "    estadoincidencia e ON i.idEstado = e.idEstado\n" +
+                "LEFT JOIN \n" +
+                "    clasificacin c ON i.idClasificacin = c.idClasificacin\n" +
+                "JOIN \n" +
+                "    usuario u ON i.idUsuario = u.idUsuario\n" +
+                "WHERE \n" +
+                "    i.idEstado IN (1, 2, 4);";
 
         try (Connection conn= DriverManager.getConnection(url, username, password);
              Statement stmt = conn.createStatement();
@@ -82,12 +97,12 @@ public class IncidenciasDao extends BaseDao{
             while (rs.next()){
                 Incidencia incidencia = new Incidencia();
 
-                //considerando que la columna 1 es el id
 
+                incidencia.setIdIncidencia(rs.getInt(1));
                 incidencia.setEstado(rs.getString(2));
                 incidencia.setClasificacion(rs.getString(3));
-                incidencia.setNombreUsuarioIncidencia(rs.getString(3));
-                incidencia.setApellidoUsuarioIncidencia(rs.getString(4));
+                incidencia.setNombreUsuarioIncidencia(rs.getString(4));
+                incidencia.setApellidoUsuarioIncidencia(rs.getString(5));
 
                 listaIncidencias.add(incidencia);
 
@@ -138,6 +153,9 @@ public class IncidenciasDao extends BaseDao{
 
         return incidencia;
     }
+
+
+
 
 
     public void eliminarIncidenciaPasada(int idIncidenciaPas){

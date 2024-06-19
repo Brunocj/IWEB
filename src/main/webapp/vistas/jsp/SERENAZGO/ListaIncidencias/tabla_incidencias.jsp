@@ -37,7 +37,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar" style ="background-color: #000f22;">  <!--Cambiar al color mas oscuro-->
         
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top" style ="background-color: #000f22;">
-          <h3 class="sidebar-brand brand-logo" style ="color:white; font-weight: 200px; cursor: default;">Menú</h3>
+          <h3 class="sidebar-brand brand-logo" style ="color:white; font-weight: 200px; cursor: default;">MENU</h3>
           <h3 class="sidebar-brand brand-logo-mini" style ="color:white; font-weight: 200px; cursor: default;">M</h3>
         </div>
 
@@ -142,10 +142,10 @@
                 <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                   <div class="navbar-profile">
                     <div class="Header-nav-item">
-                      <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default; text-align: right;">Ricardo Calderón Rodríguez</h2>
+                      <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default; text-align: right;">Ricardo Calderon Rodriguez</h2>
                       <h5 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 15px; font-weight:500; cursor: default;">Serenazgo de San Miguel, Lima</h5>
                     </div>
-                    <img class="img-xs rounded-circle" src="../../LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
+                    <img class="img-xs rounded-circle" src="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
                     
                   </div>
                 </a>
@@ -197,9 +197,10 @@
               <thead style="background-color: #000f22;"> <!--Cambiar al color de fondo de la pagina, pero un poco mas oscuro-->
                 <tr style="text-align: center; font-weight:800;">
                   <th style ="color: white;font-size: 17px;cursor: pointer;">Estado</th>
-                  <th style ="color: white;font-size: 17px;cursor: pointer;">Clasificación</th>
                   <th style ="color: white;font-size: 17px;cursor: pointer;">Nombres</th>
                   <th style ="color: white;font-size: 17px;cursor: pointer;">Apellidos</th>
+                  <th style ="color: white;font-size: 17px;cursor: pointer;">Clasificacion</th>
+
                   <th style ="color: white;font-size: 17px;cursor: pointer;"></th>
                   <th style ="color: white;font-size: 17px;cursor: pointer;"></th>
                   <th style ="color: white;font-size: 17px;cursor: pointer;"></th>
@@ -216,14 +217,15 @@
                   for (Incidencia incidencia : lista) { %>
                 <tr style="text-align: center;">
                   <td><%= incidencia.getEstado() %></td>
-                  <td><%= incidencia.getClasificacion() %></td>
                   <td><%= incidencia.getNombreUsuarioIncidencia() %></td>
                   <td><%= incidencia.getApellidoUsuarioIncidencia() %></td>
-                  <td><a href="Serenazgo?action=actualizarClasificacion&idIncidencia=<%= incidencia.getIdIncidencia() %>">Actualizar clasificación</a></td>
-                  <td><a href="Serenazgo?action=leerDescripcion&idIncidencia=<%= incidencia.getIdIncidencia() %>">Leer descripción</a></td>
-                  <td><a href="Serenazgo?action=clasificar&idIncidencia=<%= incidencia.getIdIncidencia() %>">Clasificar</a></td>
-                  <td><a href="Serenazgo?action=proceder&idIncidencia=<%= incidencia.getIdIncidencia() %>">Proceder</a></td>
+                  <td><%= incidencia.getClasificacion() %></td>
 
+                  <td><a href="Serenazgo?action=leerDescripcion&idIncidencia=<%= incidencia.getIdIncidencia() %>">Leer descripcion</a></td>
+                  <td><a href="Serenazgo?action=clasificar&idIncidencia=<%= incidencia.getIdIncidencia() %>">Clasificar</a></td>
+                  <td><a href="Serenazgo?action=actualizarClasificacion&idIncidencia=<%= incidencia.getIdIncidencia() %>">Actualizar clasificacion</a></td>
+                  <td><a href="Serenazgo?action=proceder&idIncidencia=<%= incidencia.getIdIncidencia() %>">Proceder</a></td>
+                  <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-close" style ="color: #6c7293;font-size: 20px;"></a></td>
                 </tr>
                 <% }
                 } else { %>
@@ -231,18 +233,6 @@
                   <td colspan="5">No hay incidencias </td>
                 </tr>
                 <% } %>
-
-                <tr style="text-align: center;">
-                  <td><a>Procesando</a></td>
-                  <td><a>Grave</a></td>
-                  <td><a>Coronado Maxwell</a></td>
-                  <td><a>Jorge</a></td>
-                  <td><a href="actualiza2.jsp">Actualizar clasificación</a></td>
-                  <td><a href="info1.jsp">Leer descripción</a></td>
-                  <td><a href="clasifica.html">Clasificar</a></td>
-                  <td><a href="formularios.html">Proceder</a></td>
-                  <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-close" style ="color: #6c7293;font-size: 20px;"></a></td>
-                </tr>
 
               </tbody>
           </table>
@@ -259,16 +249,16 @@
       
     <!-- container-scroller -->
     <!-- plugins:js -->
-    <script src="../../../../assets/vendors/js/vendor.bundle.base.js"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
-    <script src="../../../../assets/js/off-canvas.js"></script>
-    <script src="../../../../assets/js/hoverable-collapse.js"></script>
-    <script src="../../../../assets/js/misc.js"></script>
-    <script src="../../../../assets/js/settings.js"></script>
-    <script src="../../../../assets/js/todolist.js"></script>
+        <script src="<%=request.getContextPath()%>/assets/vendors/js/vendor.bundle.base.js"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page -->
+        <!-- End plugin js for this page -->
+        <!-- inject:js -->
+        <script src="<%=request.getContextPath()%>/assets/js/off-canvas.js"></script>
+        <script src="<%=request.getContextPath()%>/assets/js/hoverable-collapse.js"></script>
+        <script src="<%=request.getContextPath()%>/assets/js/misc.js"></script>
+        <script src="<%=request.getContextPath()%>/assets/js/settings.js"></script>
+        <script src="<%=request.getContextPath()%>/assets/js/todolist.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script>
@@ -290,7 +280,7 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script src = "script_tabla.js"></script>
+        <script src = "${pageContext.request.contextPath}/vistas/jsp/SERENAZGO/ListaIncidencias/script_tabla.js"></script>
     
     <!-- End custom js for this page -->
   </body>

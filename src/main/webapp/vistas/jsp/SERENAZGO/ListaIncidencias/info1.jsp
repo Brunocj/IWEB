@@ -1,6 +1,9 @@
-
+<%@ page import="org.example.webappsm.model.beans.Incidencia" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%
+  Incidencia incidencia = (Incidencia) request.getAttribute("incidencia");
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,10 +13,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Pagina en blanco</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="styles_tabla.css">
-    <link rel="stylesheet" href="../../../../assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../../../../assets/vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="styles_info1.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/SERENAZGO/ListaIncidencias/styles_tabla.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/SERENAZGO/ListaIncidencias/styles_info1.css">
     
     <!-- endinject -->
     <!-- Plugin css for this page -->
@@ -21,9 +24,9 @@
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="../../../../assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../LogoSM.png" /><!--Cambiar la ubicacion del logo de la pagina aca tmb-->
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" />
     <!--JS para los popups-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
@@ -36,14 +39,14 @@
           <h3 class="sidebar-brand brand-logo" style ="color:white; font-weight: 200px; cursor: default;">Menú</h3>
           <h3 class="sidebar-brand brand-logo-mini" style ="color:white; font-weight: 200px; cursor: default;">M</h3>
         </div>
-        
-        
-        <ul class="nav"style="position: fixed;">
-          
+
+
+        <ul class="nav" style="position: fixed;">
+
           <!-- Codigo para un item de la barra lateral que no tiene sublista -->
-          <li class="nav-item menu-items "> <!-- la clase "active" solo se usa para la vista que está activa -->
-            
-            <a class="nav-link" href="../pagina_principal_serenazgo.html"> <!-- Cambiar href de acuerdo a lo necesario -->
+          <li class="nav-item menu-items active"> <!-- la clase "active" solo se usa para la vista que está activa -->
+
+            <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=pagPrincipal"> <!-- Cambiar href de acuerdo a lo necesario -->
               <span class="menu-icon">
                 <i class="mdi mdi-home"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
@@ -54,15 +57,15 @@
 
 
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../ListaIncidencias/tabla_incidencias.html">
+            <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=perfil">
               <span class="menu-icon">
                 <i class="mdi mdi-account"></i>
               </span>
               <span class="menu-title" style="color: white;">Perfil</span>
             </a>
           </li>
-          
-          <li class="nav-item menu-items">
+
+          <li class="nav-item menu-items ">
             <a class="nav-link" href="https://mail.google.com/mail/u/0/#inbox">
               <span class="menu-icon">
                 <i class="mdi mdi-email"></i>
@@ -70,17 +73,18 @@
               <span class="menu-title" style="color: white;">Correo</span>
             </a>
           </li>
+
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../Dashboard/dashboard.html"onclick="return CancelarDashboard();">
+            <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=dashboard">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>
               <span class="menu-title" style="color: white;">Dashboard</span>
             </a>
           </li>
-          
+
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../ListaIncidencias/tabla_incidencias.html">
+            <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=listaIncidencias">
               <span class="menu-icon">
                 <i class="mdi mdi-format-list-bulleted"></i>
               </span>
@@ -88,25 +92,25 @@
             </a>
           </li>
 
+
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../ListaVecinos/tabla_vecinos.html">
+            <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=listaVecinos">
               <span class="menu-icon">
                 <i class="mdi mdi-format-list-bulleted"></i>
               </span>
               <span class="menu-title" style="color: white;">Lista de vecinos</span>
             </a>
           </li>
+
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../ListaPasadas/tabla_pasadas.html">
+            <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=listaIncidenciasPasadas">
               <span class="menu-icon">
                 <i class="mdi mdi-format-list-bulleted"></i>
               </span>
               <span class="menu-title" style="color: white;">Lista de incidencias <br> pasadas</span>
             </a>
           </li>
-          
-          <!-- Codigo para un item de la barra lateral que SI tiene sublista -->
-          
+
           <li class="nav-item menu-items" onclick="return mostrarPopupCerrarSesion();">
             <a class="nav-link" href="#"> <!-- Cambiar href de acuerdo a lo necesario -->
               <span class="menu-icon">
@@ -115,8 +119,7 @@
               <span class="menu-title" style="color: white;">Cerrar sesión</span>
             </a>
           </li>
-          <!-- Codigo para un item de la barra lateral que SI tiene sublista -->
-          
+
           <!-- Codigo para un item de la barra lateral que SI tiene sublista FIN -->
         </ul>
       </nav>
@@ -141,7 +144,7 @@
                       <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default; text-align: right;">Ricardo Calderón Rodríguez</h2>
                       <h5 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 15px; font-weight:500; cursor: default;">Serenazgo de San Miguel, Lima</h5>
                     </div>
-                    <img class="img-xs rounded-circle" src="../../LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
+                    <img class="img-xs rounded-circle" src="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
                     
                   </div>
                 </a>
@@ -169,14 +172,14 @@
             <!-- Radios de categorías -->
             
           <div class="info">
-            <h4 style="text-align: justify;">Se ha ocasionado un robo al frente de mi domicilio, cerca de la av. Universitaria. Para más información, contactar al 932442712<h3>
-            
+            <h4 style="text-align: justify;">
+              <%= incidencia.getDescripcion() %>
+            </h4>
           </div>
         
         <div class="botones-container">
-            <button href="#" onclick="return clasificar();" class="boton-confirmar">Finalizar</button>
-            <button href="#" onclick="return cancelar();" class="boton-cancelar">Cancelar</button>
-            
+          <a href="Serenazgo?action=listaIncidencias" class="boton-confirmar">Regresar</a>
+
         </div>
         
         </div>
