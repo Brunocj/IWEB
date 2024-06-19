@@ -25,25 +25,33 @@ function Confirmacion() {
   return false;
 }
 
-function Eliminacion() {
+function eliminarIncidenciaPasada(id,contextPath) {
   Swal.fire({
     title: "Estás seguro?",
-    text: "Una vez eliminado, la información asociada al personal será permanentemente eliminada del sistema",
+    text: "Una vez eliminado, la información asociada a la incidencia será permanentemente eliminada del sistema",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#00913f",
     cancelButtonColor: "#d33",
     confirmButtonText: "Si, eliminar",
-    cancelButtonText: 'Cancelar'
+    cancelButtonText: "Cancelar"
+
   }).then((result) => {
     if (result.isConfirmed) {
-      Swal.fire({
-        title: "Eliminado!",
-        text: "El personal ha sido eliminado con éxito",
-        icon: "success",
-      }).then(() => {
-        window.location.href = "tabla_profesor.html";
-      });
+      // Crear un formulario para enviar la solicitud POST
+      const form = document.createElement('form');
+      form.method = 'post';
+      form.action = contextPath+'/Serenazgo?action=eliminarIncidenciaPas';
+
+      // Crear un input oculto para el ID del profesor
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'id';
+      input.value = id;
+
+      form.appendChild(input);
+      document.body.appendChild(form);
+      form.submit();
     }
   });
 

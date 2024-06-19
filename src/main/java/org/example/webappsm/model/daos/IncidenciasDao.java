@@ -57,6 +57,52 @@ public class IncidenciasDao extends BaseDao{
         return listaIncidenciasPasadas;
     }
 
+    public ArrayList<Incidencia> listarIncidencias(){
+
+        ArrayList<Incidencia> listaIncidencias = new ArrayList<>();
+
+        try {
+            Class.forName( "com.mysql.cj.jdbc.Driver");
+
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        //Parametros de conexion a que base de datos me quiero unir//
+        String url ="jdbc:mysql://localhost:3306/sanmiguel";
+        String username = "root";
+        String password = "123456";
+
+        String sql = "HACER EL MALDITO QUERY";
+
+        try (Connection conn= DriverManager.getConnection(url, username, password);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()){
+                Incidencia incidencia = new Incidencia();
+
+                //considerando que la columna 1 es el id
+
+                incidencia.setEstado(rs.getString(2));
+                incidencia.setClasificacion(rs.getString(3));
+                incidencia.setNombreUsuarioIncidencia(rs.getString(3));
+                incidencia.setApellidoUsuarioIncidencia(rs.getString(4));
+
+                listaIncidencias.add(incidencia);
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return listaIncidencias;
+    }
+
+
+
+
     public Incidencia descripcion(int idIncidencia) {
 
         Incidencia incidencia = new Incidencia();
@@ -92,5 +138,30 @@ public class IncidenciasDao extends BaseDao{
 
         return incidencia;
     }
+
+
+    public void eliminarIncidenciaPasada(int idIncidenciaPas){
+        try {
+            Class.forName( "com.mysql.cj.jdbc.Driver");
+
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        String url ="jdbc:mysql://localhost:3306/sanmiguel";
+        String username = "root";
+        String password = "123456";
+
+        String query = "DELETE FROM incidencia WHERE idEstado = 3 AND idSerenazgo = ?;";
+        try (Connection conn= DriverManager.getConnection(url, username, password);
+             PreparedStatement pstmt = conn.prepareStatement(query)){
+            pstmt.setInt(1, idIncidenciaPas);
+            pstmt.executeUpdate();
+        }catch( SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+
 
 }

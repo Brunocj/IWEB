@@ -1,3 +1,8 @@
+<%@ page import="org.example.webappsm.model.beans.Incidencia" %>
+<%@ page import="java.util.ArrayList" %>
+<%
+  ArrayList<Incidencia> lista = (ArrayList<Incidencia>) request.getAttribute("listaIncidencias");
+%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,18 +11,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Lista de profesores</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="styles_tabla.css">
-    <link rel="stylesheet" href="../../../../assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../../../../assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/SERENAZGO/ListaIncidencias/styles_tabla.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/css/vendor.bundle.base.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End Plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="../../../../assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../LogoSM.png" /> <!--Cambiar la ubicacion del logo de la pagina aca tmb-->
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" />
     <!--JS para los popups-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
    
@@ -35,14 +40,14 @@
           <h3 class="sidebar-brand brand-logo" style ="color:white; font-weight: 200px; cursor: default;">Menú</h3>
           <h3 class="sidebar-brand brand-logo-mini" style ="color:white; font-weight: 200px; cursor: default;">M</h3>
         </div>
-        
-        
+
+
         <ul class="nav" style="position: fixed;">
-          
+
           <!-- Codigo para un item de la barra lateral que no tiene sublista -->
-          <li class="nav-item menu-items "> <!-- la clase "active" solo se usa para la vista que está activa -->
-            
-            <a class="nav-link" href="../pagina_principal_serenazgo.html "> <!-- Cambiar href de acuerdo a lo necesario -->
+          <li class="nav-item menu-items active"> <!-- la clase "active" solo se usa para la vista que está activa -->
+
+            <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=pagPrincipal"> <!-- Cambiar href de acuerdo a lo necesario -->
               <span class="menu-icon">
                 <i class="mdi mdi-home"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
@@ -50,60 +55,63 @@
             </a>
           </li>
           <!-- Codigo para un item de la barra lateral que no tiene sublista FIN-->
-          <li class="nav-item menu-items "> <!-- la clase "active" solo se usa para la vista que está activa -->
-            
-            <a class="nav-link" href="../Perfil/Perfil.html "> <!-- Cambiar href de acuerdo a lo necesario -->
-              <span class="menu-icon">
-                <i class="mdi mdi-account"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
-              </span>
-              <span class="menu-title" style="color: white;">Perfil</span> <!-- Cambiar color de texto de acuerdo a lo necesario -->
-            </a>
-          </li>
-          <li class="nav-item menu-items "> <!-- la clase "active" solo se usa para la vista que está activa -->
-            
-            <a class="nav-link" href="https://mail.google.com/mail/u/0/#inbox "> <!-- Cambiar href de acuerdo a lo necesario -->
-              <span class="menu-icon">
-                <i class="mdi mdi-email"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
-              </span>
-              <span class="menu-title" style="color: white;">Correo</span> <!-- Cambiar color de texto de acuerdo a lo necesario -->
-            </a>
-          </li>
-          
+
+
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../Dashboard/dashboard.html" >
+            <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=perfil">
+              <span class="menu-icon">
+                <i class="mdi mdi-account"></i>
+              </span>
+              <span class="menu-title" style="color: white;">Perfil</span>
+            </a>
+          </li>
+
+          <li class="nav-item menu-items ">
+            <a class="nav-link" href="https://mail.google.com/mail/u/0/#inbox">
+              <span class="menu-icon">
+                <i class="mdi mdi-email"></i>
+              </span>
+              <span class="menu-title" style="color: white;">Correo</span>
+            </a>
+          </li>
+
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=dashboard">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>
               <span class="menu-title" style="color: white;">Dashboard</span>
             </a>
           </li>
-          <li class="nav-item menu-items active"> <!-- la clase "active" solo se usa para la vista que está activa --> 
-            <a class="nav-link" href="#"> <!-- Cambiar href de acuerdo a lo necesario -->
+
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=listaIncidencias">
               <span class="menu-icon">
-                <i class="mdi mdi-format-list-bulleted"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
+                <i class="mdi mdi-format-list-bulleted"></i>
               </span>
-              <span class="menu-title" style="color: white;">Lista de incidencias</span> <!-- Cambiar color de texto de acuerdo a lo necesario -->
+              <span class="menu-title" style="color: white;">Lista de incidencias</span>
             </a>
           </li>
+
+
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../ListaVecinos/tabla_vecinos.html" >
+            <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=listaVecinos">
               <span class="menu-icon">
                 <i class="mdi mdi-format-list-bulleted"></i>
               </span>
               <span class="menu-title" style="color: white;">Lista de vecinos</span>
             </a>
           </li>
-          
+
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../ListaPasadas/tabla_pasadas.html">
+            <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=listaIncidenciasPasadas">
               <span class="menu-icon">
                 <i class="mdi mdi-format-list-bulleted"></i>
               </span>
               <span class="menu-title" style="color: white;">Lista de incidencias <br> pasadas</span>
             </a>
           </li>
-          <!-- Codigo para un item de la barra lateral que SI tiene sublista -->
-         
+
           <li class="nav-item menu-items" onclick="return mostrarPopupCerrarSesion();">
             <a class="nav-link" href="#"> <!-- Cambiar href de acuerdo a lo necesario -->
               <span class="menu-icon">
@@ -112,8 +120,7 @@
               <span class="menu-title" style="color: white;">Cerrar sesión</span>
             </a>
           </li>
-          <!-- Codigo para un item de la barra lateral que SI tiene sublista -->
-          
+
           <!-- Codigo para un item de la barra lateral que SI tiene sublista FIN -->
         </ul>
       </nav>
@@ -167,8 +174,8 @@
                       <p style ="color:black; align-self: center; margin-bottom: 0px;font-size: 15px">Filtrar por incidencias :</p>
                       <select id="filtroEstado" style="border-color: #DFDFDF; border-radius: 6px; padding:5px; outline: none; height: 40px; margin-top: 10px;" >
                         <option value="">Mostrar Todos</option> <!--Cambiar el filtro de acuerdo a lo necesario-->
-                        <option value="Futbol">Más de 5 incidencias</option>
-                        <option value="Natacion">Menos de 6</option>
+                        <option value="Futbol">Incidencias nuevas</option>
+                        <option value="Natacion">Incidencias en proceso</option>
                         
 
                       </select>
@@ -203,95 +210,28 @@
               <hr style="border: none; border-top: 3px solid black; margin-top: -55px; border-radius: 10px;">
 
               <tbody style="text-align: center;color: black;">
-                
+
+                <% if (lista != null && !lista.isEmpty()) {
+
+                  for (Incidencia incidencia : lista) { %>
                 <tr style="text-align: center;">
-                  <td><a>Procesando</a></td>
-                  <td><a>leve</a></td>
-                  <td><a>López Pascual</a></td>
-                  <td><a>Adrián Alvaro</a></td>
-                  <td><a href="actualiza2.jsp">Actualizar clasificación</a></td>
-                  <td><a href="info1.jsp">Leer descripción</a></td>
-                  <td><a href="clasifica.html">Clasificar</a></td>
-                  <td><a href="formularios.html">Proceder</a></td>
-                  <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-close" style ="color: #6c7293;font-size: 20px;"></a></td>
+                  <td><%= incidencia.getEstado() %></td>
+                  <td><%= incidencia.getClasificacion() %></td>
+                  <td><%= incidencia.getNombreUsuarioIncidencia() %></td>
+                  <td><%= incidencia.getApellidoUsuarioIncidencia() %></td>
+                  <td><a href="Serenazgo?action=actualizarClasificacion&idIncidencia=<%= incidencia.getIdIncidencia() %>">Actualizar clasificación</a></td>
+                  <td><a href="Serenazgo?action=leerDescripcion&idIncidencia=<%= incidencia.getIdIncidencia() %>">Leer descripción</a></td>
+                  <td><a href="Serenazgo?action=clasificar&idIncidencia=<%= incidencia.getIdIncidencia() %>">Clasificar</a></td>
+                  <td><a href="Serenazgo?action=proceder&idIncidencia=<%= incidencia.getIdIncidencia() %>">Proceder</a></td>
+
                 </tr>
-                <tr style="text-align: center;">
-                  <td><a>Procesando</a></td>
-                  <td><a>moderada</a></td>
-                  <td><a>Coronado Maxwell</a></td>
-                  <td><a>Jorge</a></td>
-                  <td><a href="actualiza2.jsp">Actualizar clasificación</a></td>
-                  <td><a href="info1.jsp">Leer descripción</a></td>
-                  <td><a href="clasifica.html">Clasificar</a></td>
-                  <td><a href="formularios.html">Proceder</a></td>
-                  <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-close" style ="color: #6c7293;font-size: 20px;"></a></td>
+                <% }
+                } else { %>
+                <tr>
+                  <td colspan="5">No hay incidencias </td>
                 </tr>
-                <tr style="text-align: center;">
-                  <td><a>Procesando</a></td>
-                  <td><a>leve</a></td>
-                  <td ><a>Bustamante Melo</a></td>
-                  <td><a>Pedro Miguel</a></td>
-                  <td><a href="actualiza2.jsp">Actualizar clasificación</a></td>
-                  <td><a href="info1.jsp">Leer descripción</a></td>
-                  <td><a href="clasifica.html">Clasificar</a></td>
-                  <td><a href="formularios.html">Proceder</a></td>
-                  <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-close" style ="color: #6c7293;font-size: 20px;"></a></td>
-                </tr>
-                <tr style="text-align: center;">
-                  <td><a>Procesando</a></td>
-                  <td><a>leve</a></td>
-                  <td><a>Yarleque Medina</a></td>
-                  <td><a>Manuel Augusto</a></td>
-                  <td><a href="actualiza2.jsp">Actualizar clasificación</a></td>
-                  <td><a href="info1.jsp">Leer descripción</a></td>
-                  <td><a href="clasifica.html">Clasificar</a></td>
-                  <td><a href="formularios.html">Proceder</a></td>
-                  <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-close" style ="color: #6c7293;font-size: 20px;"></a></td>
-                </tr>
-                <tr style="text-align: center;">
-                  <td><a>Nueva</a></td>
-                  <td><a>N.C</a></td>
-                  <td><a>Yarleque Medina</a></td>
-                  <td><a>Manuel Augusto</a></td>
-                  <td><a href="actualiza1.jsp">Actualizar clasificación</a></td>
-                  <td><a href="info1.jsp">Leer descripción</a></td>
-                  <td><a href="clasifica.html">Clasificar</a></td>
-                  <td><a href="formularios.html">Proceder</a></td>
-                  <td></td>
-                </tr>
-                <tr style="text-align: center;">
-                  <td><a>Nueva</a></td>
-                  <td><a>moderada</a></td>
-                  <td><a>Galarga Melo</a></td>
-                  <td><a>Elver Augusto</a></td>
-                  <td><a href="actualiza2.jsp">Actualizar clasificación</a></td>
-                  <td><a href="info1.jsp">Leer descripción</a></td>
-                  <td><a href="clasifica.html">Clasificar</a></td>
-                  <td><a href="formularios.html">Proceder</a></td>
-                  <td></td>
-                </tr>
-                <tr style="text-align: center;">
-                  <td><a>Nueva</a></td>
-                  <td><a>leve</a></td>
-                  <td><a>Calderon Rodriguez</a></td>
-                  <td><a>José Ricardo</a></td>
-                  <td><a href="actualiza2.jsp">Actualizar clasificación</a></td>
-                  <td><a href="info1.jsp">Leer descripción</a></td>
-                  <td><a href="clasifica.html">Clasificar</a></td>
-                  <td><a href="formularios.html">Proceder</a></td>
-                  <td></td>
-                </tr>
-                <tr style="text-align: center;">
-                  <td><a>Nueva</a></td>
-                  <td><a>N.C</a></td>
-                  <td><a>garay Cruz</a></td>
-                  <td><a>Eduardo Daniel</a></td>
-                  <td><a href="actualiza1.jsp">Actualizar clasificación</a></td>
-                  <td><a href="info1.jsp">Leer descripción</a></td>
-                  <td><a href="clasifica.html">Clasificar</a></td>
-                  <td><a href="formularios.html">Proceder</a></td>
-                  <td></td>
-                </tr>
+                <% } %>
+
                 <tr style="text-align: center;">
                   <td><a>Procesando</a></td>
                   <td><a>Grave</a></td>
@@ -303,6 +243,7 @@
                   <td><a href="formularios.html">Proceder</a></td>
                   <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-close" style ="color: #6c7293;font-size: 20px;"></a></td>
                 </tr>
+
               </tbody>
           </table>
           

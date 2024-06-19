@@ -27,23 +27,25 @@ function Confirmacion() {
     return false;
 }
 
-function eliminarSerenazgo(id,contextPath) {
+
+
+function eliminarIncidenciaPasada(id, contextPath) {
     Swal.fire({
-        title: "Estás seguro?",
-        text: "Una vez eliminado, la información asociada al personal será permanentemente eliminada del sistema",
+        title: "¿Estás seguro?",
+        text: "Una vez eliminada, la información no se podrá recuperar",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#00913f",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Si, eliminar"
+        confirmButtonText: "Sí, eliminar"
     }).then((result) => {
         if (result.isConfirmed) {
             // Crear un formulario para enviar la solicitud POST
             const form = document.createElement('form');
             form.method = 'post';
-            form.action = contextPath+'/Admin?action=eliminarSerenazgo';
+            form.action = contextPath + '/Admin?action=eliminarIncidencia';
 
-            // Crear un input oculto para el ID del profesor
+            // Crear un input oculto para el ID de la incidencia
             const input = document.createElement('input');
             input.type = 'hidden';
             input.name = 'id';
@@ -55,14 +57,8 @@ function eliminarSerenazgo(id,contextPath) {
         }
     });
 
-    // Evitar que el formulario se envíe automáticamente
     return false;
 }
-
-
-
-
-
 
 
 $(document).ready(function() {

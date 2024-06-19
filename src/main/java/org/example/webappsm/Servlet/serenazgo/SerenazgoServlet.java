@@ -123,6 +123,21 @@ public class SerenazgoServlet extends HttpServlet {
                 rd.forward(request,response);
                 break;
 
+            case "listaIncidencias":
+
+                IncidenciasDao incidenciasDao1 = new IncidenciasDao();
+
+                ArrayList<Incidencia> listaIncidencias = incidenciasDao1.listarIncidencias();
+
+                request.setAttribute("listaIncidencias",listaIncidencias);
+
+                vista = "vistas/jsp/SERENAZGO/ListaIncidencias/tabla_incidencias.jsp";
+
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+
+
         }
 
     }
@@ -141,6 +156,17 @@ public class SerenazgoServlet extends HttpServlet {
 
             response.sendRedirect(request.getContextPath() + "/Serenazgo?action=listaVecinos");
 
+        }else if(action.equals("eliminarIncidenciaPas")){
+
+            String idParam = request.getParameter("id");
+            if (idParam != null) {
+                int idIncidenciaPas = Integer.parseInt(idParam);
+
+                IncidenciasDao incidenciasDao = new IncidenciasDao();
+                incidenciasDao.eliminarIncidenciaPasada(idIncidenciaPas);
+
+                response.sendRedirect(request.getContextPath() + "/Serenazgo?action=listaIncidenciasPasadas");
+            }
         }
 
 

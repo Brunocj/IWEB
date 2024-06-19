@@ -20,4 +20,9 @@ public class Incidencia {
     private String estado;
     private String clasificacion;
     private String descripcion;
+    private String nombreUsuarioIncidencia;
+    private String apellidoUsuarioIncidencia;
+
+
+
 }

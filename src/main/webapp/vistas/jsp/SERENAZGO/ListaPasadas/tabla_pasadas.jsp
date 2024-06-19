@@ -214,7 +214,8 @@
                   <td><%= incidencia.getNombre() %></td>
                   <td><%= incidencia.getClasificacion() %></td>
                   <td><a href="Serenazgo?action=mostrarDescripcion&idIncidencia=<%= incidencia.getIdIncidencia() %>">Leer descripción</a></td>
-                  <td><a href="#" onclick="return Eliminacion(<%= incidencia.getIdIncidencia() %>, '<%= request.getContextPath() %>');" class="mdi mdi-delete" style="color: #6c7293; font-size: 20px;"></a></td>
+                  <td><a href="#" onclick="return eliminarIncidenciaPasada(<%= incidencia.getIdIncidencia() %>, '<%= request.getContextPath() %>');"
+                         class="mdi mdi-delete" style="color: #6c7293; font-size: 20px;"></a></td>
                 </tr>
                 <% }
                 } else { %>
