@@ -200,7 +200,9 @@ Created by IntelliJ IDEA.
                                 </tr>
                                 <tr>
                                     <td class = "info" colspan="3" style="text-align: center;">
-                                        <img src=src="data:image/jpeg;base64, <%= new String(org.apache.commons.codec.binary.Base64.encodeBase64(incidencia.getImgEvidencia())) %>">
+                                        <div class="image-container">
+                                            <img src="data:image/jpeg;base64, <%= new String(org.apache.commons.codec.binary.Base64.encodeBase64(incidencia.getImgEvidencia())) %>">
+                                        </div>
                                     </td>
                                 </tr>
                                 </tbody>

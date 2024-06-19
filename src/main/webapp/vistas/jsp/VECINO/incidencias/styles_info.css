@@ -62,3 +62,12 @@
     align-items: center; /* Centra verticalmente */
 
   }
+.image-container {
+  text-align: center;
+}
+.image-container img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  border: 2px solid #000f22; /* Optional: Add border for better visualization */
+}
