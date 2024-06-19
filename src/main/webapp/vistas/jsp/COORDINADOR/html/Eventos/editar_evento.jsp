@@ -6,24 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Página Principal Coordinador</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="../../../../../assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../../../../../assets/vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="../../../../../assets/css/styles_pag_principales.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styles_pag_principales.css">
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <!-- jQuery UI -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="../../css/Eventos/styles_editar.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/COORDINADOR/css/Eventos/styles_editar.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End Plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="../../../../../assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../../LogoSM.png" />
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" />
     <!--JS para los popups-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
@@ -150,7 +150,7 @@
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
-    <script src="../../../../../assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <!-- SweetAlert2 -->
@@ -163,15 +163,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- End plugin js for this page -->
     <!-- inject:js -->
-    <script src="../../../../../assets/js/off-canvas.js"></script>
-    <script src="../../../../../assets/js/hoverable-collapse.js"></script>
-    <script src="../../../../../assets/js/misc.js"></script>
-    <script src="../../../../../assets/js/settings.js"></script>
-    <script src="../../../../../assets/js/todolist.js"></script>
-    <script src="../../../../../assets/js/paginas_princpales.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/paginas_princpales.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
-    <script src = "../../js/Eventos/script_editar.js"></script>
+    <script src = "${pageContext.request.contextPath}/vistas/jsp/COORDINADOR/js/Eventos/script_editar.js"></script>
     <!-- End custom js for this page -->
   </body>
 </html>

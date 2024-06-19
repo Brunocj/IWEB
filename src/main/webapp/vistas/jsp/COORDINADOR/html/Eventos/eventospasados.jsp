@@ -7,18 +7,18 @@
     <title>Eventos</title>
 
     <!-- plugins:css -->
-    <link rel="stylesheet" href="../../../../../assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../../../../../assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/css/vendor.bundle.base.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End Plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="../../../../../assets/css/style.css">
-    <link rel="stylesheet" href="../../css/Eventos/styles_eventos.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/COORDINADOR/css/Eventos/styles_eventos.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../../LogoSM.png" />
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" />
     <!--JS para los popups-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
@@ -238,22 +238,22 @@
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
-    <script src="../../../../../assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <!-- End plugin js for this page -->
     <!-- inject:js -->
-    <script src="../../../../../assets/js/off-canvas.js"></script>
-    <script src="../../../../../assets/js/hoverable-collapse.js"></script>
-    <script src="../../../../../assets/js/misc.js"></script>
-    <script src="../../../../../assets/js/settings.js"></script>
-    <script src="../../../../../assets/js/todolist.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     
-    <script src = "../../js/Eventos/script_eventos.js"></script>
+    <script src = "${pageContext.request.contextPath}/vistas/jsp/COORDINADOR/js/Eventos/script_eventos.js"></script>
     
     <!-- End custom js for this page -->
   </body>
