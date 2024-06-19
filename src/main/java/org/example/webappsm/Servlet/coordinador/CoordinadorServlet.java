@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 
-
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -96,7 +96,7 @@ public class CoordinadorServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
-
+        UserDao userDao = new UserDao();
         switch (action) {
             case "registrarEvento":
                 CoordinadorDao coordinadorDao = new CoordinadorDao();
@@ -181,6 +181,43 @@ public class CoordinadorServlet extends HttpServlet {
 
                 // Redireccionar a la página de eventos después de procesar la inscripción
                 response.sendRedirect(request.getContextPath() + "/Coordinador?action=eventos");
+                break;
+            case "registrarIncidencia":
+                Incidencia incidencia = new Incidencia();
+                String nombreIncidencia = request.getParameter("nombreIncidencia");
+                String lugarIncidencia = request.getParameter("lugar");
+                String referencia = request.getParameter("ref");
+                int idUrbanizacion = Integer.parseInt(request.getParameter("idUrb"));
+                String contacto = request.getParameter("contacto");
+                Boolean necesitaAmbulancia = Boolean.parseBoolean(request.getParameter("ambulanciaSN"));
+                byte[] evidencia = obtenerImagenComoByteArray((request.getPart("foto").getInputStream()));
+                String fechaStr = request.getParameter("fecha");
+
+                try {
+                    // Definir el formato de la fecha/hora
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    // Parsear la cadena a un objeto java.util.Date
+                    Date fechaUtil = sdf.parse(fechaStr);
+                    // Convertir el objeto java.util.Date a java.sql.Timestamp
+                    Timestamp fechaSql = new Timestamp(fechaUtil.getTime());
+                    incidencia.setFechaIncidencia(fechaSql);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                int idTipo = Integer.parseInt(request.getParameter("idTipoIncidencia"));
+                int idUsuarioIncidencia = Integer.parseInt(request.getParameter("idUsuario"));
+                incidencia.setNombre(nombreIncidencia);
+                incidencia.setLugar(lugarIncidencia);
+                incidencia.setReferencia(referencia);
+                incidencia.setIdUrbanizacion(idUrbanizacion);
+                incidencia.setContactoO(contacto);
+                incidencia.setAmbulanciaI(necesitaAmbulancia);
+                incidencia.setImgEvidencia(evidencia);
+                incidencia.setIdTipo(idTipo);
+                incidencia.setIdUsuario(idUsuarioIncidencia);
+                userDao.agregarIncidencia(incidencia);
+                response.sendRedirect(request.getContextPath() + "/Coordinador?action=incidencias");
                 break;
 
             default:

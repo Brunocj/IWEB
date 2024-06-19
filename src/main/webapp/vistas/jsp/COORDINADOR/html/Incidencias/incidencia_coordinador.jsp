@@ -1,4 +1,11 @@
+<%@ page import="org.example.webappsm.model.beans.Incidencia" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+  ArrayList<Incidencia> listaIncidencias = (ArrayList<Incidencia>) request.getAttribute("listaincidencias");
+  SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -45,90 +52,45 @@
 
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
               <h2 class="tabla-title" style="color: #000f22; margin-bottom: 0px;">Incidencias</h2>
-              <button class="btnTable" style="display: flex; align-items: center;" onclick="window.location.href='registrar_incidencia.jsp';">
+              <button class="btnTable" style="display: flex; align-items: center;" onclick="window.location.href='<%=request.getContextPath()%>/Coordinador?action=registroIncidencia';">
                   Agregar Incidencia
                   <a class="mdi mdi-plus" style="color: #ffffff; font-size: 20px; margin-left: 5px;"></a>
               </button>
           </div>
-          
+
 
 
             <table id="miTabla" class="table" style="margin-bottom:15px;">
               <thead style="background-color: #000f22;"> <!--Cambiar al color de fondo (claro) de la pagina, pero un poco mas oscuro-->
-                <tr style="text-align: center; font-weight:800;">
-                  <th style ="color: white;">Descripción</th>
-                  <th style ="color: white;">Fecha</th>
-                  <th style ="color: white;">Estado</th>
-                  <th style="width: 20px; color: white;"></th>
-                </tr>
+              <tr style="text-align: center; font-weight:800;">
+                <th style ="color: white;">Descripción</th>
+                <th style ="color: white;">Fecha</th>
+                <th style ="color: white;">Estado</th>
+                <th style="width: 20px; color: white;"></th>
+              </tr>
               </thead>
               <tbody style="text-align: center; color: black;">
-                <tr style="text-align: center;">
-                  <td>Asalto a la altura de la puerta Riva Agüero de la PUCP</a></td>
-                  <td>12/04/2024</a></td>
-                  <td>Resuelto</td>
-                  <td><a href="incidencia_info.jsp"><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
-                </tr>
-                <tr>
-                  <td>Robo en el parque Juan Pablo II</a></td>
-                  <td>13/03/2024</a></td>
-                  <td>Pendiente</td>
-                  <td><a href="incidencia_info.jsp"><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
-                </tr>
-                <tr>
-                  <td>Escape de los leones del Parque de las Leyendas</a></td>
-                  <td>11/01/2024</a></td>
-                  <td>Resuelto</td>
-                  <td><a href="incidencia_info.jsp"><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
-                </tr>
-                <tr>
-                  <td>Lab2 de IWEB y GTICS (los patos abusaron de los alumnos)</a></td>
-                  <td>10/04/2024</a></td>
-                  <td>Resuelto</td>
-                  <td><a href="incidencia_info.jsp"><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
-                </tr>
-                <tr>
-                  <td>Choque en el cruce de las avenidas Universitaria con La Marina</a></td>
-                  <td>22/04/2024</a></td>
-                  <td>Pendiente</td>
-                  <td><a href="incidencia_info.jsp"><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
-                </tr>
-                <tr>
-                  <td>Lab2 de IWEB y GTICS (los patos abusaron de los alumnos)</a></td>
-                  <td>10/04/2024</a></td>
-                  <td>Resuelto</td>
-                  <td><a href="incidencia_info.jsp"><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
-                </tr>
-                <tr>
-                  <td>Lab2 de IWEB y GTICS (los patos abusaron de los alumnos)</a></td>
-                  <td>10/04/2024</a></td>
-                  <td>Resuelto</td>
-                  <td><a href="incidencia_info.jsp"><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
-                </tr>
-                <tr>
-                  <td>Lab2 de IWEB y GTICS (los patos abusaron de los alumnos)</a></td>
-                  <td>10/04/2024</a></td>
-                  <td>Resuelto</td>
-                  <td><a href="incidencia_info.jsp"><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
-                </tr>
-                <tr>
-                  <td>Lab2 de IWEB y GTICS (los patos abusaron de los alumnos)</a></td>
-                  <td>10/04/2024</a></td>
-                  <td>Resuelto</td>
-                  <td><a href="incidencia_info.jsp"><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
-                </tr>
-                <tr>
-                  <td>Lab2 de IWEB y GTICS (los patos abusaron de los alumnos)</td>
-                  <td>10/04/2024</td>
-                  <td>Resuelto</td>
-                  <td><a href="incidencia_info.jsp"><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
-                </tr>
-                <tr>
-                  <td>Lab2 de IWEB y GTICS (los patos abusaron de los alumnos)</a></td>
-                  <td>10/04/2024</a></td>
-                  <td>Resuelto</td>
-                  <td><a href="incidencia_info.jsp"><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
-                </tr>
+              <%
+                if (listaIncidencias == null || listaIncidencias.isEmpty()) {
+              %>
+              <p>No hay incidencias registradas</p>
+              <%
+              } else {
+                for(Incidencia incidencia : listaIncidencias){
+                  String fechaFormateada = sdf.format(incidencia.getFechaIncidencia());
+
+              %>
+              <tr style="text-align: center;">
+                <td><%=incidencia.getNombre()%></td>
+                <td><%=fechaFormateada %></td>
+                <td><%=incidencia.getEstado()%></td>
+                <td><a href='<%=request.getContextPath()%>/Coordinador?action=infoIncidencia&idIncidencia=<%=incidencia.getIdIncidencia()%>'><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
+              </tr>
+              <%
+                  }
+                }
+              %>
+
               </tbody>
             </table>
           </div>
