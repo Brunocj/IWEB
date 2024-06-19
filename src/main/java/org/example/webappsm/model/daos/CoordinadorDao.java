@@ -31,7 +31,7 @@ public class CoordinadorDao extends BaseDao {
                     evento.setFechaYHora(rs.getTimestamp("fechaYHora"));
                     evento.setUbicacion(rs.getString("ubicacion"));
                     evento.setRecurrencia(rs.getInt("recurrencia"));
-                    evento.setImagenes(readImagenes(rs.getBinaryStream("imagenes")));
+                    evento.setImagenes(this.readImagenes(rs.getBinaryStream("imagenes")));
                     evento.setVacantes(rs.getInt("vacantes"));
                     evento.setIngreso(rs.getTimestamp("ingreso"));
                     evento.setSalida(rs.getTimestamp("salida"));
@@ -90,16 +90,6 @@ public class CoordinadorDao extends BaseDao {
 
         }
 
-    }
-    private byte[] readImagenes(InputStream is) throws IOException {
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        int nRead;
-        byte[] data = new byte[1024];
-        while ((nRead = is.read(data, 0, data.length)) != -1) {
-            buffer.write(data, 0, nRead);
-        }
-        buffer.flush();
-        return buffer.toByteArray();
     }
 
 }

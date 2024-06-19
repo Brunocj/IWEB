@@ -7,27 +7,19 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
-import org.example.webappsm.model.beans.Evento;
-import org.example.webappsm.model.beans.Incidencia;
-import org.example.webappsm.model.beans.Profesor;
-import org.example.webappsm.model.beans.Usuario;
+import org.example.webappsm.model.beans.*;
 import org.example.webappsm.model.daos.CoordinadorDao;
-import org.example.webappsm.model.daos.ProfesorDao;
 import org.example.webappsm.model.daos.UserDao;
-import org.example.webappsm.model.daos.VecinosDao;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
 
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.EventListener;
 
 @WebServlet(name ="CoordinadorServlet" , value = "/Coordinador")
 @MultipartConfig
@@ -40,6 +32,49 @@ public class CoordinadorServlet extends HttpServlet {
         UserDao userDao  = new UserDao();
 
         switch (action){
+            case "pagPrincipal":
+                vista = "vistas/jsp/COORDINADOR/html/PaginaPrincipal/pagina_principal_coordinador.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+            case "miPerfil":
+                int idusuario = Integer.parseInt(request.getParameter("id"));
+                Usuario u = userDao.mostrarUsuarioID(idusuario);
+
+                request.setAttribute("usuario", u);
+                vista = "vistas/jsp/COORDINADOR/html/MiPerfil/Miperfil.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+            case "incidencias":
+                ArrayList<Incidencia> listaIncidencias = userDao.listarIncidencias();
+                request.setAttribute("listaincidencias", listaIncidencias);
+
+                vista = "vistas/jsp/COORDINADOR/html/Incidencias/incidencia_coordinador.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+            case "registroIncidencia":
+                ArrayList<Urbanizacion> listaUrbanizaciones = userDao.listarUrbanizaciones();
+                ArrayList<Tipos> tiposIncidencias = userDao.listarTiposIncidencias();
+                request.setAttribute("listaUrbanizaciones", listaUrbanizaciones);
+                request.setAttribute("tiposIncidencias", tiposIncidencias);
+                vista = "vistas/jsp/COORDINADOR/html/Incidencias/registrar_incidencia.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+            case "infoIncidencia":
+                int idIncidencia = Integer.parseInt(request.getParameter("idIncidencia"));
+                Incidencia incidencia = userDao.getIncidenciaId(idIncidencia);
+                request.setAttribute("incidencia", incidencia);
+                vista = "vistas/jsp/COORDINADOR/html/Incidencias/incidencia_info.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+
+
+
+
             case "eventos":
                 CoordinadorDao coordinadorDao2 = new CoordinadorDao();
                 int idCoordinador = 3;

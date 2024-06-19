@@ -36,10 +36,10 @@
     <%
         String userRole = (String) session.getAttribute("userRole");
         if (userRole == null) {
-            userRole = "vecino"; // Por defecto, si no hay rol en la sesión
+            userRole = "Vecino"; // Por defecto, si no hay rol en la sesión
         }
 
-        String menuvecino = "/vistas/jsp/VECINO/Utilidades/menu_" + userRole + ".jsp";
+        String menuvecino = "/vistas/jsp/Utilidades/menu_" + userRole + ".jsp";
     %>
 
     <%-- Incluir el menú y pasar el parámetro de la página activa --%>

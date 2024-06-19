@@ -7,10 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.webappsm.model.beans.Evento;
-import org.example.webappsm.model.beans.Incidencia;
-import org.example.webappsm.model.beans.Profesor;
-import org.example.webappsm.model.beans.Usuario;
+import org.example.webappsm.model.beans.*;
 import org.example.webappsm.model.daos.ProfesorDao;
 import org.example.webappsm.model.daos.UserDao;
 import org.example.webappsm.model.daos.VecinosDao;
@@ -120,6 +117,23 @@ public class VecinoServlet extends HttpServlet {
                 request.setAttribute("listaincidencias", listaIncidencias);
 
                 vista = "vistas/jsp/VECINO/incidencias/incidencia_vecino.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+            case "registroIncidencia":
+                ArrayList<Urbanizacion> listaUrbanizaciones = userDao.listarUrbanizaciones();
+                ArrayList<Tipos> tiposIncidencias = userDao.listarTiposIncidencias();
+                request.setAttribute("listaUrbanizaciones", listaUrbanizaciones);
+                request.setAttribute("tiposIncidencias", tiposIncidencias);
+                vista = "vistas/jsp/VECINO/incidencias/registrar_incidencia.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+            case "infoIncidencia":
+                int idIncidencia = Integer.parseInt(request.getParameter("idIncidencia"));
+                Incidencia incidencia = userDao.getIncidenciaId(idIncidencia);
+                request.setAttribute("incidencia", incidencia);
+                vista = "vistas/jsp/VECINO/incidencias/incidencia_info.jsp";
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
