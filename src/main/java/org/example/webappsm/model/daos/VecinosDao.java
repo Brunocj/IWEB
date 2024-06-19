@@ -117,7 +117,8 @@ public class VecinosDao extends BaseDao{
                     evento.setIdEvento(rs.getInt("idEvento"));
                     evento.setTitulo(rs.getString("titulo"));
                     evento.setDescripcion(rs.getString("descripcion"));
-                    evento.setFechaYHora(rs.getTimestamp("fechaYHora"));
+                    evento.setFecha(rs.getDate("fecha"));
+                    evento.setHora(rs.getTime("hora"));
                     evento.setUbicacion(rs.getString("ubicacion"));
                     evento.setRecurrencia(rs.getInt("recurrencia"));
                     evento.setImagenes(this.readImagenes(rs.getBinaryStream("imagenes")));
@@ -161,7 +162,8 @@ public class VecinosDao extends BaseDao{
                     evento.setIdEvento(rs.getInt("idEvento"));
                     evento.setTitulo(rs.getString("titulo"));
                     evento.setDescripcion(rs.getString("descripcion"));
-                    evento.setFechaYHora(rs.getTimestamp("fechaYHora"));
+                    evento.setFecha(rs.getDate("fecha"));
+                    evento.setHora(rs.getTime("hora"));
                     evento.setUbicacion(rs.getString("ubicacion"));
                     evento.setRecurrencia(rs.getInt("recurrencia"));
                     evento.setImagenes(this.readImagenes(rs.getBinaryStream("imagenes")));
@@ -201,7 +203,8 @@ public class VecinosDao extends BaseDao{
                     evento.setIdEvento(rs.getInt("idEvento"));
                     evento.setTitulo(rs.getString("titulo"));
                     evento.setDescripcion(rs.getString("descripcion"));
-                    evento.setFechaYHora(rs.getTimestamp("fechaYHora"));
+                    evento.setFecha(rs.getDate("fecha"));
+                    evento.setHora(rs.getTime("hora"));
                     evento.setUbicacion(rs.getString("ubicacion"));
                     evento.setRecurrencia(rs.getInt("recurrencia"));
                     evento.setImagenes(this.readImagenes(rs.getBinaryStream("imagenes")));

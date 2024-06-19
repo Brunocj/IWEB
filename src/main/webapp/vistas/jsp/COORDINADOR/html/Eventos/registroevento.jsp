@@ -66,7 +66,7 @@
                   <div class="custom-container rounded-3" style = "padding: 10px" id="fechas">
                     <h4 class="mb-4 center-text"><span id="nombre-seleccionado"><input type="text" id="nombre" name="nombre_evento" placeholder="[Nombre del evento]"></span><i class="fas fa-pencil-alt edit-icon"></i></h4>
                         <p><strong>Fecha:</strong> <span><input type="date" id="fecha" name="fecha" value="AAAA-MM-DD"></span> <i class="fas fa-pencil-alt edit-icon"></i></p>
-                        <p><strong>Hora:</strong> <span><input type="time" id="hora" name="hora" value="mm:hh"></span> <i class="fas fa-pencil-alt edit-icon"></i></p>
+                        <p><strong>Hora:</strong> <span><input type="time" id="hora" name="hora" value="HH:mm"></span> <i class="fas fa-pencil-alt edit-icon"></i></p>
                         <p><strong>Lugar:</strong> <span><input type="text" id="lugar" name="lugar" placeholder="[Establecer lugar]"></span> <i class="fas fa-pencil-alt edit-icon"></i></p>
                         <p><strong>Recurrencia:</strong> <span>
                             <select id="recurrencia" name="recurrencia">

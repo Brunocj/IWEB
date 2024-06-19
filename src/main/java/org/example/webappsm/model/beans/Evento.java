@@ -1,14 +1,16 @@
 package org.example.webappsm.model.beans;
 import lombok.Data;
+
+import java.sql.Time;
 import java.util.Date;
-import java.sql.Timestamp;
 
 @Data
 public class Evento {
     private int idEvento;
     private String titulo;
     private String descripcion;
-    private Date fechaYHora;
+    private Date fecha;
+    private Time hora;
     private String ubicacion;
     private int recurrencia;
     private byte[] imagenes;
@@ -19,6 +21,7 @@ public class Evento {
     private int idCoordinador;
     private int idEstadoEvento;
     private int idArea;
+    private String materiales;
     private String resumen;
 
 }

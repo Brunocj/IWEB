@@ -28,7 +28,8 @@ public class CoordinadorDao extends BaseDao {
                     evento.setIdEvento(rs.getInt("idEvento"));
                     evento.setTitulo(rs.getString("titulo"));
                     evento.setDescripcion(rs.getString("descripcion"));
-                    evento.setFechaYHora(rs.getTimestamp("fechaYHora"));
+                    evento.setFecha(rs.getDate("fecha"));
+                    evento.setHora(rs.getTime("hora"));
                     evento.setUbicacion(rs.getString("ubicacion"));
                     evento.setRecurrencia(rs.getInt("recurrencia"));
                     evento.setImagenes(this.readImagenes(rs.getBinaryStream("imagenes")));
@@ -39,6 +40,7 @@ public class CoordinadorDao extends BaseDao {
                     evento.setIdCoordinador(rs.getInt("idCoordinador"));
                     evento.setIdEstadoEvento(rs.getInt("idEstadoEvento"));
                     evento.setIdArea(rs.getInt("idArea"));
+                    evento.setMateriales(rs.getString("materiales"));
                     evento.setResumen(rs.getString("resumen"));
 
                     listaEventos.add(evento);
@@ -54,8 +56,8 @@ public class CoordinadorDao extends BaseDao {
 
     public boolean registrarEvento(Evento evento) {
         String sql = "INSERT INTO evento " +
-                "(titulo, descripcion, fechaYHora, ubicacion, recurrencia, imagenes, vacantes, ingreso, salida, idProfesor, idCoordinador, idEstadoEvento, idArea, resumen) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "(titulo, descripcion, fecha,hora, ubicacion, recurrencia, imagenes, vacantes, ingreso, salida, idProfesor, idCoordinador, idEstadoEvento, idArea, materiales, resumen) " +
+                "VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 
         try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -63,22 +65,24 @@ public class CoordinadorDao extends BaseDao {
             // Establecer los parámetros del PreparedStatement
             stmt.setString(1, evento.getTitulo());
             stmt.setString(2, evento.getDescripcion());
-            stmt.setTimestamp(3, new Timestamp(evento.getFechaYHora().getTime()));
-            stmt.setString(4, evento.getUbicacion());
-            stmt.setInt(5, evento.getRecurrencia());
-            stmt.setBytes(6, evento.getImagenes());
-            stmt.setInt(7, evento.getVacantes());
-            stmt.setTimestamp(8, new Timestamp(evento.getIngreso().getTime()));
+            stmt.setDate(3, new java.sql.Date(evento.getFecha().getTime()));
+            stmt.setTime(4,  evento.getHora() );
+            stmt.setString(5, evento.getUbicacion());
+            stmt.setInt(6, evento.getRecurrencia());
+            stmt.setBytes(7, evento.getImagenes());
+            stmt.setInt(8, evento.getVacantes());
+            stmt.setTimestamp(9, new Timestamp(evento.getIngreso().getTime()));
             if (evento.getSalida() != null) {
-                stmt.setTimestamp(9, new Timestamp(evento.getSalida().getTime()));
+                stmt.setTimestamp(10, new Timestamp(evento.getSalida().getTime()));
             } else {
-                stmt.setNull(9, java.sql.Types.TIMESTAMP);
+                stmt.setNull(10, java.sql.Types.TIMESTAMP);
             }
-            stmt.setInt(10, evento.getIdProfesor());
-            stmt.setInt(11, evento.getIdCoordinador());
-            stmt.setInt(12, evento.getIdEstadoEvento());
-            stmt.setInt(13, evento.getIdArea());
-            stmt.setString(14, evento.getResumen());
+            stmt.setInt(11, evento.getIdProfesor());
+            stmt.setInt(12, evento.getIdCoordinador());
+            stmt.setInt(13, evento.getIdEstadoEvento());
+            stmt.setInt(14, evento.getIdArea());
+            stmt.setString(15,evento.getMateriales());
+            stmt.setString(16, evento.getResumen());
 
             // Ejecutar la consulta
             stmt.executeUpdate();
