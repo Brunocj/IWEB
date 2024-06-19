@@ -18,4 +18,5 @@ public class Usuario {
     private String direccion;
     private String numContacto;
     private String area;
+    private int idRol;
 }
