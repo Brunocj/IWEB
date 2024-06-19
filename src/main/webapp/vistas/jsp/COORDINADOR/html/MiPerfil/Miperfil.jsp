@@ -88,11 +88,11 @@
                     <tbody>
                       <tr>
                         <td><i class="mdi mdi-lock" style="font-size:25px"></i></td>
-                        <td><a href="../../../LOGIN/chPass.html" style ="color: black;">Cambiar contraseña</a></td>
+                        <td><a href="../../../LOGIN/chPass.jsp" style ="color: black;">Cambiar contraseña</a></td>
                       </tr>
                       <tr>
                         <td><i class="mdi mdi-phone" style="font-size:25px"></i></td> 
-                        <td><a href="../../../LOGIN/chPhone.html" style ="color: black;">Cambiar número telefónico</a></td>
+                        <td><a href="../../../LOGIN/chPhone.jsp" style ="color: black;">Cambiar número telefónico</a></td>
                       </tr>
                     </tbody>
                   </table>

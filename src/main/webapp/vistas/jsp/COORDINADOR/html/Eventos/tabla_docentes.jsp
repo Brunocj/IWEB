@@ -172,7 +172,7 @@
             confirmButtonText: 'Sí, cerrar sesión'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "LOGIN/login.html"; //Cambiar la ubicacion del login de acuerdo a lo necesario
+                window.location.href = "LOGIN/login.jsp"; //Cambiar la ubicacion del login de acuerdo a lo necesario
             }
         });
     }
