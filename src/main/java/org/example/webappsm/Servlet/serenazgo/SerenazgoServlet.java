@@ -153,21 +153,7 @@ public class SerenazgoServlet extends HttpServlet {
                 rd.forward(request,response);
                 break;
 
-            case "clasificar":
 
-                IncidenciasDao incidenciasDao2 = new IncidenciasDao();
-                String idIncidenciaLeer = request.getParameter("idIncidencia");
-                int idIncidenciaLeerInt = Integer.parseInt(idIncidenciaLeer);
-
-                Incidencia incidencia2 = incidenciasDao2.descripcion(idIncidenciaLeerInt);
-
-                request.setAttribute("incidencia",incidencia2);
-
-                vista = "vistas/jsp/SERENAZGO/ListaIncidencias/info1.jsp";
-
-                rd = request.getRequestDispatcher(vista);
-                rd.forward(request,response);
-                break;
         }
 
     }
