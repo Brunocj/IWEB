@@ -203,3 +203,7 @@ document.getElementById("eventForm").addEventListener("submit", function(event) 
     Swal.fire("Error", "Todos los campos son obligatorios", "error");
   }
 });
+
+function goBack() {
+  window.history.back();
+}

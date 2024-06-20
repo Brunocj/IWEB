@@ -15,11 +15,13 @@ import java.io.IOException;
 import java.io.InputStream;
 
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.SimpleTimeZone;
 
 @WebServlet(name ="CoordinadorServlet" , value = "/Coordinador")
 @MultipartConfig
@@ -141,6 +143,34 @@ public class CoordinadorServlet extends HttpServlet {
                         throw new RuntimeException(e);
                     }
                 }
+                String horaString = request.getParameter("hora");
+                Time horaEvento = null;
+
+                if (horaString != null && !horaString.isEmpty()) {
+                    try {
+                        // Verificar el formato HH:mm
+                        if (!horaString.matches("^\\d{2}:\\d{2}$")) {
+                            throw new IllegalArgumentException("Formato de hora inválido, debería ser HH:mm");
+                        }
+
+                        // Añadir ":00" para completar el formato HH:mm:ss
+                        horaString += ":00";
+
+                        horaEvento = Time.valueOf(horaString);
+                    } catch (IllegalArgumentException e) {
+                        throw new RuntimeException("Formato de hora inválido 2, debería ser HH:mm", e);
+                    }
+                } else {
+                    throw new RuntimeException("La hora del evento no fue seleccionada correctamente");
+                }
+
+                // Verificar si horaEvento se asignó correctamente
+                if (horaEvento == null) {
+                    throw new RuntimeException("La hora del evento no fue seleccionada correctamente");
+                }
+
+
+
                 String fechaString2 = "2000-03-31";
                 Date entrada = null;
                 if (fechaString2 != null && !fechaString2.isEmpty()) {
@@ -164,7 +194,8 @@ public class CoordinadorServlet extends HttpServlet {
                 Evento evento = new Evento();
                 evento.setTitulo(nombre_evento);
                 evento.setDescripcion(descripcion);
-                evento.setFechaYHora(fechaEvento);
+                evento.setFecha(fechaEvento);
+                evento.setHora(horaEvento);
                 evento.setUbicacion(lugar);
                 evento.setRecurrencia(recurrencia);
                 evento.setImagenes(imagen);
@@ -175,6 +206,7 @@ public class CoordinadorServlet extends HttpServlet {
                 evento.setIdCoordinador(idCoordinador);
                 evento.setIdEstadoEvento(idEstadoEvento);
                 evento.setIdArea(idArea);
+                evento.setMateriales(material);
                 evento.setResumen(resumen);
                 boolean exito;
                 coordinadorDao.registrarEvento(evento);
