@@ -42,17 +42,9 @@
           <div class="content-wrapper" style ="background-color: #bdf1f5;"> <!--Cambiar al color mas claro-->
             <!-- Sección de contenido -->
             <section class="py-3">
-              <div class="container">
-                <div class="row justify-content-center">
-                  <div class="col-md-4">
-                    <a href="eventos.jsp" class="btn btn-primary btn-lg d-block mb-3 topBtn" style ="background-color: #000f22;">Eventos</a> <!--Cambiar el color de acuerdo al que este seleccionado (el codigo de color de estalinea es el que se debe usar para cuando se encuentra una pestaña seleccionada; en coordinador, usar otro color, pero que sea más oscuro)-->
-                  </div>
-                  <div class="col-md-4">
-                    <a href="eventospasados.jsp" class="btn btn-primary btn-lg d-block mb-3" style ="background-color: #183d6c;">Eventos Pasados</a>
-                  </div>
-                </div>
-              </div>
+              <h2 style ="color:#000f22; font-size: 30px; font-weight: bold; margin-bottom: 20px;">Eventos | Eventos por agregar nota</h2>
             </section>
+            <hr style="color:#000f22; border: none; border-top: 3px solid black; margin-top: -15px; border-radius: 10px;">
             <section class="py-5" >
               <div class="container" style ="padding-top: 0px;">
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">

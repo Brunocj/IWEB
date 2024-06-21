@@ -6,7 +6,7 @@
 
 <nav class="sidebar sidebar-offcanvas" id="sidebar" style ="background-color: #000f22;">  <!--Cambiar al color mas oscuro-->
 
-    <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top" style ="background-color: #000f22; position: fixed">
+    <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top" style ="background-color: #000f22;">
         <h3 class="sidebar-brand brand-logo" style ="color:white; font-weight: 200px; cursor: default;">Menú</h3>
         <h3 class="sidebar-brand brand-logo-mini" style ="color:white; font-weight: 200px; cursor: default;">M</h3>
     </div>
@@ -40,14 +40,38 @@
             </a>
         </li>
 
-        <li class="nav-item menu-items ${"eventos".equals(request.getParameter("action")) ? "active" : ""}">
-            <a class="nav-link" href="<%=request.getContextPath()%>/Coordinador?action=eventos"><!-- Cambiar href de acuerdo a lo necesario -->
-                <span class="menu-icon">
+
+
+
+        <li class="nav-item menu-items">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-icon">
                 <i class="mdi mdi-earth"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
-                <span class="menu-title" style="color: white;">Eventos</span>
+                <span class="menu-title vecinos" style="color: white;">Eventos</span>
+                <i class="menu-arrow" style="color: white;"></i>
             </a>
+
+            <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu"><!-- Colocar items de la sublista -->
+
+                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/Coordinador?action=eventos">
+                  <span class="menu-icon">
+                    <i class="mdi mdi-calendar-plus"></i>
+                  </span>
+                        Eventos creados</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/Coordinador?action=EventosNota">
+                    <span class="menu-icon">
+                    <i class="mdi mdi-calendar-text"></i>
+                  </span>
+                        Eventos pendientes</a></li>
+                </ul>
+            </div>
         </li>
+
+
+
+
         <li class="nav-item menu-items ${"incidencias".equals(request.getParameter("action")) ? "active" : ""}">
             <a class="nav-link" href="<%=request.getContextPath()%>/Coordinador?action=incidencias"> <!-- Cambiar href de acuerdo a lo necesario -->
                 <span class="menu-icon">

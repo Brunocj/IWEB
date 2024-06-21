@@ -79,13 +79,21 @@ public class CoordinadorServlet extends HttpServlet {
 
             case "eventos":
                 CoordinadorDao coordinadorDao2 = new CoordinadorDao();
-                int idCoordinador = 3;
+                int idCoordinador = 3; // posteriormente obtener mediante un request.getParameter
                 ArrayList<Evento> listarEventoscreadoss = coordinadorDao2.listarEventosCreados(idCoordinador);
                 request.setAttribute("listaEventos", listarEventoscreadoss);
                 vista = "vistas/jsp/COORDINADOR/html/Eventos/eventos.jsp";
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
+            case "EventosNota":
+
+                vista = "vistas/jsp/COORDINADOR/html/Eventos/eventospasados.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+
+
             case  "escogerProfesor":
                 vista = "vistas/jsp/COORDINADOR/html/Eventos/tabla_docentes.jsp";
                 rd = request.getRequestDispatcher(vista);
