@@ -410,11 +410,11 @@ public class AdminServlet extends HttpServlet {
         }else if(action.equals("opcionSoli")){
             String opcionSeleccionada = request.getParameter("opcionSeleccionada");
             int id = Integer.parseInt(request.getParameter("idUser"));
-
+            int idArea = Integer.parseInt(request.getParameter("idArea"));
             VecinosDao vecinosDao = new VecinosDao();
 
             if (opcionSeleccionada.equals("aprobar")) {
-                vecinosDao.editarRol(id);
+                vecinosDao.editarRol(id, idArea);
 
             } else if (opcionSeleccionada.equals("denegar")) {
                 vecinosDao.eliminarSolicitud(id);

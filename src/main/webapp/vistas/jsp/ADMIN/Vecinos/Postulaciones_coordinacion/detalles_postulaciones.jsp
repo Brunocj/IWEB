@@ -183,6 +183,15 @@
                         <form id="miFormularioPostulacion" action="${pageContext.request.contextPath}/Admin?action=opcionSoli" method="post">
                             <input type="hidden" name="action" value="opcionSoli">
                             <input type="hidden" id="idUser" name="idUser" value="<%=idPostulacion%>">
+                            <%
+                                int idArea;
+                                if(usuario.getArea().equals("Cultura")){
+                                    idArea = 1;
+                                }else{
+                                    idArea = 2;
+                                }
+                            %>
+                            <input type="hidden" id="idArea" name="idArea" value="<%=idArea%>">
                             <input type="hidden" id="opcionSeleccionada" name="opcionSeleccionada" value="">
                             <div class="inputs">
                                 <label for="nombre" style="font-size: 12px; color: gray;">Nombres:</label>

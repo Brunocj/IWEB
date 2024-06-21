@@ -197,9 +197,9 @@
                     <table id="miTabla" class="table" style="margin-bottom:15px;">
                         <thead style="background-color: #ff8e9f;"> <!--Cambiar al color de fondo de la pagina, pero un poco mas oscuro-->
                             <tr style="text-align: center; font-weight:800;">
-                                <th style ="color: white;font-size: 17px;cursor: pointer;">Apellidos</th>
-                                <th style ="color: white;font-size: 17px;cursor: pointer;">Nombres</th>
-                                <th style ="color: white;font-size: 17px;cursor: pointer;">Deporte/Cultura</th>
+                                <th style ="color: white;font-size: 17px;cursor: pointer;">Apellidos y Nombres</th>
+                                <th style ="color: white;font-size: 17px;cursor: pointer;">Documento</th>
+                                <th style ="color: white;font-size: 17px;cursor: pointer;">Área</th>
                                 <th style="color: white; font-size: 17px; cursor: pointer;">Ver Detalles
                                     <a class="mdi mdi-magnify" style="color: #ffffff; font-size: 20px;"></a>
                                 </th>
@@ -214,9 +214,10 @@
                                     for (Usuario usuario : lista) {
                             %>
                             <tr style="text-align: center;">
-                                <td><a><%=usuario.getApellido() %></a></td>
-                                <td><a><%=usuario.getNombre() %></a></td>
+                                <td><a><%=usuario.getApellido() %>, <%=usuario.getNombre() %></a></td>
+                                <td><a><%=usuario.getDocumento()%></a></td>
                                 <td><a><%=usuario.getArea() %></a></td>
+
                                 <td><a href="<%=request.getContextPath()%>/Admin?action=solicitudCoordi&id=<%=usuario.getId()%>" class="mdi mdi-account-details" style="color: #6c7293; font-size: 20px;"></a>
                             </tr>
                             <%

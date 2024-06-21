@@ -11,7 +11,7 @@ public class VecinosDao extends BaseDao{
         ArrayList<Usuario> listaSoli = new ArrayList<>();
 
 
-        String sql = "SELECT u.idUsuario, u.nombres, u.apellidos, e.nombreEstado AS estado " +
+        String sql = "SELECT u.idUsuario, u.nombres, u.apellidos, e.nombreEstado AS estado, u.nroDocumento, u.correo " +
                 "FROM Usuario u " +
                 "JOIN Estado e ON u.Estado_idEstado = e.idEstado " +
                 "WHERE u.Estado_idEstado = 1";
@@ -25,7 +25,8 @@ public class VecinosDao extends BaseDao{
                 usuario.setId(rs.getInt("idUsuario"));
                 usuario.setNombre(rs.getString("nombres"));
                 usuario.setApellido(rs.getString("apellidos"));
-
+                usuario.setCorreoE(rs.getString("correo"));
+                usuario.setDocumento(rs.getString("nroDocumento"));
 
                 listaSoli.add(usuario);
 
@@ -46,7 +47,8 @@ public class VecinosDao extends BaseDao{
                 "u.idUsuario," +
                 "u.nombres, " +
                 "u.apellidos, " +
-                "a.nombreArea AS area " +
+                "a.nombreArea AS area, " +
+                "u.nroDocumento " +
                 "FROM " +
                 "SolicitudCoordinador sc " +
                 "JOIN Usuario u ON sc.idUsuario = u.idUsuario " +
@@ -64,7 +66,7 @@ public class VecinosDao extends BaseDao{
                 usuario.setNombre(rs.getString("nombres"));
                 usuario.setApellido(rs.getString("apellidos"));
                 usuario.setArea(rs.getString("area"));
-
+                usuario.setDocumento(rs.getString("nroDocumento"));
                 listaCoord.add(usuario);
 
             }
@@ -190,17 +192,18 @@ public class VecinosDao extends BaseDao{
             throw new RuntimeException(e);
         }
     }
-    public void editarRol(int idUsuario){
+    public void editarRol(int idUsuario, int idArea){
         int idNuevoRol = 4;
         int idEstado = 1;
 
         try (Connection conn = this.getConnection()){
             String queryRol = "UPDATE Usuario AS U " +
-                    "SET U.idRol = ? " +
+                    "SET U.idRol = ?, U.idArea = ? " +
                     "WHERE U.idUsuario = ?";
             try (PreparedStatement pstmtRol = conn.prepareStatement(queryRol);) {
                 pstmtRol.setInt(1,idNuevoRol);
-                pstmtRol.setInt(2,idUsuario );
+                pstmtRol.setInt(2,idArea );
+                pstmtRol.setInt(3,idUsuario );
                 pstmtRol.executeUpdate();
             }
             String queryEstado = "UPDATE solicitudCoordinador SET estado = ? WHERE idUsuario = ?";
