@@ -13,7 +13,7 @@
     <ul class="nav" style = "position: fixed;">
 
         <!-- Codigo para un item de la barra lateral que no tiene sublista -->
-        <li class="nav-item menu-items ${"pagPrincipal".equals(request.getParameter("action")) ? "active" : ""}">
+        <li class="nav-item menu-items ${"pagPrincipal".equals(request.getParameter("activePage")) ? "active" : ""}">
             <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=pagPrincipal">
         <span class="menu-icon">
             <i class="mdi mdi-home"></i>
@@ -21,7 +21,7 @@
                 <span class="menu-title" style="color: white;">Página principal</span>
             </a>
         </li>
-        <li class="nav-item menu-items ${"dashboard".equals(request.getParameter("action")) ? "active" : ""}">
+        <li class="nav-item menu-items ${"dashboard".equals(request.getParameter("activePage")) ? "active" : ""}">
             <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=dashboard">
         <span class="menu-icon">
             <i class="mdi mdi-chart-bar"></i>
@@ -29,7 +29,7 @@
                 <span class="menu-title" style="color: white;">Dashboard</span>
             </a>
         </li>
-        <li class="nav-item menu-items ${"tablaSerenazgo".equals(request.getParameter("action")) ? "active" : ""}">
+        <li class="nav-item menu-items ${"tablaSerenazgo".equals(request.getParameter("activePage")) ? "active" : ""}">
             <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=tablaSerenazgo">
         <span class="menu-icon">
             <i class="mdi mdi-security"></i>
@@ -37,7 +37,7 @@
                 <span class="menu-title" style="color: white;">Serenazgo</span>
             </a>
         </li>
-        <li class="nav-item menu-items ${"tablaProfesores".equals(request.getParameter("action")) ? "active" : ""}">
+        <li class="nav-item menu-items ${"tablaProfesores".equals(request.getParameter("activePage")) ? "active" : ""}">
             <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=tablaProfesores">
         <span class="menu-icon">
             <i class="mdi mdi-teach"></i>
@@ -59,12 +59,12 @@
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu"><!-- Colocar items de la sublista -->
 
-                    <li class="nav-item ${"tablaAcceso".equals(request.getParameter("action")) ? "active" : ""}"> <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=tablaAcceso" style="color: white;">
+                    <li class="nav-item ${"tablaAcceso".equals(request.getParameter("activePage")) ? "active" : ""}"> <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=tablaAcceso" style="color: white;">
                   <span class="menu-icon">
                     <i class="mdi mdi-account-alert"></i>
                   </span>
                         Sol. de acceso</a></li>
-                    <li class="nav-item ${"tablaCoordinador".equals(request.getParameter("action")) ? "active" : ""}"> <a class="nav-link " href="<%=request.getContextPath()%>/Admin?action=tablaCoordinador" style="color: white;">
+                    <li class="nav-item ${"tablaCoordinador".equals(request.getParameter("activePage")) ? "active" : ""}"> <a class="nav-link " href="<%=request.getContextPath()%>/Admin?action=tablaCoordinador" style="color: white;">
                   <span class="menu-icon ">
                     <i class="mdi mdi-account-alert "></i>
                   </span>
