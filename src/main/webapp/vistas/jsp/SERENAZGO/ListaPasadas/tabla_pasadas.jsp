@@ -216,7 +216,7 @@
                   <td><a href="Serenazgo?action=mostrarDescripcion&idIncidencia=<%= incidencia.getIdIncidencia() %>">Leer descripción</a></td>
 
                   <td><a href="#" onclick="return eliminarpas(<%= incidencia.getIdIncidencia() %>, '<%= request.getContextPath() %>');"
-                         class="mdi mdi-delete" style="color: #6c7293; font-size: 20px;"></a></td>
+                         class="mdi mdi-trash-can-outline" style="color: #0D1832; font-size: 20px;"></a></td>
 
                 </tr>
                 <% }

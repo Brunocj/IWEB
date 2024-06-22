@@ -225,7 +225,7 @@
                   <td><a href="Serenazgo?action=clasificar&idIncidencia=<%= incidencia.getIdIncidencia() %>">Clasificar</a></td>
                   <td><a href="Serenazgo?action=actualizarClasificacion&idIncidencia=<%= incidencia.getIdIncidencia() %>">Actualizar clasificacion</a></td>
                   <td><a href="Serenazgo?action=proceder&idIncidencia=<%= incidencia.getIdIncidencia() %>">Proceder</a></td>
-                  <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-close" style ="color: #6c7293;font-size: 20px;"></a></td>
+                  <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-close" style ="color: #0D1832 ;font-size: 20px;"></a></td>
                 </tr>
                 <% }
                 } else { %>

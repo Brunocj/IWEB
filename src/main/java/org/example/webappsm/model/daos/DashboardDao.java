@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class DashboardDao {
 
-
     public ArrayList<Usuario> listarBaneados(){
         ArrayList<Usuario> listaBaneados = new ArrayList<>();
 

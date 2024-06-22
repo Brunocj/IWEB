@@ -2,13 +2,6 @@
 <%@ page import="com.google.gson.Gson" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="org.example.webappsm.model.beans.Usuario" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: bruno
-  Date: 27/05/2024
-  Time: 22:05
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String totalBaneados = (String) request.getAttribute("totalbaneados");
@@ -19,7 +12,6 @@
     String incidenciasPorAtender = (String) request.getAttribute("incidenciasatender");
     String incidenciasUrbMax = (String) request.getAttribute("incidenciasurbmax");
     String incidenciasUrbMin = (String) request.getAttribute("incidenciasurbmin");
-    ArrayList<Usuario> listaBaneados = (ArrayList<Usuario>) request.getAttribute("listabaneados");
     ArrayList<String> tipoIncidencias = (ArrayList<String>) request.getAttribute("tipoincidencias");
     ArrayList<Integer> cantidadTipo = (ArrayList<Integer>) request.getAttribute("cantidadtipo");
     ArrayList<String> urbanizaciones = (ArrayList<String>) request.getAttribute("urbanizaciones");
@@ -396,48 +388,6 @@
                                 </div>
 
 
-
-                                <hr style="border: none; border-top: 3px solid black; margin-top: 30px; border-radius: 10px;">
-                                <!--dashboard-->
-                                <div style="display: flex; justify-content: space-between;">
-                                    <div style="display: flex; justify-content: space-between;">
-                                        <div style="display: flex; flex-direction: column;">
-                                            <h2 class="tabla-title" style="color:#000f22;">Usuarios sancionados por falsas alarmas</h2>  <!--Cambiar el titulo de la tabla-->
-                                        </div>
-                                    </div>
-                                </div>
-                                <table id="miTabla" class="table" style="margin-bottom:50px;">
-                                    <thead style="background-color: #e9290c44;"> <!--Cambiar al color de fondo de la pagina, pero un poco mas oscuro-->
-                                        <tr style="text-align: center; font-weight:800;">
-                                            <th style="color: white;font-size: 17px;cursor: pointer;">Apellidos</th>
-                                            <th style="color: white;font-size: 17px;cursor: pointer;">Nombres</th>
-                                            <th style="color: white;font-size: 17px;cursor: pointer;">DNI</th>
-                                            <th style="color: white;font-size: 17px;cursor: pointer;">Administrar sanción</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody style="text-align: center;color: black;">
-                                        <%
-                                            if (listaBaneados != null) {
-                                                for (Usuario usuario : listaBaneados) {
-                                        %>
-                                        <tr style="text-align: center;">
-                                            <td><a><%= usuario.getApellido() %></a></td>
-                                            <td><a><%= usuario.getNombre() %></a></td>
-                                            <td><a><%= usuario.getDocumento() %></a></td>
-                                            <td><a class="mdi mdi-lock-open" style="color:black;"></a></td>
-                                        </tr>
-                                        <%
-                                            }
-                                        } else {
-                                        %>
-                                        <tr>
-                                            <td colspan="5">No hay usuarios baneados.</td>
-                                        </tr>
-                                        <%
-                                            }
-                                        %>
-                                    </tbody>
-                                </table>
                             </div>
                             <!-- main-panel ends -->
                         </div>

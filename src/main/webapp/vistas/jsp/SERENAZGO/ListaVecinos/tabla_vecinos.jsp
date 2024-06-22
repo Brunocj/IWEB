@@ -225,7 +225,7 @@
                   <td style="color: red; font-weight: bold;">Usuario baneado</td>
                   <%
                   } else if (usuario.getFalsasAlarmas() > 5) { %>
-                  <td><a href="#" onclick="return banear(<%= usuario.getId() %>,'<%= request.getContextPath() %>');" class="mdi mdi-account-remove" style="color: #6c7293; font-size: 20px;"></a></td>
+                  <td><a href="#" onclick="return banear(<%= usuario.getId() %>,'<%= request.getContextPath() %>');" class="mdi mdi-trash-can-outline" style="color: #0D1832; font-size: 20px;"></a></td>
                   <%
                   } else { %>
                   <td></td>

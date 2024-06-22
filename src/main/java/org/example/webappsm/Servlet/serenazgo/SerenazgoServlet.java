@@ -44,7 +44,6 @@ public class SerenazgoServlet extends HttpServlet {
                 String incidenciasPorAtender = dashboardDao.incidenciasPorAtender();
                 String incidenciasUrbMax = dashboardDao.incidenciasUrbMax();
                 String incidenciasUrbMin = dashboardDao.incidenciasUrbMin();
-                ArrayList<Usuario> listaBaneados = dashboardDao.listarBaneados();
 
                 ArrayList<String> tipoIncidencias = new ArrayList<>();
                 ArrayList<Integer> cantidadTipo = new ArrayList<>();
@@ -66,7 +65,7 @@ public class SerenazgoServlet extends HttpServlet {
                 request.setAttribute("incidenciasatender", incidenciasPorAtender);
                 request.setAttribute("incidenciasurbmax",incidenciasUrbMax);
                 request.setAttribute("incidenciasurbmin", incidenciasUrbMin);
-                request.setAttribute("listabaneados", listaBaneados);
+
                 request.setAttribute("tipoincidencias", tipoIncidencias);
                 request.setAttribute("cantidadtipo", cantidadTipo);
                 request.setAttribute("urbanizaciones", urbanizaciones);
