@@ -8,11 +8,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.webappsm.model.beans.Incidencia;
-import org.example.webappsm.model.beans.Tipos;
-import org.example.webappsm.model.beans.Urbanizacion;
-import org.example.webappsm.model.beans.Usuario;
+import org.example.webappsm.model.beans.*;
 import org.example.webappsm.model.daos.UserDao;
+import org.example.webappsm.model.daos.VecinosDao;
 
 
 import java.io.ByteArrayOutputStream;
@@ -54,9 +52,31 @@ public class VecinoServlet extends HttpServlet {
                 rd.forward(request,response);
                 break;
             case "eventos":
-
+                VecinosDao vecinosDao = new VecinosDao();
+                idusuario = 10;
+                ArrayList<Evento> listarEventos = vecinosDao.listarEventos(idusuario);
+                request.setAttribute("listaEventos", listarEventos);
 
                 vista = "vistas/jsp/VECINO/eventos/eventos.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+            case "misEventos":
+                VecinosDao vecinosDao2 = new VecinosDao();
+                idusuario = 10; //posteriormente obtener este parametro mediante sessions
+                ArrayList<Evento> listarEventos2 = vecinosDao2.listarMisEventos(idusuario);
+                request.setAttribute("listaMisEventos", listarEventos2);
+
+                vista = "vistas/jsp/VECINO/eventos/mis_eventos.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+            case "eventosPasados":
+
+
+
+
+                vista = "vistas/jsp/VECINO/eventos/eventos_pasados.jsp";
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;

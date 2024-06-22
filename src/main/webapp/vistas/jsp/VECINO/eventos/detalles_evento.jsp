@@ -38,10 +38,10 @@
     <%
         String userRole = (String) session.getAttribute("userRole");
         if (userRole == null) {
-            userRole = "vecino"; // Por defecto, si no hay rol en la sesión
+            userRole = "Vecino"; // Por defecto, si no hay rol en la sesión
         }
 
-        String menuvecino = "/vistas/jsp/VECINO/Utilidades/menu_" + userRole + ".jsp";
+        String menuvecino = "/vistas/jsp/Utilidades/menu_" + userRole + ".jsp";
     %>
 
     <%-- Incluir el menú y pasar el parámetro de la página activa --%>
@@ -69,8 +69,8 @@
                         <div class="col-md-6">
                             <div class="custom-container rounded-3" id="fechas" style="font-size: 28px;">
                                 <h4 class="mb-4 center-text"><%=evento.getTitulo()%></h4>
-                                <p><strong>Fecha:</strong> <%=evento.getFechaYHora()%></p>
-                                <p><strong>Hora:</strong> 08:00 AM a 10:00 AM </p>
+                                <p><strong>Fecha:</strong> <%=evento.getFecha()%></p>
+                                <p><strong>Hora:</strong> <%=evento.getHora()%> </p>
                                 <p><strong>Lugar:</strong> <%=evento.getUbicacion()%></p>
                                 <p><strong>Recurrencia:</strong><%=evento.getRecurrencia()%></p>
                                 <div class="text-center">
@@ -88,7 +88,7 @@
                                 <h4 class="mb-4">Descripción del Evento</h4>
                                 <p><%=evento.getDescripcion()%></p>
                                 <h4 class="mb-4">Materiales</h4>
-                                <p>Te odio Bruno has bien tus base de datos la csmr</p>
+                                <p>Pelota de futbol</p>
                                 <h4 class="mb-4">Profesor</h4>
                                 <p><%=evento.getIdProfesor()%></p>
                             </div>

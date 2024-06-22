@@ -46,84 +46,73 @@
     <jsp:include page="<%= menuvecino %>">
         <jsp:param name="activePage" value="eventos"/>
     </jsp:include>
-    <!-- partial -->
-    <div class="main-panel">
-        <div class="content-wrapper" style ="background-color: #d6e9ff;"> <!--Cambiar al color mas claro-->
-            <!-- Sección de contenido -->
-            <section class="py-3">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-md-4">
-                            <a href="${pageContext.request.contextPath}/Vecino?action=misEventos" class="btn btn-primary btn-lg d-block mb-3" style ="background-color:  #183d6c;">Mis Eventos</a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="${pageContext.request.contextPath}/Vecino?action=eventos" class="btn btn-primary btn-lg d-block mb-3 topBtn" style ="background-color: #000f22;">Eventos</a> <!--Cambiar el color de acuerdo al que este seleccionado (el codigo de color de estalinea es el que se debe usar para cuando se encuentra una pestaña seleccionada; en coordinador, usar otro color, pero que sea más oscuro)-->
-                        </div>
-                        <div class="col-md-4">
-                            <a href= "eventos_pasados.jsp" class="btn btn-primary btn-lg d-block mb-3" style ="background-color:  #000f22;">Eventos Pasados</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="py-5" >
-                <%
-                    // Suponiendo que eventos es un ArrayList<Evento> que proviene del servlet o controlador
-                    ArrayList<Evento> eventos = (ArrayList<Evento>) request.getAttribute("listaMisEventos");
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper" style ="background-color: #d6e9ff;"> <!--Cambiar al color mas claro-->
+                <!-- Sección de contenido -->
+                <section class="py-3">
+                    <h2 style ="color:#000f22; font-size: 30px; font-weight: bold; margin-bottom: 20px;">Eventos | Mis eventos</h2>
+                </section>
+                <hr style="color:#000f22; border: none; border-top: 3px solid black; margin-top: -15px; border-radius: 10px;">
+                <section class="py-5" >
+                    <%
+                        // Suponiendo que eventos es un ArrayList<Evento> que proviene del servlet o controlador
+                        ArrayList<Evento> eventos = (ArrayList<Evento>) request.getAttribute("listaMisEventos");
 
-                    int columnasPorFila = 4;
-                    int contador = 0;
+                        int columnasPorFila = 4;
+                        int contador = 0;
 
-                    // Iterar sobre la lista de eventos
-                    for (Evento evento : eventos) {
-                        // Abrir un nuevo container y row cada 4 eventos
-                        if (contador % columnasPorFila == 0) {
-                %>
-                <div class="container" style ="padding-top: 0px;">
-                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-                        <% } %>
-                        <div class="col">
-                            <div class="cardEvent" data-event-id="<%= evento.getIdEvento() %>">
-                                <img  src="data:image/jpeg;base64, <%= new String(org.apache.commons.codec.binary.Base64.encodeBase64(evento.getImagenes())) %>" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <h5 class="card-title"><%= evento.getTitulo() %></h5>
+                        // Iterar sobre la lista de eventos
+                        for (Evento evento : eventos) {
+                            // Abrir un nuevo container y row cada 4 eventos
+                            if (contador % columnasPorFila == 0) {
+                    %>
+                    <div class="container" style ="padding-top: 0px;">
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                            <% } %>
+                            <div class="col">
+                                <div class="cardEvent" data-event-id="<%= evento.getIdEvento() %>">
+                                    <img  src="data:image/jpeg;base64, <%= new String(org.apache.commons.codec.binary.Base64.encodeBase64(evento.getImagenes())) %>" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h5 class="card-title"><%= evento.getTitulo() %></h5>
+                                        </div>
+                                        <p class="card-text"><%= evento.getDescripcion() %></p>
+                                        <!-- Botón en la parte inferior derecha -->
+                                        <a href ="${pageContext.request.contextPath}/Vecino?action=verMiEvento&id=<%= evento.getIdEvento() %>" class="btn btn-primary btn-sm btn-bottom-right">Ver mi evento</a>
                                     </div>
-                                    <p class="card-text"><%= evento.getDescripcion() %></p>
-                                    <!-- Botón en la parte inferior derecha -->
-                                    <a href ="${pageContext.request.contextPath}/Vecino?action=verMiEvento&id=<%= evento.getIdEvento() %>" class="btn btn-primary btn-sm btn-bottom-right">Ver mi evento</a>
                                 </div>
                             </div>
+                            <% if ((contador + 1) % columnasPorFila == 0 || contador == eventos.size() - 1) { %>
                         </div>
-                        <% if ((contador + 1) % columnasPorFila == 0 || contador == eventos.size() - 1) { %>
                     </div>
-                </div>
-                <% } %>
+                    <% } %>
 
-                <% contador++;
-                } %>
-            </section>
-            <nav>
-                <ul class="pagination justify-content-center">
-                    <li class="page-item" id="previousPage">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
-                    </li>
-                    <li class="page-item active"><a class="page-link page-button" href="#" data-page="1">1</a></li>
-                    <li class="page-item"><a class="page-link page-button" href="#" data-page="2">2</a></li>
+                    <% contador++;
+                    } %>
+                </section>
+                <nav>
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item" id="previousPage">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                        </li>
+                        <li class="page-item active"><a class="page-link page-button" href="#" data-page="1">1</a></li>
+                        <li class="page-item"><a class="page-link page-button" href="#" data-page="2">2</a></li>
 
-                    <!-- Repite este bloque para más números de página si es necesario -->
-                    <li class="page-item" id="nextPage">
-                        <a class="page-link" href="#">Siguiente</a>
-                    </li>
-                </ul>
-            </nav>
+                        <!-- Repite este bloque para más números de página si es necesario -->
+                        <li class="page-item" id="nextPage">
+                            <a class="page-link" href="#">Siguiente</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:../../partials/_footer.jsp -->
+            <!-- partial -->
         </div>
-        <!-- content-wrapper ends -->
-        <!-- partial:../../partials/_footer.jsp -->
-        <!-- partial -->
+        <!-- main-panel ends -->
     </div>
-    <!-- main-panel ends -->
-</div>
-<!-- page-body-wrapper ends -->
+    <!-- page-body-wrapper ends -->
 </div>
 <!-- container-scroller -->
 <!-- plugins:js -->
