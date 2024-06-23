@@ -1,9 +1,5 @@
-<%@ page import="org.example.webappsm.model.beans.Incidencia" %>
-<%@ page import="java.util.ArrayList" %>
-<%
-  ArrayList<Incidencia> lista = (ArrayList<Incidencia>) request.getAttribute("listaIncidencias");
-%>
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -25,8 +21,6 @@
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" />
     <!--JS para los popups-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-   
-    
   </head>
   <body>
     <div class="container-scroller">
@@ -35,9 +29,9 @@
 
 
       <nav class="sidebar sidebar-offcanvas" id="sidebar" style ="background-color: #000f22;">  <!--Cambiar al color mas oscuro-->
-        
+
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top" style ="background-color: #000f22;">
-          <h3 class="sidebar-brand brand-logo" style ="color:white; font-weight: 200px; cursor: default;">MENU</h3>
+          <h3 class="sidebar-brand brand-logo" style ="color:white; font-weight: 200px; cursor: default;">Menú</h3>
           <h3 class="sidebar-brand brand-logo-mini" style ="color:white; font-weight: 200px; cursor: default;">M</h3>
         </div>
 
@@ -125,31 +119,31 @@
         </ul>
       </nav>
       <!-- partial -->
-      
+
       <div class="container-fluid page-body-wrapper">
         <!-- partial:../../partials/_navbar.html -->
         <nav class="navbar p-0 fixed-top d-flex flex-row">
-          
+
           <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch" style ="background-color: #000f22"> <!--Cambiar al color mas oscuro-->
             <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
               <span class="mdi mdi-menu" style="color: white;"></span> <!--Cambiar el color de las 3 rayas de acuerdo a lo necesario (a negro en todo caso)-->
             </button>
-            
+
             <ul class="navbar-nav navbar-nav-right">
-              
-              
+
+
               <li class="nav-item dropdown">
                 <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                   <div class="navbar-profile">
                     <div class="Header-nav-item">
-                      <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default; text-align: right;">Ricardo Calderon Rodriguez</h2>
+                      <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default; text-align: right;">Ricardo Calderón Rodríguez</h2>
                       <h5 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 15px; font-weight:500; cursor: default;">Serenazgo de San Miguel, Lima</h5>
                     </div>
-                    <img class="img-xs rounded-circle" src="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
-                    
+                    <img class="img-xs rounded-circle" src="../../LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
+
                   </div>
                 </a>
-                
+
               </li>
             </ul>
             <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
@@ -161,127 +155,127 @@
         <div class="main-panel">
           <div >
             <div class="content-wrapper" style ="background-color: #fffff6; margin-top:auto;"> <!--Cambiar al color mas claro-->
-            <!--CONTENIDO-->
-            <div style="display: flex; justify-content: space-between;">
+              <!--CONTENIDO-->
               <div style="display: flex; justify-content: space-between;">
-                <div style="display: flex; flex-direction: column; ">
-                  <h2 class="tabla-title" style ="color:#000f22;">Lista de incidencias</h2>  <!--Cambiar el titulo de la tabla-->
-                    
-                  <div style="display: flex; gap:30px;margin-top: 10px;">
- 
-                    <div style="display: flex; gap:10px;">
+                <div style="display: flex; justify-content: space-between;">
+                  <div style="display: flex; flex-direction: column; ">
+                    <h2 class="tabla-title" style ="color:#000f22;">Lista de incidencias</h2>  <!--Cambiar el titulo de la tabla-->
 
-                      <p style ="color:black; align-self: center; margin-bottom: 0px;font-size: 15px">Filtrar por incidencias :</p>
-                      <select id="filtroEstado" style="border-color: #DFDFDF; border-radius: 6px; padding:5px; outline: none; height: 40px; margin-top: 10px;" >
-                        <option value="">Mostrar Todos</option> <!--Cambiar el filtro de acuerdo a lo necesario-->
-                        <option value="Futbol">Incidencias nuevas</option>
-                        <option value="Natacion">Incidencias en proceso</option>
-                        
+                    <div style="display: flex; gap:30px;margin-top: 10px;">
 
-                      </select>
+                      <div style="display: flex; gap:10px;">
+
+                        <p style ="color:black; align-self: center; margin-bottom: 0px;font-size: 15px">Filtrar por incidencias :</p>
+                        <select id="filtroEstado" style="border-color: #DFDFDF; border-radius: 6px; padding:5px; outline: none; height: 40px; margin-top: 10px;" >
+                          <option value="">Mostrar Todos</option> <!--Cambiar el filtro de acuerdo a lo necesario-->
+                          <option value="Futbol">Más de 5 incidencias</option>
+                          <option value="Natacion">Menos de 6</option>
+
+
+                        </select>
+                      </div>
+                      <div style="display: flex; align-items: center; justify-content: center;">
+                        <button id="limpiarFiltros" class="btnTable" style="display: flex; align-items: center;">
+                          Limpiar Filtros
+                          <a class="mdi mdi-filter-remove" style="color: #ffffff; font-size: 20px; margin-left: 5px;"></a>
+                        </button>
+                      </div>
+                      <div style="display: flex; align-items: center; justify-content: center;">
+
+                      </div>
                     </div>
-                    <div style="display: flex; align-items: center; justify-content: center;">
-                      <button id="limpiarFiltros" class="btnTable" style="display: flex; align-items: center;">
-                        Limpiar Filtros
-                        <a class="mdi mdi-filter-remove" style="color: #ffffff; font-size: 20px; margin-left: 5px;"></a>
-                      </button> 
-                    </div>
-                    <div style="display: flex; align-items: center; justify-content: center;">
-                    
-                    </div>
-                  </div>    
+                  </div>
                 </div>
               </div>
+              <table id="miTabla" class="table" style="margin-bottom:15px;">
+                <thead style="background-color: #000f22;"> <!--Cambiar al color de fondo de la pagina, pero un poco mas oscuro-->
+                  <tr style="text-align: center; font-weight:800;">
+                    <th style ="color: white;font-size: 17px;cursor: pointer;">Estado</th>
+                    <th style ="color: white;font-size: 17px;cursor: pointer;">Apellidos</th>
+                    <th style ="color: white;font-size: 17px;cursor: pointer;">Nombres</th>
+
+                    <th style="width: 20px;color: white"></th>
+                    <th style="width: 20px;color: white"></th>
+                    <th style="width: 20px;color: white;cursor: pointer;">Finalizar</th>
+                    <th style="width: 20px;color: white;cursor: pointer;">Falsa Alarma</th>
+                  </tr>
+                </thead>
+                <hr style="border: none; border-top: 3px solid black; margin-top: -55px; border-radius: 10px;">
+
+                <tbody style="text-align: center;color: black;">
+
+                  <tr style="text-align: center;">
+                    <td><a>En proceso</a></td>
+                    <td><a>López Pascual</a></td>
+                    <td><a>Adrián Alvaro</a></td>
+                    <td><a href="clasifica.html">Descripción</a></td>
+                    <td><a href="clasifica.html">Proceder</a></td>
+                    <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-marker-check" style ="color: #6c7293;font-size: 20px;"></a></td>
+                    <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-alert" style ="color: #6c7293;font-size: 20px;"></a></td>
+
+                  </tr>
+
+                  <tr style="text-align: center;">
+                    <td><a>Nueva</a></td>
+                    <td><a>Calderon Rodriguez</a></td>
+                    <td><a>José Ricardo</a></td>
+                    <td><a href="clasifica.html">Descripción</a></td>
+                    <td><a href="info1.html">Proceder</a></td>
+
+                    <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-marker-check" style ="color: #6c7293;font-size: 20px;"></a></td>
+
+                    <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-alert" style ="color: #6c7293;font-size: 20px;"></a></td>
+
+                  </tr>
+
+                </tbody>
+              </table>
+
+              <!-- content-wrapper ends -->
+              <!-- partial:../../partials/_footer.html -->
+              <!-- partial -->
             </div>
-            <table id="miTabla" class="table" style="margin-bottom:15px;">
-              <thead style="background-color: #000f22;"> <!--Cambiar al color de fondo de la pagina, pero un poco mas oscuro-->
-                <tr style="text-align: center; font-weight:800;">
-                  <th style ="color: white;font-size: 17px;cursor: pointer;">Estado</th>
-                  <th style ="color: white;font-size: 17px;cursor: pointer;">Nombres</th>
-                  <th style ="color: white;font-size: 17px;cursor: pointer;">Apellidos</th>
-                  <th style ="color: white;font-size: 17px;cursor: pointer;">Clasificacion</th>
 
-                  <th style ="color: white;font-size: 17px;cursor: pointer;"></th>
-                  <th style ="color: white;font-size: 17px;cursor: pointer;"></th>
-                  <th style ="color: white;font-size: 17px;cursor: pointer;"></th>
-                  <th style="width: 20px;color: white"></th>
-                  <th style="width: 20px;color: white">Finalizar</th>
-                </tr>
-              </thead>
-              <hr style="border: none; border-top: 3px solid black; margin-top: -55px; border-radius: 10px;">
+            <!-- main-panel ends -->
+          </div>
+          <!-- page-body-wrapper ends -->
+        </div>
 
-              <tbody style="text-align: center;color: black;">
-
-                <% if (lista != null && !lista.isEmpty()) {
-
-                  for (Incidencia incidencia : lista) { %>
-                <tr style="text-align: center;">
-                  <td><%= incidencia.getEstado() %></td>
-                  <td><%= incidencia.getNombreUsuarioIncidencia() %></td>
-                  <td><%= incidencia.getApellidoUsuarioIncidencia() %></td>
-                  <td><%= incidencia.getClasificacion() %></td>
-
-                  <td><a href="Serenazgo?action=leerDescripcion&idIncidencia=<%= incidencia.getIdIncidencia() %>">Leer descripcion</a></td>
-                  <td><a href="Serenazgo?action=clasificar&idIncidencia=<%= incidencia.getIdIncidencia() %>">Clasificar</a></td>
-                  <td><a href="Serenazgo?action=actualizarClasificacion&idIncidencia=<%= incidencia.getIdIncidencia() %>">Actualizar clasificacion</a></td>
-                  <td><a href="Serenazgo?action=proceder&idIncidencia=<%= incidencia.getIdIncidencia() %>">Proceder</a></td>
-                  <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-close" style ="color: #0D1832 ;font-size: 20px;"></a></td>
-                </tr>
-                <% }
-                } else { %>
-                <tr>
-                  <td colspan="5">No hay incidencias </td>
-                </tr>
-                <% } %>
-
-              </tbody>
-          </table>
-          
-          <!-- content-wrapper ends -->
-          <!-- partial:../../partials/_footer.html -->
-          <!-- partial -->
-            </div>
-          
-        <!-- main-panel ends -->
-      </div>
-      <!-- page-body-wrapper ends -->
-      </div>
-      
-    <!-- container-scroller -->
-    <!-- plugins:js -->
-        <script src="<%=request.getContextPath()%>/assets/vendors/js/vendor.bundle.base.js"></script>
+        <!-- container-scroller -->
+        <!-- plugins:js -->
+        <script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
         <!-- endinject -->
         <!-- Plugin js for this page -->
         <!-- End plugin js for this page -->
         <!-- inject:js -->
-        <script src="<%=request.getContextPath()%>/assets/js/off-canvas.js"></script>
-        <script src="<%=request.getContextPath()%>/assets/js/hoverable-collapse.js"></script>
-        <script src="<%=request.getContextPath()%>/assets/js/misc.js"></script>
-        <script src="<%=request.getContextPath()%>/assets/js/settings.js"></script>
-        <script src="<%=request.getContextPath()%>/assets/js/todolist.js"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page -->
-    <script>
-      function mostrarPopupCerrarSesion() {
-        Swal.fire({
-            title: 'Cerrar sesión',
-            text: '¿Estás seguro de que deseas cerrar sesión?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#00913f',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, cerrar sesión'
-        }).then((result) => {
-            if (result.isConfirmed) {
+        <script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
+        <!-- endinject -->
+        <!-- Custom js for this page -->
+        <script>
+          function mostrarPopupCerrarSesion() {
+            Swal.fire({
+              title: 'Cerrar sesión',
+              text: '¿Estás seguro de que deseas cerrar sesión?',
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#00913f',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Sí, cerrar sesión'
+            }).then((result) => {
+              if (result.isConfirmed) {
                 window.location.href = "../../LOGIN/login.html"; //Cambiar la ubicacion del login de acuerdo a lo necesario
-            }
-        });
-    }
-    </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-        <script src = "${pageContext.request.contextPath}/vistas/jsp/SERENAZGO/ListaIncidencias/script_tabla.js"></script>
-    
-    <!-- End custom js for this page -->
+              }
+            });
+          }
+        </script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/SERENAZGO/ListaIncidencias/script_tabla.js">
+
+        <!-- End custom js for this page -->
   </body>
 </html>
