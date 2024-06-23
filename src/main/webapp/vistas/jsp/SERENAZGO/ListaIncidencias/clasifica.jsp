@@ -7,7 +7,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Pagina en blanco</title>
+    <title>Clasificación</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="styles_tabla.css">
     <link rel="stylesheet" href="../../../../assets/vendors/mdi/css/materialdesignicons.min.css">
