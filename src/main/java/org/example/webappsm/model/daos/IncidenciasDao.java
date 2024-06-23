@@ -12,17 +12,6 @@ public class IncidenciasDao extends BaseDao{
 
         ArrayList<Incidencia> listaIncidenciasPasadas = new ArrayList<>();
 
-        try {
-            Class.forName( "com.mysql.cj.jdbc.Driver");
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        //Parametros de conexion a que base de datos me quiero unir//
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "123456";
 
         String sql = "SELECT \n" +
                 "    i.idIncidencia, \n" +
@@ -35,7 +24,7 @@ public class IncidenciasDao extends BaseDao{
                 "WHERE \n" +
                 "i.idEstado=3;";
 
-        try (Connection conn= DriverManager.getConnection(url, username, password);
+        try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -61,18 +50,6 @@ public class IncidenciasDao extends BaseDao{
 
         ArrayList<Incidencia> listaIncidencias = new ArrayList<>();
 
-        try {
-            Class.forName( "com.mysql.cj.jdbc.Driver");
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        //Parametros de conexion a que base de datos me quiero unir//
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "123456";
-
         String sql = "SELECT \n" +
                 "    i.idIncidencia,\n" +
                 "    e.nombreEstado,\n" +
@@ -90,7 +67,7 @@ public class IncidenciasDao extends BaseDao{
                 "WHERE \n" +
                 "    i.idEstado IN (1, 2, 4);";
 
-        try (Connection conn= DriverManager.getConnection(url, username, password);
+        try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -121,20 +98,11 @@ public class IncidenciasDao extends BaseDao{
     public Incidencia descripcion(int idIncidencia) {
 
         Incidencia incidencia = new Incidencia();
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "123456";
 
         String sql = "SELECT idIncidencia, descripcion from incidencia WHERE idIncidencia=?;";
 
-        try (Connection connection = DriverManager.getConnection(url, username, password);
-             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, idIncidencia);
 
@@ -159,19 +127,9 @@ public class IncidenciasDao extends BaseDao{
 
 
     public void eliminarIncidenciaPasada(int idIncidenciaPas){
-        try {
-            Class.forName( "com.mysql.cj.jdbc.Driver");
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "123456";
 
         String query = "DELETE FROM incidencia WHERE idEstado = 3 AND idSerenazgo = ?;";
-        try (Connection conn= DriverManager.getConnection(url, username, password);
+        try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)){
             pstmt.setInt(1, idIncidenciaPas);
             pstmt.executeUpdate();
