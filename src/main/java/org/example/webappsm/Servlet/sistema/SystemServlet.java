@@ -33,6 +33,26 @@ public class SystemServlet extends HttpServlet {
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
+            case "register":
+                vista = "vistas/jsp/LOGIN/register.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+            case "chPass":
+                vista = "vistas/jsp/LOGIN/chPass.jsp";
+                int idUsuario = 10;//Integer.parseInt(request.getParameter("id"));
+                request.setAttribute("idUsuario", idUsuario);
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+            case "chPhone":
+                //int idUsuario = Integer.parseInt(request.getParameter("id"));
+                //Usuario usuario = userDao.mostrarUsuarioID(idUsuario);
+                //request.setAttribute("usuario", usuario);
+                vista = "vistas/jsp/LOGIN/chPhone.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
 
         }
 
@@ -42,36 +62,86 @@ public class SystemServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String correo = request.getParameter("user");
-        String password = request.getParameter("passwd");
-        System.out.println("username: " + correo + " | password: " + password);
+        String action = request.getParameter("action");
         SystemDao systemDao = new SystemDao();
-        if(systemDao.validarUsuarioPassword(correo, password)){
-            System.out.println("usuario y password válidos");
-            Usuario usuario = systemDao.getUsuarioCorreo(correo);
-            HttpSession httpSession = request.getSession();
-            switch (usuario.getIdRol()){
-                case 1:
-                    response.sendRedirect(request.getContextPath() + "/Admin?action=pagPrincipal");
-                    break;
-                case 2:
-                    response.sendRedirect(request.getContextPath() + "/Serenazgo?action=pagPrincipal");
-                    break;
-                case 3:
-                    response.sendRedirect(request.getContextPath() + "/Vecino?action=pagPrincipal");
-                    break;
-                case 4:
-                    response.sendRedirect(request.getContextPath() + "/Coordinador?action=pagPrincipal");
-                    break;
-            }
+        UserDao userDao = new UserDao();
+        switch (action){
+            case "loginPOST":
+                String correo = request.getParameter("user");
+                String password = request.getParameter("passwd");
+                System.out.println("username: " + correo + " | password: " + password);
+
+                if(systemDao.validarUsuarioPassword(correo, password)){
+                    System.out.println("usuario y password válidos");
+                    Usuario usuario = systemDao.getUsuarioCorreo(correo);
+                    HttpSession httpSession = request.getSession();
+                    httpSession.setAttribute("usuarioLogueado",usuario);
+                    switch (usuario.getIdRol()){
+                        case 1:
+                            response.sendRedirect(request.getContextPath() + "/Admin?action=pagPrincipal");
+                            break;
+                        case 2:
+                            response.sendRedirect(request.getContextPath() + "/Serenazgo?action=pagPrincipal");
+                            break;
+                        case 3:
+                            response.sendRedirect(request.getContextPath() + "/Vecino?action=pagPrincipal");
+                            break;
+                        case 4:
+                            response.sendRedirect(request.getContextPath() + "/Coordinador?action=pagPrincipal");
+                            break;
+                    }
 
 
 
-        }else{
-            System.out.println("usuario o password incorrectos");
-            request.setAttribute("err","Credenciales incorrectos");
-            request.getRequestDispatcher("vistas/jsp/LOGIN/login.jsp").forward(request,response);
+                }else{
+                    System.out.println("usuario o password incorrectos");
+                    request.setAttribute("err","Credenciales incorrectos");
+                    request.getRequestDispatcher("vistas/jsp/LOGIN/login.jsp").forward(request,response); //redireect
+                }
+                break;
+            case "registerPOST":
+                String nombre = request.getParameter("nombre");
+                String apellido = request.getParameter("apellido");
+                int idDocumento = Integer.parseInt( request.getParameter("idDoc"));
+                String nroDocumento = request.getParameter("documento");
+                String direccion =  request.getParameter("direccion");
+                String distrito =  request.getParameter("distrito");
+                String urbanizacion = request.getParameter("urbanizacion");
+                String correo1 =  request.getParameter("correo");
+                int idRol = Integer.parseInt( request.getParameter("idrol"));
+                boolean baneado = Boolean.parseBoolean( request.getParameter("baneado"));
+                int idEstado = Integer.parseInt( request.getParameter("idestado"));
+                int falsasAlarmas = Integer.parseInt( request.getParameter("falsasAlarmas"));
+                String contacto = request.getParameter("contacto");
+                String contra = systemDao.generarContra();
+
+                systemDao.registrarUsuario(nombre, apellido, idDocumento, nroDocumento, direccion, distrito, urbanizacion, correo1, idRol, baneado, idEstado, falsasAlarmas, contacto, contra);
+
+                String msg = "Se le notificará cuando su solicitud sea procesada";
+                request.setAttribute("msg",msg);
+                request.getRequestDispatcher("vistas/jsp/LOGIN/login.jsp").forward(request,response);
+
+                break;
+            case "chPassPOST":
+                int idUsuario = Integer.parseInt(request.getParameter("id"));
+                Usuario usuario = userDao.mostrarUsuarioID(idUsuario);
+                String contraIngresada = request.getParameter("currentPass");
+                if(contraIngresada.equals(usuario.getContrasena())){ //falta adaptar para cuando la contraseña este hasheada
+                    String nuevaContra = request.getParameter("newPassword");
+                    systemDao.actualizarContra(idUsuario, nuevaContra);
+                    String passSuccess = "Se actualizo correctamente su contraseña";
+                    request.setAttribute("passSuccess",passSuccess);
+                    request.getRequestDispatcher("vistas/jsp/LOGIN/PassSuccess.jsp").forward(request,response);
+                } else{
+                  String passErr = "Ingrese correctamente su contraseña";
+                  request.setAttribute("passErr", passErr);
+                  request.getRequestDispatcher("${pageContext.request.contextPath}/sys?action=chPassPOST&id=<%=idUsuario%>").forward(request,response);
+                }
+
+                break;
         }
+
+
 
 
     }

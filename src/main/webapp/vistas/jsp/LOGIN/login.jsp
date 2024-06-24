@@ -17,24 +17,27 @@
             <div class="alert alert-danger" role="alert" style="color: red"><%=request.getAttribute("err")%>
             </div>
             <% } %>
+            <% if (request.getAttribute("msg") != null) {%>
+            <div class="alert alert-danger" role="alert" ><%=request.getAttribute("msg")%>
+            </div>
+            <% } %>
           <!-- Icon -->
           <div class="fadeIn first">
             <img src="${pageContext.request.contextPath}/vistas/jsp/logoSMletra.png" id="icon" alt="User Icon" />
           </div>
       
           <!-- Login Form -->
-          <form method="POST" action="${pageContext.request.contextPath}/sys">
+          <form method="POST" action="${pageContext.request.contextPath}/sys?action=loginPOST">
             <input type="text" id="login" class="fadeIn second" name="user" placeholder="Usuario">
             <input type="text" id="password" class="fadeIn third" name="passwd" placeholder="Contraseña">
-              <button type="submit" class="fadeIn fourth" >Iniciar sesión</button>
+              <input type="submit" class="fadeIn fourth" value="Iniciar sesión" >
             
           </form>
       
           <!-- Remind Passowrd -->
           <div id="formFooter">
-              <a style="color: black">No tienes una cuenta?<a class="underlineHover" href="register.jsp"><span>Regístrate aquí</span></a></a>
-            <h1></h1>
-            <a class="underlineHover" href="recvPass.jsp">Olvidaste tu contraseña?</a>
+              <p style="color: black">No tienes una cuenta? <a class="underlineHover" href="${pageContext.request.contextPath}/sys?action=register"><span>Regístrate aquí</span></a></p>
+            <p><a class="underlineHover" href="recvPass.jsp">Olvidaste tu contraseña?</a></p>
           </div>
       
         </div>

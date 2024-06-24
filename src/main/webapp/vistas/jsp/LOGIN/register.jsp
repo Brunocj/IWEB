@@ -1,10 +1,12 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/LOGIN/styles.css">
 </head>
 <body>
   
@@ -15,31 +17,37 @@
       
           <!-- Icon -->
           <div class="fadeIn first">
-            <img src="logoSM.png" id="icon" alt="User Icon" />
+            <img src="${pageContext.request.contextPath}/vistas/jsp/logoSMletra.png" id="icon" alt="User Icon" />
           </div>
       
           <!-- Login Form -->
-            <form class="flexform">
+            <form class="flexform" method="POST" action="${pageContext.request.contextPath}/sys?action=registerPOST">
               <div class = "flex">
-                <input type="text" id="nombre" class="fadeIn second" name="login" placeholder="Nombre">
-                <input type="text" id="apellido" class="fadeIn second" name="login" placeholder="Apellido">
+                  <input type="hidden" name="idrol" value="3">
+                  <input type="hidden" name="baneado" value="0">
+                  <input type="hidden" name="idestado" value="1">
+                  <input type="hidden" name="falsasAlarmas" value="0">
+
+                <input type="text" name="nombre" id="nombre"  class="fadeIn second" placeholder="Nombre" required>
+                <input type="text" name="apellido" id="apellido" class="fadeIn second" placeholder="Apellido" required>
               </div>
               <div class= "flex" id="documentSection">
-                <select id="docList" name="document" class="fadeIn third">
-                  <option value="">Seleccione su documento</option>
-                  <option value="DNI">DNI</option>
-                  <option value="Pasaporte">Pasaporte</option>
-                  <option value="Pasaporte">Carnet de extranjería</option>
+                <select id="docList" name="idDoc" class="fadeIn third" style="text-align: center; color: #757575;" required>
+                  <option value="" selected disabled style="text-align: left;" >Documento</option>
+                  <option value="1" style="text-align: left;">DNI</option>
+                  <option value="3" style="text-align: left;">Pasaporte</option>
+                  <option value="2" style="text-align: left;">Carnet de extranjería</option>
                 </select>
-                <input type="text" id="documento" class="fadeIn third" name="login" placeholder="Documento">
+                <input type="text" name="documento" id="documento" class="fadeIn third"  placeholder="Nro. Documento" required>
               </div>
-              <input type="text" id="direccion" class="fadeIn fourth" name="login" placeholder="Direccion">
+              <input type="text" name="direccion" class="fadeIn fourth"  placeholder="Direccion" required>
               <div class = "flex">  
-                <input type="text" id="distrito" class="fadeIn fifth" name="login" placeholder="Distrito">
-                <input type="text" id="urbanizacion" class="fadeIn fifth" name="login" placeholder="Urbanización">
+                <input type="text" name="distrito" id="distrito" class="fadeIn fifth"  placeholder="Distrito" required>
+                <input type="text" name="urbanizacion" id="urbanizacion" class="fadeIn fifth" placeholder="Urbanización" required>
               </div>  
-              <input type="text" id="correo" class="fadeIn sixth" name="login" placeholder="Correo">
-              <input type="submit" class="fadeIn sixth" value="Enviar solicitud de registro" formaction = "login.html">
+              <input type="email" name="correo" class="fadeIn sixth" placeholder="Correo" required>
+                <input type="text" name="contacto" class="fadeIn sixth" placeholder="Número de cntacto" required>
+              <input type="submit" class="fadeIn sixth" value="Enviar solicitud de registro">
             </form>
             
         </div>
@@ -49,7 +57,7 @@
     <div class="circle"></div>
     <div class="background"></div>
     <div class="bottom-left-button">
-      <a href="login.jsp" class="btn">Volver</a>
+      <a href="${pageContext.request.contextPath}/sys?action=login" class="btn">Volver</a>
     </div>
     
 </body>

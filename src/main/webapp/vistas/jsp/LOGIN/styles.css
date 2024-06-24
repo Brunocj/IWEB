@@ -98,12 +98,13 @@ text-align: center;
 }
 
 #formFooter {
-  background-color: #f6f6f6;
+
   border-top: 1px solid #dce8f1;
-  padding: 25px;
+
   text-align: center;
   border-radius: 0 0 10px 10px;
   width: 100%; /* Ajustamos el ancho del footer */
+
 }
 
 
@@ -160,7 +161,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
 transform: scale(0.95);
 }
 
-input[type=text] {
+input[type=text], input[type=password],input[type=email] {
 background-color: #eeeeee;
 border: none;
 color: #0d0d0d;
@@ -181,12 +182,12 @@ transition: all 0.5s ease-in-out;
 border-radius: 5px 5px 5px 5px;
 }
 
-input[type=text]:focus {
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
 background-color: #fff;
 border-bottom: 2px solid #5fbae9;
 }
 
-input[type=text]:placeholder {
+input[type=text]::placeholder, input[type=password]::placeholder, input[type=email]::placeholder {
 color: #cccccc;
 }
 
@@ -337,7 +338,7 @@ input[type=submit] {
   box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
   -webkit-border-radius: 5px;
   border-radius: 5px;
-  margin: 5px 0 40px; /* Ajustamos el margen inferior */
+  margin: 5px 0 20px; /* Ajustamos el margen inferior */
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
