@@ -106,8 +106,8 @@
                     <td><a><%=incidencia.getNombreUsuarioIncidencia()%></a></td>
                     <td><a href="<%=request.getContextPath()%>/Serenazgo?action=leerDescripcion&idIncidencia=<%= incidencia.getIdIncidencia() %>" class="mdi mdi-eye" style="color: #6c7293; font-size: 20px;"></a></td>
                     <td>
-                      <form id="form_<%= incidencia.getIdIncidencia() %>" method="post" action="<%= request.getContextPath() %>/Serenazgo">
-                        <select name="accion" id="acciones_<%= incidencia.getIdIncidencia() %>"  class = "btn btn-secondary dropdown-toggle">
+                      <form id="form_<%= incidencia.getIdIncidencia() %>" method="get" action="<%= request.getContextPath() %>/Serenazgo">
+                        <select name="accion" id="acciones_<%= incidencia.getIdIncidencia() %>" class="btn btn-secondary dropdown-toggle" onchange="activarBoton('<%= incidencia.getIdIncidencia() %>')">
                           <option value="">--Seleccionar acción--</option>
                           <option value="clasificar">Clasificar</option>
                           <option value="proceder">Proceder</option>
