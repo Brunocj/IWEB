@@ -46,9 +46,9 @@ public class SystemServlet extends HttpServlet {
                 rd.forward(request,response);
                 break;
             case "chPhone":
-                //int idUsuario = Integer.parseInt(request.getParameter("id"));
-                //Usuario usuario = userDao.mostrarUsuarioID(idUsuario);
-                //request.setAttribute("usuario", usuario);
+                int idUsuarioPh = 10; //Integer.parseInt(request.getParameter("id"));
+                Usuario usuario = userDao.mostrarUsuarioID(idUsuarioPh);
+                request.setAttribute("idUsuario", idUsuarioPh);
                 vista = "vistas/jsp/LOGIN/chPhone.jsp";
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
@@ -133,10 +133,21 @@ public class SystemServlet extends HttpServlet {
                     request.setAttribute("passSuccess",passSuccess);
                     request.getRequestDispatcher("vistas/jsp/LOGIN/PassSuccess.jsp").forward(request,response);
                 } else{
-                  String passErr = "Ingrese correctamente su contraseña";
+                  String passErr = "Ingrese correctamente su contraseña actual";
+                    request.setAttribute("idUsuario", idUsuario);
                   request.setAttribute("passErr", passErr);
-                  request.getRequestDispatcher("${pageContext.request.contextPath}/sys?action=chPassPOST&id=<%=idUsuario%>").forward(request,response);
+                  request.getRequestDispatcher("vistas/jsp/LOGIN/chPass.jsp").forward(request,response);
                 }
+
+                break;
+
+            case "chPhonePOST":
+                int idUsuarioPh = Integer.parseInt(request.getParameter("id"));
+                Usuario usuarioPh = userDao.mostrarUsuarioID(idUsuarioPh);
+                String telefonoIngresado = request.getParameter("newPhone");
+                systemDao.actualizarTelefono(idUsuarioPh, telefonoIngresado);
+                request.setAttribute("idUsuario", idUsuarioPh);
+                request.getRequestDispatcher("vistas/jsp/LOGIN/PhoneSuccess.jsp").forward(request,response);
 
                 break;
         }

@@ -1,10 +1,17 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%
+    int idUsuario = (int) request.getAttribute("idUsuario");
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cambiar Celular</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/LOGIN/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 <body>
     <div class="wrapper fadeInDown">
@@ -14,14 +21,14 @@
       
           <!-- Icon -->
           <div class="fadeIn first">
-            <img src="logoSM.png" id="icon" alt="User Icon" />
+            <img src="${pageContext.request.contextPath}/vistas/jsp/logoSMletra.png"  id="icon" alt="User Icon" />
           </div>
       
           <!-- Login Form -->
-          <form>
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Ingrese su nuevo número">
-            <input type="text" id="password" class="fadeIn third" name="login" placeholder="Confirme su número">
-            <input type="submit" class="fadeIn fourth" value="Cambiar contraseña" formaction = "PhoneSuccess.html">
+          <form onsubmit="return validateForm()" method="POST" action="${pageContext.request.contextPath}/sys?action=chPhonePOST&id=<%=idUsuario%>">
+              <input type="text" id="newPhone" class="fadeIn second" name="newPhone" placeholder="Ingrese su nuevo número" required>
+              <input type="text" id="newPhoneConfirm" class="fadeIn third" name="newPhoneConfirm" placeholder="Confirme su número" required>
+            <input type="submit" class="fadeIn fourth" value="Cambiar número telefónico">
             
           </form>
       
@@ -36,5 +43,25 @@
      <div class="bottom-left-button">
       <a href="../VECINO/MiPerfil.html" class="btn">Volver</a>
     </div>
+
+    <script>
+        function validateForm() {
+            const newPhone = document.getElementById('newPhone').value;
+            const newPhoneConfirm = document.getElementById('newPhoneConfirm').value;
+
+            if (newPhone !== newPhoneConfirm) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Los datos ingresados no coinciden, inténtelo de nuevo.',
+                    confirmButtonColor: '#56baed'
+                });
+                return false;
+            }
+
+            return true;
+        }
+
+    </script>
 </body>
 </html>

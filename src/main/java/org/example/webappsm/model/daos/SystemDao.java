@@ -139,6 +139,20 @@ public class SystemDao extends BaseDao{
         }
 
     }
+    public void actualizarTelefono(int idUsuario, String telIngresado){
+        String sql ="UPDATE usuario SET numeroContacto = ? WHERE idUsuario = ?;";
+        try(Connection connection = this.getConnection();
+        PreparedStatement pstmt =connection.prepareStatement(sql)){
+            pstmt.setString(1, telIngresado);
+            pstmt.setInt(2, idUsuario);
+            pstmt.executeUpdate();
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
+    }
 
 
 }

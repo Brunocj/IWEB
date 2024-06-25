@@ -3,6 +3,7 @@
 
 <%
     int idUsuario = (int) request.getAttribute("idUsuario");
+    String err = (String) request.getAttribute("passErr");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,6 +61,17 @@
         }
 
         return true;
+    }
+    window.onload = function() {
+        const errMessage = "<%= err != null ? err : "" %>";
+        if (errMessage) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: errMessage,
+                confirmButtonColor: '#56baed'
+            });
+        }
     }
 </script>
 </body>
