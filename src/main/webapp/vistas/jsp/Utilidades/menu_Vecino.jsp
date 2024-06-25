@@ -1,9 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%
-    int idProvisional = 10; //poosteriormente, obtener el id con query
-%>
-<jsp:useBean id="usuarioLogueado" scope="session" type="org.example.webappsm.model.beans.Usuario"></jsp:useBean>
+
+<jsp:useBean id="usuarioLogueado" scope="session" type="org.example.webappsm.model.beans.Usuario"/>
 <nav class="sidebar sidebar-offcanvas" id="sidebar" style ="background-color: #000f22;">  <!--Cambiar al color mas oscuro-->
 
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top" style ="background-color: #000f22;">

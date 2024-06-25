@@ -28,8 +28,8 @@
       
           <!-- Login Form -->
           <form method="POST" action="${pageContext.request.contextPath}/sys?action=loginPOST">
-            <input type="text" id="login" class="fadeIn second" name="user" placeholder="Usuario">
-            <input type="text" id="password" class="fadeIn third" name="passwd" placeholder="Contraseña">
+            <input type="text" id="login" class="fadeIn second" name="user" placeholder="Correo electrónico">
+            <input type="password" id="password" class="fadeIn third" name="passwd" placeholder="Contraseña">
               <input type="submit" class="fadeIn fourth" value="Iniciar sesión" >
             
           </form>
