@@ -151,7 +151,47 @@ public class SerenazgoServlet extends HttpServlet {
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
+            case "clasificar":
+                int idIncidenciaClasificar = 0;
+                IncidenciasDao incidenciasClasificar = new IncidenciasDao();
+                String idIncidenciaClasificarStr = request.getParameter("idClasificar");
+                try {
+                    idIncidenciaClasificar = Integer.parseInt(idIncidenciaClasificarStr);
+                } catch (NumberFormatException e) {
+                    // Manejo de la excepción si el parámetro no es un entero válido
+                    e.printStackTrace(); // Opcional: imprimir la traza de la excepción para debug
+                    // Puedes establecer un valor por defecto, redirigir a una página de error, etc.
+                }
+                Incidencia incidenciaClasificar = incidenciasClasificar.obtenerIncidenciaPorId(idIncidenciaClasificar);
 
+                request.setAttribute("incidencia",incidenciaClasificar);
+                vista = "vistas/jsp/SERENAZGO/ListaIncidencias/clasifica.jsp";
+
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+            case "proceder":
+                IncidenciasDao incidenciasProceder = new IncidenciasDao();
+                int idIncidenciaProceder = Integer.parseInt(request.getParameter("idProceder"));
+                Incidencia incidenciaProceder = incidenciasProceder.obtenerIncidenciaPorId(idIncidenciaProceder);
+
+                request.setAttribute("incidencia",incidenciaProceder);
+                vista = "vistas/jsp/SERENAZGO/ListaIncidencias/formularios.jsp";
+
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+            case "descripcionFinal":
+                IncidenciasDao incidenciasDF = new IncidenciasDao();
+                int idIncidenciaDF = Integer.parseInt(request.getParameter("idDescripcionF"));
+                Incidencia incidenciaDF = incidenciasDF.obtenerIncidenciaPorId(idIncidenciaDF);
+
+                request.setAttribute("incidencia",incidenciaDF);
+                vista = "vistas/jsp/SERENAZGO/ListaIncidencias/.jsp";
+
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
 
         }
 
@@ -182,9 +222,29 @@ public class SerenazgoServlet extends HttpServlet {
 
                 response.sendRedirect(request.getContextPath() + "/Serenazgo?action=listaIncidenciasPasadas");
             }
+        }else if(action.equals("clasificar")){
+            Incidencia incidencia = new Incidencia();
+            String categoria = null;
+            String idParam = request.getParameter("id");
+            String categoriaId = request.getParameter("categoria");
+            if (idParam != null) {
+                int idIncidenciaC = Integer.parseInt(idParam);
+
+                IncidenciasDao incidenciasDao = new IncidenciasDao();
+                incidencia = incidenciasDao.obtenerIncidenciaPorId(idIncidenciaC);
+                if ("1".equals(categoriaId)) {
+                    categoria = "Leve";
+                } else if ("2".equals(categoriaId)) {
+                    categoria = "Moderada";
+                } else if ("3".equals(categoriaId)) {
+                    categoria = "Grave";
+                }
+                incidencia.setClasificacion(categoria);
+                response.sendRedirect(request.getContextPath() + "/Serenazgo?action=listaIncidencias");
+            }
+        }else{
+            response.sendRedirect(request.getContextPath() + "/Serenazgo");
         }
-
-
 
     }
 

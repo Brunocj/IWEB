@@ -104,22 +104,21 @@
                     <td><a><%=incidencia.getEstado()%></a></td>
                     <td><a><%=incidencia.getApellidoUsuarioIncidencia()%></a></td>
                     <td><a><%=incidencia.getNombreUsuarioIncidencia()%></a></td>
-                    <td><a href="<%=request.getContextPath()%>/Serenazgo?action=verDescripcion&idDesc=<%= incidencia.getIdRegistro() %>" class="mdi mdi-eye" style="color: #6c7293; font-size: 20px;"></a></td>
+                    <td><a href="<%=request.getContextPath()%>/Serenazgo?action=leerDescripcion&idIncidencia=<%= incidencia.getIdIncidencia() %>" class="mdi mdi-eye" style="color: #6c7293; font-size: 20px;"></a></td>
                     <td>
-                      <form id="form_<%= incidencia.getIdRegistro() %>" method="post" action="<%= request.getContextPath() %>/Serenazgo">
-                        <select name="accion" id="acciones_<%= incidencia.getIdRegistro() %>" onchange="mostrarBoton(<%= incidencia.getIdRegistro() %>)" class = "btn btn-secondary dropdown-toggle">
+                      <form id="form_<%= incidencia.getIdIncidencia() %>" method="post" action="<%= request.getContextPath() %>/Serenazgo">
+                        <select name="accion" id="acciones_<%= incidencia.getIdIncidencia() %>"  class = "btn btn-secondary dropdown-toggle">
                           <option value="">--Seleccionar acción--</option>
                           <option value="clasificar">Clasificar</option>
                           <option value="proceder">Proceder</option>
-                          <option value="actualizar">Actualizar</option>
-                          <option value="finalizar">Finalizar</option>
+                          <option value="descripcion final">Descripción final</option>
                         </select>
-                        <input type="hidden" name="idRegistro" value="<%= incidencia.getIdRegistro() %>">
+                        <input type="hidden" name="idIncidencia" value="<%= incidencia.getIdIncidencia() %>">
                       </form>
                     </td>
                     <td>
-                      <button id="boton_<%= incidencia.getIdRegistro() %>" type="button" class = "btn btn-primary btn-icon-text"
-                              onclick="enviarAccion(<%= incidencia.getIdRegistro() %>)"
+                      <button id="boton_<%= incidencia.getIdIncidencia() %>" type="button"
+                              onclick="redirectAction('<%= incidencia.getIdIncidencia() %>')"
                               class="btnTable" disabled>Enviar
                       </button>
                     </td>
@@ -181,18 +180,36 @@
               }
             });
           }
-          function activarBoton(idRegistro) {
-            var selectId = 'acciones_' + idRegistro;
-            var botonId = 'boton_' + idRegistro;
+          function activarBoton(idIncidencia) {
+            var selectId = 'acciones_' + idIncidencia;
+            var botonId = 'boton_' + idIncidencia;
             var select = document.getElementById(selectId);
             var boton = document.getElementById(botonId);
             boton.disabled = select.value === '';
           }
 
-          function enviarAccion(idRegistro) {
-            var formId = 'form_' + idRegistro;
-            var form = document.getElementById(formId);
-            form.submit();
+          function redirectAction(idIncidencia) {
+            var selectId = 'acciones_' + idIncidencia;
+
+            // Obtener el elemento select por su id
+            var selectElement = document.getElementById(selectId);
+
+            // Obtener el valor seleccionado
+            var selectedOption = selectElement.value;
+            switch(selectedOption) {
+              case 'clasificar':
+                window.location.href = '<%= request.getContextPath() %>/Serenazgo?action=clasificar&idClasificar=' + idIncidencia;
+                break;
+              case 'proceder':
+                window.location.href = '<%= request.getContextPath() %>/Serenazgo?action=proceder&idProceder=' + idIncidencia;
+                break;
+              case 'descripcion final':
+                window.location.href = '<%= request.getContextPath() %>/Serenazgo?action=descripcionFinal&idDescripcionF=' + idIncidencia;
+                break;
+              default:
+                // Opción por defecto si no se selecciona ninguna acción válida
+                break;
+            }
           }
 
         </script>

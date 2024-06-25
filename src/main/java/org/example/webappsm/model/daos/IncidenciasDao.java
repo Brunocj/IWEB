@@ -109,7 +109,7 @@ public class IncidenciasDao extends BaseDao{
             try (ResultSet rs = pstmt.executeQuery()) {
 
                 if (rs.next()) {
-
+                    incidencia.setIdIncidencia(idIncidencia);
                     incidencia.setDescripcion(rs.getString(2));
 
                 }
@@ -136,6 +136,23 @@ public class IncidenciasDao extends BaseDao{
         }catch( SQLException e){
             throw new RuntimeException(e);
         }
+    }
+    public Incidencia obtenerIncidenciaPorId(int idIncidencia){
+        Incidencia incidencia = new Incidencia();
+
+        String query = "SELECT * FROM incidencia WHERE idIncidencia = ?";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)){
+            pstmt.setInt(1, idIncidencia);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                incidencia.setIdIncidencia(idIncidencia);
+            }
+        }catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+        return incidencia;
     }
 
 

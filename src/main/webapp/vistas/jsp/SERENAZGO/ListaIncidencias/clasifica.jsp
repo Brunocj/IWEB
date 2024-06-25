@@ -9,10 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Clasificación</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="styles_tabla.css">
-    <link rel="stylesheet" href="../../../../assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../../../../assets/vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="styles_clasifica.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/SERENAZGO/ListaIncidencias/styles_tabla.css">    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/SERENAZGO/ListaIncidencias/styles_clasifica.css">
     
     <!-- endinject -->
     <!-- Plugin css for this page -->
@@ -20,9 +19,9 @@
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="../../../../assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../LogoSM.png" /><!--Cambiar la ubicacion del logo de la pagina aca tmb-->
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" />
     <!--JS para los popups-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
@@ -169,15 +168,15 @@
             
             <div class="opciones">
               <div class="opcion">
-                  <input type="radio" id="categoriaLeve" name="categoria" value="leve">
+                  <input type="radio" id="categoriaLeve" name="categoria" value="1">
                   <label for="categoriaLeve">Leve</label>
               </div>
               <div class="opcion">
-                  <input type="radio" id="categoriaModerada" name="categoria" value="moderada">
+                  <input type="radio" id="categoriaModerada" name="categoria" value="2">
                   <label for="categoriaModerada">Moderada</label>
               </div>
               <div class="opcion">
-                  <input type="radio" id="categoriaGrave" name="categoria" value="grave">
+                  <input type="radio" id="categoriaGrave" name="categoria" value="3">
                   <label for="categoriaGrave">Grave</label>
               </div>
           </div>
