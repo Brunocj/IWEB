@@ -8,6 +8,7 @@
     //pero tienen que buscar que hace y como adaptarla a cada vista que tienen en serenazgo.
 %>
 
+
 <nav class="sidebar sidebar-offcanvas" id="sidebar" style ="background-color: #000f22;">  <!--Cambiar al color mas oscuro-->
 
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top" style ="background-color: #000f22;">
@@ -16,26 +17,31 @@
     </div>
 
 
-    <ul class="nav" style="position: fixed">
+    <ul class="nav" style="position: fixed;">
+
         <!-- Codigo para un item de la barra lateral que no tiene sublista -->
-        <li class="nav-item menu-items ${"pagPrincipal".equals(request.getParameter("action")) ? "active" : ""}">
-            <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=pagPrincipal"> <!-- Cambiar href de acuerdo a lo necesario -->
+        <li class="nav-item menu-items active"> <!-- la clase "active" solo se usa para la vista que está activa -->
+
+            <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=pagPrincipal"> <!-- Cambiar href de acuerdo a lo necesario -->
                 <span class="menu-icon">
                 <i class="mdi mdi-home"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
                 <span class="menu-title" style="color: white;">Página principal</span> <!-- Cambiar color de texto de acuerdo a lo necesario -->
             </a>
         </li>
+        <!-- Codigo para un item de la barra lateral que no tiene sublista FIN-->
 
-        <li class="nav-item menu-items ${"miPerfil".equals(request.getParameter("action")) ? "active" : ""}">
-            <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=miPerfil&id=<%=idProvisional%>">
+
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=perfil">
               <span class="menu-icon">
                 <i class="mdi mdi-account"></i>
               </span>
-                <span class="menu-title" style="color: white;">Mi perfil</span>
+                <span class="menu-title" style="color: white;">Perfil</span>
             </a>
         </li>
-        <li class="nav-item menu-items">
+
+        <li class="nav-item menu-items ">
             <a class="nav-link" href="https://mail.google.com/mail/u/0/#inbox">
               <span class="menu-icon">
                 <i class="mdi mdi-email"></i>
@@ -43,46 +49,60 @@
                 <span class="menu-title" style="color: white;">Correo</span>
             </a>
         </li>
-        <li class="nav-item menu-items ${"solCoordinador".equals(request.getParameter("action")) ? "active" : ""}">
-            <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=solCoordinador">
+
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=dashboard">
               <span class="menu-icon">
-                <i class="mdi mdi-key-change"></i>
+                <i class="mdi mdi-chart-bar"></i>
               </span>
-                <span class="menu-title" style="color: white;">Sol. coordinador(a)</span>
+                <span class="menu-title" style="color: white;">Dashboard</span>
             </a>
         </li>
-        <li class="nav-item menu-items ${"eventos".equals(request.getParameter("action")) ? "active" : ""}">
-            <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=eventos"><!-- Cambiar href de acuerdo a lo necesario -->
-                <span class="menu-icon">
-                <i class="mdi mdi-earth"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
+
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=listaIncidencias">
+              <span class="menu-icon">
+                <i class="mdi mdi-format-list-bulleted"></i>
               </span>
-                <span class="menu-title" style="color: white;">Eventos</span>
+                <span class="menu-title" style="color: white;">Lista de incidencias</span>
             </a>
         </li>
-        <li class="nav-item menu-items ${"incidencias".equals(request.getParameter("action")) ? "active" : ""}">
-            <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=incidencias"> <!-- Cambiar href de acuerdo a lo necesario -->
-                <span class="menu-icon">
-                <i class="mdi mdi-alert"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
+
+
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=listaVecinos">
+              <span class="menu-icon">
+                <i class="mdi mdi-format-list-bulleted"></i>
               </span>
-                <span class="menu-title" style="color: white;">Incidencias</span>
+                <span class="menu-title" style="color: white;">Lista de vecinos</span>
             </a>
         </li>
+
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=listaIncidenciasPasadas">
+              <span class="menu-icon">
+                <i class="mdi mdi-format-list-bulleted"></i>
+              </span>
+                <span class="menu-title" style="color: white;">Lista de incidencias <br> pasadas</span>
+            </a>
+        </li>
+
         <li class="nav-item menu-items" onclick="return mostrarPopupCerrarSesion();">
             <a class="nav-link" href="#"> <!-- Cambiar href de acuerdo a lo necesario -->
                 <span class="menu-icon">
-                <i class="mdi mdi-logout"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
+                <i class="mdi mdi-speedometer"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
                 <span class="menu-title" style="color: white;">Cerrar sesión</span>
             </a>
         </li>
 
         <!-- Codigo para un item de la barra lateral que SI tiene sublista FIN -->
-        <!-- Codigo para un item de la barra lateral que SI tiene sublista FIN -->
     </ul>
 </nav>
 <!-- partial -->
+
 <div class="container-fluid page-body-wrapper">
-    <!-- partial:../../partials/_navbar.jsp -->
+    <!-- partial:../../partials/_navbar.html -->
     <nav class="navbar p-0 fixed-top d-flex flex-row">
 
         <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch" style ="background-color: #000f22"> <!--Cambiar al color mas oscuro-->
@@ -97,10 +117,10 @@
                     <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                         <div class="navbar-profile">
                             <div class="Header-nav-item">
-                                <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default;">Nombre del Serenazgo</h2> <!--Posteriormente obtener mediante querys -->
-                                <h5 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 15px; font-weight:500; cursor: default;">Serenazgo Dispatcher</h5>
+                                <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default; text-align: right;">Ricardo Calderón Rodríguez</h2>
+                                <h5 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 15px; font-weight:500; cursor: default;">Serenazgo de San Miguel, Lima</h5>
                             </div>
-                            <img class="img-xs rounded-circle" src="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
+                            <img class="img-xs rounded-circle" src="../../LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
 
                         </div>
                     </a>
