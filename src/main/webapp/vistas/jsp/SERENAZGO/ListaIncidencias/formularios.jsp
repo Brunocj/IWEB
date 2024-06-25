@@ -9,19 +9,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Sección Proceder</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="styles_tabla.css">
-    <link rel="stylesheet" href="../../../../assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../../../../assets/vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="styles_proceder.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/SERENAZGO/ListaIncidencias/styles_tabla.css">    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/SERENAZGO/ListaIncidencias/styles_clasifica.css">
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/SERENAZGO/ListaIncidencias/styles_proceder.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End Plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="../../../../assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../LogoSM.png" /><!--Cambiar la ubicacion del logo de la pagina aca tmb-->
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" />
     <!--JS para los popups-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
@@ -208,7 +209,7 @@
                       <input type="text" id="nombre" placeholder="Nombre del personal de turno">
                     </div>
                     <div class="form-section">
-                      <input type="text" id="motivo" placeholder="Motivo de la solicitud">
+                      <input type="text" id="motivoSol" placeholder="Motivo de la solicitud">
                     </div>
                   </div>
                 </div>
@@ -231,7 +232,7 @@
                       <input type="text" id="tipo" placeholder="Ingrese el tipo de vehículo">
                     </div>
                     <div class ="inputs">
-                      <input type="text" id="tipo" placeholder="Motivo de la solicitud">
+                      <input type="text" id="motivo" placeholder="Motivo de la solicitud">
                     </div>
                   </div>
                 </div>
@@ -258,23 +259,23 @@
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
-    <script src="../../../../assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <!-- End plugin js for this page -->
     <!-- inject:js -->
-    <script src="../../../../assets/js/off-canvas.js"></script>
-    <script src="../../../../assets/js/hoverable-collapse.js"></script>
-    <script src="../../../../assets/js/misc.js"></script>
-    <script src="../../../../assets/js/settings.js"></script>
-    <script src="../../../../assets/js/todolist.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script src="script_tabla.js"></script>
-    <script src="script_proceder.js"></script>
+    <script src="${pageContext.request.contextPath}/vistas/jsp/SERENAZGO/ListaIncidencias/script_tabla.js"></script>
+    <script src="${pageContext.request.contextPath}/vistas/jsp/SERENAZGO/ListaIncidencias/script_proceder.js"></script>
     <!-- End custom js for this page -->
   </body>
 </html>
