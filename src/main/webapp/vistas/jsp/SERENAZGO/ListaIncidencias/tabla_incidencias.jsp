@@ -88,8 +88,7 @@
                     <th style ="color: white;font-size: 17px;cursor: pointer;">Nombres</th>
 
                     <th style="width: 20px;color: white"></th>
-                    <th style="width: 20px;color: white"></th>
-                    <th style="width: 20px;color: white"></th>
+                    <th style="width: 20px;color: white" colspan="2">Acciones</th>
                     <th style="width: 20px;color: white;cursor: pointer;">Finalizar</th>
                     <th style="width: 20px;color: white;cursor: pointer;">Falsa Alarma</th>
                   </tr>
