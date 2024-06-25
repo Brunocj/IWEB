@@ -107,8 +107,8 @@
                     <td><a href="<%=request.getContextPath()%>/Serenazgo?action=verDescripcion&idDesc=<%= incidencia.getIdRegistro() %>" class="mdi mdi-eye" style="color: #6c7293; font-size: 20px;"></a></td>
                     <td>
                       <form id="form_<%= incidencia.getIdRegistro() %>" method="post" action="<%= request.getContextPath() %>/Serenazgo">
-                        <select name="accion" id="acciones_<%= incidencia.getIdRegistro() %>" onchange="mostrarBoton(<%= incidencia.getIdRegistro() %>)">
-                          <option value="">Seleccionar accion</option>
+                        <select name="accion" id="acciones_<%= incidencia.getIdRegistro() %>" onchange="mostrarBoton(<%= incidencia.getIdRegistro() %>)" class = "btn btn-secondary dropdown-toggle">
+                          <option value="">--Seleccionar acción--</option>
                           <option value="clasificar">Clasificar</option>
                           <option value="proceder">Proceder</option>
                           <option value="actualizar">Actualizar</option>
@@ -118,7 +118,10 @@
                       </form>
                     </td>
                     <td>
-                    <button id="boton_<%= incidencia.getIdRegistro() %>" type="button" onclick="enviarAccion('<%= incidencia.getIdRegistro() %>')" style="display: none;">Enviar</button>
+                      <button id="boton_<%= incidencia.getIdRegistro() %>" type="button" class = "btn btn-primary btn-icon-text"
+                              onclick="enviarAccion(<%= incidencia.getIdRegistro() %>)"
+                              class="btnTable" disabled>Enviar
+                      </button>
                     </td>
                     <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-marker-check" style ="color: #6c7293;font-size: 20px;"></a></td>
                     <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-alert" style ="color: #6c7293;font-size: 20px;"></a></td>
@@ -178,20 +181,20 @@
               }
             });
           }
-          function mostrarBoton(id) {
-            var select = document.getElementById("acciones_" + id);
-            var boton = document.getElementById("boton_" + id);
-            if (select.value !== "") {
-              boton.style.display = "inline-block";
-            } else {
-              boton.style.display = "none";
-            }
+          function activarBoton(idRegistro) {
+            var selectId = 'acciones_' + idRegistro;
+            var botonId = 'boton_' + idRegistro;
+            var select = document.getElementById(selectId);
+            var boton = document.getElementById(botonId);
+            boton.disabled = select.value === '';
           }
 
-          function enviarAccion() {
-            var form = document.getElementById("form");
+          function enviarAccion(idRegistro) {
+            var formId = 'form_' + idRegistro;
+            var form = document.getElementById(formId);
             form.submit();
           }
+
         </script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
