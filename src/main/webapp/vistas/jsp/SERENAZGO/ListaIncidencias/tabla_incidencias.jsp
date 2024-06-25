@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-
+<%@ page import="org.example.webappsm.model.beans.Incidencia" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.ArrayList" %>
+<%
+  ArrayList<Incidencia> incidencias = (ArrayList<Incidencia>) request.getAttribute("listaIncidencias");
+%>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -158,7 +163,7 @@
               <!--CONTENIDO-->
               <div style="display: flex; justify-content: space-between;">
                 <div style="display: flex; justify-content: space-between;">
-                  <div style="display: flex; flex-direction: column; ">
+                  <div style="display: flex; flex-direction: column; margin-bottom: 80px;">
                     <h2 class="tabla-title" style ="color:#000f22;">Lista de incidencias</h2>  <!--Cambiar el titulo de la tabla-->
 
                     <div style="display: flex; gap:30px;margin-top: 10px;">
@@ -168,8 +173,8 @@
                         <p style ="color:black; align-self: center; margin-bottom: 0px;font-size: 15px">Filtrar por incidencias :</p>
                         <select id="filtroEstado" style="border-color: #DFDFDF; border-radius: 6px; padding:5px; outline: none; height: 40px; margin-top: 10px;" >
                           <option value="">Mostrar Todos</option> <!--Cambiar el filtro de acuerdo a lo necesario-->
-                          <option value="Futbol">Más de 5 incidencias</option>
-                          <option value="Natacion">Menos de 6</option>
+                          <option value="Mayor">Más de 5 incidencias</option>
+                          <option value="Menor">Menos de 6</option>
 
 
                         </select>
@@ -196,6 +201,7 @@
 
                     <th style="width: 20px;color: white"></th>
                     <th style="width: 20px;color: white"></th>
+                    <th style="width: 20px;color: white"></th>
                     <th style="width: 20px;color: white;cursor: pointer;">Finalizar</th>
                     <th style="width: 20px;color: white;cursor: pointer;">Falsa Alarma</th>
                   </tr>
@@ -203,31 +209,44 @@
                 <hr style="border: none; border-top: 3px solid black; margin-top: -55px; border-radius: 10px;">
 
                 <tbody style="text-align: center;color: black;">
-
+                <% if (incidencias != null) {
+                  for(Incidencia incidencia : incidencias){
+                %>
                   <tr style="text-align: center;">
-                    <td><a>En proceso</a></td>
-                    <td><a>López Pascual</a></td>
-                    <td><a>Adrián Alvaro</a></td>
-                    <td><a href="clasifica.html">Descripción</a></td>
-                    <td><a href="clasifica.html">Proceder</a></td>
+                    <td><a><%=incidencia.getEstado()%></a></td>
+                    <td><a><%=incidencia.getApellidoUsuarioIncidencia()%></a></td>
+                    <td><a><%=incidencia.getNombreUsuarioIncidencia()%></a></td>
+                    <td><a href="<%=request.getContextPath()%>/Serenazgo?action=verDescripcion&idDesc=<%= incidencia.getIdRegistro() %>" class="mdi mdi-eye" style="color: #6c7293; font-size: 20px;"></a></td>
+                    <td>
+                      <form id="form%>" method="post" action="<%= request.getContextPath() %>/Serenazgo">
+                        <select name="accion" id="acciones" onchange="mostrarBoton(this)">
+                          <option value="">Seleccionar accion</option>
+                          <option value="clasificar">Clasificar</option>
+                          <option value="proceder">Proceder</option>
+                          <option value="actualizar">Actualizar</option>
+                          <option value="finalizar">Finalizar</option>
+                        </select>
+                        <input type="hidden" name="idRegistro" value="<%= incidencia.getIdRegistro() %>">
+                      </form>
+                    </td>
+                    <td>
+                    <button id="boton_<%= incidencia.getIdRegistro() %>" type="button" onclick="enviarAccion('<%= incidencia.getIdRegistro() %>')" style="display: none;">Enviar</button>
+                    </td>
                     <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-marker-check" style ="color: #6c7293;font-size: 20px;"></a></td>
                     <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-alert" style ="color: #6c7293;font-size: 20px;"></a></td>
 
                   </tr>
 
-                  <tr style="text-align: center;">
-                    <td><a>Nueva</a></td>
-                    <td><a>Calderon Rodriguez</a></td>
-                    <td><a>José Ricardo</a></td>
-                    <td><a href="clasifica.html">Descripción</a></td>
-                    <td><a href="info1.html">Proceder</a></td>
-
-                    <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-marker-check" style ="color: #6c7293;font-size: 20px;"></a></td>
-
-                    <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-alert" style ="color: #6c7293;font-size: 20px;"></a></td>
-
-                  </tr>
-
+                <%
+                  }
+                } else {
+                %>
+                <tr>
+                  <td colspan="5">No hay incidencias registradas owo.</td>
+                </tr>
+                <%
+                  }
+                %>
                 </tbody>
               </table>
 
@@ -270,6 +289,19 @@
                 window.location.href = "../../LOGIN/login.html"; //Cambiar la ubicacion del login de acuerdo a lo necesario
               }
             });
+          }
+          function mostrarBoton(select) {
+            var boton = document.getElementById("boton");
+            if (select.value !== "") {
+              boton.style.display = "inline-block";
+            } else {
+              boton.style.display = "none";
+            }
+          }
+
+          function enviarAccion() {
+            var form = document.getElementById("form");
+            form.submit();
           }
         </script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
