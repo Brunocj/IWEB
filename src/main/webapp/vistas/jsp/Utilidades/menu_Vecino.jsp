@@ -3,7 +3,7 @@
 <%
     int idProvisional = 10; //poosteriormente, obtener el id con query
 %>
-
+<jsp:useBean id="usuarioLogueado" scope="session" type="org.example.webappsm.model.beans.Usuario"></jsp:useBean>
 <nav class="sidebar sidebar-offcanvas" id="sidebar" style ="background-color: #000f22;">  <!--Cambiar al color mas oscuro-->
 
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top" style ="background-color: #000f22;">
@@ -24,7 +24,7 @@
         </li>
 
         <li class="nav-item menu-items ${"miPerfil".equals(request.getParameter("action")) ? "active" : ""}">
-            <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=miPerfil&id=<%=idProvisional%>">
+            <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=miPerfil&id=<%=usuarioLogueado.getId()%>">
               <span class="menu-icon">
                 <i class="mdi mdi-account"></i>
               </span>
@@ -93,7 +93,7 @@
                     <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                         <div class="navbar-profile">
                             <div class="Header-nav-item">
-                                <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default;">Nombre del vecino</h2> <!--Posteriormente obtener mediante querys -->
+                                <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default;"><%=usuarioLogueado.getNombre()%> <%=usuarioLogueado.getApellido()%></h2> <!--Posteriormente obtener mediante querys -->
                                 <h5 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 15px; font-weight:500; cursor: default;">Vecino Sanmiguelino</h5>
                             </div>
                             <img class="img-xs rounded-circle" src="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
