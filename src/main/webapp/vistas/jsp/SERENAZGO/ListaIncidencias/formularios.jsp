@@ -331,4 +331,4 @@
     // Evitar que el formulario se envíe automáticamente
     return false;
   }
-</script>ript>
+</script>

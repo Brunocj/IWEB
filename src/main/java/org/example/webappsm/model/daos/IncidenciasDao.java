@@ -99,7 +99,7 @@ public class IncidenciasDao extends BaseDao{
 
         Incidencia incidencia = new Incidencia();
 
-        String sql = "SELECT idIncidencia, descripcion from incidencia WHERE idIncidencia=?;";
+        String sql = "SELECT idIncidencia,nombre,lugar,referencia,contacto,evidencia FROM sanmiguel.incidencia WHERE idIncidencia=?";
 
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -110,7 +110,12 @@ public class IncidenciasDao extends BaseDao{
 
                 if (rs.next()) {
                     incidencia.setIdIncidencia(idIncidencia);
-                    incidencia.setDescripcion(rs.getString(2));
+
+                    incidencia.setNombre(rs.getString(2));
+                    incidencia.setLugar(rs.getString(3));
+                    incidencia.setReferencia(rs.getString(4));
+                    incidencia.setContactoO(rs.getString(5));
+                    incidencia.setImgEvidencia(rs.getBytes(6));
 
                 }
             }
