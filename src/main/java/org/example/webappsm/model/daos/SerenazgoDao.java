@@ -132,4 +132,22 @@ public class SerenazgoDao extends BaseDao{
             throw new RuntimeException(e);
         }
     }
-}
+
+
+    public void setNecesitaAmbulancia(String idIncidencia, String motivo,String personalTurno ){
+
+    }
+
+    public void setNecesitaPolicia(int idIncidencia,int idComisaria, String motivo){
+
+    }
+    public void setNecesitaBombero(Boolean necesitaBombero){
+
+    }
+    public void setTipoSerenazgo(int idTipo, int idIncidencia){
+
+    }
+
+    }
+
+

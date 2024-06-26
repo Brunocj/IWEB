@@ -143,33 +143,6 @@
                 <hr style="border: none; border-top: 3px solid #000; margin: 10px 0;">
               </div>
 
-              <div class="autoridad">
-                <h1 style="text-align: left;">Clasificación de la incidencia</h1>
-              </div>
-
-              <!-- para la clasificacion -->
-
-              <div class="opcion">
-                <label style="font-size: 18px; display: block; margin-bottom: 10px;">
-                  <input type="checkbox" name="opcion" value="leve" style="transform: scale(1.5); vertical-align: middle;"> Leve
-                </label>
-
-              </div>
-
-              <div class="opcion">
-                <label style="font-size: 18px; display: block; margin-bottom: 10px;">
-                  <input type="checkbox" name="opcion" value="moderada" style="transform: scale(1.5); vertical-align: middle;"> Moderada
-                </label>
-
-              </div>
-
-              <div class="opcion">
-                <label style="font-size: 18px; display: block; margin-bottom: 10px;">
-                  <input type="checkbox" name="opcion" value="grave" style="transform: scale(1.5); vertical-align: middle;"> Grave
-                </label>
-
-              </div>
-
               <div style="margin-top: 20px; margin-bottom: 50px;">
                 <hr style="border: none; border-top: 1px solid #000;">
               </div>
@@ -227,9 +200,6 @@
                     </select>
                   </div>
                   <div class="inWrapper">
-                    <div class ="inputs">
-                      <input type="text" id="tipo" placeholder="Ingrese el tipo de vehículo">
-                    </div>
                     <div class ="inputs">
                       <input type="text" id="motivo" placeholder="Motivo de la solicitud">
                     </div>
