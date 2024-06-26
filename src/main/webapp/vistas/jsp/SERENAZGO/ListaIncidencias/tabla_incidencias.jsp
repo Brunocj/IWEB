@@ -51,7 +51,7 @@
             <!--CONTENIDO-->
             <div style="display: flex; justify-content: space-between;">
               <div style="display: flex; justify-content: space-between;">
-                <div style="display: flex; flex-direction: column; margin-bottom: 80px;">
+                <div style="display: flex; flex-direction: column">
                   <h2 class="tabla-title" style ="color:#000f22;">Lista de incidencias</h2>  <!--Cambiar el titulo de la tabla-->
 
                   <div style="display: flex; gap:30px;margin-top: 10px;">
@@ -82,8 +82,8 @@
               <thead style="background-color: #000f22;"> <!--Cambiar al color de fondo de la pagina, pero un poco mas oscuro-->
                 <tr style="text-align: center; font-weight:800;">
                   <th style ="color: white;font-size: 17px;cursor: pointer;">Estado</th>
-                  <th style ="color: white;font-size: 17px;cursor: pointer;">Apellidos</th>
-                  <th style ="color: white;font-size: 17px;cursor: pointer;">Nombres</th>
+                  <th style ="color: white;font-size: 17px;cursor: pointer;">Clasifación</th>
+                  <th style ="color: white;font-size: 17px;cursor: pointer;">Nombre Completo</th>
 
                   <th style="width: 20px;color: white" colspan="2">Acciones</th>
                   <th style="width: 20px;color: white;cursor: pointer;">Finalizar</th>
@@ -98,7 +98,7 @@
                 %>
                 <tr style="text-align: center;">
                   <td><a><%=incidencia.getEstado()%></a></td>
-                  <td><a><%=incidencia.getApellidoUsuarioIncidencia()%></a></td>
+                  <td><%= incidencia.getClasificacion() != null ? incidencia.getClasificacion() : "no especificado" %></td>
                   <td><a><%=incidencia.getNombreUsuarioIncidencia()%></a></td>
                   <td>
                     <form id="form_<%= incidencia.getIdIncidencia() %>" method="get" action="<%= request.getContextPath() %>/Serenazgo">

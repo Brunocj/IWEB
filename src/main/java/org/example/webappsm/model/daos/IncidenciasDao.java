@@ -1,6 +1,7 @@
 package org.example.webappsm.model.daos;
 
 import org.example.webappsm.model.beans.Incidencia;
+import org.example.webappsm.model.beans.TipoSerenazgo;
 import org.example.webappsm.model.beans.Usuario;
 import org.example.webappsm.model.daos.UserDao;
 
@@ -55,8 +56,7 @@ public class IncidenciasDao extends BaseDao{
                 "    i.idIncidencia,\n" +
                 "    e.nombreEstado,\n" +
                 "    c.nombreClasificacion,\n" +
-                "    u.nombres,\n" +
-                "    u.apellidos,\n" +
+                "    CONCAT(u.nombres, ' ', u.apellidos) AS nombreCompleto,\n" +
                 "    i.idUsuario\n" +
                 "FROM \n" +
                 "    incidencia i\n" +
@@ -81,9 +81,7 @@ public class IncidenciasDao extends BaseDao{
                 incidencia.setEstado(rs.getString(2));
                 incidencia.setClasificacion(rs.getString(3));
                 incidencia.setNombreUsuarioIncidencia(rs.getString(4));
-                incidencia.setApellidoUsuarioIncidencia(rs.getString(5));
-                incidencia.setIdUsuario(rs.getInt(6));
-
+                incidencia.setIdUsuario(rs.getInt(5));
                 listaIncidencias.add(incidencia);
 
             }
@@ -137,8 +135,10 @@ public class IncidenciasDao extends BaseDao{
     public void eliminarIncidenciaPasada(int idIncidenciaPas){
 
         String query = "DELETE FROM incidencia WHERE idEstado = 3 AND idSerenazgo = ?;";
+
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)){
+
             pstmt.setInt(1, idIncidenciaPas);
             pstmt.executeUpdate();
         }catch( SQLException e){
@@ -222,4 +222,38 @@ public class IncidenciasDao extends BaseDao{
             throw new RuntimeException(e);
         }
     }
+
+    public ArrayList<TipoSerenazgo> listarTipos(){
+        ArrayList<TipoSerenazgo> listaTipos = new ArrayList<>();
+
+        String sql = "SELECT * from Tiposerenazgo";
+
+        try (Connection conn = this.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()){
+                TipoSerenazgo tipo = new TipoSerenazgo();
+
+                tipo.setIdTipoSerenazgo(rs.getInt("idTipoSerenazgo"));
+                tipo.setNombreTipo(rs.getString("nombreTipo"));
+                listaTipos.add(tipo);
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return listaTipos;
+    }
+
+
+
+
+
+
+
+
+
 }

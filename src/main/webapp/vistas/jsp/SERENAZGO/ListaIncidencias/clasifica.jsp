@@ -45,8 +45,10 @@
       </jsp:include>
 
         <div class="main-panel">
+
             <div class="content-wrapper" style ="background-color: #fffff6;margin-top: -30px"> <!--Cambiar al color mas claro-->
-            <!--CONTENIDO-->  
+            <!--CONTENIDO-->
+
         </div>
         
         
@@ -75,7 +77,7 @@
                 </div>
            
                 <div>
-                    <label for="nombre">Ingrese una descripción del porqué seleccionó esta opción:</label>
+                    <label for="nombre">Ingrese una breve descripción de la solución a dar:</label>
                     <br>
                     <textarea id="nombre" name="nombre" placeholder="Opcional" required></textarea>
                 </div>

@@ -38,7 +38,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar" style ="background-color: #000f22;">  <!--Cambiar al color mas oscuro-->
 
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top" style ="background-color: #000f22;">
-          <h3 class="sidebar-brand brand-logo" style ="color:white; font-weight: 200px; cursor: default;">Menú</h3>
+          <h3 class="sidebar-brand brand-logo" style ="color:rgb(230, 225, 225); font-weight: 200px; cursor: default;">Menú</h3>
           <h3 class="sidebar-brand brand-logo-mini" style ="color:white; font-weight: 200px; cursor: default;">M</h3>
         </div>
 
@@ -159,7 +159,7 @@
         </nav>
         <!-- partial -->
         <div class="main-panel">
-          <div class="content-wrapper" style ="background-color: #d6e9ff;"> <!--Cambiar al color mas claro-->
+          <div class="content-wrapper" style ="background-color: #fffff6;"> <!--Cambiar al color mas claro-->
             <!--CONTENIDO-->
             <div class="card" style="background-color: white; color: black;">
               <h2 style="color: black;">Información de la incidencia:</h2>
@@ -210,10 +210,11 @@
               </div>
               <div class="button-container">
                 <!-- Botón con enlace "#" -->
-                <a href="incidencia_vecino.html" class="button" style =" background-color: #000f22;" >Regresar</a>
+                <a href="<%=request.getContextPath()%>/Serenazgo?action=listaIncidencias" class="button" style =" background-color: #000f22;" >Regresar</a>
+
               </div>
               <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
-                <a href="incidencia_vecino.html" class="button" style="background-color: #195199; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Proceder</a>
+                <a href="<%=request.getContextPath()%>/Serenazgo?action=proceder&idProceder=<%=incidencia.getIdIncidencia()%>" class="button" style="background-color: #195199; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Proceder</a>
               </div>
             </div>
 

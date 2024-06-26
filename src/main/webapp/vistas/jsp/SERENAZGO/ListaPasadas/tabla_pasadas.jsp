@@ -167,7 +167,7 @@
             <!--CONTENIDO-->
             <div style="display: flex; justify-content: space-between;">
               <div style="display: flex; justify-content: space-between;">
-                <div style="display: flex; flex-direction: column; margin-bottom: 80px; ">
+                <div style="display: flex; flex-direction: column ">
                   <h2 class="tabla-title" style ="color:#000f22;">Lista de incidencias pasadas</h2>  <!--Cambiar el titulo de la tabla-->
 
                   <div style="display: flex; gap:30px;margin-top: 10px;">

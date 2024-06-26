@@ -134,6 +134,9 @@ public class SerenazgoDao extends BaseDao{
     }
 
 
+
+
+
     public void setNecesitaAmbulancia(String idIncidencia, String motivo,String personalTurno ){
 
     }
@@ -147,6 +150,7 @@ public class SerenazgoDao extends BaseDao{
     public void setTipoSerenazgo(int idTipo, int idIncidencia){
 
     }
+
 
     }
 

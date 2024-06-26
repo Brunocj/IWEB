@@ -5,6 +5,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import org.example.webappsm.model.beans.Incidencia;
 import org.example.webappsm.model.beans.Serenazgo;
+import org.example.webappsm.model.beans.TipoSerenazgo;
 import org.example.webappsm.model.beans.Usuario;
 import org.example.webappsm.model.daos.DashboardDao;
 import org.example.webappsm.model.daos.IncidenciasDao;
@@ -171,11 +172,15 @@ public class SerenazgoServlet extends HttpServlet {
                 rd.forward(request,response);
                 break;
             case "proceder":
+
                 IncidenciasDao incidenciasProceder = new IncidenciasDao();
                 int idIncidenciaProceder = Integer.parseInt(request.getParameter("idProceder"));
-                Incidencia incidenciaProceder = incidenciasProceder.obtenerIncidenciaPorId(idIncidenciaProceder);
 
-                request.setAttribute("incidencia",incidenciaProceder);
+                ArrayList<TipoSerenazgo> listaTipos = incidenciasProceder.listarTipos();
+
+                request.setAttribute("idIncidencia",idIncidenciaProceder);
+                request.setAttribute("listaTipos",listaTipos);
+
                 vista = "vistas/jsp/SERENAZGO/ListaIncidencias/formularios.jsp";
 
                 rd = request.getRequestDispatcher(vista);
@@ -192,6 +197,11 @@ public class SerenazgoServlet extends HttpServlet {
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
+
+
+
+
+
 
         }
 
