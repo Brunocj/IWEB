@@ -137,21 +137,55 @@ public class SerenazgoDao extends BaseDao{
 
 
 
-    public void setNecesitaAmbulancia(String idIncidencia, String motivo,String personalTurno ){
-
+    public void setNecesitaAmbulancia(int idIncidencia, String motivo,String personalTurno ){
+    String sql = "UPDATE incidencia SET motivoAmbulancia = ?, personalAmbulancia = ? WHERE idIncidencia = ?";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1, motivo);
+            pstmt.setString(2, personalTurno);
+            pstmt.setInt(3, idIncidencia);
+            pstmt.executeUpdate();
+        }catch( SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 
     public void setNecesitaPolicia(int idIncidencia,int idComisaria, String motivo){
-
+        String sql = "UPDATE incidencia SET motivoPolicia = ?, idComisaria = ? WHERE idIncidencia = ?";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1, motivo);
+            pstmt.setInt(2, idComisaria);
+            pstmt.setInt(3, idIncidencia);
+            pstmt.executeUpdate();
+        }catch( SQLException e){
+            throw new RuntimeException(e);
+        }
     }
-    public void setNecesitaBombero(Boolean necesitaBombero){
-
+    public void setNecesitaBombero(int idIncidencia, Boolean necesitaBombero){
+        String sql = "UPDATE incidencia SET NecesitaBombero = ? WHERE idIncidencia = ?";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setBoolean(1, necesitaBombero);
+            pstmt.setInt(2, idIncidencia);
+            pstmt.executeUpdate();
+        }catch( SQLException e){
+            throw new RuntimeException(e);
+        }
     }
     public void setTipoSerenazgo(int idTipo, int idIncidencia){
-
+        String sql = "UPDATE incidencia SET idTipoSerenazgo = ? WHERE idIncidencia = ?";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1, idTipo);
+            pstmt.setInt(2, idIncidencia);
+            pstmt.executeUpdate();
+        }catch( SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 
 
-    }
+}
 
 
