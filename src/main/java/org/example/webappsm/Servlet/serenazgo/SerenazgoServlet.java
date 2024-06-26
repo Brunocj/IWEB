@@ -266,22 +266,27 @@ public class SerenazgoServlet extends HttpServlet {
             SerenazgoDao serenazgoDao = new SerenazgoDao();
             int idIncidencia = Integer.parseInt(request.getParameter("id"));
             int idTipoSerenazgo = Integer.parseInt(request.getParameter("tipoS"));
+            System.out.printf(request.getParameter("motivoSol"));
             serenazgoDao.setTipoSerenazgo(idTipoSerenazgo, idIncidencia);
             if(request.getParameter("motivoSol")!=null){
                 String motivoAmbulancia = request.getParameter("motivoSol");
                 String personalAcargo = request.getParameter("nombre");
                 serenazgoDao.setNecesitaAmbulancia(idIncidencia, motivoAmbulancia, personalAcargo);
+                System.out.printf("Se ingreso: " + motivoAmbulancia);
             }
             if(request.getParameter("motivo")!= null){
                 int idComisaria = Integer.parseInt(request.getParameter("nombreComisasria"));
                 String motivoPolicia = request.getParameter("motivo");
                 serenazgoDao.setNecesitaPolicia(idIncidencia, idComisaria, motivoPolicia);
+                System.out.printf("Se ingreso: " + motivoPolicia);
             }
             if(request.getParameter("bomberos")!=null){
                 Boolean bomberos = true;
                 serenazgoDao.setNecesitaBombero(idIncidencia, bomberos);
+                System.out.printf("Se solicito bomberos");
             }
             response.sendRedirect(request.getContextPath() + "/Serenazgo?action=listaIncidencias");
+
         } else{
             response.sendRedirect(request.getContextPath() + "/Serenazgo");
         }

@@ -109,10 +109,10 @@
                   <div class="form-ambulancia" style="display: none;">
                     <div class ="inWrapper">
                       <div class="form-section">
-                        <input type="text" id="nombre" placeholder="Nombre del personal de turno">
+                        <input type="text" id="nombre" name ="nombre" placeholder="Nombre del personal de turno">
                       </div>
                       <div class="form-section">
-                        <input type="text" id="motivoSol" placeholder="Motivo de la solicitud">
+                        <input type="text" id="motivoSol" name ="motivoSol" placeholder="Motivo de la solicitud">
                       </div>
                     </div>
                   </div>
@@ -132,7 +132,7 @@
                     </div>
                     <div class="inWrapper">
                       <div class ="inputs">
-                        <input type="text" id="motivo" placeholder="Motivo de la solicitud">
+                        <input type="text" id="motivo" name="motivo" placeholder="Motivo de la solicitud">
                       </div>
                     </div>
                   </div>
@@ -155,8 +155,8 @@
 
             <div class="botones-container">
 
-              <button href="#" onclick="return aceptar();" class="boton-confirmar">Confirmar</button>
-              <button href="#" onclick="return cancelar();" class="boton-cancelar">Cancelar</button>
+              <button onclick="return aceptar();" class="boton-confirmar">Confirmar</button>
+              <button onclick="return cancelar();" class="boton-cancelar">Cancelar</button>
 
             </div>
           </form>
@@ -203,10 +203,10 @@
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
-          title: "Se canceló la el procesamiento con éxito",
+          title: "Se canceló el proceso con éxito",
           icon: "success"
         }).then(() => {
-          window.location.href ="tabla_incidencias.html";
+          window.location.href = "tabla_incidencias.html";
         });
       }
     });
@@ -226,14 +226,12 @@
       cancelButtonText: "Cancelar",
       confirmButtonText: "Sí, confirmar"
     }).then((result) => {
-
-
       if (result.isConfirmed) {
         Swal.fire({
           title: "Se inició el proceso de esta incidencia",
           icon: "success"
         }).then(() => {
-          document.querySelector("tipo_form").submit();
+          document.querySelector("#tipo_form").submit();
         });
       }
     });
