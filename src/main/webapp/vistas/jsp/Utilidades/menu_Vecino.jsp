@@ -45,13 +45,35 @@
                 <span class="menu-title" style="color: white;">Sol. coordinador(a)</span>
             </a>
         </li>
-        <li class="nav-item menu-items ${"eventos".equals(request.getParameter("action")) ? "active" : ""}">
-            <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=eventos"><!-- Cambiar href de acuerdo a lo necesario -->
-                <span class="menu-icon">
+        <li class="nav-item menu-items">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-icon">
                 <i class="mdi mdi-earth"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
-                <span class="menu-title" style="color: white;">Eventos</span>
+                <span class="menu-title vecinos" style="color: white;">Eventos</span>
+                <i class="menu-arrow" style="color: white;"></i>
             </a>
+
+            <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu"><!-- Colocar items de la sublista -->
+
+                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/Vecino?action=eventos">
+                  <span class="menu-icon">
+                    <i class="mdi mdi-earth"></i>
+                  </span>
+                        Eventos</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/Vecino?action=misEventos">
+                    <span class="menu-icon">
+                    <i class="mdi mdi-account-check"></i>
+                  </span>
+                        Mis eventos</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/Vecino?action=eventosPasados">
+                    <span class="menu-icon">
+                    <i class="mdi mdi-backup-restore"></i>
+                  </span>
+                        Eventos pasados</a></li>
+                </ul>
+            </div>
         </li>
         <li class="nav-item menu-items ${"incidencias".equals(request.getParameter("action")) ? "active" : ""}">
             <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=incidencias"> <!-- Cambiar href de acuerdo a lo necesario -->

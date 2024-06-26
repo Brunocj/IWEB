@@ -13,8 +13,14 @@ import org.example.webappsm.model.daos.UserDao;
 import org.example.webappsm.model.daos.VecinosDao;
 
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.EventListener;
 
 @WebServlet(name ="VecinoServlet" , value = "/Vecino")
@@ -155,6 +161,43 @@ public class VecinoServlet extends HttpServlet {
                 userDao.enviarSolicitud(idUsuario, idArea);
                 response.sendRedirect(request.getContextPath() + "/Vecino?action=solCoordinador");
                 break;
+            case "registrarIncidencia":
+                Incidencia incidencia = new Incidencia();
+                String nombreIncidencia = request.getParameter("nombreIncidencia");
+                String lugar = request.getParameter("lugar");
+                String referencia = request.getParameter("ref");
+                int idUrbanizacion = Integer.parseInt(request.getParameter("urbanizacionId"));
+                String contacto = request.getParameter("contacto");
+                Boolean necesitaAmbulancia = Boolean.parseBoolean(request.getParameter("ambulanciaSN"));
+                byte[] evidencia = obtenerImagenComoByteArray((request.getPart("foto").getInputStream()));
+                String fechaStr = request.getParameter("fecha");
+
+                try {
+                    // Definir el formato de la fecha/hora
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    // Parsear la cadena a un objeto java.util.Date
+                    Date fechaUtil = sdf.parse(fechaStr);
+                    // Convertir el objeto java.util.Date a java.sql.Timestamp
+                    Timestamp fechaSql = new Timestamp(fechaUtil.getTime());
+                    incidencia.setFechaIncidencia(fechaSql);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                int idTipo = Integer.parseInt(request.getParameter("idTipoIncidencia"));
+                int idUsuarioIncidencia = Integer.parseInt(request.getParameter("idUsuario"));
+                incidencia.setNombre(nombreIncidencia);
+                incidencia.setLugar(lugar);
+                incidencia.setReferencia(referencia);
+                incidencia.setIdUrbanizacion(idUrbanizacion);
+                incidencia.setContactoO(contacto);
+                incidencia.setAmbulanciaI(necesitaAmbulancia);
+                incidencia.setImgEvidencia(evidencia);
+                incidencia.setIdTipo(idTipo);
+                incidencia.setIdUsuario(idUsuarioIncidencia);
+                userDao.agregarIncidencia(incidencia);
+                response.sendRedirect(request.getContextPath() + "/Vecino?action=incidencias");
+                break;
 
             case "inscribir":
                 VecinosDao vecinosDao = new VecinosDao();
@@ -190,6 +233,16 @@ public class VecinoServlet extends HttpServlet {
                 break;
 
         }
+    }
+    public static byte[] obtenerImagenComoByteArray(InputStream inputStream) throws IOException {
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        int nRead;
+        byte[] data = new byte[1024];
+        while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
+            buffer.write(data, 0, nRead);
+        }
+        buffer.flush();
+        return buffer.toByteArray();
     }
 
 }
