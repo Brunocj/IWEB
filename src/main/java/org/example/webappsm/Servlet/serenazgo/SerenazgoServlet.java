@@ -236,18 +236,20 @@ public class SerenazgoServlet extends HttpServlet {
             }
         }else if(action.equals("finalizar")){
             String idFinalizar = request.getParameter("idIncidencia");
-            if (idFinalizar != null) {
-                int idIncidenciaFinalizar = Integer.parseInt(idFinalizar);
-                IncidenciasDao incidenciasDaoFinalizar = new IncidenciasDao();
-                incidenciasDaoFinalizar.finalizarIncidencia(idIncidenciaFinalizar);
-            }
+
+            int idIncidenciaFinalizar = Integer.parseInt(idFinalizar);
+            IncidenciasDao incidenciasDaoFinalizar = new IncidenciasDao();
+            incidenciasDaoFinalizar.finalizarIncidencia(idIncidenciaFinalizar);
+
             response.sendRedirect(request.getContextPath() + "/Serenazgo?action=listaIncidencias");
         }else if(action.equals("falsaAlarma")){
             String idFA = request.getParameter("idIncidencia");
-            if (idFA != null) {
+            String idUser = request.getParameter("idUsuario");
+            if (idFA != null && idUser != null) {
                 int idIncidenciaFA = Integer.parseInt(idFA);
+                int idUserFA = Integer.parseInt(idUser);
                 IncidenciasDao incidenciasDaoFA = new IncidenciasDao();
-                incidenciasDaoFA.declararFalsaAlarma(idIncidenciaFA);
+                incidenciasDaoFA.declararFalsaAlarma(idIncidenciaFA,idUserFA);
             }
             response.sendRedirect(request.getContextPath() + "/Serenazgo?action=listaIncidencias");
         }else{

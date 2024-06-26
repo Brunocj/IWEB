@@ -284,7 +284,7 @@ public class VecinosDao extends BaseDao{
         //Parametros de conexion a que base de datos me quiero unir//
         String url ="jdbc:mysql://localhost:3306/sanmiguel";
         String username = "root";
-        String password = "123456";
+        String password = "rootroot";
 
         String sql = "SELECT u.idUsuario, u.nombres, u.apellidos, u.correo, u.falsasAlarmas, u.baneado, e.nombreEstado AS estado " +
                 "FROM Usuario u " +

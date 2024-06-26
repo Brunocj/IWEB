@@ -128,6 +128,7 @@
                     <a href="#" onclick="confirmarYEnviar('falsaAlarmaForm');" class="mdi mdi-alert" style="color: #6c7293; font-size: 20px;"></a>
                     <form id="falsaAlarmaForm" method="post" action="<%= request.getContextPath() %>/Serenazgo?action=falsaAlarma" style="display: none;">
                       <input type="hidden" name="idIncidencia" value="<%= incidencia.getIdIncidencia() %>">
+                      <input type="hidden" name="idUsuario" value="<%= incidencia.getIdUsuario() %>">
                     </form>
                   </td>
 

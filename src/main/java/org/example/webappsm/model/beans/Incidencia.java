@@ -18,6 +18,7 @@ public class Incidencia {
     private Timestamp fechaIncidencia;
     private int idRegistro;
     private String estado;
+    private int idUsuario;
     private String clasificacion;
     private String descripcion;
     private String nombreUsuarioIncidencia;
