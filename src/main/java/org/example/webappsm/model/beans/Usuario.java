@@ -19,4 +19,5 @@ public class Usuario {
     private String numContacto;
     private String area;
     private int idRol;
+    private int idEstado;
 }

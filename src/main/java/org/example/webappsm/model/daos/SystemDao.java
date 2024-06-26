@@ -101,6 +101,7 @@ public class SystemDao extends BaseDao{
                     usuario.setNombre(rs.getString(2));
                     usuario.setApellido(rs.getString(3));
                     usuario.setIdRol(rs.getInt(5));
+                    usuario.setIdEstado(rs.getInt(16));
 
                 }
             }
@@ -152,6 +153,17 @@ public class SystemDao extends BaseDao{
 
 
 
+    }
+    public void actualizarEstado(int idEstado, int idUsuario){
+        String sql ="UPDATE usuario SET Estado_idEstado = ? WHERE idUsuario = ?;";
+        try(Connection connection = this.getConnection();
+            PreparedStatement pstmt =connection.prepareStatement(sql)){
+            pstmt.setInt(1, idEstado);
+            pstmt.setInt(2, idUsuario);
+            pstmt.executeUpdate();
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

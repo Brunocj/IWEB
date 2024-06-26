@@ -1,10 +1,13 @@
 <%@ page import="org.example.webappsm.model.beans.Usuario" %><%--
+
   Created by IntelliJ IDEA.
   User: bruno
   Date: 28/05/2024
   Time: 17:39
   To change this template use File | Settings | File Templates.
 --%>
+<jsp:useBean id="usuarioLogueado" scope="session" type="org.example.webappsm.model.beans.Usuario"/>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Usuario usuario = (Usuario) request.getAttribute("usuario");
@@ -94,11 +97,11 @@
                                 <tbody>
                                 <tr>
                                     <td><i class="mdi mdi-lock" style="font-size:25px"></i></td>
-                                    <td><a href="${pageContext.request.contextPath}/vistas/jsp/LOGIN/chPass.jsp" style ="color: black;">Cambiar contraseña</a></td>
+                                    <td><a href="${pageContext.request.contextPath}/sys?action=chPass&id=<%=usuarioLogueado.getId()%>" style ="color: black;">Cambiar contraseña</a></td>
                                 </tr>
                                 <tr>
                                     <td><i class="mdi mdi-phone" style="font-size:25px"></i></td>
-                                    <td><a href="${pageContext.request.contextPath}/vistas/jsp/LOGIN/chPhone.jsp" style ="color: black;">Cambiar número telefónico</a></td>
+                                    <td><a href="${pageContext.request.contextPath}/sys?action=chPhone&id=<%=usuarioLogueado.getId()%>" style ="color: black;">Cambiar número telefónico</a></td>
                                 </tr>
                                 </tbody>
                             </table>

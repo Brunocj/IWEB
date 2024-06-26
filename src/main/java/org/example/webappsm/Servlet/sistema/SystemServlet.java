@@ -40,14 +40,14 @@ public class SystemServlet extends HttpServlet {
                 break;
             case "chPass":
                 vista = "vistas/jsp/LOGIN/chPass.jsp";
-                int idUsuario = 10;//Integer.parseInt(request.getParameter("id"));
+                int idUsuario = Integer.parseInt(request.getParameter("id"));
                 request.setAttribute("idUsuario", idUsuario);
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
             case "chPhone":
-                int idUsuarioPh = 10; //Integer.parseInt(request.getParameter("id"));
-                Usuario usuario = userDao.mostrarUsuarioID(idUsuarioPh);
+                int idUsuarioPh = Integer.parseInt(request.getParameter("id"));
+                //Usuario usuario = userDao.mostrarUsuarioID(idUsuarioPh);
                 request.setAttribute("idUsuario", idUsuarioPh);
                 vista = "vistas/jsp/LOGIN/chPhone.jsp";
                 rd = request.getRequestDispatcher(vista);
@@ -83,20 +83,30 @@ public class SystemServlet extends HttpServlet {
                     HttpSession httpSession = request.getSession();
                     httpSession.setAttribute("usuarioLogueado",usuario);
                     httpSession.setMaxInactiveInterval(15*60);
-                    switch (usuario.getIdRol()){
-                        case 1:
-                            response.sendRedirect(request.getContextPath() + "/Admin?action=pagPrincipal");
-                            break;
-                        case 2:
-                            response.sendRedirect(request.getContextPath() + "/Serenazgo?action=pagPrincipal");
-                            break;
-                        case 3:
-                            response.sendRedirect(request.getContextPath() + "/Vecino?action=pagPrincipal");
-                            break;
-                        case 4:
-                            response.sendRedirect(request.getContextPath() + "/Coordinador?action=pagPrincipal");
-                            break;
+                    if(usuario.getIdEstado() == 1){
+                        request.setAttribute("err","Sus datos aún no han sido validados");
+                        request.getRequestDispatcher("vistas/jsp/LOGIN/login.jsp").forward(request,response); //redireect
+
+                    }else if(usuario.getIdEstado() == 2){
+                        request.setAttribute("idUsuario", usuario.getId());
+                        request.getRequestDispatcher("vistas/jsp/LOGIN/chPass.jsp").forward(request,response);
+                    }else{
+                        switch (usuario.getIdRol()){
+                            case 1:
+                                response.sendRedirect(request.getContextPath() + "/Admin?action=pagPrincipal");
+                                break;
+                            case 2:
+                                response.sendRedirect(request.getContextPath() + "/Serenazgo?action=pagPrincipal");
+                                break;
+                            case 3:
+                                response.sendRedirect(request.getContextPath() + "/Vecino?action=pagPrincipal");
+                                break;
+                            case 4:
+                                response.sendRedirect(request.getContextPath() + "/Coordinador?action=pagPrincipal");
+                                break;
+                        }
                     }
+
 
 
 
@@ -137,6 +147,12 @@ public class SystemServlet extends HttpServlet {
                     String nuevaContra = request.getParameter("newPassword");
                     systemDao.actualizarContra(idUsuario, nuevaContra);
                     String passSuccess = "Se actualizo correctamente su contraseña";
+                    Usuario usuariohttp = systemDao.getUsuarioCorreo(usuario.getCorreoE());
+                    if(usuariohttp.getIdEstado()==2){
+                        systemDao.actualizarEstado(3, usuariohttp.getId());
+                    }
+                    HttpSession httpSession = request.getSession();
+                    httpSession.setAttribute("usuarioLogueado",usuariohttp);
                     request.setAttribute("passSuccess",passSuccess);
                     request.getRequestDispatcher("vistas/jsp/LOGIN/PassSuccess.jsp").forward(request,response);
                 } else{
@@ -150,9 +166,11 @@ public class SystemServlet extends HttpServlet {
 
             case "chPhonePOST":
                 int idUsuarioPh = Integer.parseInt(request.getParameter("id"));
-                Usuario usuarioPh = userDao.mostrarUsuarioID(idUsuarioPh);
+                Usuario usuarioPh = systemDao.getUsuarioCorreo(userDao.mostrarUsuarioID(idUsuarioPh).getCorreoE());
                 String telefonoIngresado = request.getParameter("newPhone");
                 systemDao.actualizarTelefono(idUsuarioPh, telefonoIngresado);
+                HttpSession httpSession = request.getSession();
+                httpSession.setAttribute("usuarioLogueado",usuarioPh);
                 request.setAttribute("idUsuario", idUsuarioPh);
                 request.getRequestDispatcher("vistas/jsp/LOGIN/PhoneSuccess.jsp").forward(request,response);
 
