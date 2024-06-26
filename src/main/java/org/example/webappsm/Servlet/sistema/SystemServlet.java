@@ -53,6 +53,12 @@ public class SystemServlet extends HttpServlet {
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
+            case "logout":
+                HttpSession session = request.getSession();
+                session.invalidate();
+                response.sendRedirect("vistas/jsp/LOGIN/login.jsp");
+
+                break;
 
         }
 
@@ -76,6 +82,7 @@ public class SystemServlet extends HttpServlet {
                     Usuario usuario = systemDao.getUsuarioCorreo(correo);
                     HttpSession httpSession = request.getSession();
                     httpSession.setAttribute("usuarioLogueado",usuario);
+                    httpSession.setMaxInactiveInterval(15*60);
                     switch (usuario.getIdRol()){
                         case 1:
                             response.sendRedirect(request.getContextPath() + "/Admin?action=pagPrincipal");
