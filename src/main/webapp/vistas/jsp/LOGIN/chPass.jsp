@@ -1,5 +1,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="usuarioLogueado" scope="session" type="org.example.webappsm.model.beans.Usuario"/>
 
 <%
     int idUsuario = (int) request.getAttribute("idUsuario");
@@ -42,7 +43,25 @@
 <div class="background"></div>
 <!-- Nuevo elemento para el círculo -->
 <div class="bottom-left-button">
-    <a href="../VECINO/MiPerfil.html" class="btn">Volver</a>
+    <%
+        String vista = "";
+        switch (usuarioLogueado.getIdRol()){
+            case 1:
+                vista = request.getContextPath() + "/Admin?action=pagPrincipal";
+                break;
+            case 2:
+                vista = request.getContextPath() + "/Serenazgo?action=pagPrincipal";
+                break;
+            case 3:
+                vista = request.getContextPath() + "/Vecino?action=pagPrincipal";
+                break;
+            case 4:
+                vista = request.getContextPath() + "/Coordinador?action=pagPrincipal";
+                break;
+        }
+
+    %>
+    <a href="<%=vista%>" class="btn">Volver</a>
 </div>
 
 <script>
