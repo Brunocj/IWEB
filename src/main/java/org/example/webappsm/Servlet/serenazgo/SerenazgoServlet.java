@@ -222,26 +222,34 @@ public class SerenazgoServlet extends HttpServlet {
 
                 response.sendRedirect(request.getContextPath() + "/Serenazgo?action=listaIncidenciasPasadas");
             }
-        }else if(action.equals("clasificar")){
-            Incidencia incidencia = new Incidencia();
-            String categoria = null;
+        }else if(action.equals("clasificarIncidencia")){
             String idParam = request.getParameter("id");
-            String categoriaId = request.getParameter("categoria");
+            String categoria = request.getParameter("categoria");
             if (idParam != null) {
                 int idIncidenciaC = Integer.parseInt(idParam);
 
                 IncidenciasDao incidenciasDao = new IncidenciasDao();
-                incidencia = incidenciasDao.obtenerIncidenciaPorId(idIncidenciaC);
-                if ("1".equals(categoriaId)) {
-                    categoria = "Leve";
-                } else if ("2".equals(categoriaId)) {
-                    categoria = "Moderada";
-                } else if ("3".equals(categoriaId)) {
-                    categoria = "Grave";
-                }
-                incidencia.setClasificacion(categoria);
+                int categoriaId = Integer.parseInt(categoria);
+
+                incidenciasDao.actualizarClasificacion(categoriaId, idIncidenciaC);
                 response.sendRedirect(request.getContextPath() + "/Serenazgo?action=listaIncidencias");
             }
+        }else if(action.equals("finalizar")){
+            String idFinalizar = request.getParameter("idIncidencia");
+            if (idFinalizar != null) {
+                int idIncidenciaFinalizar = Integer.parseInt(idFinalizar);
+                IncidenciasDao incidenciasDaoFinalizar = new IncidenciasDao();
+                incidenciasDaoFinalizar.finalizarIncidencia(idIncidenciaFinalizar);
+            }
+            response.sendRedirect(request.getContextPath() + "/Serenazgo?action=listaIncidencias");
+        }else if(action.equals("falsaAlarma")){
+            String idFA = request.getParameter("idIncidencia");
+            if (idFA != null) {
+                int idIncidenciaFA = Integer.parseInt(idFA);
+                IncidenciasDao incidenciasDaoFA = new IncidenciasDao();
+                incidenciasDaoFA.declararFalsaAlarma(idIncidenciaFA);
+            }
+            response.sendRedirect(request.getContextPath() + "/Serenazgo?action=listaIncidencias");
         }else{
             response.sendRedirect(request.getContextPath() + "/Serenazgo");
         }

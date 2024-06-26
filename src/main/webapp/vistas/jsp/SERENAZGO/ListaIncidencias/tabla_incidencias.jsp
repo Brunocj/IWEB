@@ -85,7 +85,6 @@
                   <th style ="color: white;font-size: 17px;cursor: pointer;">Apellidos</th>
                   <th style ="color: white;font-size: 17px;cursor: pointer;">Nombres</th>
 
-                  <th style="width: 20px;color: white"></th>
                   <th style="width: 20px;color: white" colspan="2">Acciones</th>
                   <th style="width: 20px;color: white;cursor: pointer;">Finalizar</th>
                   <th style="width: 20px;color: white;cursor: pointer;">Falsa Alarma</th>
@@ -101,14 +100,13 @@
                   <td><a><%=incidencia.getEstado()%></a></td>
                   <td><a><%=incidencia.getApellidoUsuarioIncidencia()%></a></td>
                   <td><a><%=incidencia.getNombreUsuarioIncidencia()%></a></td>
-                  <td><a href="<%=request.getContextPath()%>/Serenazgo?action=leerDescripcion&idIncidencia=<%= incidencia.getIdIncidencia() %>" class="mdi mdi-eye" style="color: #6c7293; font-size: 20px;"></a></td>
                   <td>
                     <form id="form_<%= incidencia.getIdIncidencia() %>" method="get" action="<%= request.getContextPath() %>/Serenazgo">
                       <select name="accion" id="acciones_<%= incidencia.getIdIncidencia() %>" class="btn btn-secondary dropdown-toggle" onchange="activarBoton('<%= incidencia.getIdIncidencia() %>')">
                         <option value="">--Seleccionar acción--</option>
+                        <option value="info">Ver Incidencia</option>
                         <option value="clasificar">Clasificar</option>
                         <option value="proceder">Proceder</option>
-                        <option value="descripcion final">Descripción final</option>
                       </select>
                       <input type="hidden" name="idIncidencia" value="<%= incidencia.getIdIncidencia() %>">
                     </form>
@@ -119,8 +117,19 @@
                             class="btnTable" disabled>Enviar
                     </button>
                   </td>
-                  <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-marker-check" style ="color: #6c7293;font-size: 20px;"></a></td>
-                  <td><a href ="#" onclick="return Eliminacion();" class ="mdi mdi-alert" style ="color: #6c7293;font-size: 20px;"></a></td>
+
+                  <td>
+                    <a href="#" onclick="confirmarYEnviar('finalizarForm');" class="mdi mdi-marker-check" style="color: #6c7293; font-size: 20px;"></a>
+                    <form id="finalizarForm" method="post" action="<%= request.getContextPath() %>/Serenazgo?action=finalizar" style="display: none;">
+                      <input type="hidden" name="idIncidencia" value="<%= incidencia.getIdIncidencia() %>">
+                    </form>
+                  </td>
+                  <td>
+                    <a href="#" onclick="confirmarYEnviar('falsaAlarmaForm');" class="mdi mdi-alert" style="color: #6c7293; font-size: 20px;"></a>
+                    <form id="falsaAlarmaForm" method="post" action="<%= request.getContextPath() %>/Serenazgo?action=falsaAlarma" style="display: none;">
+                      <input type="hidden" name="idIncidencia" value="<%= incidencia.getIdIncidencia() %>">
+                    </form>
+                  </td>
 
                 </tr>
 
@@ -194,21 +203,43 @@
           // Obtener el valor seleccionado
           var selectedOption = selectElement.value;
           switch(selectedOption) {
+            case 'info':
+              window.location.href = '<%=request.getContextPath()%>/Serenazgo?action=leerDescripcion&idIncidencia=' + idIncidencia;
+              break;
             case 'clasificar':
               window.location.href = '<%= request.getContextPath() %>/Serenazgo?action=clasificar&idClasificar=' + idIncidencia;
               break;
             case 'proceder':
               window.location.href = '<%= request.getContextPath() %>/Serenazgo?action=proceder&idProceder=' + idIncidencia;
               break;
-            case 'descripcion final':
-              window.location.href = '<%= request.getContextPath() %>/Serenazgo?action=descripcionFinal&idDescripcionF=' + idIncidencia;
-              break;
             default:
               // Opción por defecto si no se selecciona ninguna acción válida
               break;
           }
         }
+        function confirmarYEnviar(formId) {
+          let confirmMessage = "";
+          if (formId.startsWith("finalizarForm")) {
+            confirmMessage = "¿Estás seguro de que deseas finalizar la incidencia?";
+          } else if (formId.startsWith("falsaAlarmaForm")) {
+            confirmMessage = "¿Estás seguro de declarar la incidencia como falsa alarma?";
+          }
 
+          Swal.fire({
+            title: confirmMessage,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#00913f',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              document.getElementById(formId).submit();
+            }
+          });
+
+          return false;
+        }
       </script>
 
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

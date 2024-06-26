@@ -65,7 +65,7 @@ public class IncidenciasDao extends BaseDao{
                 "JOIN \n" +
                 "    usuario u ON i.idUsuario = u.idUsuario\n" +
                 "WHERE \n" +
-                "    i.idEstado IN (1, 2, 4);";
+                "    i.idEstado IN (1, 2);";
 
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
@@ -160,6 +160,53 @@ public class IncidenciasDao extends BaseDao{
         return incidencia;
     }
 
+    public void actualizarClasificacion(int categoriaId,int id){
 
+        String query = "UPDATE Incidencia AS i " +
+                "SET idClasificacin = ? " +
+                "WHERE i.idIncidencia = ?";
 
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)){
+            pstmt.setInt(1, categoriaId);
+            pstmt.setInt(2, id);
+            pstmt.executeUpdate();
+        }catch( SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    public void finalizarIncidencia(int id){
+        int idFinalizar = 3;
+        String query = "UPDATE Incidencia AS i " +
+                "SET idEstado = ? " +
+                "WHERE i.idIncidencia = ?";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)){
+            pstmt.setInt(1, idFinalizar);
+            pstmt.setInt(2, id);
+            pstmt.executeUpdate();
+        }catch( SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    public void declararFalsaAlarma(int id){
+        int idFalsaAlarma = 4;
+        String queryUpd = "UPDATE Incidencia AS i " +
+                "SET idEstado = ? " +
+                "WHERE i.idIncidencia = ?";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(queryUpd)){
+            pstmt.setInt(1, idFalsaAlarma);
+            pstmt.setInt(2, id);
+            pstmt.executeUpdate();
+        }
+        String queryUpd = "UPDATE Incidencia AS i " +
+                "SET idEstado = ? " +
+                "WHERE i.idIncidencia = ?";
+        catch( SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 }
