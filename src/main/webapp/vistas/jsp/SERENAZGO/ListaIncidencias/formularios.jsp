@@ -140,7 +140,7 @@
                 <div class ="opcion">
                   <div>
                     <label>
-                      <input type="checkbox" name="opcion" value="bomberos"> Bomberos
+                      <input type="checkbox" name="bomberos" value="bomberos"> Bomberos
                     </label>
 
 

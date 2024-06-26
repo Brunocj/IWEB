@@ -262,7 +262,27 @@ public class SerenazgoServlet extends HttpServlet {
                 incidenciasDaoFA.declararFalsaAlarma(idIncidenciaFA,idUserFA);
             }
             response.sendRedirect(request.getContextPath() + "/Serenazgo?action=listaIncidencias");
-        }else{
+        }else if(action.equals("procederIncidencia")){
+            SerenazgoDao serenazgoDao = new SerenazgoDao();
+            int idIncidencia = Integer.parseInt(request.getParameter("id"));
+            int idTipoSerenazgo = Integer.parseInt(request.getParameter("tipoS"));
+            serenazgoDao.setTipoSerenazgo(idTipoSerenazgo, idIncidencia);
+            if(request.getParameter("motivoSol")!=null){
+                String motivoAmbulancia = request.getParameter("motivoSol");
+                String personalAcargo = request.getParameter("nombre");
+                serenazgoDao.setNecesitaAmbulancia(idIncidencia, motivoAmbulancia, personalAcargo);
+            }
+            if(request.getParameter("motivo")!= null){
+                int idComisaria = Integer.parseInt(request.getParameter("nombreComisasria"));
+                String motivoPolicia = request.getParameter("motivo");
+                serenazgoDao.setNecesitaPolicia(idIncidencia, idComisaria, motivoPolicia);
+            }
+            if(request.getParameter("bomberos")!=null){
+                Boolean bomberos = true;
+                serenazgoDao.setNecesitaBombero(idIncidencia, bomberos);
+            }
+            response.sendRedirect(request.getContextPath() + "/Serenazgo?action=listaIncidencias");
+        } else{
             response.sendRedirect(request.getContextPath() + "/Serenazgo");
         }
 
