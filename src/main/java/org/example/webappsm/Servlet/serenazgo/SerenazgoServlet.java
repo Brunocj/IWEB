@@ -184,10 +184,10 @@ public class SerenazgoServlet extends HttpServlet {
             case "descripcionFinal":
                 IncidenciasDao incidenciasDF = new IncidenciasDao();
                 int idIncidenciaDF = Integer.parseInt(request.getParameter("idDescripcionF"));
-                Incidencia incidenciaDF = incidenciasDF.obtenerIncidenciaPorId(idIncidenciaDF);
+                Incidencia incidenciaDF = incidenciasDF.descripcion(idIncidenciaDF);
 
                 request.setAttribute("incidencia",incidenciaDF);
-                vista = "vistas/jsp/SERENAZGO/ListaIncidencias/.jsp";
+                vista = "vistas/jsp/SERENAZGO/ListaIncidencias/info1.jsp";
 
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
