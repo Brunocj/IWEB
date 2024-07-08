@@ -12,23 +12,12 @@ public class VecinosDao extends BaseDao{
     public ArrayList<Usuario> listarSoliAcceso(){
         ArrayList<Usuario> listaSoli = new ArrayList<>();
 
-        try {
-            Class.forName( "com.mysql.cj.jdbc.Driver");
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        //Parametros de conexion a que base de datos me quiero unir//
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "123456";
         String sql = "SELECT u.idUsuario, u.nombres, u.apellidos, e.nombreEstado AS estado " +
                 "FROM Usuario u " +
                 "JOIN Estado e ON u.Estado_idEstado = e.idEstado " +
                 "WHERE e.nombreEstado = 'pendiente'";
 
-        try (Connection conn= DriverManager.getConnection(url, username, password);
+        try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -53,17 +42,6 @@ public class VecinosDao extends BaseDao{
     public ArrayList<Usuario> listarSoliCord(){
         ArrayList<Usuario> listaCoord = new ArrayList<>();
 
-        try {
-            Class.forName( "com.mysql.cj.jdbc.Driver");
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        //Parametros de conexion a que base de datos me quiero unir//
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "123456";
         String sql = "SELECT " +
                 "u.idUsuario," +
                 "u.nombres, " +
@@ -76,7 +54,7 @@ public class VecinosDao extends BaseDao{
                 "WHERE " +
                 "sc.estado = 0";
 
-        try (Connection conn= DriverManager.getConnection(url, username, password);
+        try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -143,6 +121,7 @@ public class VecinosDao extends BaseDao{
 
     public ArrayList<Evento> listarMisEventos(int idUsuario) {
         ArrayList<Evento> listaEventos = new ArrayList<>();
+
         String sql = "SELECT e.* " +
                 "FROM evento e " +
                 "INNER JOIN inscripcion i ON e.idEvento = i.idEvento\n " +
@@ -225,6 +204,7 @@ public class VecinosDao extends BaseDao{
     }
     public boolean inscribirUsuarioEnEvento(int idUsuario, int idEvento) {
         String sqlInscripcion = "INSERT INTO inscripcion (idUsuario, idEvento) VALUES (?, ?)";
+
         try (Connection con = this.getConnection();
              PreparedStatement ps = con.prepareStatement(sqlInscripcion)) {
 

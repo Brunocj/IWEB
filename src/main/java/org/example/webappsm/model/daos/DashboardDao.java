@@ -6,28 +6,16 @@ import org.example.webappsm.model.beans.Usuario;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class DashboardDao {
+public class DashboardDao extends BaseDao{
 
 
     public ArrayList<Usuario> listarBaneados(){
         ArrayList<Usuario> listaBaneados = new ArrayList<>();
 
-        try {
-            Class.forName( "com.mysql.cj.jdbc.Driver");
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        //Parametros de conexion a que base de datos me quiero unir//
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "123456";
-
         String sql = "SELECT * FROM Usuario WHERE baneado = 1";
 
 
-        try (Connection conn= DriverManager.getConnection(url, username, password);
+        try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -51,23 +39,11 @@ public class DashboardDao {
     public String totalBaneados(){
         String totalBaneados = "";
 
-        try {
-            Class.forName( "com.mysql.cj.jdbc.Driver");
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        //Parametros de conexion a que base de datos me quiero unir//
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "123456";
-
         String sql = "SELECT COUNT(*) AS total_vecinos_baneados " +
                 "FROM Usuario " +
                 "WHERE idRol = 3 AND baneado = 1;";
 
-        try (Connection conn= DriverManager.getConnection(url, username, password);
+        try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -87,25 +63,13 @@ public class DashboardDao {
     public String avgIncidencias(){
         String avgIncidencias ="";
 
-        try {
-            Class.forName( "com.mysql.cj.jdbc.Driver");
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        //Parametros de conexion a que base de datos me quiero unir//
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "123456";
-
         String sql = "SELECT AVG(incidencias_por_dia) AS promedio_incidencias_por_dia " +
                 "FROM (SELECT DATE(fecha) AS fecha_dia, COUNT(*) AS incidencias_por_dia " +
                 "FROM Incidencia " +
                 "GROUP BY fecha_dia) AS incidencias_diarias;";
 
 
-        try (Connection conn= DriverManager.getConnection(url, username, password);
+        try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -124,22 +88,10 @@ public class DashboardDao {
     public String totalIncidencias(){
         String totalIncidencias ="";
 
-        try {
-            Class.forName( "com.mysql.cj.jdbc.Driver");
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        //Parametros de conexion a que base de datos me quiero unir//
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "123456";
-
         String sql = "SELECT COUNT(*) AS cantidad_total_incidencias " +
                 "FROM Incidencia;";
 
-        try (Connection conn= DriverManager.getConnection(url, username, password);
+        try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -158,18 +110,6 @@ public class DashboardDao {
     public String incidenciaComunMax(){
         String maxComun = "";
 
-        try {
-            Class.forName( "com.mysql.cj.jdbc.Driver");
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        //Parametros de conexion a que base de datos me quiero unir//
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "123456";
-
         String sql = "SELECT nombreTipo, COUNT(*) AS cantidad_incidencias " +
                 "FROM Incidencia " +
                 "JOIN TipoIncidencia ON Incidencia.idTipoIncidencia = TipoIncidencia.idTipoIncidencia " +
@@ -177,7 +117,7 @@ public class DashboardDao {
                 "ORDER BY cantidad_incidencias DESC " +
                 "LIMIT 1;";
 
-        try (Connection conn= DriverManager.getConnection(url, username, password);
+        try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -196,18 +136,6 @@ public class DashboardDao {
     public String incidenciaComunMin(){
         String minComun = "";
 
-        try {
-            Class.forName( "com.mysql.cj.jdbc.Driver");
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        //Parametros de conexion a que base de datos me quiero unir//
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "123456";
-
         String sql = "SELECT nombreTipo, COUNT(*) AS cantidad_incidencias " +
                 "FROM Incidencia " +
                 "JOIN TipoIncidencia ON Incidencia.idTipoIncidencia = TipoIncidencia.idTipoIncidencia " +
@@ -215,7 +143,7 @@ public class DashboardDao {
                 "ORDER BY cantidad_incidencias ASC " +
                 "LIMIT 1;";
 
-        try (Connection conn= DriverManager.getConnection(url, username, password);
+        try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -233,23 +161,11 @@ public class DashboardDao {
     public String incidenciasPorAtender(){
         String  incidenciasPorAtender ="";
 
-        try {
-            Class.forName( "com.mysql.cj.jdbc.Driver");
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        //Parametros de conexion a que base de datos me quiero unir//
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "123456";
-
         String sql = "SELECT COUNT(*) AS cantidad_incidencias_pendientes " +
                 "FROM Incidencia " +
                 "WHERE idEstado = 1;";
 
-        try (Connection conn= DriverManager.getConnection(url, username, password);
+        try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -268,18 +184,6 @@ public class DashboardDao {
     public String incidenciasUrbMax(){
         String maxUrb ="";
 
-        try {
-            Class.forName( "com.mysql.cj.jdbc.Driver");
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        //Parametros de conexion a que base de datos me quiero unir//
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "123456";
-
         String sql = "SELECT nombreUrbanizacion, COUNT(*) AS cantidad_incidencias " +
                 "FROM Incidencia " +
                 "JOIN Urbanizacion ON Incidencia.idUrbanizacion = Urbanizacion.idUrbanizacion " +
@@ -287,7 +191,7 @@ public class DashboardDao {
                 "ORDER BY cantidad_incidencias DESC " +
                 "LIMIT 1;";
 
-        try (Connection conn= DriverManager.getConnection(url, username, password);
+        try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -306,18 +210,6 @@ public class DashboardDao {
     public String incidenciasUrbMin(){
         String minUrb ="";
 
-        try {
-            Class.forName( "com.mysql.cj.jdbc.Driver");
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        //Parametros de conexion a que base de datos me quiero unir//
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "123456";
-
         String sql = "SELECT nombreUrbanizacion, COUNT(*) AS cantidad_incidencias " +
                 "FROM Incidencia " +
                 "JOIN Urbanizacion ON Incidencia.idUrbanizacion = Urbanizacion.idUrbanizacion " +
@@ -325,7 +217,7 @@ public class DashboardDao {
                 "ORDER BY cantidad_incidencias ASC " +
                 "LIMIT 1;";
 
-        try (Connection conn= DriverManager.getConnection(url, username, password);
+        try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -344,25 +236,13 @@ public class DashboardDao {
     public ArrayList<String> obtenerIncidenciasPorTipo() {
         ArrayList<String> incidenciasPorTipo = new ArrayList<>();
 
-        try {
-            Class.forName( "com.mysql.cj.jdbc.Driver");
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        //Parametros de conexion a que base de datos me quiero unir//
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "123456";
-
         String sql = "SELECT nombreTipo, COUNT(*) AS cantidad_incidencias " +
                 "FROM Incidencia " +
                 "JOIN TipoIncidencia ON Incidencia.idTipoIncidencia = TipoIncidencia.idTipoIncidencia " +
                 "GROUP BY nombreTipo " +
                 "ORDER BY cantidad_incidencias DESC";
 
-        try (Connection conn = DriverManager.getConnection(url, username, password);
+        try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
@@ -381,21 +261,9 @@ public class DashboardDao {
     public ArrayList<Incidencia> listarIncidenciasPorEstado(int idEstado) {
         ArrayList<Incidencia> listaIncidencias = new ArrayList<>();
 
-        try {
-            Class.forName( "com.mysql.cj.jdbc.Driver");
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        //Parametros de conexion a que base de datos me quiero unir//
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "123456";
-
         String sql = "SELECT * FROM Incidencia WHERE idEstado = ?";
 
-        try (Connection conn = DriverManager.getConnection(url, username, password);
+        try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, idEstado);
@@ -417,26 +285,13 @@ public class DashboardDao {
     public ArrayList<String> obtenerIncidenciasPorUrbanizacion() {
         ArrayList<String> incidenciasPorUrbanizacion = new ArrayList<>();
 
-        try {
-            Class.forName( "com.mysql.cj.jdbc.Driver");
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        //Parametros de conexion a que base de datos me quiero unir//
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "123456";
-
-
         String sql = "SELECT nombreUrbanizacion, COUNT(*) AS cantidad_incidencias " +
                 "FROM Incidencia " +
                 "JOIN Urbanizacion ON Incidencia.idUrbanizacion = Urbanizacion.idUrbanizacion " +
                 "GROUP BY nombreUrbanizacion " +
                 "ORDER BY cantidad_incidencias DESC";
 
-        try (Connection conn = DriverManager.getConnection(url, username, password);
+        try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
@@ -456,17 +311,7 @@ public class DashboardDao {
 
 
     public void incidenciasPorTipo(ArrayList<String> Tipos, ArrayList<Integer> Cantidades){
-        try {
-            Class.forName( "com.mysql.cj.jdbc.Driver");
 
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        //Parametros de conexion a que base de datos me quiero unir//
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "123456";
         String sql = "SELECT " +
                 "ti.nombreTipo AS tipo_incidencia, " +
                 "COUNT(i.idIncidencia) AS cantidad_incidencias " +
@@ -477,7 +322,7 @@ public class DashboardDao {
                 "GROUP BY " +
                 "ti.nombreTipo;";
 
-        try (Connection conn = DriverManager.getConnection(url, username, password);
+        try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
@@ -494,17 +339,7 @@ public class DashboardDao {
     }
 
     public void incidenciasPorUrbanizacion(ArrayList<String> Urbanizaciones, ArrayList<Integer> Cantidades){
-        try {
-            Class.forName( "com.mysql.cj.jdbc.Driver");
 
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        //Parametros de conexion a que base de datos me quiero unir//
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "123456";
         String sql = "SELECT " +
                 "u.nombreUrbanizacion AS nombreUrb, " +
                 "COUNT(i.idIncidencia) AS cantidad_incidencias " +
@@ -515,7 +350,7 @@ public class DashboardDao {
                 "GROUP BY " +
                 "u.nombreUrbanizacion;";
 
-        try (Connection conn = DriverManager.getConnection(url, username, password);
+        try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
@@ -532,17 +367,7 @@ public class DashboardDao {
     }
 
     public void incidenciasPorEstado(ArrayList<String> Estados, ArrayList<Double> Porcentajes){
-        try {
-            Class.forName( "com.mysql.cj.jdbc.Driver");
 
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        //Parametros de conexion a que base de datos me quiero unir//
-        String url ="jdbc:mysql://localhost:3306/sanmiguel";
-        String username = "root";
-        String password = "123456";
         String sql = "SELECT " +
                 "e.nombreEstado, " +
                 "(COUNT(i.idIncidencia) * 100.0 / (SELECT COUNT(*) FROM Incidencia)) AS porcentaje " +
@@ -553,7 +378,7 @@ public class DashboardDao {
                 "GROUP BY " +
                 "e.nombreEstado;";
 
-        try (Connection conn = DriverManager.getConnection(url, username, password);
+        try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
