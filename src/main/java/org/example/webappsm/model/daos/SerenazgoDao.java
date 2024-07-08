@@ -40,11 +40,11 @@ public class SerenazgoDao extends BaseDao {
 
         return listaSerenazgo;
     }
-    public void agregarSerenazgo(Serenazgo serenazgo){
+    public void agregarSerenazgo(Serenazgo serenazgo, Integer turnoId, Integer tipoId){
 
-        String query = "INSERT INTO Serenazgo (nombre, apellido, dni, direccion, telefono, turno, tipo, fNacimiento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Serenazgo (nombre, apellido, dni, direccion, telefono, idTurno, idTipoSerenazgo, fNacimiento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn= this.getConnection();
+        try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)){
 
             if (serenazgo.getDni() == null) {
@@ -56,8 +56,16 @@ public class SerenazgoDao extends BaseDao {
             pstmt.setString(3,serenazgo.getDni());
             pstmt.setString(4,serenazgo.getDireccion());
             pstmt.setString(5,serenazgo.getTelefono());
-            pstmt.setString(6,serenazgo.getTurno());
-            pstmt.setString(7,serenazgo.getTipo());
+            if (turnoId != null) {
+                pstmt.setInt(6, turnoId);
+            } else {
+                pstmt.setNull(6, Types.INTEGER);
+            }
+            if (tipoId != null) {
+                pstmt.setInt(7, tipoId);
+            } else {
+                pstmt.setNull(7, Types.INTEGER);
+            }
             pstmt.setDate(8,new java.sql.Date(serenazgo.getFNacimiento().getTime()));
             pstmt.executeUpdate();
         }catch( SQLException e){
@@ -106,7 +114,7 @@ public class SerenazgoDao extends BaseDao {
         }
         return serenazgo;
     }
-    public void editarSerenazgo(Serenazgo serenazgo){
+    public void editarSerenazgo(Serenazgo serenazgo, Integer turnoId, Integer tipoId){
 
         String query = "UPDATE Serenazgo AS S " +
                 "SET S.nombre = ?, " +
@@ -114,20 +122,30 @@ public class SerenazgoDao extends BaseDao {
                 "    S.dni = ?, " +
                 "    S.direccion = ?, " +
                 "    S.telefono = ?, " +
-                "    S.idTurno = (SELECT idTurno FROM Turno WHERE nombreTurno = ?), " +
-                "    S.idTipoSerenazgo = (SELECT idTipoSerenazgo FROM tiposerenazgo WHERE nombreTipo = ?), " +
+                "    S.idTurno = ?, " +
+                "    S.idTipoSerenazgo = ?, " +
                 "    S.fNacimiento = ? " +
                 "WHERE S.idSerenazgo = ?";
-        try (Connection conn= this.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)){
 
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)){
             pstmt.setString(1, serenazgo.getNombre());
             pstmt.setString(2, serenazgo.getApellido());
             pstmt.setString(3, serenazgo.getDni());
             pstmt.setString(4, serenazgo.getDireccion());
             pstmt.setString(5, serenazgo.getTelefono());
-            pstmt.setString(6, serenazgo.getTurno());
-            pstmt.setString(7, serenazgo.getTipo());
+
+            if (turnoId != null) {
+                pstmt.setInt(6, turnoId.intValue());
+            } else {
+                pstmt.setNull(6, Types.INTEGER);
+            }
+            if (tipoId != null) {
+                pstmt.setInt(7, tipoId.intValue());
+            } else {
+                pstmt.setNull(7, Types.INTEGER);
+            }
+
             pstmt.setDate(8, new java.sql.Date(serenazgo.getFNacimiento().getTime()));
             pstmt.setInt(9, serenazgo.getIdSerenazgo());
             pstmt.executeUpdate();
