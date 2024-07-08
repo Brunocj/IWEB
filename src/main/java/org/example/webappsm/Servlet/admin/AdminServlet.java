@@ -3,10 +3,7 @@ package org.example.webappsm.Servlet.admin;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import org.example.webappsm.model.beans.Incidencia;
-import org.example.webappsm.model.beans.Profesor;
-import org.example.webappsm.model.beans.Serenazgo;
-import org.example.webappsm.model.beans.Usuario;
+import org.example.webappsm.model.beans.*;
 import org.example.webappsm.model.daos.DashboardDao;
 import org.example.webappsm.model.daos.ProfesorDao;
 import org.example.webappsm.model.daos.SerenazgoDao;
@@ -38,9 +35,9 @@ public class AdminServlet extends HttpServlet {
                 DashboardDao dashboardDao = new DashboardDao();
                 String totalBaneados = dashboardDao.totalBaneados();
                 String avgIncidencias = dashboardDao.avgIncidencias();
-                String totalIncidencias = dashboardDao.totalIncidencias();
-                String incidenciasComunMax = dashboardDao.incidenciaComunMax();
-                String incidenciasComunMin = dashboardDao.incidenciaComunMin();
+                String incidenciasMes = dashboardDao.incidenciasMes();
+                String incidenciasSemana = dashboardDao.incidenciasSemana();
+                String incidenciasHoy = dashboardDao.incidenciasHoy();
                 String incidenciasPorAtender = dashboardDao.incidenciasPorAtender();
                 String incidenciasUrbMax = dashboardDao.incidenciasUrbMax();
                 String incidenciasUrbMin = dashboardDao.incidenciasUrbMin();
@@ -54,12 +51,16 @@ public class AdminServlet extends HttpServlet {
                 ArrayList<String> estados = new ArrayList<>();
                 ArrayList<Double> porcentajes = new ArrayList<>();
                 dashboardDao.incidenciasPorEstado(estados, porcentajes);
+                ArrayList<String> labelsChart2 = new ArrayList<>();
+                ArrayList<Integer> incidenciasReportadas = new ArrayList<>();
+                ArrayList<Integer> incidenciasResueltas = new ArrayList<>();
+                dashboardDao.incidenciasRegistradas(labelsChart2, incidenciasReportadas, incidenciasResueltas);
 
                 request.setAttribute("totalbaneados", totalBaneados);
                 request.setAttribute("avgincidencias", avgIncidencias);
-                request.setAttribute("totalincidencias", totalIncidencias);
-                request.setAttribute("incidenciascomunmax", incidenciasComunMax);
-                request.setAttribute("incidenciascomunmin",incidenciasComunMin);
+                request.setAttribute("incidenciasmes", incidenciasMes);
+                request.setAttribute("incidenciassemana", incidenciasSemana);
+                request.setAttribute("incidenciashoy",incidenciasHoy);
                 request.setAttribute("incidenciasatender", incidenciasPorAtender);
                 request.setAttribute("incidenciasurbmax",incidenciasUrbMax);
                 request.setAttribute("incidenciasurbmin", incidenciasUrbMin);
@@ -70,7 +71,9 @@ public class AdminServlet extends HttpServlet {
                 request.setAttribute("cantidadurbanizacion", cantidadUrbanizacion);
                 request.setAttribute("estados", estados);
                 request.setAttribute("porcentajes", porcentajes);
-
+                request.setAttribute("labels", labelsChart2);
+                request.setAttribute("incidenciasReportadas", incidenciasReportadas);
+                request.setAttribute("incidenciasResueltas", incidenciasResueltas);
                 vista = "vistas/jsp/ADMIN/Dashboard/dashboard.jsp";
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
@@ -96,12 +99,25 @@ public class AdminServlet extends HttpServlet {
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
+            case "agregarSerenazgo":
+                SerenazgoDao serenazgoDao = new SerenazgoDao();
+                ArrayList<Turno> listaTurnos = serenazgoDao.listarTurnos();
+                ArrayList<TipoSerenazgo> listaTipos = serenazgoDao.listarTipos();
+                request.setAttribute("listaTurnos", listaTurnos);
+                request.setAttribute("listaTipos", listaTipos);
+                vista = "vistas/jsp/ADMIN/Serenazgo/serenazgoRegistro.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
             case "editarSerenazgo":
                 int idSerenazgoEditar = Integer.parseInt(request.getParameter("idEditar"));
 
-                SerenazgoDao serenazgoDao = new SerenazgoDao();
-                Serenazgo serenazgoEdit = serenazgoDao.obtenerSerenazgoPorId(idSerenazgoEditar);
-
+                SerenazgoDao serenazgoDaoE = new SerenazgoDao();
+                Serenazgo serenazgoEdit = serenazgoDaoE.obtenerSerenazgoPorId(idSerenazgoEditar);
+                ArrayList<Turno> listaTurnosE = serenazgoDaoE.listarTurnos();
+                ArrayList<TipoSerenazgo> listaTiposE = serenazgoDaoE.listarTipos();
+                request.setAttribute("listaTurnos", listaTurnosE);
+                request.setAttribute("listaTipos", listaTiposE);
                 request.setAttribute("serenazgoEdit", serenazgoEdit);
                 vista = "vistas/jsp/ADMIN/Serenazgo/editarSerenazgo.jsp";
                 rd = request.getRequestDispatcher(vista);
@@ -158,6 +174,46 @@ public class AdminServlet extends HttpServlet {
                 vista = "vistas/jsp/ADMIN/Vecinos/Postulaciones_coordinacion/tabla_postulaciones.jsp";
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
+                break;
+            case "solicitudAcceso":
+                int idUsuario = Integer.parseInt(request.getParameter("id")); // Asegúrate de que el nombre del parámetro sea "id"
+
+                VecinosDao vecinosDao2 = new VecinosDao();
+
+                Usuario usuario = vecinosDao2.obtenerUsuarioPorId(idUsuario);
+
+                request.setAttribute("usuarioVer", usuario);
+                request.setAttribute("id",idUsuario);
+
+                vista = "vistas/jsp/ADMIN/Vecinos/Solicitudes_acceso/detalles_solicitudes.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+            case "solicitudCoordi":
+
+                int idUsuarioCoordi = Integer.parseInt(request.getParameter("id")); // Asegúrate de que el nombre del parámetro sea "id"
+
+                VecinosDao vecinosDaoS = new VecinosDao();
+
+                Usuario usuario1 = vecinosDaoS.obtenerSolCoordiPorId(idUsuarioCoordi);
+
+                request.setAttribute("usuarioVerCoordi", usuario1);
+                request.setAttribute("id",idUsuarioCoordi);
+
+                vista = "vistas/jsp/ADMIN/Vecinos/Postulaciones_coordinacion/detalles_postulaciones.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+            case "deleteVecino":
+
+                VecinosDao vecinosDao3 = new VecinosDao();
+
+                int id_usuario = Integer.parseInt(request.getParameter("id1"));
+                int opcion_boton = Integer.parseInt(request.getParameter("id2"));
+
+                vecinosDao3.borrar_vecino(id_usuario,opcion_boton); //revisar esta funcion (recive un parametro que no usa)
+
+
                 break;
         }
 
@@ -242,12 +298,24 @@ public class AdminServlet extends HttpServlet {
             nuevoSerenazgo.setDni(dniS);
             nuevoSerenazgo.setDireccion(direccionS);
             nuevoSerenazgo.setTelefono(telefonoS);
-            nuevoSerenazgo.setTurno(turnoS);
-            nuevoSerenazgo.setTipo(tipoS);
+            Integer turnoId = null;;
+            if ("null".equals(turnoS)) {
+                turnoId = null;
+            } else if (turnoS != null && !turnoS.isEmpty()) {
+                turnoId = Integer.parseInt(turnoS);
+            } else {
+            }
+            Integer tipoId = null;;
+            if ("null".equals(tipoS)) {
+                tipoId = null;
+            } else if (tipoS != null && !tipoS.isEmpty()) {
+                tipoId = Integer.parseInt(tipoS);
+            } else {
+            }
             nuevoSerenazgo.setFNacimiento(fechaNacimiento);
 
             SerenazgoDao serenazgoDao = new SerenazgoDao();
-            serenazgoDao.agregarSerenazgo(nuevoSerenazgo);
+            serenazgoDao.agregarSerenazgo(nuevoSerenazgo, turnoId, tipoId);
 
             response.sendRedirect(request.getContextPath() + "/Admin?action=tablaSerenazgo");
 
@@ -281,12 +349,25 @@ public class AdminServlet extends HttpServlet {
             if (telefonoS != null && !telefonoS.isEmpty()) {
                 serenazgo.setTelefono(telefonoS);
             }
+            Integer turnoId = null;
             if (turnoS != null && !turnoS.isEmpty()) {
-                serenazgo.setTurno(turnoS);
+                try {
+                    turnoId = Integer.parseInt(turnoS);
+                } catch (NumberFormatException e) {
+                    // Manejar el caso en que turnoS no sea un valor numérico válido
+                    e.printStackTrace(); // o puedes imprimir un mensaje de error
+                }
             }
+            Integer tipoId = null;
             if (tipoS != null && !tipoS.isEmpty()) {
-                serenazgo.setTipo(tipoS);
+                try {
+                    tipoId = Integer.parseInt(tipoS);
+                } catch (NumberFormatException e) {
+                    // Manejar el caso en que turnoS no sea un valor numérico válido
+                    e.printStackTrace(); // o puedes imprimir un mensaje de error
+                }
             }
+
             if (fNacimientoS != null && !fNacimientoS.isEmpty()) {
                 try {
                     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -297,7 +378,7 @@ public class AdminServlet extends HttpServlet {
                 }
             }
 
-            serenazgoDao.editarSerenazgo(serenazgo);
+            serenazgoDao.editarSerenazgo(serenazgo, turnoId, tipoId);
             response.sendRedirect(request.getContextPath() + "/Admin?action=tablaSerenazgo");
 
         }else if(action.equals("eliminarSerenazgo")){
@@ -311,9 +392,40 @@ public class AdminServlet extends HttpServlet {
 
                 response.sendRedirect(request.getContextPath() + "/Admin?action=tablaSerenazgo");
             }
+        }else if(action.equals("opcionAcceso")){
+            String opcionSeleccionada = request.getParameter("opcionSeleccionada");
+            int id = Integer.parseInt(request.getParameter("idUser"));
+
+            VecinosDao vecinosDao = new VecinosDao();
+
+            if (opcionSeleccionada.equals("aprobar")) {
+                vecinosDao.editarEstadoAprobado(id);
+
+            } else if (opcionSeleccionada.equals("denegar")) {
+                vecinosDao.eliminarUsuarioPorId(id);
+
+            }
+
+            response.sendRedirect(request.getContextPath() + "/Admin?action=tablaAcceso");
+        }else if(action.equals("opcionSoli")){
+            String opcionSeleccionada = request.getParameter("opcionSeleccionada");
+            int id = Integer.parseInt(request.getParameter("idUser"));
+            int idArea = Integer.parseInt(request.getParameter("idArea"));
+            VecinosDao vecinosDao = new VecinosDao();
+
+            if (opcionSeleccionada.equals("aprobar")) {
+                vecinosDao.editarRol(id, idArea);
+
+            } else if (opcionSeleccionada.equals("denegar")) {
+                vecinosDao.eliminarSolicitud(id);
+
+            }
+
+            response.sendRedirect(request.getContextPath() + "/Admin?action=tablaCoordinador");
         }else{
             response.sendRedirect(request.getContextPath() + "/Admin");
         }
     }
 
 }
+

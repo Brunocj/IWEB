@@ -17,7 +17,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Pagina en blanco</title>
+    <title>Tabla de solicitudes</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="<%=request.getContextPath()%>/vistas/jsp/ADMIN/Vecinos/Solicitudes_acceso/styles_tabla.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/vendors/mdi/css/materialdesignicons.min.css">
@@ -64,7 +64,7 @@
 
 
             <li class="nav-item menu-items">
-                <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=dashboard">
+                <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Dashboard/dashboard.jsp" onclick="return CancelarDashboard();">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>
@@ -182,8 +182,9 @@
                     <table id="miTabla" class="table" style="margin-bottom:15px;">
                         <thead style="background-color: #ff8e9f;"> <!--Cambiar al color de fondo de la pagina, pero un poco mas oscuro-->
                         <tr style="text-align: center; font-weight:800;">
-                            <th style ="color: white;font-size: 17px;cursor: pointer;">Apellidos</th>
-                            <th style ="color: white;font-size: 17px;cursor: pointer;">Nombres</th>
+                            <th style ="color: white;font-size: 17px;cursor: pointer;">Apellidos y Nombres</th>
+                            <th style ="color: white;font-size: 17px;cursor: pointer;">Documento</th>
+                            <th style ="color: white;font-size: 17px;cursor: pointer;">e-mail</th>
                             <th style="color: white; font-size: 17px; cursor: pointer;">Ver Detalles
                                 <a class="mdi mdi-magnify" style="color: #ffffff; font-size: 20px;"></a>
                             </th>
@@ -191,26 +192,28 @@
                         </thead>
                         <hr style="border: none; border-top: 3px solid black; margin-top: -15px; border-radius: 10px;">
                         <tbody style="text-align: center;color: black;">
-                            <%
-                                if (lista != null) {
-                                    for (Usuario usuario : lista) {
-                            %>
-                            <tr style="text-align: center;">
-                                <td><a><%=usuario.getApellido() %></a></td>
-                                <td><a><%=usuario.getNombre() %></a></td>
-                                <td><a href ="detalles_solicitudes.jsp" class ="mdi mdi-account-details"  style ="color: #6c7293; font-size: 20px;"></a>
-                                </td>
-                            </tr>
-                            <%
-                                }
-                            } else {
-                            %>
-                            <tr>
-                                <td colspan="5">No hay Solicitudes pendientes.</td>
-                            </tr>
-                            <%
-                                }
-                            %>
+                        <%
+                            if (lista != null) {
+                                for (Usuario usuario : lista) {
+                        %>
+                        <tr style="text-align: center;">
+                            <td><a><%=usuario.getApellido() %>, <%=usuario.getNombre() %></a></td>
+                            <td><a><%=usuario.getDocumento() %></a></td>
+                            <td><a><%=usuario.getCorreoE() %></a></td>
+                            <td><a href="<%=request.getContextPath()%>/Admin?action=solicitudAcceso&id=<%=usuario.getId()%>" class="mdi mdi-account-details" style="color: #6c7293; font-size: 20px;"></a>
+
+                            </td>
+                        </tr>
+                        <%
+                            }
+                        } else {
+                        %>
+                        <tr>
+                            <td colspan="5">No hay Solicitudes pendientes.</td>
+                        </tr>
+                        <%
+                            }
+                        %>
                         </tbody>
                     </table>
 

@@ -290,7 +290,93 @@ public class VecinosDao extends BaseDao{
             throw new RuntimeException(e);
         }
     }
+    public Usuario obtenerUsuarioPorId(int id) {
+        Usuario usuario = null;
 
+
+        String sql = "SELECT * FROM Usuario WHERE idUsuario = ?";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, id);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    usuario = new Usuario();
+                    usuario.setId(id);
+                    usuario.setNombre(rs.getString("nombres"));
+                    usuario.setApellido(rs.getString("apellidos"));
+                    usuario.setDocumento(rs.getString("nroDocumento"));
+                    usuario.setDireccion(rs.getString("direccion"));
+                    usuario.setNumContacto(rs.getString("numeroContacto"));
+                    usuario.setFalsasAlarmas(rs.getInt("falsasAlarmas"));
+                    usuario.setDistrito(rs.getString("distrito"));
+                    usuario.setUrbanizacion(rs.getString("urbanización"));
+                    usuario.setCorreoE(rs.getString("correo"));
+
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return usuario;
+    }
+    public Usuario obtenerSolCoordiPorId(int id) {
+        Usuario usuario = null;
+
+        String sql = "SELECT s.idUsuario, s.nombres, s.apellidos, s.nroDocumento, s.direccion, s.numeroContacto, s.falsasAlarmas, " +
+                "s.distrito, s.urbanización, s.correo, " +
+                "(SELECT a.nombreArea FROM Area a WHERE a.idArea = " +
+                "(SELECT sc.idArea " +
+                "FROM solicitudCoordinador sc " +
+                "WHERE sc.idUsuario = s.idUsuario)) AS area " +
+                "FROM Usuario s " +
+                "WHERE s.idUsuario = ?";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, id);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    usuario = new Usuario();
+                    usuario.setNombre(rs.getString("nombres"));
+                    usuario.setApellido(rs.getString("apellidos"));
+                    usuario.setDocumento(rs.getString("nroDocumento"));
+                    usuario.setDireccion(rs.getString("direccion"));
+                    usuario.setNumContacto(rs.getString("numeroContacto"));
+                    usuario.setFalsasAlarmas(rs.getInt("falsasAlarmas"));
+                    usuario.setDistrito(rs.getString("distrito"));
+                    usuario.setUrbanizacion(rs.getString("urbanización"));
+                    usuario.setCorreoE(rs.getString("correo"));
+                    usuario.setArea(rs.getString("area"));
+
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return usuario;
+    }
+    public void borrar_vecino(int id_usuario, int opcion_boton){
+
+
+
+        if (opcion_boton == 1){
+            String query="";
+        } else if (opcion_boton == 2){
+            String query="";
+        }
+
+        String query = "DELETE FROM Usuario";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)){
+
+
+        }catch( SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 
 
 

@@ -32,7 +32,7 @@
     <!-- End layout styles -->
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" />
     <!--JS para los popups-->
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 <div class="container-scroller">
@@ -231,7 +231,7 @@
                             <td><a><%= profesor.getNombre() %></a></td>
                             <td><%= profesor.getCurso() %></td>
                             <td><%= profesor.getNombreArea() %></td>
-                                <td><a href ="${pageContext.request.contextPath}/Admin?action=editarProfesor&id=<%= profesor.getIdProfesor() %>" class ="mdi mdi-lead-pencil" style ="color: #6c7293;font-size: 20px;"></a></td>
+                            <td><a href ="${pageContext.request.contextPath}/Admin?action=editarProfesor&id=<%= profesor.getIdProfesor() %>" class ="mdi mdi-lead-pencil" style ="color: #6c7293;font-size: 20px;"></a></td>
                             <td><a href ="#" onclick="return Eliminacion(<%= profesor.getIdProfesor() %>, '<%= request.getContextPath() %>');" class ="mdi mdi-delete" style ="color: #6c7293;font-size: 20px;"></a></td>
                         </tr>
 

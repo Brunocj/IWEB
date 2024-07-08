@@ -21,7 +21,7 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" /><!--Cambiar la ubicacion del logo de la pagina aca tmb-->
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png"/><!--Cambiar la ubicacion del logo de la pagina aca tmb-->
     <!--JS para los popups-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -117,7 +117,6 @@
         </ul>
     </nav>
     <!-- partial -->
-</div>
     <div class="container-fluid page-body-wrapper">
         <!-- partial:../../partials/_navbar.jsp -->
         <nav class="navbar p-0 fixed-top d-flex flex-row">
@@ -156,7 +155,7 @@
 
                 <div class="card2">
                     <h2 style="margin-top: 0; margin-bottom: 20px; text-align: left;  font-size: 30px;">Datos de Serenazgo</h2>
-                    <a href="tabla_serenazgo.jsp" class="button">Regresar</a>
+                    <a href="tabla_serenazgo.jsp"  class="button" onclick="return Cancelar();">Regresar</a>
                     <hr style="border: none; border-top: 2px solid black;">
                     <div class="card-table">
                         <div class="card-body">
@@ -248,13 +247,38 @@
             });
         }
 
+        function Cancelar() {
+            Swal.fire({
+                title: "Estás seguro?",
+                text: "Perdera todo su progreso",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#00913f",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Sí, cancelar",
+                cancelButtonText: "Cancelar",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Cancelado!",
+                        text: "Se ha cancelado satisfactoriamente",
+                        icon: "success"
+                    }).then(() => {
+                        window.location.href = "${pageContext.request.contextPath}/Admin?action=tablaSerenazgo";
 
+                    });
+                }
+            });
+
+            // Evitar que el formulario se envíe automáticamente
+            return false;
+        }
 
 
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script src = "<%=request.getContextPath()%>/vistas/jsp/ADMIN/Serenazgo/script_tabla.js"></script>
+    <script src ="script_tabla.js"></script>
 
     <!-- End custom js for this page -->
 

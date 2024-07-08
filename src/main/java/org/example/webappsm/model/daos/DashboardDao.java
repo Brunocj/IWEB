@@ -12,6 +12,8 @@ public class DashboardDao extends BaseDao{
     public ArrayList<Usuario> listarBaneados(){
         ArrayList<Usuario> listaBaneados = new ArrayList<>();
 
+
+
         String sql = "SELECT * FROM Usuario WHERE baneado = 1";
 
 
@@ -39,6 +41,8 @@ public class DashboardDao extends BaseDao{
     public String totalBaneados(){
         String totalBaneados = "";
 
+
+
         String sql = "SELECT COUNT(*) AS total_vecinos_baneados " +
                 "FROM Usuario " +
                 "WHERE idRol = 3 AND baneado = 1;";
@@ -63,6 +67,8 @@ public class DashboardDao extends BaseDao{
     public String avgIncidencias(){
         String avgIncidencias ="";
 
+
+
         String sql = "SELECT AVG(incidencias_por_dia) AS promedio_incidencias_por_dia " +
                 "FROM (SELECT DATE(fecha) AS fecha_dia, COUNT(*) AS incidencias_por_dia " +
                 "FROM Incidencia " +
@@ -85,18 +91,21 @@ public class DashboardDao extends BaseDao{
         return avgIncidencias;
     }
 
-    public String totalIncidencias(){
+    public String incidenciasMes(){
         String totalIncidencias ="";
 
-        String sql = "SELECT COUNT(*) AS cantidad_total_incidencias " +
-                "FROM Incidencia;";
+
+
+        String sql = "SELECT COUNT(*) AS total_incidencias_ultimo_mes " +
+                "FROM incidencia " +
+                "WHERE fecha >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH);";
 
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()){
-                totalIncidencias = Integer.toString(rs.getInt("cantidad_total_incidencias"));
+                totalIncidencias = Integer.toString(rs.getInt(1));
 
             }
 
@@ -107,22 +116,21 @@ public class DashboardDao extends BaseDao{
         return totalIncidencias;
     }
 
-    public String incidenciaComunMax(){
+    public String incidenciasSemana(){
         String maxComun = "";
 
-        String sql = "SELECT nombreTipo, COUNT(*) AS cantidad_incidencias " +
-                "FROM Incidencia " +
-                "JOIN TipoIncidencia ON Incidencia.idTipoIncidencia = TipoIncidencia.idTipoIncidencia " +
-                "GROUP BY nombreTipo " +
-                "ORDER BY cantidad_incidencias DESC " +
-                "LIMIT 1;";
+
+
+        String sql = "SELECT COUNT(*) AS total_incidencias_esta_semana " +
+                "FROM incidencia " +
+                "WHERE YEARWEEK(fecha, 1) = YEARWEEK(CURDATE(), 1);";
 
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()){
-                maxComun = (rs.getString("nombreTipo"));
+                maxComun = (rs.getString(1));
 
             }
 
@@ -133,22 +141,21 @@ public class DashboardDao extends BaseDao{
         return maxComun;
     }
 
-    public String incidenciaComunMin(){
+    public String incidenciasHoy(){
         String minComun = "";
 
-        String sql = "SELECT nombreTipo, COUNT(*) AS cantidad_incidencias " +
-                "FROM Incidencia " +
-                "JOIN TipoIncidencia ON Incidencia.idTipoIncidencia = TipoIncidencia.idTipoIncidencia " +
-                "GROUP BY nombreTipo " +
-                "ORDER BY cantidad_incidencias ASC " +
-                "LIMIT 1;";
+
+
+        String sql = "SELECT COUNT(*) AS total_incidencias_hoy " +
+                "FROM incidencia " +
+                "WHERE DATE(fecha) = CURDATE();";
 
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()){
-                minComun = (rs.getString("nombreTipo"));
+                minComun = (rs.getString(1));
 
             }
 
@@ -160,6 +167,7 @@ public class DashboardDao extends BaseDao{
     }
     public String incidenciasPorAtender(){
         String  incidenciasPorAtender ="";
+
 
         String sql = "SELECT COUNT(*) AS cantidad_incidencias_pendientes " +
                 "FROM Incidencia " +
@@ -183,6 +191,8 @@ public class DashboardDao extends BaseDao{
 
     public String incidenciasUrbMax(){
         String maxUrb ="";
+
+
 
         String sql = "SELECT nombreUrbanizacion, COUNT(*) AS cantidad_incidencias " +
                 "FROM Incidencia " +
@@ -210,6 +220,8 @@ public class DashboardDao extends BaseDao{
     public String incidenciasUrbMin(){
         String minUrb ="";
 
+
+
         String sql = "SELECT nombreUrbanizacion, COUNT(*) AS cantidad_incidencias " +
                 "FROM Incidencia " +
                 "JOIN Urbanizacion ON Incidencia.idUrbanizacion = Urbanizacion.idUrbanizacion " +
@@ -236,6 +248,7 @@ public class DashboardDao extends BaseDao{
     public ArrayList<String> obtenerIncidenciasPorTipo() {
         ArrayList<String> incidenciasPorTipo = new ArrayList<>();
 
+
         String sql = "SELECT nombreTipo, COUNT(*) AS cantidad_incidencias " +
                 "FROM Incidencia " +
                 "JOIN TipoIncidencia ON Incidencia.idTipoIncidencia = TipoIncidencia.idTipoIncidencia " +
@@ -261,6 +274,7 @@ public class DashboardDao extends BaseDao{
     public ArrayList<Incidencia> listarIncidenciasPorEstado(int idEstado) {
         ArrayList<Incidencia> listaIncidencias = new ArrayList<>();
 
+
         String sql = "SELECT * FROM Incidencia WHERE idEstado = ?";
 
         try (Connection conn = this.getConnection();
@@ -284,6 +298,7 @@ public class DashboardDao extends BaseDao{
 
     public ArrayList<String> obtenerIncidenciasPorUrbanizacion() {
         ArrayList<String> incidenciasPorUrbanizacion = new ArrayList<>();
+
 
         String sql = "SELECT nombreUrbanizacion, COUNT(*) AS cantidad_incidencias " +
                 "FROM Incidencia " +
@@ -394,7 +409,46 @@ public class DashboardDao extends BaseDao{
 
     }
 
+    public void incidenciasRegistradas (ArrayList<String> Labels, ArrayList<Integer>IncidenciasRegistradas, ArrayList<Integer>IncidenciasResueltas){
 
+        String sql = "WITH Days AS (" +
+                "SELECT 1 AS DayNumber, 'Lunes' AS DayName " +
+                "UNION ALL SELECT 2, 'Martes' " +
+                "UNION ALL SELECT 3, 'Miercoles' " +
+                "UNION ALL SELECT 4, 'Jueves' " +
+                "UNION ALL SELECT 5, 'Viernes' " +
+                "UNION ALL SELECT 6, 'Sábado' " +
+                "UNION ALL SELECT 7, 'Domingo' " +
+                ") " +
+                "SELECT " +
+                "d.DayName AS Dia, " +
+                "COALESCE(SUM(CASE WHEN DAYOFWEEK(i.fecha) = d.DayNumber THEN 1 ELSE 0 END), 0) AS IncidenciasReportadas, " +
+                "COALESCE(SUM(CASE WHEN i.idEstado IN (3, 4) AND DAYOFWEEK(i.fecha) = d.DayNumber THEN 1 ELSE 0 END), 0) AS IncidenciasResueltas " +
+                "FROM " +
+                "Days d " +
+                "LEFT JOIN " +
+                "Incidencia i ON YEARWEEK(i.fecha, 1) = YEARWEEK(CURDATE(), 1) AND DAYOFWEEK(i.fecha) = d.DayNumber " +
+                "GROUP BY " +
+                "d.DayNumber, d.DayName " +
+                "ORDER BY " +
+                "d.DayNumber;";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Labels.add(rs.getString(1));
+                IncidenciasRegistradas.add(rs.getInt(2));
+                IncidenciasResueltas.add(rs.getInt(3));
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
 
 

@@ -97,7 +97,7 @@
                     <i class="mdi mdi-account-alert"></i>
                   </span>
               Sol. de acceso</a></li>
-              <li class="nav-item ${"tablaCoordinador".equals(request.getParameter("action")) ? "active" : ""}"> <a class="nav-link " href="<%=request.getContextPath()%>/Admin?action=tablaCoordinador" style="color: white;">
+            <li class="nav-item ${"tablaCoordinador".equals(request.getParameter("action")) ? "active" : ""}"> <a class="nav-link " href="<%=request.getContextPath()%>/Admin?action=tablaCoordinador" style="color: white;">
                   <span class="menu-icon ">
                     <i class="mdi mdi-account-alert "></i>
                   </span>

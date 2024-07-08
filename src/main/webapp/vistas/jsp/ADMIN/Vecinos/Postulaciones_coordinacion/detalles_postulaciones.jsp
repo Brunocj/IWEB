@@ -5,28 +5,31 @@
   Time: 22:42
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="org.example.webappsm.model.beans.Usuario" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% Usuario usuario =(Usuario) request.getAttribute("usuarioVerCoordi");%>
+<% int idPostulacion =(int) request.getAttribute("id");%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Pagina en blanco</title>
+    <title>Postulación a coordinador: <%=usuario.getNombre()%></title>
     <!-- plugins:css -->
 
-    <link rel="stylesheet" href="../../../../../assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../../../../../assets/vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="styles_detalles_postulaciones.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/vistas/jsp/ADMIN/Vecinos/Solicitudes_acceso/styles_detalles_solicitudes.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End Plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="../../../../../assets/css/style.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../../LogoSM.png" /> <!--Cambiar la ubicacion del logo de la pagina aca tmb-->
+    <link rel="shortcut icon" href="<%=request.getContextPath()%>/vistas/jsp/LogoSM.png" /> <!--Cambiar la ubicacion del logo de la pagina aca tmb-->
     <!--JS para los popups-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -35,20 +38,22 @@
 <body>
 <div class="container-scroller">
     <!-- partial:../../partials/_sidebar.html -->
+    <!-- partial:../../partials/_sidebar.html -->
+    <!-- partial:../../partials/_sidebar.html -->
     <nav class="sidebar sidebar-offcanvas" id="sidebar" style ="background-color: #000f22;">  <!--Cambiar al color mas oscuro-->
 
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top" style ="background-color: #000f22;">
-            <h3 class="sidebar-brand brand-logo" style ="color:white; font-weight: 200px; cursor: default;">Menú</h3>
-            <h3 class="sidebar-brand brand-logo-mini" style ="color:white; font-weight: 200px; cursor: default;">M</h3>
+            <h3 class="sidebar-brand brand-logo" style ="color:white; font-weight: 200; cursor: default;">Menú</h3>
+            <h3 class="sidebar-brand brand-logo-mini" style ="color:white; font-weight: 200; cursor: default;">M</h3>
         </div>
 
 
-        <ul class="nav" style="position: fixed;">
+        <ul class="nav">
 
             <!-- Codigo para un item de la barra lateral que no tiene sublista -->
             <li class="nav-item menu-items "> <!-- la clase "active" solo se usa para la vista que está activa -->
 
-                <a class="nav-link" href="../../pag_principal.jsp "onclick="return CancelarPagPrincipal();"> <!-- Cambiar href de acuerdo a lo necesario -->
+                <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/pagina_principal_admin.jsp" onclick="return CancelarPagPrincipal();"> <!-- Cambiar href de acuerdo a lo necesario -->
                     <span class="menu-icon">
                 <i class="mdi mdi-home"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
@@ -59,23 +64,23 @@
 
 
             <li class="nav-item menu-items">
-                <a class="nav-link" href="../../Dashboard/dashboard.jsp" onclick="return CancelarDashboard();">
+                <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Dashboard/dashboard.jsp" onclick="return CancelarDashboard();">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>
                     <span class="menu-title" style="color: white;">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item menu-items ">
-                <a class="nav-link" href="../../Serenazgo/tabla_serenazgo.jsp "onclick="return CancelarSerenazgo();">
+            <li class="nav-item menu-items active">
+                <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Serenazgo/tabla_serenazgo.jsp" onclick="return CancelarSerenazgo();">
               <span class="menu-icon">
                 <i class="mdi mdi-security"></i>
               </span>
                     <span class="menu-title" style="color: white;">Serenazgo</span>
                 </a>
             </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="../../Profesores/tabla_profesor.jsp"onclick="return CancelarProfesores();">
+            <li class="nav-item menu-items ">
+                <a class="nav-link" href="${pageContext.request.contextPath}/Admin?action=tablaProfesores" onclick="return CancelarProfesores();">
               <span class="menu-icon">
                 <i class="mdi mdi-teach"></i>
               </span>
@@ -95,16 +100,16 @@
                 <div class="collapse" id="ui-basic">
                     <ul class="nav flex-column sub-menu"><!-- Colocar items de la sublista -->
 
-                        <li class="nav-item active "> <a class="nav-link" href="../../Vecinos/Solicitudes_acceso/tabla_solicitudes.jsp" style="color: white;"onclick="return CancelarSolAcceso();">
+                        <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Vecinos/Postulaciones_coordinacion/tabla_postulaciones.jsp" style="color: white;"onclick="return CancelarSolAcceso();">
                   <span class="menu-icon">
                     <i class="mdi mdi-account-alert"></i>
                   </span>
-                            Sol. de acceso</a></li>
-                        <li class="nav-item "> <a class="nav-link " href="../../Vecinos/Postulaciones_coordinacion/tabla_postulaciones.jsp" style="color: white;"onclick="return CancelarSolCoordinacion();">
-                    <span class="menu-icon ">
-                    <i class="mdi mdi-account-alert active"></i>
+                            Solicitudes de acceso</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Vecinos/Solicitudes_acceso/tabla_solicitudes.jsp" style="color: white;"onclick="return CancelarSolCoordinacion();">
+                    <span class="menu-icon">
+                    <i class="mdi mdi-account-alert"></i>
                   </span>
-                            Sol. a coordinación</a></li>
+                            Solicitudes a coordinación</a></li>
                     </ul>
                 </div>
             </li>
@@ -121,6 +126,7 @@
             <!-- Codigo para un item de la barra lateral que SI tiene sublista FIN -->
         </ul>
     </nav>
+
     <!-- partial -->
 
     <div class="container-fluid page-body-wrapper">
@@ -133,20 +139,24 @@
                 </button>
 
                 <ul class="navbar-nav navbar-nav-right">
-
-
                     <li class="nav-item dropdown">
                         <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                             <div class="navbar-profile">
                                 <div class="Header-nav-item">
-                                    <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default; text-align: right;">ADMIN</h2>
-                                    <h5 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 15px; font-weight:500; cursor: default;">Administrador de San Miguel</h5>
+                                    <h2 class="mb-0 d-none d-sm-block navbar-profile-name"
+                                        style="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default; text-align: right;">
+                                        ADMIN
+                                    </h2>
+                                    <h5 class="mb-0 d-none d-sm-block navbar-profile-name"
+                                        style="margin-right: 10px; font-size: 15px; font-weight:500; cursor: default;">
+                                        Administrador de San Miguel
+                                    </h5>
                                 </div>
-                                <img class="img-xs rounded-circle" src="../../../LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
-
+                                <img class="img-xs rounded-circle" src="<%=request.getContextPath()%>/vistas/jsp/LogoSM.png" alt=""
+                                     style="height: 50px; width: 100%;">
+                                <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
                             </div>
                         </a>
-
                     </li>
                 </ul>
                 <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
@@ -170,45 +180,52 @@
                         <!-- Icon -->
 
                         <!-- Login Form -->
-                        <form>
+                        <form id="miFormularioPostulacion" action="${pageContext.request.contextPath}/Admin?action=opcionSoli" method="post">
+                            <input type="hidden" name="action" value="opcionSoli">
+                            <input type="hidden" id="idUser" name="idUser" value="<%=idPostulacion%>">
+                            <%
+                                int idArea;
+                                if(usuario.getArea().equals("Cultura")){
+                                    idArea = 1;
+                                }else{
+                                    idArea = 2;
+                                }
+                            %>
+                            <input type="hidden" id="idArea" name="idArea" value="<%=idArea%>">
+                            <input type="hidden" id="opcionSeleccionada" name="opcionSeleccionada" value="">
                             <div class="inputs">
                                 <label for="nombre" style="font-size: 12px; color: gray;">Nombres:</label>
-                                <input type="text" id="nombre" value="Manuel Augusto" disabled style="margin-bottom: 5px; background-color: rgb(241, 241, 241);">
+                                <input type="text" id="nombre" value="<%=usuario.getNombre()%>" disabled style="margin-bottom: 5px; background-color: rgb(241, 241, 241);">
 
                                 <label for="apellido" style="font-size: 12px; color: gray;">Apellidos:</label>
-                                <input type="text" id="apellido" value="Yarlequé Medina" disabled style="margin-bottom: 5px;background-color: rgb(241, 241, 241);">
+                                <input type="text" id="apellido" value="<%=usuario.getApellido()%>" disabled style="margin-bottom: 5px;background-color: rgb(241, 241, 241);">
 
-                                <label for="correo" style="font-size: 12px; color: gray;">DNI-peruano:</label>
-                                <input type="text" id="correo" value="myarleq@pucp.edu.pe" disabled style="margin-bottom: 5px;background-color: rgb(241, 241, 241);">
-
-                                <label for="dni" style="font-size: 12px; color: gray;">Dirección:</label>
-                                <input type="text" id="dni" value="32990451" disabled style="margin-bottom: 5px;background-color: rgb(241, 241, 241);">
+                                <label for="dni" style="font-size: 12px; color: gray;">DNI-peruano:</label>
+                                <input type="text" id="dni" value="<%=usuario.getDocumento()%>" disabled style="margin-bottom: 5px;background-color: rgb(241, 241, 241);">
 
                                 <label for="direccion" style="font-size: 12px; color: gray;">Distrito:</label>
-                                <input type="text" id="direccion" value="Inras/V" disabled style="margin-bottom: 5px;background-color: rgb(241, 241, 241);">
+                                <input type="text" id="direccion" value="<%=usuario.getDistrito()%>" disabled style="margin-bottom: 5px;background-color: rgb(241, 241, 241);">
 
                                 <label for="telefono" style="font-size: 12px; color: gray;">Urbanización:</label>
-                                <input type="text" id="telefono" value="915478952" disabled style="margin-bottom: 5px;background-color: rgb(241, 241, 241);">
+                                <input type="text" id="telefono" value="<%=usuario.getNumContacto()%>" style="margin-bottom: 5px;background-color: rgb(241, 241, 241);">
 
-                                <label for="turno" style="font-size: 12px; color: gray;">Correo(gmail):</label>
-                                <input type="text" id="turno" value="Mañana" disabled style="margin-bottom: 5px;background-color: rgb(241, 241, 241);">
+                                <label for="correo" style="font-size: 12px; color: gray;">Correo(gmail):</label>
+                                <input type="text" id="correo" value="<%=usuario.getCorreoE()%>" disabled style="margin-bottom: 5px;background-color: rgb(241, 241, 241);">
 
-                                <label for="nacimiento" style="font-size: 12px; color: gray;">Fecha de nacimiento:</label>
-                                <input type="text" id="nacimiento" value="Fecha de nacimiento" disabled style="margin-bottom: 5px;background-color: rgb(241, 241, 241);">
 
                                 <label for="nacimiento" style="font-size: 12px; color: gray;">Coordinación [Deporte/Cultura]</label>
-                                <input type="text" id="nacimiento" value="Cultura" disabled style="margin-bottom: -15px;background-color: rgb(236, 243, 207);">
+                                <input type="text" id="nacimiento" value="<%=usuario.getArea() %>" disabled style="margin-bottom: -15px;background-color: rgb(236, 243, 207);">
                             </div>
 
                             <label for="solicitud" style="font-size: 16px; color: rgb(5, 0, 0); padding: 5px; float:left; font-weight: bold;">Solicitud a Coordinación:</label>
                             <hr style="margin-top: 60px;margin-bottom: 0px; ">
 
                             <label style="color: black; float:left; cursor: pointer;">
-                                <input type="radio" name="opcion" style="margin-top: 15px;cursor: pointer;" onclick="showApproveContent()"> Aprobar
+                                <input type="radio" name="opcion" value="aprobar" style="margin-top: 15px;cursor: pointer;" onclick="showApproveContent()"> Aprobar
                             </label>
 
                             <label style="color: black; float:left; margin-left: 20px; cursor: pointer;">
-                                <input type="radio" name="opcion" style="margin-left: 5px;margin-top: 15px;cursor: pointer;" onclick="showDenyContent()"> Denegar
+                                <input type="radio" name="opcion" value="denegar" style="margin-left: 5px;margin-top: 15px;cursor: pointer;" onclick="showDenyContent()"> Denegar
                             </label>
                             <br>
                             <br>
@@ -252,23 +269,22 @@
 
     <!-- container-scroller -->
     <!-- plugins:js -->
-    <script src="../../../../../assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="<%=request.getContextPath()%>/assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <!-- End plugin js for this page -->
     <!-- inject:js -->
-    <script src="../../../../../assets/js/off-canvas.js"></script>
-    <script src="../../../../../assets/js/hoverable-collapse.js"></script>
-    <script src="../../../../../assets/js/misc.js"></script>
-    <script src="../../../../../assets/js/settings.js"></script>
-    <script src="../../../../../assets/js/todolist.js"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page -->
+    <script src="<%=request.getContextPath()%>/assets/js/off-canvas.js"></script>
+    <script src="<%=request.getContextPath()%>/assets/js/hoverable-collapse.js"></script>
+    <script src="<%=request.getContextPath()%>/assets/js/misc.js"></script>
+    <script src="<%=request.getContextPath()%>/assets/js/settings.js"></script>
+    <script src="<%=request.getContextPath()%>/assets/js/todolist.js"></script>
     <script>
 
         /* Funciones para que el texto cambie de acuerdo a lo indicado*/
 
         function showApproveContent() {
+            document.getElementById("opcionSeleccionada").value = "aprobar";
             var titulo = document.getElementById("titulo");
             var cuerpo = document.getElementById("cuerpo");
 
@@ -284,6 +300,7 @@
         }
 
         function showDenyContent() {
+            document.getElementById("opcionSeleccionada").value = "denegar";
             var titulo = document.getElementById("titulo");
             var cuerpo = document.getElementById("cuerpo");
 
@@ -334,7 +351,7 @@
                         text: "Se ha cancelado satisfactoriamente",
                         icon: "success"
                     }).then(() => {
-                        window.location.href = "tabla_postulaciones.jsp";
+                        window.location.href = "${pageContext.request.contextPath}/Admin?action=tablaCoordinador";
                     });
                 }
             });
@@ -344,6 +361,24 @@
         }
 
         function Guardar() {
+            var opcionSeleccionada = document.getElementById("opcionSeleccionada").value;
+            console.log("Opción seleccionada:", opcionSeleccionada);
+            var id = document.getElementById("idUser").value;
+            // Verificar si se ha seleccionado alguna opción
+            if (!opcionSeleccionada) {
+                // Mostrar un mensaje de error si no se ha seleccionado ninguna opción
+                console.log("Error: No se ha seleccionado ninguna opción.");
+                Swal.fire({
+                    title: "Error",
+                    text: "Por favor, selecciona una opción antes de guardar",
+                    icon: "error",
+                    confirmButtonColor: "#00913f",
+                });
+                return false; // Prevenir el envío del formulario
+            }
+
+            // Mostrar el popup de confirmación
+            console.log("Mostrando pop-up de confirmación...");
             Swal.fire({
                 title: "Estás seguro?",
                 text: "El proceso no podrá ser reversible",
@@ -354,13 +389,16 @@
                 confirmButtonText: "Si, guardar y enviar"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Swal.fire({
-                        title: "Guardado y enviado!",
-                        text: "Se ha guardado con éxito",
-                        icon: "success"
-                    }).then(() => {
-                        window.location.href = "tabla_postulaciones.jsp";
-                    });
+                    // Enviar el formulario
+                    var idInput = document.createElement("input");
+                    idInput.type = "hidden";
+                    idInput.name = "id";
+                    idInput.value = id;
+                    document.getElementById("miFormularioPostulacion").appendChild(idInput);
+                    console.log("Enviando formulario...");
+                    document.getElementById("miFormularioPostulacion").submit();
+                } else {
+                    console.log("Operación cancelada.");
                 }
             });
 

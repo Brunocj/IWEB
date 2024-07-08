@@ -36,45 +36,48 @@ public class SerenazgoServlet extends HttpServlet {
 
             case "dashboard":
                 DashboardDao dashboardDao = new DashboardDao();
-
                 String totalBaneados = dashboardDao.totalBaneados();
                 String avgIncidencias = dashboardDao.avgIncidencias();
-                String totalIncidencias = dashboardDao.totalIncidencias();
-                String incidenciasComunMax = dashboardDao.incidenciaComunMax();
-                String incidenciasComunMin = dashboardDao.incidenciaComunMin();
+                String incidenciasMes = dashboardDao.incidenciasMes();
+                String incidenciasSemana = dashboardDao.incidenciasSemana();
+                String incidenciasHoy = dashboardDao.incidenciasHoy();
                 String incidenciasPorAtender = dashboardDao.incidenciasPorAtender();
                 String incidenciasUrbMax = dashboardDao.incidenciasUrbMax();
                 String incidenciasUrbMin = dashboardDao.incidenciasUrbMin();
-
+                ArrayList<Usuario> listaBaneados = dashboardDao.listarBaneados();
                 ArrayList<String> tipoIncidencias = new ArrayList<>();
                 ArrayList<Integer> cantidadTipo = new ArrayList<>();
                 dashboardDao.incidenciasPorTipo(tipoIncidencias, cantidadTipo);
-
                 ArrayList<String> urbanizaciones = new ArrayList<>();
                 ArrayList<Integer> cantidadUrbanizacion = new ArrayList<>();
                 dashboardDao.incidenciasPorUrbanizacion(urbanizaciones, cantidadUrbanizacion);
-
                 ArrayList<String> estados = new ArrayList<>();
                 ArrayList<Double> porcentajes = new ArrayList<>();
                 dashboardDao.incidenciasPorEstado(estados, porcentajes);
+                ArrayList<String> labelsChart2 = new ArrayList<>();
+                ArrayList<Integer> incidenciasReportadas = new ArrayList<>();
+                ArrayList<Integer> incidenciasResueltas = new ArrayList<>();
+                dashboardDao.incidenciasRegistradas(labelsChart2, incidenciasReportadas, incidenciasResueltas);
 
                 request.setAttribute("totalbaneados", totalBaneados);
                 request.setAttribute("avgincidencias", avgIncidencias);
-                request.setAttribute("totalincidencias", totalIncidencias);
-                request.setAttribute("incidenciascomunmax", incidenciasComunMax);
-                request.setAttribute("incidenciascomunmin",incidenciasComunMin);
+                request.setAttribute("incidenciasmes", incidenciasMes);
+                request.setAttribute("incidenciassemana", incidenciasSemana);
+                request.setAttribute("incidenciashoy",incidenciasHoy);
                 request.setAttribute("incidenciasatender", incidenciasPorAtender);
                 request.setAttribute("incidenciasurbmax",incidenciasUrbMax);
                 request.setAttribute("incidenciasurbmin", incidenciasUrbMin);
-
+                request.setAttribute("listabaneados", listaBaneados);
                 request.setAttribute("tipoincidencias", tipoIncidencias);
                 request.setAttribute("cantidadtipo", cantidadTipo);
                 request.setAttribute("urbanizaciones", urbanizaciones);
                 request.setAttribute("cantidadurbanizacion", cantidadUrbanizacion);
                 request.setAttribute("estados", estados);
                 request.setAttribute("porcentajes", porcentajes);
-
-                vista = "vistas/jsp/SERENAZGO/Dashboard/dashboard.jsp";
+                request.setAttribute("labels", labelsChart2);
+                request.setAttribute("incidenciasReportadas", incidenciasReportadas);
+                request.setAttribute("incidenciasResueltas", incidenciasResueltas);
+                vista = "vistas/jsp/ADMIN/Dashboard/dashboard.jsp";
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;

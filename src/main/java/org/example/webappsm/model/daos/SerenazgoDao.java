@@ -1,6 +1,8 @@
 package org.example.webappsm.model.daos;
 
 import org.example.webappsm.model.beans.Serenazgo;
+import org.example.webappsm.model.beans.TipoSerenazgo;
+import org.example.webappsm.model.beans.Turno;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -26,7 +28,7 @@ public class SerenazgoDao extends BaseDao {
                 serenazgo.setNombre(rs.getString("nombre"));
                 serenazgo.setApellido(rs.getString("apellido"));
                 serenazgo.setTipo(rs.getString("tipo"));
-                serenazgo.setTurno(rs.getString("turno"));
+                serenazgo.setTurno(rs.getString("Turno"));
 
                 listaSerenazgo.add(serenazgo);
 
@@ -95,7 +97,7 @@ public class SerenazgoDao extends BaseDao {
                     serenazgo.setDni(rs.getString("dni"));
                     serenazgo.setDireccion(rs.getString("direccion"));
                     serenazgo.setTelefono(rs.getString("telefono"));
-                    serenazgo.setTurno(rs.getString("turno"));
+                    serenazgo.setTurno(rs.getString("Turno"));
                     serenazgo.setTipo(rs.getString("tipo"));
                     serenazgo.setFNacimiento(rs.getDate("fNacimiento"));
                 }
@@ -182,5 +184,53 @@ public class SerenazgoDao extends BaseDao {
         }catch( SQLException e){
             throw new RuntimeException(e);
         }
+    }
+    public ArrayList<Turno> listarTurnos(){
+        ArrayList<Turno> listaTurnos = new ArrayList<>();
+
+        String sql = "SELECT * from Turno";
+
+        try (Connection conn = this.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()){
+                Turno turno = new Turno();
+
+                turno.setIdTurno(rs.getInt("idTurno"));
+                turno.setNombreTurno(rs.getString("nombreTurno"));
+                listaTurnos.add(turno);
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return listaTurnos;
+    }
+    public ArrayList<TipoSerenazgo> listarTipos(){
+        ArrayList<TipoSerenazgo> listaTipos = new ArrayList<>();
+
+        String sql = "SELECT * from Tiposerenazgo";
+
+        try (Connection conn = this.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()){
+                TipoSerenazgo tipo = new TipoSerenazgo();
+
+                tipo.setIdTipoSerenazgo(rs.getInt("idTipoSerenazgo"));
+                tipo.setNombreTipo(rs.getString("nombreTipo"));
+                listaTipos.add(tipo);
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return listaTipos;
     }
 }

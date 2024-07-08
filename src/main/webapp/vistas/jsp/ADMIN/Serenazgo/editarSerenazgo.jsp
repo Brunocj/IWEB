@@ -1,6 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import ="org.example.webappsm.model.beans.Serenazgo" %>
+<%@ page import ="org.example.webappsm.model.beans.Turno" %>
+<%@ page import ="org.example.webappsm.model.beans.TipoSerenazgo" %>
+<%@ page import="java.util.ArrayList" %>
 <%Serenazgo serenazgo = (Serenazgo) request.getAttribute("serenazgoEdit");%>
+<%ArrayList<Turno> listaTurnos= (ArrayList<Turno>) request.getAttribute("listaTurnos");%>
+<%ArrayList<TipoSerenazgo> listaTipos= (ArrayList<TipoSerenazgo>) request.getAttribute("listaTipos");%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,10 +14,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Pagina en blanco</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/vistas/jsp/ADMIN/Serenazgo/styles_tabla.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Serenazgo/styles_serenazgo_registro.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Profesores/styles_profesor_registro.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End Plugin css for this page -->
@@ -28,8 +32,6 @@
 <body>
 <div class="container-scroller">
     <!-- partial:../../partials/_sidebar.html -->
-
-
     <nav class="sidebar sidebar-offcanvas" id="sidebar" style ="background-color: #000f22;">  <!--Cambiar al color mas oscuro-->
 
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top" style ="background-color: #000f22;">
@@ -38,12 +40,12 @@
         </div>
 
 
-        <ul class="nav"style="position: fixed;">
+        <ul class="nav">
 
             <!-- Codigo para un item de la barra lateral que no tiene sublista -->
             <li class="nav-item menu-items "> <!-- la clase "active" solo se usa para la vista que está activa -->
 
-                <a class="nav-link" href="../pagina_principal_admin.jsp"onclick="return CancelarPagPrincipal();"> <!-- Cambiar href de acuerdo a lo necesario -->
+                <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/pagina_principal_admin.jsp" onclick="return CancelarPagPrincipal();"> <!-- Cambiar href de acuerdo a lo necesario -->
                     <span class="menu-icon">
                 <i class="mdi mdi-home"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
@@ -54,7 +56,7 @@
 
 
             <li class="nav-item menu-items">
-                <a class="nav-link" href="../Dashboard/dashboard.jsp"onclick="return CancelarDashboard();">
+                <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Dashboard/dashboard.jsp" onclick="return CancelarDashboard();">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>
@@ -62,15 +64,15 @@
                 </a>
             </li>
             <li class="nav-item menu-items active">
-                <a class="nav-link" href="tabla_serenazgo.jsp"onclick="return CancelarSerenazgo();">
+                <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Serenazgo/tabla_serenazgo.jsp" onclick="return CancelarSerenazgo();">
               <span class="menu-icon">
                 <i class="mdi mdi-security"></i>
               </span>
                     <span class="menu-title" style="color: white;">Serenazgo</span>
                 </a>
             </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="../Profesores/tabla_profesor.jsp"onclick="return CancelarProfesores();">
+            <li class="nav-item menu-items ">
+                <a class="nav-link" href="${pageContext.request.contextPath}/Admin?action=tablaProfesores" onclick="return CancelarProfesores();">
               <span class="menu-icon">
                 <i class="mdi mdi-teach"></i>
               </span>
@@ -90,16 +92,16 @@
                 <div class="collapse" id="ui-basic">
                     <ul class="nav flex-column sub-menu"><!-- Colocar items de la sublista -->
 
-                        <li class="nav-item"> <a class="nav-link" href="../Vecinos/Solicitudes_acceso/tabla_solicitudes.jsp" style="color: white;"onclick="return CancelarSolAcceso();">
+                        <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Vecinos/Postulaciones_coordinacion/tabla_postulaciones.jsp" style="color: white;"onclick="return CancelarSolAcceso();">
                   <span class="menu-icon">
                     <i class="mdi mdi-account-alert"></i>
                   </span>
-                            Sol. de acceso</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="../Vecinos/Postulaciones_coordinacion/tabla_postulaciones.jsp" style="color: white;"onclick="return CancelarSolCoordinacion();">
-                  <span class="menu-icon">
+                            Solicitudes de acceso</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Vecinos/Solicitudes_acceso/tabla_solicitudes.jsp" style="color: white;"onclick="return CancelarSolCoordinacion();">
+                    <span class="menu-icon">
                     <i class="mdi mdi-account-alert"></i>
                   </span>
-                            Sol. a coordinación</a></li>
+                            Solicitudes a coordinación</a></li>
                     </ul>
                 </div>
             </li>
@@ -116,8 +118,9 @@
             <!-- Codigo para un item de la barra lateral que SI tiene sublista FIN -->
         </ul>
     </nav>
+
     <!-- partial -->
-</div>
+
     <div class="container-fluid page-body-wrapper">
         <!-- partial:../../partials/_navbar.jsp -->
         <nav class="navbar p-0 fixed-top d-flex flex-row">
@@ -157,7 +160,7 @@
                 <div class="card1">
                     <div class = "wrapper"id="formContent">
                         <!-- Tabs Titles -->
-                        <h2 style="margin-top: 0; margin-bottom: 20px; text-align: left;font-size: 30px;">Editar Personal de Serenazgo</h2>
+                        <h2 style="margin-top: 0; margin-bottom: 20px; text-align: left;font-size: 30px;">Editar Serenazgo</h2>
                         <a href="tabla_serenazgo.jsp" class="button" onclick="return Cancelar();">Regresar</a>
                         <hr style="border: none; border-top: 2px solid black;">
                         <!-- Icon -->
@@ -182,11 +185,28 @@
                                 <label for="telefono">Teléfono:</label>
                                 <input type="text" id="telefono" name="telefonoS" value="<%= serenazgo.getTelefono() %>" style="margin-bottom: 0px;">
 
-                                <label for="turno">Turno:</label>
-                                <input type="text" id="turno" name="turnoS" value="<%= serenazgo.getTurno() %>" style="margin-bottom: 0px;">
+                                <div class="form-group">
+                                    <label for="turnoS">Turno:</label>
+                                    <select id="turnoS" name="turnoS" class="form-combo" required>
+                                        <% for (Turno turno : listaTurnos) { %>
+                                            <option value="<%= turno.getIdTurno() %>" <%= serenazgo.getTurno().equals(turno.getNombreTurno()) ? "selected" : "" %>><%=turno.getNombreTurno()%></option>
+                                        <%
+                                            }
+                                        %>
+                                    </select>
+                                </div>
 
-                                <label for="tipo">Tipo:</label>
-                                <input type="text" id="tipo" name="tipoS" value="<%= serenazgo.getTipo() %>" style="margin-bottom: 0px;">
+                                <div class="form-group">
+                                    <label for="tipoS">Tipo:</label>
+                                    <select id="tipoS" name="tipoS" class="form-combo" required>
+                                        <% for (TipoSerenazgo tipo : listaTipos) { %>
+                                        <option value="<%= tipo.getIdTipoSerenazgo() %>" <%= serenazgo.getTipo().equals(tipo.getNombreTipo()) ? "selected" : "" %>><%=tipo.getNombreTipo()%></option>
+                                        <%
+                                            }
+                                        %>
+                                    </select>
+                                </div>
+
 
                                 <label for="nacimiento">Fecha de nacimiento:</label>
                                 <input type="text" id="nacimiento" name="fNacimientoS" value="<%= serenazgo.getFNacimiento() %>" style="margin-bottom: 15px;">
@@ -213,16 +233,16 @@
 
     <!-- container-scroller -->
     <!-- plugins:js -->
-<script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <!-- End plugin js for this page -->
     <!-- inject:js -->
-<script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script>
@@ -240,32 +260,6 @@
                     window.location.href = "../../LOGIN/login.jsp"; //Cambiar la ubicacion del login de acuerdo a lo necesario
                 }
             });
-        }
-
-        function Cancelar() {
-            Swal.fire({
-                title: "Estás seguro?",
-                text: "Perdera todo su progreso",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#00913f",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Sí, cancelar",
-                cancelButtonText: "Cancelar",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire({
-                        title: "Cancelado!",
-                        text: "Se ha cancelado satisfactoriamente",
-                        icon: "success"
-                    }).then(() => {
-                        window.location.href = "${pageContext.request.contextPath}/Admin?action=tablaSerenazgo";
-                    });
-                }
-            });
-
-            // Evitar que el formulario se envíe automáticamente
-            return false;
         }
 
         function Actualizar() {
@@ -297,7 +291,7 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script src = "script_tabla.js"></script>
+    <script src ="script_tabla.js"></script>
     <script src="cancelaciones.js"></script>
     <!-- End custom js for this page -->
 </body>
