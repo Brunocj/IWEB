@@ -14,4 +14,5 @@ public class Serenazgo {
     private String turno;
     private String tipo;
     private Date fNacimiento;
+
 }

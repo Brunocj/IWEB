@@ -21,4 +21,5 @@ public class Incidencia {
     private String clasificacion;
     private int idUsuario;
     private int idTipo;
+    private String nombreUsuarioIncidencia;
 }

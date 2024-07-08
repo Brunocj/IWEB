@@ -20,4 +20,5 @@ public class Usuario {
     private String area;
     private int idRol;
     private int idEstado;
+    private boolean baneado;
 }

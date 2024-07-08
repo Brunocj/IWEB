@@ -260,4 +260,61 @@ public class VecinosDao extends BaseDao{
     }
 
 
+    public ArrayList<Usuario> listarVecinos(){
+
+        ArrayList<Usuario> listaVecinos = new ArrayList<>();
+
+        String sql = "SELECT u.idUsuario, u.nombres, u.apellidos, u.correo, u.falsasAlarmas, u.baneado, e.nombreEstado AS estado " +
+                "FROM Usuario u " +
+                "JOIN Estado e ON u.Estado_idEstado = e.idEstado " +
+                "WHERE e.nombreEstado = 'aceptado'";
+
+        try (Connection conn = this.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()){
+                Usuario usuario = new Usuario();
+
+                usuario.setId(rs.getInt("idUsuario"));
+                usuario.setNombre(rs.getString("nombres"));
+                usuario.setApellido(rs.getString("apellidos"));
+                usuario.setCorreoE(rs.getString("correo"));
+                usuario.setFalsasAlarmas(rs.getInt("falsasAlarmas"));
+                usuario.setBaneado(rs.getBoolean("baneado"));
+
+                listaVecinos.add(usuario);
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return listaVecinos;
+    }
+
+    public void banearVecino(int idVecino){
+
+        String query = "UPDATE Usuario\n" +
+                "SET baneado = 1\n" +
+                "WHERE idUsuario = ?;";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)){
+
+            pstmt.setInt(1,idVecino);
+            pstmt.executeUpdate();
+
+        }catch( SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
+
+
+
+
 }
