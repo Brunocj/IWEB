@@ -25,6 +25,55 @@
     <!-- End layout styles -->
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" />
     <!--JS para los popups-->
+    <style>
+
+      .clasificacion-leve {
+        background-color: #32CD32; /* Turquesa medio */
+        color: white;
+        padding: 2px 4px; /* Ajustar padding para hacerlo más delgado */
+        border-radius: 5px;
+        font-weight: normal; /* Asegurarse de que no sea bold */
+        font-size: 12px; /* Ajustar tamaño del texto */
+        display: inline-block; /* Hacer que el elemento ocupe solo el ancho del texto */
+        margin-top: 13px; /* Eliminar margen */
+        width: 100px; /* Ancho fijo */
+        height: 40px;
+        text-align: center;
+        vertical-align: middle;
+      }
+
+      .clasificacion-moderada {
+        background-color: #FFA500; /* Naranja */
+        color: white;
+        padding: 2px 4px; /* Ajustar padding para hacerlo más delgado */
+        border-radius: 5px;
+        font-weight: normal; /* Asegurarse de que no sea bold */
+        font-size: 12px; /* Ajustar tamaño del texto */
+        display: inline-block; /* Hacer que el elemento ocupe solo el ancho del texto */
+        margin-top: 13px; /* Eliminar margen */
+        width: 100px; /* Ancho fijo */
+        height: 40px;
+        text-align: center;
+        vertical-align: middle;
+      }
+
+      .clasificacion-grave {
+        background-color: #FF0000; /* Rojo */
+        color: white;
+        padding: 2px 4px; /* Ajustar padding para hacerlo más delgado */
+        border-radius: 5px;
+        font-weight: normal; /* Asegurarse de que no sea bold */
+        font-size: 12px; /* Ajustar tamaño del texto */
+        display: inline-block; /* Hacer que el elemento ocupe solo el ancho del texto */
+        margin-top: 13px; /* Eliminar margen */
+        width: 100px; /* Ancho fijo */
+        height: 40px;
+        text-align: center;
+        vertical-align: middle;
+      }
+    </style>
+
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
   <body>
@@ -56,13 +105,14 @@
 
                   <div style="display: flex; gap:30px;margin-top: 10px;">
 
-                    <div style="display: flex; gap:10px;">
+                    <!-- <div style="display: flex; gap:10px;">
 
                       <p style ="color:black; align-self: center; margin-bottom: 0px;font-size: 15px">Filtrar por incidencias :</p>
                       <select id="filtroEstado" style="border-color: #DFDFDF; border-radius: 6px; padding:5px; outline: none; height: 40px; margin-top: 10px;">
                         <option value="">Mostrar Todos</option>
                         <option value="pendiente">Pendiente</option>
                         <option value="en proceso">En Proceso</option>
+
                       </select>
                     </div>
                     <div style="display: flex; align-items: center; justify-content: center;">
@@ -73,24 +123,38 @@
                     </div>
                     <div style="display: flex; align-items: center; justify-content: center;">
 
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>
             </div>
+            <hr style="border: none; border-top: 3px solid black; margin-top: 0; border-radius: 10px;">
+            <%!
+              String getClasificacionClase(String clasificacion) {
+                switch (clasificacion) {
+                  case "Leve":
+                    return "clasificacion-leve";
+                  case "Moderada":
+                    return "clasificacion-moderada";
+                  case "Grave":
+                    return "clasificacion-grave";
+                  default:
+                    return "";
+                }
+              }
+            %>
+
             <table id="miTabla" class="table" style="margin-bottom:15px;">
               <thead style="background-color: #000f22;"> <!--Cambiar al color de fondo de la pagina, pero un poco mas oscuro-->
                 <tr style="text-align: center; font-weight:800;">
                   <th style ="color: white;font-size: 17px;cursor: pointer;">Estado</th>
-                  <th style ="color: white;font-size: 17px;cursor: pointer;">Clasifación</th>
+                  <th style ="color: white;font-size: 17px;cursor: pointer;">Clasificación</th>
                   <th style ="color: white;font-size: 17px;cursor: pointer;">Nombre Completo</th>
 
                   <th style="width: 20px;color: white" colspan="2">Acciones</th>
-                  <th style="width: 20px;color: white;cursor: pointer;">Finalizar</th>
                   <th style="width: 20px;color: white;cursor: pointer;">Falsa Alarma</th>
                 </tr>
               </thead>
-              <hr style="border: none; border-top: 3px solid black; margin-top: -55px; border-radius: 10px;">
 
               <tbody style="text-align: center;color: black;">
                 <% if (incidencias != null) {
@@ -98,29 +162,20 @@
                 %>
                 <tr style="text-align: center;">
                   <td><a><%=incidencia.getEstado()%></a></td>
-                  <td><%= incidencia.getClasificacion() != null ? incidencia.getClasificacion() : "no especificado" %></td>
+                  <td class="<%= incidencia.getClasificacion() != null ? getClasificacionClase(incidencia.getClasificacion()) : "" %>">
+                    <%= incidencia.getClasificacion() != null ? incidencia.getClasificacion() : "no especificado" %>
+                  </td>
                   <td><a><%=incidencia.getNombreUsuarioIncidencia()%></a></td>
-                  <td>
+                  <td colspan="2">
                     <form id="form_<%= incidencia.getIdIncidencia() %>" method="get" action="<%= request.getContextPath() %>/Serenazgo">
-                      <select name="accion" id="acciones_<%= incidencia.getIdIncidencia() %>" class="btn btn-secondary dropdown-toggle" onchange="activarBoton('<%= incidencia.getIdIncidencia() %>')">
+                      <select name="accion" id="acciones_<%= incidencia.getIdIncidencia() %>" class="btn btn-secondary dropdown-toggle" onchange="redirectAction('<%= incidencia.getIdIncidencia() %>')">
                         <option value="">--Seleccionar acción--</option>
                         <option value="info">Ver Incidencia</option>
-                        <option value="clasificar">Clasificar</option>
-                        <option value="proceder">Proceder</option>
+                        <option value="clasificarProceder">Clasificar y Proceder</option>
+                        <% if (incidencia.getEstado().equals("En proceso")) { %>
+                        <option value="finalizar">Finalizar</option>
+                        <% } %>
                       </select>
-                      <input type="hidden" name="idIncidencia" value="<%= incidencia.getIdIncidencia() %>">
-                    </form>
-                  </td>
-                  <td>
-                    <button id="boton_<%= incidencia.getIdIncidencia() %>" type="button"
-                            onclick="redirectAction('<%= incidencia.getIdIncidencia() %>')"
-                            class="btnTable" disabled>Enviar
-                    </button>
-                  </td>
-
-                  <td>
-                    <a href="#" onclick="confirmarYEnviar('finalizarForm');" class="mdi mdi-marker-check" style="color: #6c7293; font-size: 20px;"></a>
-                    <form id="finalizarForm" method="post" action="<%= request.getContextPath() %>/Serenazgo?action=finalizar" style="display: none;">
                       <input type="hidden" name="idIncidencia" value="<%= incidencia.getIdIncidencia() %>">
                     </form>
                   </td>
@@ -172,6 +227,7 @@
       <!-- endinject -->
       <!-- Custom js for this page -->
       <script>
+
         function mostrarPopupCerrarSesion() {
           Swal.fire({
             title: 'Cerrar sesión',
@@ -187,13 +243,7 @@
             }
           });
         }
-        function activarBoton(idIncidencia) {
-          var selectId = 'acciones_' + idIncidencia;
-          var botonId = 'boton_' + idIncidencia;
-          var select = document.getElementById(selectId);
-          var boton = document.getElementById(botonId);
-          boton.disabled = select.value === '';
-        }
+
 
         function redirectAction(idIncidencia) {
           var selectId = 'acciones_' + idIncidencia;
@@ -205,13 +255,13 @@
           var selectedOption = selectElement.value;
           switch(selectedOption) {
             case 'info':
-              window.location.href = '<%=request.getContextPath()%>/Serenazgo?action=leerDescripcion&idIncidencia=' + idIncidencia;
+              window.location.href = '<%= request.getContextPath() %>/Serenazgo?action=leerDescripcion&idIncidencia=' + idIncidencia;
               break;
-            case 'clasificar':
+            case 'clasificarProceder':
               window.location.href = '<%= request.getContextPath() %>/Serenazgo?action=clasificar&idClasificar=' + idIncidencia;
               break;
-            case 'proceder':
-              window.location.href = '<%= request.getContextPath() %>/Serenazgo?action=proceder&idProceder=' + idIncidencia;
+            case 'finalizar':
+              window.location.href = '<%= request.getContextPath() %>/Serenazgo?action=finalizar&idFinalizar=' + idIncidencia;
               break;
             default:
               // Opción por defecto si no se selecciona ninguna acción válida
@@ -241,6 +291,7 @@
 
           return false;
         }
+
       </script>
 
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
