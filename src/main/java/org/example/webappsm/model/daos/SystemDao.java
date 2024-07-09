@@ -1,5 +1,6 @@
 package org.example.webappsm.model.daos;
 
+import jakarta.mail.*;
 import org.example.webappsm.model.beans.Usuario;
 
 import java.security.SecureRandom;
@@ -7,7 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.stream.Stream;
+import java.util.Properties;
+import jakarta.mail.internet.*;
 
 public class SystemDao extends BaseDao{
 
@@ -166,5 +168,37 @@ public class SystemDao extends BaseDao{
         }
     }
 
+    public void enviarCorreo(String destino, String asunto, String cuerpo){
+        String from = "sm.4dmin@gmail.com";
+        String pass = "jrnj deve irvb munz";
+        String host = "smtp.gmail.com";
+        Properties properties = System.getProperties();
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.port", "587");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+
+        Session session = Session.getInstance(properties, new jakarta.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(from, pass); // Cambia "tu_contraseña" por tu contraseña de correo
+            }
+        });
+        try {
+            // Crear un objeto MimeMessage
+            MimeMessage message = new MimeMessage(session);
+
+            // Configurar los parámetros del mensaje
+            message.setFrom(new InternetAddress(from)); // Configuración de la dirección del remitente
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(destino)); // Configuración de la dirección del destinatario
+            message.setSubject(asunto); // Configuración del asunto
+            message.setText(cuerpo); // Configuración del cuerpo del correo
+
+            // Enviar el mensaje
+            Transport.send(message);
+            System.out.println("Correo enviado exitosamente...");
+        } catch (MessagingException mex) {
+            mex.printStackTrace();
+        }
+    }
 
 }
