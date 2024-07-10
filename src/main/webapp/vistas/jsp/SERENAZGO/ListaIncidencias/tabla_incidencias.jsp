@@ -233,6 +233,7 @@
           var selectElement = document.getElementById(selectId);
 
           var selectedOption = selectElement.value;
+
           switch(selectedOption) {
             case 'info':
               window.location.href = '<%= request.getContextPath() %>/Serenazgo?action=leerDescripcion&idIncidencia=' + idIncidencia;
@@ -241,25 +242,41 @@
               window.location.href = '<%= request.getContextPath() %>/Serenazgo?action=proceder&idProceder=' + idIncidencia;
               break;
             case 'finalizar':
-              var form = document.createElement('form');
-              form.method = 'post';
-              form.action = '<%= request.getContextPath() %>/Serenazgo?action=finalizar&idFinalizar=' + idIncidencia;
+              Swal.fire({
+                title: 'Finalizar incidencia',
+                text: '¿Estás seguro de que deseas finalizar la incidencia?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#00913f',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, finalizar',
+                cancelButtonText: 'Cancelar'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  var form = document.createElement('form');
+                  form.method = 'post';
+                  form.action = '<%= request.getContextPath() %>/Serenazgo?action=finalizar&idFinalizar=' + idIncidencia;
 
-              var hiddenField = document.createElement('input');
-              hiddenField.type = 'hidden';
-              hiddenField.name = 'idIncidencia';
-              hiddenField.value = idIncidencia;
-              form.appendChild(hiddenField);
+                  var hiddenField = document.createElement('input');
+                  hiddenField.type = 'hidden';
+                  hiddenField.name = 'idIncidencia';
+                  hiddenField.value = idIncidencia;
+                  form.appendChild(hiddenField);
 
-              document.body.appendChild(form);
-              form.submit();
-              break;
+                  document.body.appendChild(form);
+                  form.submit();
+                } else {
+                  // Reset the select element to the default option if the action is canceled
+                  selectElement.value = "";
+                }
+              });
               break;
             default:
               // Opción por defecto si no se selecciona ninguna acción válida
               break;
           }
         }
+
         function confirmarYEnviar(formId) {
           let confirmMessage = "";
           if (formId.startsWith("falsaAlarmaForm")) {
@@ -272,7 +289,8 @@
             showCancelButton: true,
             confirmButtonColor: '#00913f',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí'
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'Cancelar'
           }).then((result) => {
             if (result.isConfirmed) {
               document.getElementById(formId).submit();
