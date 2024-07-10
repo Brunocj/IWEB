@@ -56,7 +56,7 @@ public class IncidenciasDao extends BaseDao{
                 "    i.idIncidencia,\n" +
                 "    e.nombreEstado,\n" +
                 "    c.nombreClasificacion,\n" +
-                "    CONCAT(u.nombres, ' ', u.apellidos) AS nombreCompleto,\n" +
+                "    CONCAT(u.apellidos, ', ', u.nombres) AS nombreCompleto,\n" +
                 "    i.idUsuario\n" +
                 "FROM \n" +
                 "    incidencia i\n" +

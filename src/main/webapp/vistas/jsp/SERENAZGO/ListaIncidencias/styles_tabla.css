@@ -157,3 +157,54 @@
 .sidebar-icon-only .sidebar .nav .nav-item.hover-open .collapsing {
   width: 250px !important;
 }
+
+.dataTables_wrapper .dataTable .btn, .dataTables_wrapper .dataTable .fc button, .fc .dataTables_wrapper .dataTable button, .dataTables_wrapper .dataTable .ajax-upload-dragdrop .ajax-file-upload, .ajax-upload-dragdrop .dataTables_wrapper .dataTable .ajax-file-upload, .dataTables_wrapper .dataTable .swal2-modal .swal2-buttonswrapper .swal2-styled, .swal2-modal .swal2-buttonswrapper .dataTables_wrapper .dataTable .swal2-styled, .dataTables_wrapper .dataTable .wizard > .actions a, .wizard > .actions .dataTables_wrapper .dataTable a {
+  padding: 0.5rem 1.5rem; /* Aumento del padding para más espacio */
+  vertical-align: top;
+  background-color: #9bbee8; /* Azul plomo bajo */
+  color: #333; /* Color de texto más oscuro para contraste */
+  width: 270px; /* Ancho automático para ajustarse al contenido */
+  white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
+  display: block; /* Hacer que el botón sea un bloque para centrarlo */
+  margin: 0 auto; /* Auto-margen horizontal para centrar */
+  cursor: pointer;
+
+}
+
+/* Estilo para que e boton rojo sea mas ancho */
+.bg-danger {
+  background-color: #fc424a ;
+  width: 120px;
+}
+
+.bg-success, .swal2-modal .swal2-buttonswrapper .swal2-styled.swal2-confirm {
+  background-color: #67cd7e ;
+  width: 120px;
+}
+
+.bg-warning {
+  background-color: #ffab00 ;
+  width: 120px;
+}
+
+.bg-info {
+  background-color: #446ae3 !important ; }
+
+.bg-primary {
+  background-color: #f58a42 !important;  }
+
+
+.badge {
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+}
+
+.dataTables_wrapper .dataTable .btn, .dataTables_wrapper .dataTable .fc button, .fc .dataTables_wrapper .dataTable button, .dataTables_wrapper .dataTable .ajax-upload-dragdrop .ajax-file-upload, .ajax-upload-dragdrop .dataTables_wrapper .dataTable .ajax-file-upload, .dataTables_wrapper .dataTable .swal2-modal .swal2-buttonswrapper .swal2-styled, .swal2-modal .swal2-buttonswrapper .dataTables_wrapper .dataTable .swal2-styled, .dataTables_wrapper .dataTable .wizard > .actions a, .wizard > .actions .dataTables_wrapper .dataTable a {
+  padding: 0.1rem 1rem;
+  vertical-align: top;
+  font-size: 1.3em;
+}
+
+.dataTables_wrapper label {
+   font-size: 1rem !important;
+}

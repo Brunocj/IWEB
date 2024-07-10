@@ -50,41 +50,34 @@ function Eliminacion() {
 }
 
 $(document).ready(function () {
-  var table = $("#miTabla").DataTable({
-    pageLength: 5,
-    lengthChange: false,
-    language: {
-      emptyTable: "No hay registros disponibles",
-      zeroRecords: "No se encontraron registros coincidentes",
-      infoEmpty: "Aún no se ingresan entradas a las tabla",
-      paginate: {
-        first: "Primero",
-        last: "Último",
-        next: "Siguiente",
-        previous: "Anterior",
+  var table = $('#miTabla').DataTable({
+    "pageLength": 5,
+    "lengthChange": false,
+    "language": {
+      "emptyTable": "No hay registros disponibles",
+      "zeroRecords": "No se encontraron registros coincidentes",
+      "infoEmpty": "Aún no se ingresan entradas a las tabla",
+      "paginate": {
+        "first": "Primero",
+        "last": "Último",
+        "next": "Siguiente",
+        "previous": "Anterior"
       },
-      info: "Mostrando de _START_ a _END_ de _TOTAL_ entradas",
-      search: "Buscar:", // Cambia "Search" por "Buscar"
-    },
+      "info": "Mostrando de _START_ a _END_ de _TOTAL_ entradas",
+      "search": '<span style="font-size: 1.2em;">Buscar:</span>' // Cambia el tamaño de la letra de "Buscar"
+    }
   });
 
-  // Filtrado personalizado
-  $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-    var estadoFiltro = $("#filtroEstado").val().toLowerCase();
-    var estado = data[0].toLowerCase();
-
-    // Comprobar si el filtro de estado está vacío o si coincide con el estado actual
-    var estadoCoincide = estadoFiltro === "" || estado.includes(estadoFiltro);
-
-    return estadoCoincide;
+  $('#filtroEstado').on('change', function () {
+    var estado = $(this).val();
+    table.column(0).search(estado).draw();
+  });
+  $('#limpiarFiltros').on('click', function () {
+    $('#filtroEstado').val('');
+    table.search('').columns().search('').draw();
   });
 
-  $("#filtroEstado").on("change", function () {
-    table.draw();
-  });
-
-  $("#limpiarFiltros").on("click", function () {
-    $("#filtroEstado").val("");
-    table.search("").columns().search("").draw();
-  });
 });
+
+
+

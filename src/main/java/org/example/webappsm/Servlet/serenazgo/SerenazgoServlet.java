@@ -134,6 +134,7 @@ public class SerenazgoServlet extends HttpServlet {
 
                 request.setAttribute("listaIncidencias",listaIncidencias);
 
+
                 vista = "vistas/jsp/SERENAZGO/ListaIncidencias/tabla_incidencias.jsp";
 
                 rd = request.getRequestDispatcher(vista);
@@ -169,7 +170,7 @@ public class SerenazgoServlet extends HttpServlet {
                 Incidencia incidenciaClasificar = incidenciasClasificar.obtenerIncidenciaPorId(idIncidenciaClasificar);
 
                 request.setAttribute("incidencia",incidenciaClasificar);
-                vista = "vistas/jsp/SERENAZGO/ListaIncidencias/clasifica.jsp";
+                vista = "vistas/jsp/SERENAZGO/ListaIncidencias/formularios.jsp";
 
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
