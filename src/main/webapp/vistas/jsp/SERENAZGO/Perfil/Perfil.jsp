@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,10 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Pagina en blanco</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="styles_tabla.css">
-    <link rel="stylesheet" href="../../../../assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../../../../assets/vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="styles_Perfil.css">
+      <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/SERENAZGO/ListaIncidencias/styles_tabla.css">
+      <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/mdi/css/materialdesignicons.min.css">
+      <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/SERENAZGO/Perfil/styles_Perfil.css">
     
     <!-- endinject -->
     <!-- Plugin css for this page -->
@@ -17,9 +19,9 @@
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="../../../../assets/css/style.css">
-    <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../LogoSM.png" /><!--Cambiar la ubicacion del logo de la pagina aca tmb-->
+      <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+      <!-- End layout styles -->
+      <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" />
     <!--JS para los popups-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
@@ -93,11 +95,11 @@
                         <table>
                             <tbody>
                                 <tr>
-                                    <td><img src="../Main/imagenes/candado.png" class="img-icon"></td>
+                                    <td><i class="mdi mdi-lock" style="font-size:25px"></i></td>
                                     <td><a href="#" onclick="return contra();">Cambiar contraseña</a></td>
                                 </tr>
                                 <tr>
-                                    <td><img src="../Main/imagenes/telefono.jpg" class="img-icon"></td>
+                                    <td><i class="mdi mdi-phone" style="font-size:25px"></i></td>
                                     <td><a href="#" onclick="return telefono();">Cambiar número telefónico</a></td>
                                     
                                 </tr>
