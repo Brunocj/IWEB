@@ -22,7 +22,9 @@ public class IncidenciasDao extends BaseDao{
                 "FROM \n" +
                 "    incidencia i\n" +
                 "JOIN \n" +
-                "    clasificacin c ON i.idEstado = c.idClasificacin\n" +
+                "    estadoincidencia e ON i.idEstado = e.idEstado\n" +
+                "JOIN \n" +
+                "   clasificacin c ON i.idClasificacin = c.idClasificacin\n" +
                 "WHERE \n" +
                 "i.idEstado=3;";
 
@@ -34,8 +36,8 @@ public class IncidenciasDao extends BaseDao{
                 Incidencia incidencia = new Incidencia();
 
                 incidencia.setIdIncidencia(rs.getInt("idIncidencia"));
-                incidencia.setNombre(rs.getString(2));
-                incidencia.setClasificacion(rs.getString(3));
+                incidencia.setNombre(rs.getString("nombre"));
+                incidencia.setClasificacion(rs.getString("nombreClasificacion"));
 
                 listaIncidenciasPasadas.add(incidencia);
 
