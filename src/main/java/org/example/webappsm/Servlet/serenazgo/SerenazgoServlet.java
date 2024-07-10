@@ -33,7 +33,11 @@ public class SerenazgoServlet extends HttpServlet {
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
-
+            case "perfil":
+                vista = "vistas/jsp/SERENAZGO/Perfil/Perfil.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
             case "dashboard":
                 DashboardDao dashboardDao = new DashboardDao();
                 String totalBaneados = dashboardDao.totalBaneados();
