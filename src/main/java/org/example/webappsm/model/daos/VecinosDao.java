@@ -252,7 +252,7 @@ public class VecinosDao extends BaseDao{
         String sql = "SELECT u.idUsuario, u.nombres, u.apellidos, u.correo, u.falsasAlarmas, u.baneado, e.nombreEstado AS estado " +
                 "FROM Usuario u " +
                 "JOIN Estado e ON u.Estado_idEstado = e.idEstado " +
-                "WHERE e.nombreEstado = 'aceptado'";
+                "WHERE e.nombreEstado = 'aceptado' OR e.nombreEstado = 'activado'";
 
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();

@@ -69,10 +69,12 @@ public class DashboardDao extends BaseDao{
 
 
 
-        String sql = "SELECT AVG(incidencias_por_dia) AS promedio_incidencias_por_dia " +
-                "FROM (SELECT DATE(fecha) AS fecha_dia, COUNT(*) AS incidencias_por_dia " +
-                "FROM Incidencia " +
-                "GROUP BY fecha_dia) AS incidencias_diarias;";
+        String sql = "SELECT ROUND(AVG(incidencias_por_dia), 2) AS promedio_incidencias_por_dia \n" +
+                "FROM (\n" +
+                "    SELECT DATE(fecha) AS fecha_dia, COUNT(*) AS incidencias_por_dia \n" +
+                "    FROM Incidencia \n" +
+                "    GROUP BY fecha_dia\n" +
+                ") AS incidencias_diarias;";
 
 
         try (Connection conn = this.getConnection();

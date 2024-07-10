@@ -320,7 +320,7 @@ body {
   .card:first-child {
     background-color: rgba(255, 183, 190, 0.68) !important;
     border-color: #220000;
-    border-width: 3px;
+
     border-radius: 15px;
   }
 

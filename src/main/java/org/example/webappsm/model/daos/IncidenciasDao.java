@@ -22,7 +22,9 @@ public class IncidenciasDao extends BaseDao{
                 "FROM \n" +
                 "    incidencia i\n" +
                 "JOIN \n" +
-                "    clasificacin c ON i.idEstado = c.idClasificacin\n" +
+                "    estadoincidencia e ON i.idEstado = e.idEstado\n" +
+                "JOIN \n" +
+                "   clasificacin c ON i.idClasificacin = c.idClasificacin\n" +
                 "WHERE \n" +
                 "i.idEstado=3;";
 
@@ -34,8 +36,8 @@ public class IncidenciasDao extends BaseDao{
                 Incidencia incidencia = new Incidencia();
 
                 incidencia.setIdIncidencia(rs.getInt("idIncidencia"));
-                incidencia.setNombre(rs.getString(2));
-                incidencia.setClasificacion(rs.getString(3));
+                incidencia.setNombre(rs.getString("nombre"));
+                incidencia.setClasificacion(rs.getString("nombreClasificacion"));
 
                 listaIncidenciasPasadas.add(incidencia);
 
@@ -193,19 +195,34 @@ public class IncidenciasDao extends BaseDao{
             throw new RuntimeException(e);
         }
     }
+    public void incidenciaEnProceso(int id){
+        int idEnProceso = 2;
+        String query = "UPDATE Incidencia AS i " +
+                "SET i.idEstado = ? " +
+                "WHERE i.idIncidencia = ?";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)){
+            pstmt.setInt(1, idEnProceso);
+            pstmt.setInt(2, id);
+            pstmt.executeUpdate();
+        }catch( SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
     public void declararFalsaAlarma(int id, int idUser){
         int idFalsaAlarma = 4;
         UserDao userDao = new UserDao();
         try (Connection conn = this.getConnection()) {
-        String queryUpd = "UPDATE Incidencia AS i " +
-                "SET idEstado = ? " +
-                "WHERE i.idIncidencia = ?";
+            String queryUpd = "UPDATE Incidencia AS i " +
+                    "SET idEstado = ? " +
+                    "WHERE i.idIncidencia = ?";
 
             try (PreparedStatement pstmt = conn.prepareStatement(queryUpd)){
-                pstmt.setInt(1, idFalsaAlarma);
-                pstmt.setInt(2, id);
-                pstmt.executeUpdate();
-            }
+                    pstmt.setInt(1, idFalsaAlarma);
+                    pstmt.setInt(2, id);
+                    pstmt.executeUpdate();
+                }
             String queryUpdUser = "UPDATE Usuario AS u " +
                 "SET falsasAlarmas = ? " +
                 "WHERE u.idUsuario = ?";

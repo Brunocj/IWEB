@@ -161,8 +161,8 @@
                     </form>
                   </td>
                   <td>
-                    <a href="#" onclick="confirmarYEnviar('falsaAlarmaForm');" class="mdi mdi-alert" style="color: #6c7293; font-size: 20px;"></a>
-                    <form id="falsaAlarmaForm" method="post" action="<%= request.getContextPath() %>/Serenazgo?action=falsaAlarma" style="display: none;">
+                    <a href="#" onclick="confirmarYEnviar('falsaAlarmaForm-<%= incidencia.getIdIncidencia() %>');" class="mdi mdi-alert" style="color: #6c7293; font-size: 20px;"></a>
+                    <form id="falsaAlarmaForm-<%= incidencia.getIdIncidencia() %>" method="post" action="<%= request.getContextPath() %>/Serenazgo?action=falsaAlarma" style="display: none;">
                       <input type="hidden" name="idIncidencia" value="<%= incidencia.getIdIncidencia() %>">
                       <input type="hidden" name="idUsuario" value="<%= incidencia.getIdUsuario() %>">
                     </form>
@@ -230,11 +230,10 @@
         function redirectAction(idIncidencia) {
           var selectId = 'acciones_' + idIncidencia;
 
-          // Obtener el elemento select por su id
           var selectElement = document.getElementById(selectId);
 
-          // Obtener el valor seleccionado
           var selectedOption = selectElement.value;
+
           switch(selectedOption) {
             case 'info':
               window.location.href = '<%= request.getContextPath() %>/Serenazgo?action=leerDescripcion&idIncidencia=' + idIncidencia;
@@ -243,18 +242,44 @@
               window.location.href = '<%= request.getContextPath() %>/Serenazgo?action=proceder&idProceder=' + idIncidencia;
               break;
             case 'finalizar':
-              window.location.href = '<%= request.getContextPath() %>/Serenazgo?action=finalizar&idFinalizar=' + idIncidencia;
+              Swal.fire({
+                title: 'Finalizar incidencia',
+                text: '¿Estás seguro de que deseas finalizar la incidencia?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#00913f',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, finalizar',
+                cancelButtonText: 'Cancelar'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  var form = document.createElement('form');
+                  form.method = 'post';
+                  form.action = '<%= request.getContextPath() %>/Serenazgo?action=finalizar&idFinalizar=' + idIncidencia;
+
+                  var hiddenField = document.createElement('input');
+                  hiddenField.type = 'hidden';
+                  hiddenField.name = 'idIncidencia';
+                  hiddenField.value = idIncidencia;
+                  form.appendChild(hiddenField);
+
+                  document.body.appendChild(form);
+                  form.submit();
+                } else {
+                  // Reset the select element to the default option if the action is canceled
+                  selectElement.value = "";
+                }
+              });
               break;
             default:
               // Opción por defecto si no se selecciona ninguna acción válida
               break;
           }
         }
+
         function confirmarYEnviar(formId) {
           let confirmMessage = "";
-          if (formId.startsWith("finalizarForm")) {
-            confirmMessage = "¿Estás seguro de que deseas finalizar la incidencia?";
-          } else if (formId.startsWith("falsaAlarmaForm")) {
+          if (formId.startsWith("falsaAlarmaForm")) {
             confirmMessage = "¿Estás seguro de declarar la incidencia como falsa alarma?";
           }
 
@@ -264,7 +289,8 @@
             showCancelButton: true,
             confirmButtonColor: '#00913f',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí'
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'Cancelar'
           }).then((result) => {
             if (result.isConfirmed) {
               document.getElementById(formId).submit();
