@@ -71,21 +71,21 @@
 
               <div class="opcion">
                 <label style="font-size: 18px; display: block; margin-bottom: 10px;">
-                  <input type="checkbox" name="opcion" value="leve" style="transform: scale(1.5); vertical-align: middle;"> Leve
+                  <input type="checkbox" name="clasificacion" value="1" style="transform: scale(1.5); vertical-align: middle;" onclick="limitarSeleccion(this)"> Leve
                 </label>
 
               </div>
 
               <div class="opcion">
                 <label style="font-size: 18px; display: block; margin-bottom: 10px;">
-                  <input type="checkbox" name="opcion" value="moderada" style="transform: scale(1.5); vertical-align: middle;"> Moderada
+                  <input type="checkbox" name="clasificacion" value="2" style="transform: scale(1.5); vertical-align: middle;" onclick="limitarSeleccion(this)"> Moderada
                 </label>
 
               </div>
 
               <div class="opcion">
                 <label style="font-size: 18px; display: block; margin-bottom: 10px;">
-                  <input type="checkbox" name="opcion" value="grave" style="transform: scale(1.5); vertical-align: middle;"> Grave
+                  <input type="checkbox" name="clasificacion" value="3" style="transform: scale(1.5); vertical-align: middle;" onclick="limitarSeleccion(this)"> Grave
                 </label>
 
               </div>
@@ -112,7 +112,7 @@
                   <!-- Formulario de serenazgo -->
                       <div class ="serenazgoSelector">
 
-                        <select id="tipoS" name="tipoS" class="form-combo" required>
+                        <select id="SerenazgoSelect" name="tipoS" class="form-combo" required>
                           <option value="null">--Escoja el tipo de serenazgo--</option>
                           <%
                             for (TipoSerenazgo tipoSerenazgo : listaTipos) {
@@ -222,6 +222,16 @@
 
 
 <script>
+  function limitarSeleccion(currentCheckbox) {
+    var checkboxes = document.getElementsByName('opcion');
+
+    // Desmarca todos los checkboxes excepto el que se ha marcado
+    checkboxes.forEach(function(checkbox) {
+      if (checkbox !== currentCheckbox) {
+        checkbox.checked = false;
+      }
+    });
+  }
   function cancelar() {
     Swal.fire({
       title: "¿Estás seguro de que deseas cancelar?",
@@ -264,7 +274,7 @@
           title: "Se inició el proceso de esta incidencia",
           icon: "success"
         }).then(() => {
-          document.querySelector("tipoForm").submit();
+          document.getElementById("tipoForm").submit();
         });
       }
     });

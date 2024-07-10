@@ -236,20 +236,8 @@ public class SerenazgoServlet extends HttpServlet {
 
                 response.sendRedirect(request.getContextPath() + "/Serenazgo?action=listaIncidenciasPasadas");
             }
-        }else if(action.equals("clasificarIncidencia")){
-            String idParam = request.getParameter("id");
-            String categoria = request.getParameter("categoria");
-            if (idParam != null) {
-                int idIncidenciaC = Integer.parseInt(idParam);
-
-                IncidenciasDao incidenciasDao = new IncidenciasDao();
-                int categoriaId = Integer.parseInt(categoria);
-
-                incidenciasDao.actualizarClasificacion(categoriaId, idIncidenciaC);
-                response.sendRedirect(request.getContextPath() + "/Serenazgo?action=listaIncidencias");
-            }
         }else if(action.equals("finalizar")){
-            String idFinalizar = request.getParameter("idIncidencia");
+            String idFinalizar = request.getParameter("idFinalizar");
 
             int idIncidenciaFinalizar = Integer.parseInt(idFinalizar);
             IncidenciasDao incidenciasDaoFinalizar = new IncidenciasDao();
@@ -260,18 +248,24 @@ public class SerenazgoServlet extends HttpServlet {
             String idFA = request.getParameter("idIncidencia");
             String idUser = request.getParameter("idUsuario");
             if (idFA != null && idUser != null) {
-                int idIncidenciaFA = Integer.parseInt(idFA);
-                int idUserFA = Integer.parseInt(idUser);
-                IncidenciasDao incidenciasDaoFA = new IncidenciasDao();
-                incidenciasDaoFA.declararFalsaAlarma(idIncidenciaFA,idUserFA);
+                try {
+                    int idIncidenciaFA = Integer.parseInt(idFA);
+                    int idUserFA = Integer.parseInt(idUser);
+                    IncidenciasDao incidenciasDaoFA = new IncidenciasDao();
+                    incidenciasDaoFA.declararFalsaAlarma(idIncidenciaFA, idUserFA);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
             }
             response.sendRedirect(request.getContextPath() + "/Serenazgo?action=listaIncidencias");
         }else if(action.equals("procederIncidencia")){
             SerenazgoDao serenazgoDao = new SerenazgoDao();
+            IncidenciasDao incidenciasDao = new IncidenciasDao();
 
             // Validar que los parámetros no sean null antes de convertirlos
             String idIncidenciaParam = request.getParameter("id");
             String idTipoSerenazgoParam = request.getParameter("tipoS");
+            String clasificacion = request.getParameter("clasificacion");
 
             if (idIncidenciaParam == null || idTipoSerenazgoParam == null) {
                 // Manejar el caso donde los parámetros son null
@@ -281,8 +275,14 @@ public class SerenazgoServlet extends HttpServlet {
 
             int idIncidencia = Integer.parseInt(idIncidenciaParam);
             int idTipoSerenazgo = Integer.parseInt(idTipoSerenazgoParam);
-
             serenazgoDao.setTipoSerenazgo(idTipoSerenazgo, idIncidencia);
+
+            if (clasificacion != null){
+                int clasificacionId = Integer.parseInt(clasificacion);
+
+                incidenciasDao.actualizarClasificacion(clasificacionId, idIncidencia);
+            }
+
 
             // Obtener las opciones seleccionadas
             String[] opcionesSeleccionadas = request.getParameterValues("opcion");
@@ -330,7 +330,7 @@ public class SerenazgoServlet extends HttpServlet {
                 serenazgoDao.setNecesitaBombero(idIncidencia, bomberos);
                 System.out.println("Se solicitó bomberos");
             }
-
+            incidenciasDao.incidenciaEnProceso(idIncidencia);
             response.sendRedirect(request.getContextPath() + "/Serenazgo?action=listaIncidencias");
         }else{
             response.sendRedirect(request.getContextPath() + "/Serenazgo");
