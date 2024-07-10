@@ -94,12 +94,18 @@
                             <hr style="margin-top: 60px;margin-bottom: 0px; ">
 
                             <label style="color: black; float:left; cursor: pointer;">
-                                <input type="radio" name="opcion" value="aprobar" style="margin-top: 15px;cursor: pointer;" onclick="showApproveContent()"> Aprobar
+                                <input type="radio" name="opcion" value="aprobar" style="margin-top: 15px;cursor: pointer;" onclick="showApproveContent('<%=usuario.getNombre()%>')"> Aprobar
                             </label>
 
                             <label style="color: black; float:left; margin-left: 20px; cursor: pointer;">
-                                <input type="radio" name="opcion" value="denegar" style="margin-left: 5px;margin-top: 15px;cursor: pointer;" onclick="showDenyContent()"> Denegar
+                                <input type="radio" name="opcion" value="denegar" style="margin-left: 5px;margin-top: 15px;cursor: pointer;" onclick="showDenyContent('<%=usuario.getNombre()%>')"> Denegar
                             </label>
+
+                            //Parámetros ocultos
+                            <input type="hidden" id="tituloCorreo" name="tituloCorreo" value="">
+
+                            <input type="hidden" id="cuerpoCorreo" name="cuerpoCorreo" value="">
+
                             <br>
                             <br>
 
@@ -156,36 +162,58 @@
 
         /* Funciones para que el texto cambie de acuerdo a lo indicado*/
 
-        function showApproveContent() {
+        function showApproveContent(nombreUsuario) {
+
             document.getElementById("opcionSeleccionada").value = "aprobar";
+
+            var tituloTexto  = "SOLICITUD ACEPTADA- Registro exitoso (Eventos- San Miguel)";
+            var cuerpoTexto= "Estimado " + nombreUsuario + ",\n\nNos complace informarte que tu solicitud de registro ha sido aceptada para los Eventos San Miguel. Agradecemos sinceramente tu interés en participar y unirte a nuestros emocionantes eventos.\nPara comenzar, aquí está tu contraseña temporal para acceder a la página: Contraseña temporal: X35&%1*DS. Recuerda que es importante mantener esta contraseña segura y cambiarla después de iniciar sesión por primera vez.\nSi tienes alguna pregunta o necesitas asistencia en cualquier momento, no dudes en contactarnos. Estamos aquí para ayudarte.\n\n¡Bienvenido a la comunidad de Eventos San Miguel!\n\nAtentamente,\nLa Administración";
+
+
+
+            // Establecer los valores de los campos ocultos
+            document.getElementById("tituloCorreo").value = tituloTexto;
+            document.getElementById("cuerpoCorreo").value = cuerpoTexto;
+
+            // Mostrar los textos en los campos de título y cuerpo del formulario
             var titulo = document.getElementById("titulo");
             var cuerpo = document.getElementById("cuerpo");
+            titulo.style.color = "black";
+            titulo.value = tituloTexto;
+            cuerpo.style.color = "black";
+            cuerpo.style.fontSize = "14px";
+            cuerpo.value = cuerpoTexto;
 
-            titulo.style.color = "black"; // Cambiar color del texto a negro
-            titulo.value = "SOLICITUD ACEPTADA- Registro exitoso (Eventos- San Miguel)";
+            titulo.removeAttribute("disabled");
+            cuerpo.removeAttribute("disabled");
 
-            cuerpo.style.color = "black"; // Cambiar color del texto a negro
-            cuerpo.style.fontSize = "14px"; // Cambiar tamaño de letra del cuerpo del correo
-            cuerpo.value = "Estimado [Nombre del Usuario],\n\nNos complace informarte que tu solicitud de registro ha sido aceptada para los Eventos San Miguel. Agradecemos sinceramente tu interés en participar y unirte a nuestros emocionantes eventos.\nPara comenzar, aquí está tu contraseña temporal para acceder a la página: Contraseña temporal: X35&%1*DS. Recuerda que es importante mantener esta contraseña segura y cambiarla después de iniciar sesión por primera vez.\nSi tienes alguna pregunta o necesitas asistencia en cualquier momento, no dudes en contactarnos. Estamos aquí para ayudarte.\n\n¡Bienvenido a la comunidad de Eventos San Miguel!\n\nAtentamente,\nLa Administración";
-            titulo.removeAttribute("disabled"); // Quitar el atributo disabled
-
-            cuerpo.removeAttribute("disabled"); // Quitar el atributo disabled
         }
 
-        function showDenyContent() {
+        function showDenyContent(nombreUsuario) {
+
             document.getElementById("opcionSeleccionada").value = "denegar";
+
+            var tituloTexto = "SOLICITUD DENEGADA- Registro fallido (Eventos- San Miguel)";
+            var cuerpoTexto = "Estimado " + nombreUsuario + ",\n\nLamentamos informarte que tu solicitud de registro para los Eventos San Miguel ha sido rechazada en esta ocasión debido a [motivo].\nA pesar de esta decisión, queremos expresar nuestro agradecimiento por tu interés en participar en nuestros eventos. Valoramos tu dedicación y esperamos que puedas encontrar otras oportunidades para participar en el futuro.\nSi tienes alguna pregunta sobre el motivo de este rechazo o necesitas más información, no dudes en ponerte en contacto con nosotros. Estamos aquí para ayudarte en lo que necesites.\nApreciamos tu comprensión y esperamos poder contar contigo en futuras ocasiones.\n\nAtentamente,\nLa Administración";
+
+            // Establecer los valores de los campos ocultos
+            document.getElementById("tituloCorreo").value = tituloTexto;
+            document.getElementById("cuerpoCorreo").value = cuerpoTexto;
+
+            // Mostrar los textos en los campos de título y cuerpo del formulario
             var titulo = document.getElementById("titulo");
             var cuerpo = document.getElementById("cuerpo");
+            titulo.style.color = "black";
+            titulo.value = tituloTexto;
+            cuerpo.style.color = "black";
+            cuerpo.style.fontSize = "14px";
+            cuerpo.value = cuerpoTexto;
 
-            titulo.style.color = "black"; // Cambiar color del texto a negro
-            titulo.value = "SOLICITUD DENEGADA- Registro fallido (Eventos- San Miguel)";
+            titulo.removeAttribute("disabled");
+            cuerpo.removeAttribute("disabled");
 
-            cuerpo.style.color = "black"; // Cambiar color del texto a negro
-            cuerpo.style.fontSize = "14px"; // Cambiar tamaño de letra del cuerpo del correo
-            cuerpo.value = "Estimado [Nombre del Usuario],\n\nLamentamos informarte que tu solicitud de registro para los Eventos San Miguel ha sido rechazada en esta ocasión debido a [motivo].\nA pesar de esta decisión, queremos expresar nuestro agradecimiento por tu interés en participar en nuestros eventos. Valoramos tu dedicación y esperamos que puedas encontrar otras oportunidades para participar en el futuro.\nSi tienes alguna pregunta sobre el motivo de este rechazo o necesitas más información, no dudes en ponerte en contacto con nosotros. Estamos aquí para ayudarte en lo que necesites.\nApreciamos tu comprensión y esperamos poder contar contigo en futuras ocasiones.\n\nAtentamente,\nLa Administración";
-            titulo.removeAttribute("disabled"); // Quitar el atributo disabled
 
-            cuerpo.removeAttribute("disabled"); // Quitar el atributo disabled
+
         }
 
         /* aqui muere*/

@@ -88,7 +88,7 @@
                                 <input type="text" id="nombre" value="<%=usuario.getNombre()%>" disabled style="margin-bottom: 5px; background-color: rgb(241, 241, 241);">
 
                                 <label for="apellido" style="font-size: 12px; color: gray;">Apellidos:</label>
-                                <input type="text" id="apellido" value="<%=usuario.getApellido()%>" disabled style="margin-bottom: 5px;background-color: rgb(241, 241, 241);">
+                                <input type="text" id="apellido" value="<%=usuario.getApellido()%>" disabled style="margin-bottom: 5px;background-color: rgb(241, 241, 241);" >
 
                                 <label for="dni" style="font-size: 12px; color: gray;">DNI-peruano:</label>
                                 <input type="text" id="dni" value="<%=usuario.getDocumento()%>" disabled style="margin-bottom: 5px;background-color: rgb(241, 241, 241);">
@@ -103,20 +103,27 @@
                                 <input type="text" id="correo" value="<%=usuario.getCorreoE()%>" disabled style="margin-bottom: 5px;background-color: rgb(241, 241, 241);">
 
 
-                                <label for="nacimiento" style="font-size: 12px; color: gray;">Coordinación [Deporte/Cultura]</label>
-                                <input type="text" id="nacimiento" value="<%=usuario.getArea() %>" disabled style="margin-bottom: -15px;background-color: rgb(236, 243, 207);">
+                                <label for="area" style="font-size: 12px; color: gray;">Coordinación [Deporte/Cultura]</label>
+                                <input type="text" id="area" value="<%=usuario.getArea() %>" disabled style="margin-bottom: -15px;background-color: rgb(236, 243, 207);">
                             </div>
 
                             <label for="solicitud" style="font-size: 16px; color: rgb(5, 0, 0); padding: 5px; float:left; font-weight: bold;">Solicitud a Coordinación:</label>
                             <hr style="margin-top: 60px;margin-bottom: 0px; ">
 
                             <label style="color: black; float:left; cursor: pointer;">
-                                <input type="radio" name="opcion" value="aprobar" style="margin-top: 15px;cursor: pointer;" onclick="showApproveContent()"> Aprobar
+                                <input type="radio" name="opcion" value="aprobar" style="margin-top: 15px;cursor: pointer;" onclick="showApproveContent('<%=usuario.getNombre()%>', '<%=usuario.getArea()%>')"> Aprobar
                             </label>
 
                             <label style="color: black; float:left; margin-left: 20px; cursor: pointer;">
-                                <input type="radio" name="opcion" value="denegar" style="margin-left: 5px;margin-top: 15px;cursor: pointer;" onclick="showDenyContent()"> Denegar
+                                <input type="radio" name="opcion" value="denegar" style="margin-left: 5px;margin-top: 15px;cursor: pointer;" onclick="showDenyContent('<%=usuario.getNombre()%>', '<%=usuario.getArea()%>')"> Denegar
                             </label>
+                            //Parámetros ocultos
+                            <input type="hidden" id="tituloCorreo" name="tituloCorreo" value="">
+
+                            <input type="hidden" id="cuerpoCorreo" name="cuerpoCorreo" value="">
+
+
+
                             <br>
                             <br>
 
@@ -173,37 +180,52 @@
 
         /* Funciones para que el texto cambie de acuerdo a lo indicado*/
 
-        function showApproveContent() {
+        function showApproveContent(nombreUsuario, area) {
             document.getElementById("opcionSeleccionada").value = "aprobar";
+
+            var tituloTexto = "SOLICITUD ACEPTADA- Solicitud para coordinación de " + area + " exitosa (Eventos- San Miguel)";
+            var cuerpoTexto = "Estimado/a " + nombreUsuario + ",\n\nNos complace informarte que tu solicitud para el rol de coordinador en " + area + " ha sido aceptada. Esperamos con entusiasmo trabajar contigo para fortalecer nuestra comunidad y llevar a cabo diversos proyectos.\n\nTu nueva contraseña para acceder al sistema es: ZAXB#17%W. Reinicia la página y cambia a una contraseña segura tan pronto como sea posible. Si tienes alguna pregunta o necesitas asistencia, no dudes en contactarnos.\nBienvenido coordinador y gracias por tu compromiso con el distrito de San Miguel.\n\nAtentamente,\nLa administración";
+
+            // Establecer los valores de los campos ocultos
+            document.getElementById("tituloCorreo").value = tituloTexto;
+            document.getElementById("cuerpoCorreo").value = cuerpoTexto;
+
+            // Mostrar los textos en los campos de título y cuerpo del formulario
             var titulo = document.getElementById("titulo");
             var cuerpo = document.getElementById("cuerpo");
+            titulo.style.color = "black";
+            titulo.value = tituloTexto;
+            cuerpo.style.color = "black";
+            cuerpo.style.fontSize = "14px";
+            cuerpo.value = cuerpoTexto;
 
-            titulo.style.color = "black"; // Cambiar color del texto a negro
-            titulo.value = "SOLICITUD ACEPTADA- Solicitud para coordinación de [deporte/cultura] exitosa (Eventos- San Miguel)";
-
-            cuerpo.style.color = "black"; // Cambiar color del texto a negro
-            cuerpo.style.fontSize = "14px"; // Cambiar tamaño de letra del cuerpo del correo
-            cuerpo.value = "Estimado [Nombre del Usuario],\n\nNos complace informarte que tu solicitud para el rol de coordinador en [cultura/deporte] ha sido aceptada. Esperamos con entusiasmo trabajar contigo para fortalecer nuestra comunidad y llevar a cabo diversos proyectos.\n\nTu nueva contraseña para acceder al sistema es: ZAXB#17%W. Reinicia la página y cambia a una contraseña segura tan pronto como sea posible. Si tienes alguna pregunta o necesitas asistencia, no dudes en contactarnos.\nBienvenido coordinador y gracias por tu compromiso con el distrito de San Miguel.\n\nAtentamente,\nLa administración";
-            titulo.removeAttribute("disabled"); // Quitar el atributo disabled
-
-            cuerpo.removeAttribute("disabled"); // Quitar el atributo disabled
+            titulo.removeAttribute("disabled");
+            cuerpo.removeAttribute("disabled");
         }
 
-        function showDenyContent() {
+        function showDenyContent(nombreUsuario, area) {
             document.getElementById("opcionSeleccionada").value = "denegar";
+
+            var tituloTexto = "SOLICITUD DENEGADA- Solicitud para coordinación de " + area + " fallida (Eventos- San Miguel)";
+            var cuerpoTexto = "Estimado " + nombreUsuario + ",\n\nLamentamos informarte que tu solicitud para el rol de coordinador en el área de " + area + " ha sido rechazada en esta ocasión. Apreciamos tu interés en contribuir al bienestar de nuestra comunidad, y te animamos a explorar otras oportunidades de participación en otra ocasión. Si tienes alguna pregunta o necesitas más información, no dudes en contactar a nosotros.\n\nAtentamente,\nLa administración";
+
+            // Establecer los valores de los campos ocultos
+            document.getElementById("tituloCorreo").value = tituloTexto;
+            document.getElementById("cuerpoCorreo").value = cuerpoTexto;
+
+            // Mostrar los textos en los campos de título y cuerpo del formulario
             var titulo = document.getElementById("titulo");
             var cuerpo = document.getElementById("cuerpo");
+            titulo.style.color = "black";
+            titulo.value = tituloTexto;
+            cuerpo.style.color = "black";
+            cuerpo.style.fontSize = "14px";
+            cuerpo.value = cuerpoTexto;
 
-            titulo.style.color = "black"; // Cambiar color del texto a negro
-            titulo.value = "SOLICITUD DENEGADA- Solicitud para coordinación de [deporte/cultura] fallida (Eventos- San Miguel)";
-
-            cuerpo.style.color = "black"; // Cambiar color del texto a negro
-            cuerpo.style.fontSize = "14px"; // Cambiar tamaño de letra del cuerpo del correo
-            cuerpo.value = "Estimado [Nombre],\n\nLamentamos informarte que tu solicitud para el rol de coordinador en el área de [cultura/deporte] ha sido rechazada en esta ocasión. Apreciamos tu interés en contribuir al bienestar de nuestra comunidad, y te animamos a explorar otras oportunidades de participación en otra ocasión. Si tienes alguna pregunta o necesitas más información, no dudes en contactar a nosotros.\n\nAtentamente,\nLa administración";
-            titulo.removeAttribute("disabled"); // Quitar el atributo disabled
-
-            cuerpo.removeAttribute("disabled"); // Quitar el atributo disabled
+            titulo.removeAttribute("disabled");
+            cuerpo.removeAttribute("disabled");
         }
+
 
         /* aqui muere*/
 

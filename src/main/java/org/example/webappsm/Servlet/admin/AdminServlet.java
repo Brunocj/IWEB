@@ -4,10 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import org.example.webappsm.model.beans.*;
-import org.example.webappsm.model.daos.DashboardDao;
-import org.example.webappsm.model.daos.ProfesorDao;
-import org.example.webappsm.model.daos.SerenazgoDao;
-import org.example.webappsm.model.daos.VecinosDao;
+import org.example.webappsm.model.daos.*;
 
 import javax.lang.model.type.ArrayType;
 import java.io.IOException;
@@ -397,13 +394,16 @@ public class AdminServlet extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("idUser"));
 
             VecinosDao vecinosDao = new VecinosDao();
-
+            Usuario usuario = vecinosDao.obtenerUsuarioPorId(id);
+            String tituloCorreo = request.getParameter("tituloCorreo"); // Recuperar el título del correo
+            String cuerpoCorreo = request.getParameter("cuerpoCorreo"); // Recuperar el cuerpo del correo
+            SystemDao daosys = new SystemDao();
             if (opcionSeleccionada.equals("aprobar")) {
                 vecinosDao.editarEstadoAprobado(id);
-
+                daosys.enviarCorreo(usuario.getCorreoE(), tituloCorreo, cuerpoCorreo);
             } else if (opcionSeleccionada.equals("denegar")) {
                 vecinosDao.eliminarUsuarioPorId(id);
-
+                daosys.enviarCorreo(usuario.getCorreoE(), tituloCorreo, cuerpoCorreo);
             }
 
             response.sendRedirect(request.getContextPath() + "/Admin?action=tablaAcceso");
@@ -412,13 +412,23 @@ public class AdminServlet extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("idUser"));
             int idArea = Integer.parseInt(request.getParameter("idArea"));
             VecinosDao vecinosDao = new VecinosDao();
+            Usuario usuario = vecinosDao.obtenerUsuarioPorId(id);
+            String tituloCorreo = request.getParameter("tituloCorreo"); // Recuperar el título del correo
+            String cuerpoCorreo = request.getParameter("cuerpoCorreo"); // Recuperar el cuerpo del correo
+            SystemDao daosys = new SystemDao();
+
+            System.out.println(tituloCorreo);
+            System.out.println(cuerpoCorreo);
+
 
             if (opcionSeleccionada.equals("aprobar")) {
                 vecinosDao.editarRol(id, idArea);
 
+                daosys.enviarCorreo(usuario.getCorreoE(), tituloCorreo, cuerpoCorreo);
+
             } else if (opcionSeleccionada.equals("denegar")) {
                 vecinosDao.eliminarSolicitud(id);
-
+                daosys.enviarCorreo(usuario.getCorreoE(), tituloCorreo, cuerpoCorreo);
             }
 
             response.sendRedirect(request.getContextPath() + "/Admin?action=tablaCoordinador");

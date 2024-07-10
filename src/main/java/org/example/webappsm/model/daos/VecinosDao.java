@@ -12,10 +12,11 @@ public class VecinosDao extends BaseDao{
     public ArrayList<Usuario> listarSoliAcceso(){
         ArrayList<Usuario> listaSoli = new ArrayList<>();
 
-        String sql = "SELECT u.idUsuario, u.nombres, u.apellidos, e.nombreEstado AS estado " +
+        String sql = "SELECT u.idUsuario, u.nombres, u.apellidos, u.nroDocumento AS documento, u.correo, e.nombreEstado AS estado " +
                 "FROM Usuario u " +
                 "JOIN Estado e ON u.Estado_idEstado = e.idEstado " +
                 "WHERE e.nombreEstado = 'pendiente'";
+
 
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
@@ -25,6 +26,8 @@ public class VecinosDao extends BaseDao{
                 Usuario usuario = new Usuario();
                 usuario.setId(rs.getInt("idUsuario"));
                 usuario.setNombre(rs.getString("nombres"));
+                usuario.setCorreoE(rs.getString("correo"));
+                usuario.setDocumento(rs.getString("documento"));
                 usuario.setApellido(rs.getString("apellidos"));
 
 
@@ -43,14 +46,15 @@ public class VecinosDao extends BaseDao{
         ArrayList<Usuario> listaCoord = new ArrayList<>();
 
         String sql = "SELECT " +
-                "u.idUsuario," +
+                "u.idUsuario, " +
                 "u.nombres, " +
                 "u.apellidos, " +
+                "u.nroDocumento AS documento, " +
                 "a.nombreArea AS area " +
                 "FROM " +
-                "SolicitudCoordinador sc " +
-                "JOIN Usuario u ON sc.idUsuario = u.idUsuario " +
-                "JOIN Area a ON sc.idArea = a.idArea " +
+                "usuario u " +
+                "JOIN solicitudcoordinador sc ON u.idUsuario = sc.idUsuario " +
+                "JOIN area a ON sc.idArea = a.idArea " +
                 "WHERE " +
                 "sc.estado = 0";
 
@@ -62,6 +66,7 @@ public class VecinosDao extends BaseDao{
                 Usuario usuario = new Usuario();
                 usuario.setId(rs.getInt("idUsuario"));
                 usuario.setNombre(rs.getString("nombres"));
+                usuario.setDocumento(rs.getString("documento"));
                 usuario.setApellido(rs.getString("apellidos"));
                 usuario.setArea(rs.getString("area"));
 
