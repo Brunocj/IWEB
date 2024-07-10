@@ -15201,7 +15201,7 @@ a.text-light:hover, a.text-light:focus {
   color: #d9d9d9 !important; }
 
 .text-dark {
-  color: #0d0d0d !important; }
+  color: #0d0d0d; }
 
 a.text-dark:hover, a.text-dark:focus {
   color: black !important; }

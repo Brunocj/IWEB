@@ -19,6 +19,9 @@
     String incidenciasPorAtender = (String) request.getAttribute("incidenciasatender");
     String incidenciasUrbMax = (String) request.getAttribute("incidenciasurbmax");
     String incidenciasUrbMin = (String) request.getAttribute("incidenciasurbmin");
+    String totalIncidencias = (String) request.getAttribute("totalincidencias");
+    String incidenciasComunMax = (String) request.getAttribute("incidenciascomunmax");
+    String incidenciasComunMin = (String) request.getAttribute("incidenciascomunmin");
     ArrayList<Usuario> listaBaneados = (ArrayList<Usuario>) request.getAttribute("listabaneados");
     ArrayList<String> tipoIncidencias = (ArrayList<String>) request.getAttribute("tipoincidencias");
     ArrayList<Integer> cantidadTipo = (ArrayList<Integer>) request.getAttribute("cantidadtipo");
@@ -95,261 +98,262 @@
                 <div class="content-wrapper" style="background-color: #FFEBEE;"> <!--Cambiar al color mas claro-->
                     <!--CONTENIDO-->
                     <div class="main-panel">
-                        <div class="content-wrapper" style="background-color: #FFEBEE; margin-top: -90px;"> <!--Cambiar al color mas claro-->
-                            <h2 class="tabla-title" style="color:#000f22;">Dashboard</h2>  <!--Cambiar el titulo de la tabla-->
-                            <hr style="border: none; border-top: 3px solid black; margin-top: 0px; border-radius: 10px; margin-bottom: -50px;">
-                            <main class="main-container">
-                                <div class="row" style="margin-top: 5vh;">
-                                    <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-9">
-                                                        <div class="d-flex align-items-center align-self-start">
-                                                            <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 3vh !important; font-weight: 500 !important;"><%=incidenciasMes%></h4>
+                        <div>
+                            <div class="content-wrapper" style="background-color: #fffff6;"> <!--Cambiar al color mas claro-->
+                                <!--CONTENIDO-->
+                                <div class="main-panel">
+                                    <div class="content-wrapper" style="background-color: #fffff6; margin-top: -90px;"> <!--Cambiar al color mas claro-->
+                                        <h2 class="tabla-title" style="color:#000f22;">Dashboard</h2>  <!--Cambiar el titulo de la tabla-->
+                                        <hr style="border: none; border-top: 3px solid black; margin-top: 0px; border-radius: 10px; margin-bottom: -50px;">
+                                        <main class="main-container">
+
+
+                                            <div class="row" style="margin-top: 10vh;">
+
+                                                <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                                                    <div class="card-shadow">
+                                                        <div class="card1" style="border-radius: 15px; overflow: hidden; background: linear-gradient(109deg, #a780ef, #b65959); color: #fff;">
+                                                            <div class="card-header" style="padding: 0;">
+                                                                <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/promedios1.png" alt="header image" style="width: 100%; height: 210px; object-fit: cover;">
+                                                            </div>
+                                                            <div class="card-body" style="flex: 1; padding: 20px;">
+                                                                <div class="d-flex align-items-center justify-content-between">
+                                                                    <span class="badge bg-warning" style="margin-bottom: 10px; color: white; border-radius: 10px;">Incidencias</span>
+                                                                    <h1 style="margin: 0;"><span class="mdi mdi-chart-areaspline" style="font-size: 2.5rem; color:#062779;"></span></h1>
+                                                                </div>
+                                                                <div class="d-flex align-items-center justify-content-center">
+                                                                    <h3 class="mb-0" style="font-size: 2.5rem; font-weight: bold; color:black; margin-top: 10px;"><%= totalIncidencias != null ? totalIncidencias : '0' %></h3>
+                                                                </div>
+                                                                <h4 class="text-muted font-weight-normal mt-2 text-center" style="color: black !important; font-size: 1.5rem !important; font-weight: 500 !important;">Cantidad total de incidencias</h4>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-3">
-                                                        <h1 style="margin-bottom: 20px;"><span class="mdi mdi-calendar-blank" ></span></h1>
-                                                    </div>
                                                 </div>
-                                                <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 2.7vh !important; font-weight: 500 !important;">Incidencias en el último mes</h4>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-9">
-                                                        <div class="d-flex align-items-center align-self-start">
-                                                            <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 3vh !important; font-weight: 500 !important;"><%=incidenciasSemana%></h4>
+
+                                                <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                                                    <div class="card1" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; background:linear-gradient(332deg, #94cdde, #0173ff); color: #fff;">
+                                                        <div class="card-header" style="padding: 0;">
+                                                            <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/promedio2.png" alt="header image" style="width: 100%; height: 210px; object-fit: cover;">
+                                                        </div>
+                                                        <div class="card-body" style="flex: 1;">
+                                                            <div class="d-flex align-items-center justify-content-between">
+                                                                <span class="badge bg-warning" style="margin-bottom: 10px; color: white; border-radius: 10px;">Promedio</span>
+                                                                <h1 style="margin: 0;"><span class="mdi mdi-chart-bar" style="font-size: 2.5rem; color:#062779;"></span></h1>
+
+                                                            </div>
+                                                            <div class="d-flex align-items-center justify-content-center">
+                                                                <h3 class="mb-0" style="font-size: 2.5rem; font-weight: bold; color: black; margin-top: 10px;"><%= avgIncidencias != null ? avgIncidencias : '0' %></h3>
+                                                            </div>
+                                                            <h4 class="text-muted font-weight-normal mt-2 text-center" style="color: black !important; font-size: 1.5rem !important; font-weight: 500 !important;">Promedio de incidencias por día</h4>
                                                         </div>
                                                     </div>
-                                                    <div class="col-3">
-                                                        <h1 style="margin-bottom: 20px;"><span class="mdi mdi-calendar-blank"></span></h1>
-                                                    </div>
                                                 </div>
-                                                <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 2.7vh !important; font-weight: 500 !important;">Incidencias en la última semana</h4>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-9">
-                                                        <div class="d-flex align-items-center align-self-start">
-                                                            <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 3vh !important; font-weight: 500 !important;"><%=incidenciasHoy%></h4>
+
+
+
+
+                                                <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                                                    <div class="card1" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; background: linear-gradient(270deg, #f39c12, #e74c3c); color: #fff;">
+                                                        <div class="card-header" style="padding: 0;">
+                                                            <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/urbanizacion2.jpg" alt="header image" style="width: 100%; height: 210px; object-fit: cover;">
+                                                        </div>
+                                                        <div class="card-body" style="flex: 1;">
+                                                            <div class="d-flex align-items-center justify-content-between">
+                                                                <span class="badge bg-warning" style="margin-bottom: 10px; color: white; border-radius: 10px;">Urbanización</span>
+                                                                <h1 style="margin: 0;"><span class="mdi mdi-home-modern" style="font-size: 2.5rem; color:#062779;"></span></h1>
+
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-9">
+
+                                                                    <div class="d-flex align-items-center align-self-start">
+                                                                        <h3 class="mb-0" style="font-size: 2.5rem; font-weight: bold; color:black; margin-left: 40px;">
+                                                                            <%= incidenciasUrbMax != null && !incidenciasUrbMax.isEmpty() ? incidenciasUrbMax : "No hay" %>
+                                                                        </h3>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <h4 class="text-muted font-weight-normal mt-2 text-center" style="color: black !important; font-size: 1.5rem !important; font-weight: 500 !important;">Urbanización con más incidencias</h4>
                                                         </div>
                                                     </div>
-                                                    <div class="col-3">
-                                                        <h1 style="margin-bottom: 20px;"><span class="mdi mdi-calendar-blank"></span></h1>
-                                                    </div>
                                                 </div>
-                                                <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 2.7vh !important; font-weight: 500 !important;">Incidencias hoy</h4>
-                                            </div>
-                                        </div>
-                                    </div>
 
 
 
 
-                                    <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-9">
-                                                        <div class="d-flex align-items-center align-self-start">
-                                                            <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 3vh !important; font-weight: 500 !important;"><%=avgIncidencias%></h4>
+                                                <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                                                    <div class="card1" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; background: linear-gradient(270deg, #3498db, #2ecc71); color: #fff;">
+                                                        <div class="card-header" style="padding: 0;">
+                                                            <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/urbanizacion1.jpg" alt="header image" style="width: 100%; height: 210px; object-fit: cover;">
+                                                        </div>
+                                                        <div class="card-body" style="flex: 1;">
+                                                            <div class="d-flex align-items-center justify-content-between">
+                                                                <span class="badge bg-warning" style="margin-bottom: 10px; color: white; border-radius: 10px;">Urbanización</span>
+                                                                <h1 style="margin: 0;"><span class="mdi mdi-home-modern" style="font-size: 2.5rem; color:#062779;"></span></h1>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-9">
+                                                                    <div class="d-flex align-items-center align-self-start">
+
+                                                                        <h3 class="mb-0" style="font-size: 2.5rem; font-weight: bold; color:black; margin-left: 40px;">
+                                                                            <%= incidenciasUrbMin != null && !incidenciasUrbMin.isEmpty() ? incidenciasUrbMin : "No hay" %>
+                                                                        </h3>
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <h4 class="text-muted font-weight-normal mt-2 text-center" style="color: black !important; font-size: 1.5rem !important; font-weight: 500 !important;">Urbanización con menos incidencias</h4>
                                                         </div>
                                                     </div>
-                                                    <div class="col-3">
-                                                        <h1 style="margin-bottom: 20px;"><span class="mdi mdi-chart-bar"></span></h1>
+                                                </div>
+
+
+                                            </div>
+
+
+                                            <div class="row">
+
+
+                                                <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                                                    <div class="card1" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; background: linear-gradient(103deg, #ccef09, #378f51); color: #fff;">
+                                                        <div class="card-header" style="padding: 0;">
+                                                            <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/incidenciaAtender.jpg" alt="header image" style="width: 100%; height: 210px; object-fit: cover;">
+                                                        </div>
+                                                        <div class="card-body" style="flex: 1;">
+                                                            <div class="d-flex align-items-center justify-content-between">
+                                                                <span class="badge bg-warning" style="margin-bottom: 10px; color: white; border-radius: 10px;">Incidencias</span>
+                                                                <h1 style="margin: 0;"><span class="mdi mdi-alert" style="font-size: 2.5rem; color:#062779;"></span></h1>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-12 d-flex justify-content-center">
+                                                                    <h3 class="mb-0" style="font-size: 2.5rem; font-weight: bold; color:black;"><%= incidenciasPorAtender != null ? incidenciasPorAtender : "0" %></h3>
+                                                                </div>
+                                                            </div>
+                                                            <h4 class="text-muted font-weight-normal mt-2 text-center" style="color: black !important; font-size: 1.5rem !important; font-weight: 500 !important;">Cantidad de incidencias por atender</h4>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 2.7vh !important; font-weight: 500 !important;" >Promedio de incidencias por día</h4>
-                                            </div>
-                                        </div>
-                                    </div>
 
+                                                <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                                                    <div class="card1" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; background: linear-gradient(177deg, #00017d, #8e44ad); color: #fff;">
+                                                        <div class="card-header" style="padding: 0;">
+                                                            <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/incidenciaComun.jpg" alt="header image" style="width: 100%; height: 210px; object-fit: cover;">
+                                                        </div>
+                                                        <div class="card-body" style="flex: 1;">
+                                                            <div class="d-flex align-items-center justify-content-between">
+                                                                <span class="badge bg-warning" style="margin-bottom: 10px; color: white; border-radius: 10px;">Incidencias</span>
+                                                                <h1 style="margin: 0;"><span class="mdi mdi-arrow-top-right" style="font-size: 2.5rem; color:#062779;"></span></h1>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-12 d-flex justify-content-center">
+                                                                    <h3 class="mb-0" style="font-size: 2.5rem; font-weight: bold; color:black;"><%= incidenciasComunMax != null ? incidenciasComunMax : "No hay" %></h3>
+                                                                </div>
+                                                            </div>
+                                                            <h4 class="text-muted font-weight-normal mt-2 text-center" style="color: black !important; font-size: 1.5rem !important; font-weight: 500 !important;">Tipo de incidencia más común</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                                                    <div class="card1" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; background: linear-gradient(135deg, #2822e6, #f29500); color: #fff;">
+                                                        <div class="card-header" style="padding: 0;">
+                                                            <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/sancionados2.jpg" alt="header image" style="width: 100%; height: 210px; object-fit: cover;">
+                                                        </div>
+                                                        <div class="card-body" style="flex: 1;">
+                                                            <div class="d-flex align-items-center justify-content-between">
+                                                                <span class="badge bg-warning" style="margin-bottom: 10px; color: white; border-radius: 10px;">Incidencias</span>
+                                                                <h1 style="margin: 0;"><span class="mdi mdi-arrow-bottom-right" style="font-size: 2.5rem; color:#062779;"></span></h1>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-12 d-flex justify-content-center">
+                                                                    <h3 class="mb-0" style="font-size: 2.5rem; font-weight: bold; color:black;"><%= incidenciasComunMin != null ? incidenciasComunMin : "No hay" %></h3>
+                                                                </div>
+                                                            </div>
+                                                            <h4 class="text-muted font-weight-normal mt-2 text-center" style="color: black !important; font-size: 1.5rem !important; font-weight: 500 !important;">Tipo de incidencia menos común</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                                                    <div class="card1" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; background: linear-gradient(155deg, #ff1800, #b519ab); color: #fff;">
+                                                        <div class="card-header" style="padding: 0;">
+                                                            <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/sancionados.jpg" alt="header image" style="width: 100%; height: 210px; object-fit: cover;">
+                                                        </div>
+                                                        <div class="card-body" style="flex: 1;">
+                                                            <div class="d-flex align-items-center justify-content-between">
+                                                                <span class="badge bg-warning" style="margin-bottom: 10px; color: white; border-radius: 10px;">Sancionados</span>
+                                                                <h1 style="margin: 0;"><span class="mdi mdi-account-off" style="font-size: 2.5rem; color:#062779;"></span></h1>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-12 d-flex justify-content-center">
+                                                                    <h3 class="mb-0" style="font-size: 2.5rem; font-weight: bold; color:black;"><%= totalBaneados != null ? totalBaneados : "0" %></h3>
+                                                                </div>
+                                                            </div>
+                                                            <h4 class="text-muted font-weight-normal mt-2 text-center" style="color: black !important; font-size: 1.5rem !important; font-weight: 500 !important;">Cantidad de vecinos sancionados</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-lg-6 grid-margin stretch-card">
+                                                    <div class="card" style="background: linear-gradient(135deg, #5d3400, #e9bb5d, white);">
+                                                        <div class="card-body">
+                                                            <h2 class="card-title text-center" style="color: #000000;">Tipos de incidencias reportadas</h2>
+                                                            <canvas id="barChart" style="height:230px"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6 grid-margin stretch-card">
+                                                    <div class="card" style="background:linear-gradient(210deg, #046800, #77c741, white);">
+                                                        <div class="card-body">
+                                                            <h2 class="card-title text-center" style="color: #000000">Cantidad de incidencias</h2>
+                                                            <canvas id="areachartMulti" style="height:250px"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-lg-6 grid-margin stretch-card">
+                                                    <div class="card" style="background: linear-gradient(22deg, #450000, #df1069, white);">
+                                                        <div class="card-body">
+                                                            <h2 class="card-title text-center" style="color: #000000">Distribución de incidencias</h2>
+                                                            <canvas id="doughnutChart" style="height:250px"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6 grid-margin stretch-card">
+                                                    <div class="card" style="background: linear-gradient(331deg, #00c0f6, #cfd629, white);">
+                                                        <div class="card-body">
+                                                            <h2 class="card-title text-center" style="color: #000000">Cantidad de incidencias por urbanizacion</h2>
+                                                            <canvas id="barChart2" style="height:230px"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </main>
+                                    </div>
 
 
                                 </div>
-
-
-                                <div class="row">
-                                    <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-9">
-                                                        <div class="d-flex align-items-center align-self-start">
-                                                            <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 3vh !important; font-weight: 500 !important;"><%=incidenciasUrbMax%></h4>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <h1 style="margin-bottom: 20px;"><span class="mdi mdi-home-modern"></span></h1>
-                                                    </div>
-                                                </div>
-                                                <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 2.7vh !important; font-weight: 500 !important;">Urbanizacion con más incidencias</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-9">
-                                                        <div class="d-flex align-items-center align-self-start">
-                                                            <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 3vh !important; font-weight: 500 !important;"><%=incidenciasUrbMin%></h4>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <h1 style="margin-bottom: 20px;"><span class="mdi mdi-home-modern"></span></h1>
-                                                    </div>
-                                                </div>
-                                                <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 2.7vh !important; font-weight: 500 !important;">Urbanizacion con menos incidencias</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-9">
-                                                        <div class="d-flex align-items-center align-self-start">
-                                                            <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 3vh !important; font-weight: 500 !important;"><%=incidenciasPorAtender%></h4>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <h1 style="margin-bottom: 20px;"><span class="mdi mdi-alert"></span></h1>
-                                                    </div>
-                                                </div>
-                                                <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 2.7vh !important; font-weight: 500 !important;">Cantidad de incidencias por atender</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-9">
-                                                        <div class="d-flex align-items-center align-self-start">
-                                                            <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 3vh !important; font-weight: 500 !important;"><%=totalBaneados%></h4>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <h1 style="margin-bottom: 20px;"><span class="mdi mdi-account-off"></span></h1>
-                                                    </div>
-                                                </div>
-                                                <h4 class="text-muted font-weight-normal" style="color: #000000 !important; font-size: 2.7vh !important; font-weight: 500 !important;">Cantidad de vecinos sancionados</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
-                                </div>
-
-
-                                <div class="row">
-
-                                    <div class="col-lg-6 grid-margin stretch-card">
-                                        <div class="card" >
-                                            <div class="card-body">
-                                                <h2 class="card-title" style="color: #000000">Tipo de incidencias reportadas</h2>
-                                                <canvas id="barChart" style="height:230px"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6 grid-margin stretch-card">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h2 class="card-title" style="color: #000000">Cantidad de incidencias</h2>
-                                                <canvas id="areachartMulti" style="height:250px"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="row">
-
-                                    <div class="col-lg-6 grid-margin stretch-card">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h2 class="card-title" style="color: #000000">Distribución de incidencias</h2>
-                                                <canvas id="doughnutChart" style="height:250px"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-6 grid-margin stretch-card">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h2 class="card-title" style="color: #000000">Cantidad de incidencias por urbanizacion</h2>
-                                                <canvas id="barChart2" style="height:230px"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
-                            </main>
-                        </div>
-
-
-
-                        <hr style="border: none; border-top: 3px solid black; margin-top: 30px; border-radius: 10px;">
-                        <!--dashboard-->
-                        <div style="display: flex; justify-content: space-between;">
-                            <div style="display: flex; justify-content: space-between;">
-                                <div style="display: flex; flex-direction: column;">
-                                    <h2 class="tabla-title" style="color:#000f22;">Usuarios sancionados por falsas alarmas</h2>  <!--Cambiar el titulo de la tabla-->
-                                </div>
+                                <!-- main-panel ends -->
                             </div>
+                            <!-- page-body-wrapper ends -->
                         </div>
-                        <table id="miTabla" class="table" style="margin-bottom:50px;">
-                            <thead style="background-color: #e9290c44;"> <!--Cambiar al color de fondo de la pagina, pero un poco mas oscuro-->
-                            <tr style="text-align: center; font-weight:800;">
-                                <th style="color: white;font-size: 17px;cursor: pointer;">Apellidos</th>
-                                <th style="color: white;font-size: 17px;cursor: pointer;">Nombres</th>
-                                <th style="color: white;font-size: 17px;cursor: pointer;">DNI</th>
-                                <th style="color: white;font-size: 17px;cursor: pointer;">Administrar sanción</th>
-                            </tr>
-                            </thead>
-                            <tbody style="text-align: center;color: black;">
-                            <%
-                                if (listaBaneados != null) {
-                                    for (Usuario usuario : listaBaneados) {
-                            %>
-                            <tr style="text-align: center;">
-                                <td><a><%= usuario.getApellido() %></a></td>
-                                <td><a><%= usuario.getNombre() %></a></td>
-                                <td><a><%= usuario.getDocumento() %></a></td>
-                                <td><a class="mdi mdi-lock-open" style="color:black;"></a></td>
-                            </tr>
-                            <%
-                                }
-                            } else {
-                            %>
-                            <tr>
-                                <td colspan="5">No hay usuarios baneados.</td>
-                            </tr>
-                            <%
-                                }
-                            %>
-                            </tbody>
-                        </table>
                     </div>
                     <!-- main-panel ends -->
                 </div>

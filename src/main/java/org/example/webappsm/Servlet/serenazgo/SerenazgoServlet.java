@@ -77,7 +77,7 @@ public class SerenazgoServlet extends HttpServlet {
                 request.setAttribute("labels", labelsChart2);
                 request.setAttribute("incidenciasReportadas", incidenciasReportadas);
                 request.setAttribute("incidenciasResueltas", incidenciasResueltas);
-                vista = "vistas/jsp/ADMIN/Dashboard/dashboard.jsp";
+                vista = "vistas/jsp/SERENAZGO/Dashboard/dashboard.jsp";
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
