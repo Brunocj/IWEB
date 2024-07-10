@@ -193,19 +193,34 @@ public class IncidenciasDao extends BaseDao{
             throw new RuntimeException(e);
         }
     }
+    public void incidenciaEnProceso(int id){
+        int idEnProceso = 2;
+        String query = "UPDATE Incidencia AS i " +
+                "SET i.idEstado = ? " +
+                "WHERE i.idIncidencia = ?";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)){
+            pstmt.setInt(1, idEnProceso);
+            pstmt.setInt(2, id);
+            pstmt.executeUpdate();
+        }catch( SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
     public void declararFalsaAlarma(int id, int idUser){
         int idFalsaAlarma = 4;
         UserDao userDao = new UserDao();
         try (Connection conn = this.getConnection()) {
-        String queryUpd = "UPDATE Incidencia AS i " +
-                "SET idEstado = ? " +
-                "WHERE i.idIncidencia = ?";
+            String queryUpd = "UPDATE Incidencia AS i " +
+                    "SET idEstado = ? " +
+                    "WHERE i.idIncidencia = ?";
 
             try (PreparedStatement pstmt = conn.prepareStatement(queryUpd)){
-                pstmt.setInt(1, idFalsaAlarma);
-                pstmt.setInt(2, id);
-                pstmt.executeUpdate();
-            }
+                    pstmt.setInt(1, idFalsaAlarma);
+                    pstmt.setInt(2, id);
+                    pstmt.executeUpdate();
+                }
             String queryUpdUser = "UPDATE Usuario AS u " +
                 "SET falsasAlarmas = ? " +
                 "WHERE u.idUsuario = ?";
