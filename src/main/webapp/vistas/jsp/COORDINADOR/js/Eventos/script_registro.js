@@ -14,6 +14,7 @@ function registrar() {
     }
   });
 }
+
 function confirmarRegistro() {
   Swal.fire({
     title: "¿Estás seguro de que deseas registrar el evento?",
@@ -25,6 +26,8 @@ function confirmarRegistro() {
     cancelButtonText: "Cancelar",
   }).then((result) => {
     if (result.isConfirmed) {
+      console.log("Formulario antes de enviar:");
+      console.log($("#eventForm").serialize()); // Esto mostrará todos los datos del formulario antes de enviarlos
       document.getElementById("eventForm").submit(); // Envía el formulario
     }
   });
@@ -41,11 +44,12 @@ function anularRegistro() {
     cancelButtonText: "Cancelar",
   }).then((result) => {
     if (result.isConfirmed) {
-      // Redireccionar a evento.html
-      window.location.href = "eventos.jsp";
+      goBack();
     }
   });
 }
+
+
 
 function VacantesPopUp() {
   Swal.fire({
@@ -110,12 +114,13 @@ function enableEditMode(sectionId) {
   document.addEventListener("click", function disableEditMode(event) {
     if (!section.contains(event.target)) {
       paragraphs.forEach((paragraph) => {
-        paragraph.contentEditable = "false";
+        paragraph.contentEditable = "false"; // Corrección aquí
       });
       document.removeEventListener("click", disableEditMode);
     }
   });
 }
+
 
 function enableEditMode2(elementId) {
   var element = document.getElementById(elementId);
@@ -127,14 +132,14 @@ $(document).ready(function () {
   // Inicializar el datepicker al hacer clic en el botón de selección de fecha
   $("#fecha-seleccionada").click(function () {
     $("#fecha-seleccionada")
-      .datepicker({
-        dateFormat: "dd MM yy", // Formato de fecha deseado
-        onSelect: function (dateText, inst) {
-          // Actualizar el texto de la fecha seleccionada en el elemento span
-          $("#fecha-seleccionada").text(dateText);
-        },
-      })
-      .datepicker("show"); // Mostrar el datepicker
+        .datepicker({
+          dateFormat: "dd MM yy", // Formato de fecha deseado
+          onSelect: function (dateText, inst) {
+            // Actualizar el texto de la fecha seleccionada en el elemento span
+            $("#fecha-seleccionada").text(dateText);
+          },
+        })
+        .datepicker("show"); // Mostrar el datepicker
   });
 });
 
@@ -146,63 +151,121 @@ function enableEditMode3(elementId) {
 
 document.addEventListener("DOMContentLoaded", function () {
   document
-    .getElementById("profesores-link")
-    .addEventListener("click", function (event) {
-      event.preventDefault(); // Prevenir el comportamiento predeterminado del enlace
-      window.location.href = "../../html/Eventos/tabla_docentes.jsp"; // Cambiar la ubicación de la ventana al enlace deseado
-    });
+      .getElementById("profesores-link")
+      .addEventListener("click", function (event) {
+        event.preventDefault(); // Prevenir el comportamiento predeterminado del enlace
+        window.location.href = "../../html/Eventos/tabla_docentes.jsp"; // Cambiar la ubicación de la ventana al enlace deseado
+      });
 });
+
 function mostrarOpcionMaterial() {
   var opcionMaterial = document.getElementById('opcion-material');
   var mensajeNoMaterial = document.getElementById('mensaje-no-material');
   var select = document.getElementById('necesita-material');
 
   if (select.value === 'si') {
-      opcionMaterial.classList.remove('hidden');
-      mensajeNoMaterial.classList.add('hidden');
+    opcionMaterial.classList.remove('hidden');
+    mensajeNoMaterial.classList.add('hidden');
   } else if (select.value === 'no') {
-      opcionMaterial.classList.add('hidden');
-      mensajeNoMaterial.classList.remove('hidden');
+    opcionMaterial.classList.add('hidden');
+    mensajeNoMaterial.classList.remove('hidden');
   } else {
-      opcionMaterial.classList.add('hidden');
-      mensajeNoMaterial.classList.add('hidden');
+    opcionMaterial.classList.add('hidden');
+    mensajeNoMaterial.classList.add('hidden');
   }
 }
 
 function agregarMaterial() {
-  var lista = document.getElementById('lista-materiales');
   var nuevoMaterial = document.getElementById('nuevo-material').value;
   if (nuevoMaterial.trim() !== "") {
-      var li = document.createElement('li');
-      li.className = 'material-item';
-      li.innerHTML = `
+    var lista = document.getElementById('lista-materiales');
+    var li = document.createElement('li');
+    li.textContent = nuevoMaterial;
+    lista.appendChild(li);
+
+    // Añadir el material al campo oculto
+    var materialesField = document.getElementById('materiales');
+    if (materialesField.value) {
+      materialesField.value += "," + nuevoMaterial;
+    } else {
+      materialesField.value = nuevoMaterial;
+    }
+
+    li.innerHTML = `
           <span>${nuevoMaterial}</span>
           <button class="remove-btn" onclick="eliminarMaterial(this)">X</button>
       `;
-      lista.appendChild(li);
-      document.getElementById('nuevo-material').value = ""; // Clear input field
+
+    document.getElementById('nuevo-material').value = ""; // Limpiar campo de entrada
+    console.log("Material agregado:", materialesField.value); // Añadir log para verificar
   }
 }
 
 function eliminarMaterial(elemento) {
   var li = elemento.parentElement;
+  var material = li.querySelector('span').textContent;
+  var materialesField = document.getElementById('materiales');
+  var materialesArray = materialesField.value.split(',');
+
+  // Eliminar el material del array
+  var index = materialesArray.indexOf(material);
+  if (index > -1) {
+    materialesArray.splice(index, 1);
+  }
+
+  // Actualizar el campo oculto
+  materialesField.value = materialesArray.join(',');
+
+  // Eliminar el elemento de la lista
   li.remove();
+  console.log("Material eliminado:", materialesField.value); // Añadir log para verificar
 }
 
 document.getElementById("eventForm").addEventListener("submit", function(event) {
-  var nombre = document.getElementById("nombre_evento").value;
+  var nombre = document.getElementById("nombre").value;
   var fecha = document.getElementById("fecha").value;
   var hora = document.getElementById("hora").value;
   var lugar = document.getElementById("lugar").value;
   var recurrencia = document.getElementById("recurrencia").value;
-  var descripcion = document.getElementById("descripcion").value;
+  var descripcion = document.getElementById("descripcion2").value; // Asegúrate de que sea "descripcion2"
   var vacantes = document.getElementById("vacantes").value;
+  var materiales = document.getElementById("materiales").value; // Asegúrate de que los materiales se envíen
 
-  if (!nombre || !fecha || !hora || !lugar || !recurrencia || !descripcion || !vacantes) {
+  console.log("Materiales:", materiales);
+
+  var missingFields = [];
+
+  if (!nombre) {
+    missingFields.push("Nombre del evento");
+  }
+  if (!fecha) {
+    missingFields.push("Fecha");
+  }
+  if (!hora) {
+    missingFields.push("Hora de Inicio");
+  }
+  if (!lugar) {
+    missingFields.push("Lugar");
+  }
+  if (!recurrencia) {
+    missingFields.push("Recurrencia");
+  }
+  if (!descripcion) {
+    missingFields.push("Descripcion");
+  }
+  if (!vacantes) {
+    missingFields.push("Vacantes");
+  }
+  if (!materiales) {
+    missingFields.push("Materiales");
+  }
+
+  if (missingFields.length > 0) {
     event.preventDefault();
-    Swal.fire("Error", "Todos los campos son obligatorios", "error");
+    Swal.fire("Error", "Los siguientes campos son obligatorios: " + missingFields.join(", "), "error");
   }
 });
+
 
 function goBack() {
   window.history.back();

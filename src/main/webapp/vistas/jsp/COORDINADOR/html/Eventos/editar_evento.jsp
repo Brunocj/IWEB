@@ -1,3 +1,6 @@
+<%@ page import="org.example.webappsm.model.beans.Evento" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -44,6 +47,18 @@
         </jsp:include>
         <!-- partial -->
         <div class="main-panel">
+            <%
+                Evento evento = (Evento) request.getAttribute("evento");
+                String base64Image = (String) request.getAttribute("base64Image");
+                if (evento == null) {
+                    out.print("<p class='alert alert-danger'>Error: No se encontró el evento.</p>");
+                } else {
+            %>
+
+            <form id="eventForm" action="${pageContext.request.contextPath}/Coordinador?action=actualizarEvento" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="action" value="actualizarEvento">
+                <input type="hidden" name="idEvento" value="<%= evento.getIdEvento() %>">
+
           <div class="content-wrapper" style ="background-color: #bdf1f5;"> <!--Cambiar al color mas claro-->
             <div class="container">
                 <div class="container-fluid mt-5"> <!-- Cambié container por container-fluid -->
@@ -63,22 +78,24 @@
                 <div class="col-md-6">
                   <div class="custom-container rounded-3" id="container-image">
                     <div class="event-image-container">
-                      <img id="preview" src="https://via.placeholder.com/800x500" alt="Vista previa de la imagen" class="event-image img-fluid mb-4">
-                      <input type="file" id="upload" style="display: none;">
-                      <button class="custom-btn" id="botoncarga" onclick="document.getElementById('upload').click();"><i class="fas fa-plus"></i>Cargar</button>
+                        <img id="preview" src="<%= base64Image != null ? "data:image/jpeg;base64," + base64Image : "https://via.placeholder.com/800x500" %>" alt="Vista previa de la imagen" class="event-image img-fluid mb-4">
+                        <input type="file" id="upload" style="display: none;">
+                      <button type="button" class="custom-btn" id="botoncarga" onclick="document.getElementById('upload').click();"><i class="fas fa-plus"></i>Cargar</button>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="custom-container rounded-3" style = "padding: 10px;" id="fechas">
-                        <h4 class="mb-4 center-text"><span id="nombre-seleccionado"><input type="text" id="nombre" name="texto" value="Futbolito"></span><i class="fas fa-pencil-alt edit-icon"></i></h4>
-                        <p><strong>Fecha:</strong> <span><input type="date" id="fecha" name="fecha" value="2024-05-25"></span> <i class="fas fa-pencil-alt edit-icon"></i></p>
-                        <p><strong>Hora:</strong> <span><input type="time" id="hora" name="hora" value="18:30"></span> <i class="fas fa-pencil-alt edit-icon"></i></p>
-                        <p><strong>Lugar:</strong> <span><input type="text" id="lugar" name="texto" value="Cancha de minas"></span> <i class="fas fa-pencil-alt edit-icon"></i></p>
+                      <h4 class="mb-4 center-text"><span id="nombre-seleccionado"><input type="text" id="nombre" name="nombre_evento" value="<%=evento.getTitulo() %>"></span><i class="fas fa-pencil-alt edit-icon"></i></h4>
+                      <p><strong>Fecha:</strong> <span><input type="date" id="fecha" name="fecha" value="<%=evento.getFecha()%>"></span> <i class="fas fa-pencil-alt edit-icon"></i></p>
+                      <p><strong>Hora de Inicio:</strong> <span><input type="time" id="hora" name="hora" value="<%=evento.getHora()%>"></span> <i class="fas fa-pencil-alt edit-icon"></i></p>
+                      <p><strong>Hora de Finalización:</strong> <span><input type="time" id="horaFin" name="horaFin" value="<%=evento.getHoraFin()%>"></span> <i class="fas fa-pencil-alt edit-icon"></i></p>
+                      <p><strong>Lugar:</strong> <span><input type="text" id="lugar" name="lugar" value="<%=evento.getUbicacion()%>"></span> <i class="fas fa-pencil-alt edit-icon"></i></p>
                         <p><strong>Recurrencia:</strong> <span>
                             <select id="recurrencia" name="recurrencia">
-                                <option value="si" selected>Sí</option>
-                                <option value="no">No</option>
+                                <option value="1" <%= evento.getRecurrencia() == 1 ? "selected" : "" %>>Sí</option>
+                                <option value="0" <%= evento.getRecurrencia() == 0 ? "selected" : "" %>>No</option>
+
                             </select>
                             </span> 
                             <i class="fas fa-pencil-alt edit-icon"></i>
@@ -86,21 +103,25 @@
                     
                         <div class="d-flex justify-content-start vacantes" id="boton">
                             <!-- El nuevo botón -->
-                            
-                            <p><strong>Vacantes:</strong> <span id="btn-vacantes" >8/10</span> </p>
+
+                            <p><strong>Vacantes:</strong> <span id="btn-vacantes "  >8/<%=evento.getVacantes()%></span> </p>
                             <!-- Espacio entre botones -->
                             <div style="width: 20px;"></div>
                             
                             <!-- El botón "Inscribirse" -->
                             <button type="button" class="btn btn-primary custom-btn" id="btn-inscribirse" onclick="AmpliarVacantesPopUp()">Ampliar vacantes</button>
-                          </div>
+
+
+                        </div>
                     </div>
                   </div>
                 </div>
+
+
                 <div class="col-md-6">
                   <div class="custom-container rounded-3" id="descripcion">
                     <h4 class="mb-4">Descripción del Evento <i class="fas fa-pencil-alt edit-icon"></i></h4>
-                    <textarea id="descripcion" name="texto">Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum</textarea>
+                    <textarea id="descripcion2" name="descripcion"><%=evento.getDescripcion()%></textarea>
                     <h4 class="mb-4">Materiales <i class="fas fa-pencil-alt edit-icon"></i></h4>
                     <div>
                       <p>¿Se necesita material?</p>
@@ -113,16 +134,32 @@
                   <div id="opcion-material">
                       <input type="text" id="nuevo-material" placeholder="Agregar material">
                       <button type="button" onclick="agregarMaterial()">Agregar</button>
+                      <input type="hidden" id="vacantes" name="vacantes" value="<%= evento.getVacantes() %>">
                       <br>
                       <br>
                       <h4 class="mb-4">Lista de Materiales <i class="fas fa-pencil-alt edit-icon"></i></h4>
                       <ul id="lista-materiales">
-                          <li class="material-item"><span>Primer material</span><button class="remove-btn" onclick="eliminarMaterial(this)">X</button></li>
-                          <li class="material-item"><span>Segundo material</span><button class="remove-btn" onclick="eliminarMaterial(this)">X</button></li>
+                          <%
+                              ArrayList<String> nombresMateriales = (ArrayList<String>) request.getAttribute("materiales");
+                              if (nombresMateriales != null) {
+                                  for (String nombreMaterial : nombresMateriales) {
+                          %>
+                          <li class="material-item">
+                              <span><%= nombreMaterial %></span>
+                              <button class="remove-btn" onclick="eliminarMaterial(this)">X</button>
+                          </li>
+                          <%
+                                  }
+                              }else {
+                                  out.println("No se encontraron materiales para este evento.");
+                              }
+                          %>
                       </ul>
                   </div>
       
                   <p id="mensaje-no-material" class="hidden">No se requiere material.</p>
+
+                      <input type="hidden" id="materiales" name="materiales" value="<%= nombresMateriales != null ? String.join(",", nombresMateriales) : "" %>">
 
                     <h4 class="mb-4" id="profesores-link">
                       <a href="tabla_docentes.jsp">Seleccionar nuevo profesor <i class="fas fa-external-link-alt"></i></a>
@@ -132,8 +169,12 @@
                 </div>
               </div>
             </div>
+
+            </form>
+            <% } %>
+
             <div class="fixed-buttons">
-              <button class="btn btn-custom-success" id="success" onclick="GuardarPopUp()">Guardar cambios</button>
+              <button class="btn btn-custom-success" id="success" onclick="confirmarEdicion()">Guardar cambios</button>
               <button class="btn btn-custom-danger" id="danger" onclick="CancelarPopUp()">Descartar cambios</button>
             </div>
           

@@ -1,42 +1,29 @@
 
 
-// Función para cargar la imagen al seleccionar un archivo
-document.getElementById("upload").addEventListener("change", function (event) {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      document.getElementById("preview").src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  }
-});
-
-
 $(document).ready(function () {
   // Inicializar el datepicker al hacer clic en el botón de selección de fecha
   $("#fecha-seleccionada").click(function () {
     $("#fecha-seleccionada")
-      .datepicker({
-        dateFormat: "dd MM yy", // Formato de fecha deseado
-        onSelect: function (dateText, inst) {
-          // Actualizar el texto de la fecha seleccionada en el elemento span
-          $("#fecha-seleccionada").text(dateText);
-        },
-      })
-      .datepicker("show"); // Mostrar el datepicker
+        .datepicker({
+          dateFormat: "dd MM yy", // Formato de fecha deseado
+          onSelect: function (dateText, inst) {
+            // Actualizar el texto de la fecha seleccionada en el elemento span
+            $("#fecha-seleccionada").text(dateText);
+            console.log("Fecha seleccionada:", dateText); // Log para verificar la fecha seleccionada
+          },
+        })
+        .datepicker("show"); // Mostrar el datepicker
   });
 });
 
-
-
 document.addEventListener("DOMContentLoaded", function () {
   document
-    .getElementById("profesores-link")
-    .addEventListener("click", function (event) {
-      event.preventDefault(); // Prevenir el comportamiento predeterminado del enlace
-      window.location.href = "../tablaDocentes2/tabla.html"; // Cambiar la ubicación de la ventana al enlace deseado
-    });
+      .getElementById("profesores-link")
+      .addEventListener("click", function (event) {
+        event.preventDefault(); // Prevenir el comportamiento predeterminado del enlace
+        window.location.href = "../tablaDocentes2/tabla.html"; // Cambiar la ubicación de la ventana al enlace deseado
+        console.log("Enlace de profesores clicado"); // Log para verificar el click del enlace
+      });
 });
 
 function mostrarPopupCerrarSesion() {
@@ -51,6 +38,7 @@ function mostrarPopupCerrarSesion() {
   }).then((result) => {
     if (result.isConfirmed) {
       window.location.href = "../../../LOGIN/login.html"; //Cambiar la ubicacion del login de acuerdo a lo necesario
+      console.log("Cierre de sesión confirmado"); // Log para verificar el cierre de sesión
     }
   });
 }
@@ -61,14 +49,17 @@ function mostrarOpcionMaterial() {
   var select = document.getElementById('necesita-material');
 
   if (select.value === 'si') {
-      opcionMaterial.classList.remove('hidden');
-      mensajeNoMaterial.classList.add('hidden');
+    opcionMaterial.classList.remove('hidden');
+    mensajeNoMaterial.classList.add('hidden');
+    console.log("Opción de material mostrada"); // Log para verificar la opción de material
   } else if (select.value === 'no') {
-      opcionMaterial.classList.add('hidden');
-      mensajeNoMaterial.classList.remove('hidden');
+    opcionMaterial.classList.add('hidden');
+    mensajeNoMaterial.classList.remove('hidden');
+    console.log("Opción de material ocultada"); // Log para verificar la opción de material
   } else {
-      opcionMaterial.classList.add('hidden');
-      mensajeNoMaterial.classList.add('hidden');
+    opcionMaterial.classList.add('hidden');
+    mensajeNoMaterial.classList.add('hidden');
+    console.log("Selección de material no definida"); // Log para verificar la opción de material
   }
 }
 
@@ -76,22 +67,36 @@ function agregarMaterial() {
   var lista = document.getElementById('lista-materiales');
   var nuevoMaterial = document.getElementById('nuevo-material').value;
   if (nuevoMaterial.trim() !== "") {
-      var li = document.createElement('li');
-      li.className = 'material-item';
-      li.innerHTML = `
-          <span>${nuevoMaterial}</span>
-          <button class="remove-btn" onclick="eliminarMaterial(this)">X</button>
-      `;
-      lista.appendChild(li);
-      document.getElementById('nuevo-material').value = ""; // Clear input field
+    var li = document.createElement('li');
+    li.className = 'material-item';
+    li.innerHTML = `
+            <span>${nuevoMaterial}</span>
+            <button class="remove-btn" onclick="eliminarMaterial(this)">X</button>
+        `;
+    lista.appendChild(li);
+
+    actualizarCampoMateriales();
+    document.getElementById('nuevo-material').value = ""; // Limpiar campo de entrada
+    console.log("Material agregado:", nuevoMaterial); // Log para verificar el material agregado
   }
 }
 
 function eliminarMaterial(elemento) {
   var li = elemento.parentElement;
   li.remove();
+  actualizarCampoMateriales();
+  console.log("Material eliminado"); // Log para verificar la eliminación del material
 }
 
+function actualizarCampoMateriales() {
+  var lista = document.getElementById('lista-materiales');
+  var materiales = [];
+  lista.querySelectorAll('li').forEach(function (li) {
+    materiales.push(li.querySelector('span').textContent);
+  });
+  document.getElementById('materiales').value = materiales.join(',');
+  console.log("Campo de materiales actualizado:", document.getElementById('materiales').value); // Log para verificar el campo de materiales actualizado
+}
 
 function borrarEvento() {
   Swal.fire({
@@ -108,6 +113,7 @@ function borrarEvento() {
       localStorage.setItem("eventoEliminado", "true");
       // Redireccionar a evento.html
       window.location.href = "../../html/Eventos/eventos.jsp";
+      console.log("Evento eliminado"); // Log para verificar la eliminación del evento
     }
   });
 }
@@ -125,6 +131,7 @@ function GuardarPopUp() {
     if (result.isConfirmed) {
       // Redireccionar a evento.html
       window.location.href = "eventos.jsp";
+      console.log("Cambios guardados"); // Log para verificar que los cambios se guardaron
     }
   });
 }
@@ -142,77 +149,10 @@ function CancelarPopUp() {
     if (result.isConfirmed) {
       // Redireccionar a evento.html
       window.location.href = "eventos.jsp";
+      console.log("Cambios cancelados"); // Log para verificar que los cambios se cancelaron
     }
   });
 }
-
-window.addEventListener("DOMContentLoaded", () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const eventId = urlParams.get("eventId");
-  const eventImage = document.getElementById("preview");
-  // Obtener la URL de la imagen correspondiente al evento
-  const eventImageURL = obtenerURLImagen(eventId);
-  // Establecer la fuente de la imagen
-  eventImage.src = eventImageURL;
-});
-
-// Función para obtener la URL de la imagen del evento
-function obtenerURLImagen(eventId) {
-  // Aquí puedes definir la lógica para obtener la URL de la imagen del evento
-  // Por ejemplo, puedes tener un objeto o una base de datos que mapee eventId a la URL de la imagen
-  // Devuelve la URL de la imagen correspondiente al eventId
-  // Este es solo un ejemplo de cómo podrías hacerlo, deberías adaptarlo a tu propia lógica de datos
-  switch (eventId) {
-    case "1":
-      return "../../img/Eventos/foto1.png";
-    case "2":
-      return "../../img/Eventos/foto1.png";
-    case "3":
-      return "../../img/Eventos/foto1.png";
-    case "4":
-      return "../../img/Eventos/foto1.png";
-    case "5":
-      return "../../img/Eventos/foto2.jpg";
-    case "6":
-      return "../../img/Eventos/foto2.jpg";
-    case "7":
-      return "../../img/Eventos/foto2.jpg";
-    case "8":
-      return "../../img/Eventos/foto2.jpg";
-    case "9":
-      return "../../img/Eventos/foto3.jpg";
-    case "10":
-      return "../../img/Eventos/foto3.jpg";
-    case "11":
-      return "../../img/Eventos/foto3.jpg";
-    case "12":
-      return "../../img/Eventos/foto4.jpg";
-    case "13":
-      return "../../img/Eventos/foto4.jpg";
-    case "14":
-      return "../../img/Eventos/foto4.jpg";
-    case "15":
-      return "../../img/Eventos/foto4.jpg";
-    case "16":
-      return "../../img/Eventos/foto5.jpg";
-    case "17":
-      return "../../img/Eventos/foto5.jpg";
-    case "18":
-      return "../../img/Eventos/foto5.jpg";
-    case "19":
-      return "../../img/Eventos/foto5.jpg";
-    case "20":
-      return "../../img/Eventos/foto6.png";
-    case "21":
-      return "../../img/Eventos/foto6.png";
-    case "22":
-      return "../../img/Eventos/foto6.png";
-    case "23":
-      return "../../img/Eventos/foto6.png";
-  }
-}
-
-
 
 // Función para cargar la imagen al seleccionar un archivo
 document.getElementById("upload").addEventListener("change", function (event) {
@@ -221,17 +161,11 @@ document.getElementById("upload").addEventListener("change", function (event) {
     const reader = new FileReader();
     reader.onload = function (e) {
       document.getElementById("preview").src = e.target.result;
+      console.log("Imagen cargada:", e.target.result); // Log para verificar la imagen cargada
     };
     reader.readAsDataURL(file);
   }
 });
-
-
-
-
-
-
-
 
 function mostrarPopup(tipo) {
   // Lógica para mostrar el popup de confirmación
@@ -251,6 +185,7 @@ function mostrarPopup(tipo) {
         text: "¡Tu registro ha sido procesado correctamente!",
         icon: "success",
       });
+      console.log("Registro de asistencia:", tipo); // Log para verificar el registro de asistencia
     }
   });
 }
@@ -274,6 +209,7 @@ function registrarAsistencia() {
       // Lógica para registrar salida
       seleccionarFoto("salida");
     }
+    console.log("Registro de asistencia confirmado"); // Log para verificar el registro de asistencia
   });
 }
 
@@ -290,6 +226,7 @@ function seleccionarFoto() {
     preConfirm: () => {
       const foto = document.getElementById("inputFoto").files[0];
       // Aquí puedes procesar la foto, por ejemplo, enviándola al servidor
+      console.log("Foto seleccionada:", foto); // Log para verificar la foto seleccionada
       return foto;
     },
   }).then((result) => {
@@ -302,6 +239,7 @@ function seleccionarFoto() {
           text: `¡Tu registro de entrada ha sido procesado correctamente!`,
           icon: "success",
         });
+        console.log("Registro de entrada exitoso"); // Log para verificar el registro de entrada exitoso
       }, 1000); // Simulación de carga de 1 segundo
     }
   });
@@ -309,11 +247,12 @@ function seleccionarFoto() {
 
 document.addEventListener("DOMContentLoaded", function () {
   document
-    .getElementById("profesores-link")
-    .addEventListener("click", function (event) {
-      event.preventDefault(); // Prevenir el comportamiento predeterminado del enlace
-      window.location.href = "../../html/Eventos/tabla_docentes.jsp"; // Cambiar la ubicación de la ventana al enlace deseado
-    });
+      .getElementById("profesores-link")
+      .addEventListener("click", function (event) {
+        event.preventDefault(); // Prevenir el comportamiento predeterminado del enlace
+        window.location.href = "../../html/Eventos/tabla_docentes.jsp"; // Cambiar la ubicación de la ventana al enlace deseado
+        console.log("Enlace de profesores clicado"); // Log para verificar el click del enlace
+      });
 });
 
 function AmpliarVacantesPopUp() {
@@ -337,14 +276,14 @@ function AmpliarVacantesPopUp() {
 
       if (vacantes <= vacantesDisponibles) {
         Swal.showValidationMessage(
-          "La ampliación solo funciona con un número superior a las asignadas"
+            "La ampliación solo funciona con un número superior a las asignadas"
         );
         return;
       }
 
       // Actualizar el número de vacantes
       document.getElementById("btn-vacantes").innerText = `8/${vacantes}`;
-
+      console.log("Vacantes ampliadas:", vacantes); // Log para verificar la ampliación de vacantes
       return vacantes;
     },
   });
@@ -353,4 +292,68 @@ function AmpliarVacantesPopUp() {
 function verInscritos() {
   // Redirigir al usuario a index.html
   window.location.href = "../../html/Eventos/tabla_inscritos.jsp";
+  console.log("Ver inscritos clicado"); // Log para verificar el click en ver inscritos
+}
+
+document.getElementById("eventForm").addEventListener("submit", function(event) {
+  var nombre = document.getElementById("nombre").value;
+  var fecha = document.getElementById("fecha").value;
+  var hora = document.getElementById("hora").value;
+  var lugar = document.getElementById("lugar").value;
+  var recurrencia = document.getElementById("recurrencia").value;
+  var descripcion = document.getElementById("descripcion2").value; // Asegúrate de que sea "descripcion2"
+  var vacantes = document.getElementById("vacantes").value;
+  var materiales = document.getElementById("materiales").value; // Asegúrate de que los materiales se envíen
+
+  console.log("Materiales:", materiales);
+
+  var missingFields = [];
+
+  if (!nombre) {
+    missingFields.push("Nombre del evento");
+  }
+  if (!fecha) {
+    missingFields.push("Fecha");
+  }
+  if (!hora) {
+    missingFields.push("Hora de Inicio");
+  }
+  if (!lugar) {
+    missingFields.push("Lugar");
+  }
+  if (!recurrencia) {
+    missingFields.push("Recurrencia");
+  }
+  if (!descripcion) {
+    missingFields.push("Descripcion");
+  }
+  if (!vacantes) {
+    missingFields.push("Vacantes");
+  }
+  if (!materiales) {
+    missingFields.push("Materiales");
+  }
+
+  if (missingFields.length > 0) {
+    event.preventDefault();
+    Swal.fire("Error", "Los siguientes campos son obligatorios: " + missingFields.join(", "), "error");
+  }
+});
+
+function confirmarEdicion() {
+  Swal.fire({
+    title: "¿Estás seguro de que deseas guardar los cambios en el evento?",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonColor: "#00913f",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Confirmar",
+    cancelButtonText: "Cancelar",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      console.log("Formulario antes de enviar:");
+      console.log($("#eventForm").serialize()); // Esto mostrará todos los datos del formulario antes de enviarlos
+      document.getElementById("eventForm").submit(); // Envía el formulario
+    }
+  });
 }

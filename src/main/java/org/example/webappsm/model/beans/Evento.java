@@ -15,13 +15,12 @@ public class Evento {
     private int recurrencia;
     private byte[] imagenes;
     private int vacantes;
-    private Date ingreso;
-    private Date salida;
+    private byte[] ingreso;
+    private byte[] salida;
     private int idProfesor;
     private int idCoordinador;
     private int idEstadoEvento;
     private int idArea;
-    private String materiales;
     private String resumen;
-
+    private Time horaFin;
 }

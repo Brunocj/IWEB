@@ -84,7 +84,7 @@
                           <h5 class="card-title"><%= evento.getTitulo() %></h5>
                         </div>
                         <p class="card-text"><%= evento.getDescripcion() %></p>
-                        <a href="${pageContext.request.contextPath}/Vecino?action=verEvento&id=<%= evento.getIdEvento() %>" class="btn btn-primary btn-sm btn-bottom-right">Editar evento</a>
+                        <a href="${pageContext.request.contextPath}/Coordinador?action=editarEvento&id=<%= evento.getIdEvento() %>" class="btn btn-primary btn-sm btn-bottom-right">Editar evento</a>
                       </div>
                     </div>
                   </div>
@@ -109,7 +109,7 @@
                           <h5 class="card-title"><%= eventos.get(i).getTitulo() %></h5>
                         </div>
                         <p class="card-text"><%= eventos.get(i).getDescripcion() %></p>
-                        <a href="${pageContext.request.contextPath}/Vecino?action=verEvento&id=<%= eventos.get(i).getIdEvento() %>" class="btn btn-primary btn-sm btn-bottom-right">Ver evento</a>
+                        <a href="${pageContext.request.contextPath}/Coordinador?action=editarEvento&id=<%= eventos.get(i).getIdEvento() %>" class="btn btn-primary btn-sm btn-bottom-right">Ver evento</a>
                       </div>
                     </div>
                   </div>

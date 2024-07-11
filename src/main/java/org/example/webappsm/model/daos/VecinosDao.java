@@ -123,8 +123,8 @@ public class VecinosDao extends BaseDao{
                     evento.setRecurrencia(rs.getInt("recurrencia"));
                     evento.setImagenes(this.readImagenes(rs.getBinaryStream("imagenes")));
                     evento.setVacantes(rs.getInt("vacantes"));
-                    evento.setIngreso(rs.getTimestamp("ingreso"));
-                    evento.setSalida(rs.getTimestamp("salida"));
+                    evento.setIngreso(this.readImagenes(rs.getBinaryStream("ingreso")));
+                    evento.setSalida(this.readImagenes(rs.getBinaryStream("salida")));
                     evento.setIdProfesor(rs.getInt("idProfesor"));
                     evento.setIdCoordinador(rs.getInt("idCoordinador"));
                     evento.setIdEstadoEvento(rs.getInt("idEstadoEvento"));
@@ -168,8 +168,8 @@ public class VecinosDao extends BaseDao{
                     evento.setRecurrencia(rs.getInt("recurrencia"));
                     evento.setImagenes(this.readImagenes(rs.getBinaryStream("imagenes")));
                     evento.setVacantes(rs.getInt("vacantes"));
-                    evento.setIngreso(rs.getTimestamp("ingreso"));
-                    evento.setSalida(rs.getTimestamp("salida"));
+                    evento.setIngreso(this.readImagenes(rs.getBinaryStream("ingreso")));
+                    evento.setSalida(this.readImagenes(rs.getBinaryStream("salida")));
                     evento.setIdProfesor(rs.getInt("idProfesor"));
                     evento.setIdCoordinador(rs.getInt("idCoordinador"));
                     evento.setIdEstadoEvento(rs.getInt("idEstadoEvento"));
@@ -209,8 +209,8 @@ public class VecinosDao extends BaseDao{
                     evento.setRecurrencia(rs.getInt("recurrencia"));
                     evento.setImagenes(this.readImagenes(rs.getBinaryStream("imagenes")));
                     evento.setVacantes(rs.getInt("vacantes"));
-                    evento.setIngreso(rs.getTimestamp("ingreso"));
-                    evento.setSalida(rs.getTimestamp("salida"));
+                    evento.setIngreso(this.readImagenes(rs.getBinaryStream("ingreso")));
+                    evento.setSalida(this.readImagenes(rs.getBinaryStream("salida")));
                     evento.setIdProfesor(rs.getInt("idProfesor"));
                     evento.setIdCoordinador(rs.getInt("idCoordinador"));
                     evento.setIdEstadoEvento(rs.getInt("idEstadoEvento"));

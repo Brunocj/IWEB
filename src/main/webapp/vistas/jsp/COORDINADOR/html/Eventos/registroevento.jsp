@@ -42,10 +42,10 @@
       <jsp:include page="<%= menuvecino %>">
         <jsp:param name="activePage" value="eventos"/>
       </jsp:include>
-        <!-- partial -->
+      <!-- partial -->
 
-        <div class="main-panel">
-          <form id="eventForm" action="${pageContext.request.contextPath}/Coordinador?action=registrarEvento" method="post" enctype="multipart/form-data">
+      <div class="main-panel">
+        <form id="eventForm" action="${pageContext.request.contextPath}/Coordinador?action=registrarEvento" method="post" enctype="multipart/form-data">
 
           <div class="content-wrapper" style ="background-color: #bdf1f5;"> <!--Cambiar al color mas claro-->
 
@@ -65,79 +65,82 @@
                 <div class="col-md-6">
                   <div class="custom-container rounded-3" style = "padding: 10px" id="fechas">
                     <h4 class="mb-4 center-text"><span id="nombre-seleccionado"><input type="text" id="nombre" name="nombre_evento" placeholder="[Nombre del evento]"></span><i class="fas fa-pencil-alt edit-icon"></i></h4>
-                        <p><strong>Fecha:</strong> <span><input type="date" id="fecha" name="fecha" value="AAAA-MM-DD"></span> <i class="fas fa-pencil-alt edit-icon"></i></p>
-                        <p><strong>Hora:</strong> <span><input type="time" id="hora" name="hora" value="HH:mm"></span> <i class="fas fa-pencil-alt edit-icon"></i></p>
-                        <p><strong>Lugar:</strong> <span><input type="text" id="lugar" name="lugar" placeholder="[Establecer lugar]"></span> <i class="fas fa-pencil-alt edit-icon"></i></p>
-                        <p><strong>Recurrencia:</strong> <span>
+                    <p><strong>Fecha:</strong> <span><input type="date" id="fecha" name="fecha" value="AAAA-MM-DD"></span> <i class="fas fa-pencil-alt edit-icon"></i></p>
+                    <p><strong>Hora de Inicio:</strong> <span><input type="time" id="hora" name="hora" value="HH:mm"></span> <i class="fas fa-pencil-alt edit-icon"></i></p>
+                    <p><strong>Hora de Finalización:</strong> <span><input type="time" id="horaFin" name="horaFin" value="HH:mm"></span> <i class="fas fa-pencil-alt edit-icon"></i></p>
+                    <p><strong>Lugar:</strong> <span><input type="text" id="lugar" name="lugar" placeholder="[Establecer lugar]"></span> <i class="fas fa-pencil-alt edit-icon"></i></p>
+                    <p><strong>Recurrencia:</strong> <span>
                             <select id="recurrencia" name="recurrencia">
                                 <option value="" disabled selected>--Selecionar opción--</option>
                                 <option name="recurrencia" value="1">Sí</option>
                                 <option name="recurrencia" value="0">No</option>
                             </select>
-                            </span> 
-                            <i class="fas fa-pencil-alt edit-icon"></i>
-                        </p>
-                      <button type="button" class="btn btn-primary custom-btn" id="btn-vacantes" onclick="VacantesPopUp()">Asignar Vacantes</button>
+                            </span>
+                      <i class="fas fa-pencil-alt edit-icon"></i>
+                    </p>
+                    <button type="button" class="btn btn-primary custom-btn" id="btn-vacantes" onclick="VacantesPopUp()">Asignar Vacantes</button>
                     <input type="hidden" id="vacantes" name="vacantes">
 
                     <div id="vacantesAsignadasContainer" style="display: inline-block; margin-left: 10px;"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="custom-container rounded-3" id="descripcion">
-                    <h4 class="mb-4">Descripción del Evento <i class="fas fa-pencil-alt edit-icon"></i></h4>
-                    <textarea id="descripcion" name="descripcion" placeholder="[Ingrese la descripción aquí]" style="margin-bottom: 20px;"></textarea>
-                    <h4 class="mb-4">Materiales <i class="fas fa-pencil-alt edit-icon"></i></h4>
-                    <div>
-                        <p>¿Se necesita material?</p>
-                        <select id="necesita-material" name="necesita-material" onchange="mostrarOpcionMaterial()">
-                            <option value="" selected>-- Seleccione una opción --</option>
-                            <option value="si">Sí</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-                    <br>
-                    <div id="opcion-material" class="hidden">
-                      <input type="text" id="nuevo-material" placeholder="Agregar material">
-                      <button type="button" onclick="agregarMaterial()">Agregar</button>
-                      <br>
-                      <br>
-                        <h4 class="mb-4">Lista de Materiales <i class="fas fa-pencil-alt edit-icon"></i></h4>
-                        <ul id="lista-materiales"></ul> 
-                    </div>
-
-                    <p id="mensaje-no-material" class="hidden">No se requiere material.</p>
-                    <h4 class="mb-4" id="profesores-link">
-                      <input type="hidden" id="idProfesor" name="idProfesor" value="4">
-                      <input type="hidden" id="idCoordinador" name="idCoordinador" value="<%=idCoordinador%>">
-                      <a href="${pageContext.request.contextPath}/Coordinador?action=">Seleccionar profesor <i class="fas fa-external-link-alt"></i></a>
-                   </h4>
-                    <p>Elige el profesor para el evento...</p>
-
                   </div>
                 </div>
               </div>
+              <div class="col-md-6">
+                <div class="custom-container rounded-3" id="descripcion">
+                  <h4 class="mb-4">Descripción del Evento <i class="fas fa-pencil-alt edit-icon"></i></h4>
+                  <textarea id="descripcion2" name="descripcion" placeholder="[Ingrese la descripción aquí]" style="margin-bottom: 20px;"></textarea>
+                  <h4 class="mb-4">Materiales <i class="fas fa-pencil-alt edit-icon"></i></h4>
+                  <div>
+                    <p>¿Se necesita material?</p>
+                    <select id="necesita-material" name="necesita-material" onchange="mostrarOpcionMaterial()">
+                      <option value="" selected>-- Seleccione una opción --</option>
+                      <option value="si">Sí</option>
+                      <option value="no">No</option>
+                    </select>
+                  </div>
+                  <br>
+                  <div id="opcion-material" class="hidden">
+                    <input type="text" id="nuevo-material" placeholder="Agregar material">
+                    <button type="button" onclick="agregarMaterial()">Agregar</button>
+                    <br>
+                    <br>
+                    <h4 class="mb-4">Lista de Materiales <i class="fas fa-pencil-alt edit-icon"></i></h4>
+                    <ul id="lista-materiales"></ul>
+                  </div>
 
+                  <p id="mensaje-no-material" class="hidden">No se requiere material.</p>
+                  <input type="hidden" id="materiales" name="materiales">
 
+                  <h4 class="mb-4" id="profesores-link">
+                    <input type="hidden" id="idProfesor" name="idProfesor" value="4">
+                    <input type="hidden" id="idCoordinador" name="idCoordinador" value="<%=idCoordinador%>">
+                    <a href="${pageContext.request.contextPath}/Coordinador?action=">Seleccionar profesor <i class="fas fa-external-link-alt"></i></a>
+                  </h4>
+                  <p>Elige el profesor para el evento...</p>
+
+                </div>
+              </div>
             </div>
 
-            <div class="fixed-buttons">
-              <button class="btn btn-custom-success" id="success" onclick="confirmarRegistro()">Registrar</button>
-              <button class="btn btn-custom-danger" id="danger" onclick="anularRegistro()">Anular Registro</button>
-            </div>
-          </form>
-            
-            
+
           </div>
 
-          <!-- content-wrapper ends -->
-          <!-- partial:../../partials/_footer.html -->
-          <!-- partial -->
-        </div>
-        <!-- main-panel ends -->
+          <div class="fixed-buttons">
+            <button class="btn btn-custom-success" id="success" type="button" onclick="confirmarRegistro()">Registrar</button>
+            <button class="btn btn-custom-danger" id="danger" type="button" onclick="anularRegistro()">Anular Registro</button>
+          </div>
+        </form>
+
+
       </div>
-      <!-- page-body-wrapper ends -->
+
+      <!-- content-wrapper ends -->
+      <!-- partial:../../partials/_footer.html -->
+      <!-- partial -->
+    </div>
+    <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
     </div>
 
     <!-- container-scroller -->
@@ -163,7 +166,9 @@
     <script src="${pageContext.request.contextPath}/assets/js/paginas_princpales.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
-    <script src = "${pageContext.request.contextPath}/vistas/jsp/COORDINADOR/js/Eventos/script_registro.js"></script>
+    <script src="${pageContext.request.contextPath}/vistas/jsp/COORDINADOR/js/Eventos/script_registro.js"></script>
+
+
     <!-- End custom js for this page -->
   </body>
 </html>
