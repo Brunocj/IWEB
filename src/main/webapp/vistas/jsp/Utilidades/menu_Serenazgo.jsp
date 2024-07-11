@@ -8,6 +8,9 @@
     //pero tienen que buscar que hace y como adaptarla a cada vista que tienen en serenazgo.
 %>
 
+<%
+    String activePage = request.getParameter("activePage");
+%>
 
 <nav class="sidebar sidebar-offcanvas" id="sidebar" style ="background-color: #000f22;">  <!--Cambiar al color mas oscuro-->
 
@@ -20,7 +23,7 @@
     <ul class="nav" style="position: fixed;">
 
         <!-- Codigo para un item de la barra lateral que no tiene sublista -->
-        <li class="nav-item menu-items active"> <!-- la clase "active" solo se usa para la vista que está activa -->
+        <li class="nav-item menu-items ${"pagPrincipal".equals(request.getParameter("activePage")) ? "active" : ""}"> <!-- la clase "active" solo se usa para la vista que está activa -->
 
             <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=pagPrincipal"> <!-- Cambiar href de acuerdo a lo necesario -->
                 <span class="menu-icon">
@@ -32,7 +35,7 @@
         <!-- Codigo para un item de la barra lateral que no tiene sublista FIN-->
 
 
-        <li class="nav-item menu-items">
+        <li class="nav-item menu-items ${"perfil".equals(request.getParameter("activePage")) ? "active" : ""}">
             <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=perfil">
               <span class="menu-icon">
                 <i class="mdi mdi-account"></i>
@@ -50,7 +53,7 @@
             </a>
         </li>
 
-        <li class="nav-item menu-items">
+        <li class="nav-item menu-items ${"dashboard".equals(request.getParameter("activePage")) ? "active" : ""}">
             <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=dashboard">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
@@ -59,7 +62,7 @@
             </a>
         </li>
 
-        <li class="nav-item menu-items">
+        <li class="nav-item menu-items ${"listaIncidencias".equals(request.getParameter("activePage")) ? "active" : ""}">
             <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=listaIncidencias">
               <span class="menu-icon">
                 <i class="mdi mdi-format-list-bulleted"></i>
@@ -69,7 +72,7 @@
         </li>
 
 
-        <li class="nav-item menu-items">
+        <li class="nav-item menu-items ${"listaVecinos".equals(request.getParameter("activePage")) ? "active" : ""}">
             <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=listaVecinos">
               <span class="menu-icon">
                 <i class="mdi mdi-format-list-bulleted"></i>
@@ -78,7 +81,7 @@
             </a>
         </li>
 
-        <li class="nav-item menu-items">
+        <li class="nav-item menu-items ${"listaIncidenciasPasadas".equals(request.getParameter("activePage")) ? "active" : ""}">
             <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=listaIncidenciasPasadas">
               <span class="menu-icon">
                 <i class="mdi mdi-format-list-bulleted"></i>
