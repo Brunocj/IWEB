@@ -104,7 +104,7 @@
                 <tr style="text-align: center;">
                   <td><%= usuario.getNombre() %></td>
                   <td><%= usuario.getApellido() %></td>
-                  <td><a href="https://mail.google.com/mail/u/0/#inbox"><%= usuario.getCorreoE() %></a></td>
+                  <td><%= usuario.getCorreoE() %></td>
                   <td><%= usuario.getFalsasAlarmas() %></td>
                   <%
                     if (usuario.isBaneado()) { %>

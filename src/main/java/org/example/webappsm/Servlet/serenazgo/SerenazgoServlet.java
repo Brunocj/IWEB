@@ -7,10 +7,7 @@ import org.example.webappsm.model.beans.Incidencia;
 import org.example.webappsm.model.beans.Serenazgo;
 import org.example.webappsm.model.beans.TipoSerenazgo;
 import org.example.webappsm.model.beans.Usuario;
-import org.example.webappsm.model.daos.DashboardDao;
-import org.example.webappsm.model.daos.IncidenciasDao;
-import org.example.webappsm.model.daos.SerenazgoDao;
-import org.example.webappsm.model.daos.VecinosDao;
+import org.example.webappsm.model.daos.*;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -4,10 +4,6 @@
     int idProvisional = 12; //poosteriormente, obtener el id con query
 %>
 
-<%
-    String activePage = request.getParameter("activePage");
-%>
-
 <nav class="sidebar sidebar-offcanvas" id="sidebar" style ="background-color: #000f22;">  <!--Cambiar al color mas oscuro-->
 
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top" style ="background-color: #000f22;">

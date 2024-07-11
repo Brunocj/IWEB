@@ -34,13 +34,13 @@
     if (userRole == null) {
       userRole = "Serenazgo"; // Por defecto, si no hay rol en la sesión
     }
-    String menuadmin = "/vistas/jsp/Utilidades/menu_" + userRole + ".jsp";
+    String menuserenazgo = "/vistas/jsp/Utilidades/menu_" + userRole + ".jsp";
   %>
 
 
-        <jsp:include page="<%= menuadmin %>">
-            <jsp:param name="activePage" value="perfil"/>
-        </jsp:include>
+    <jsp:include page="<%= menuserenazgo %>">
+        <jsp:param name="activePage" value="perfil"/>
+    </jsp:include>
 
         <!-- partial -->
         <div class="main-panel">
