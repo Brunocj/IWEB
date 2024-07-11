@@ -221,14 +221,20 @@ public class SerenazgoServlet extends HttpServlet {
 
         if(action.equals("banearVecino")){
 
-            VecinosDao vecinosDao = new VecinosDao();
+           VecinosDao vecinosDao = new VecinosDao();
+            SystemDao daosys = new SystemDao();
+
             String idParamString = request.getParameter("id");
             int idVecino = Integer.parseInt(idParamString);
+            Usuario usuarioBaneado = vecinosDao.obtenerUsuarioPorId(idVecino);
 
+            String tituloCorreo = "USTED HA SIDO BANEADO - Uso incorrecto de la función Registrar Incidencia ";
+            String cuerpoCorreo = "Estimado " + usuarioBaneado.getNombre() + ",\n Lamentamos informarte que has sido baneado del botón de incidencias debido a que has registrado más de 5 falsas alarmas en la plataforma.\n Esperamos que esto no vuelva a suceder, ya que esto afecta negativamente a nuestro trabajo por brindar una buena atención a los vecinos del distrito de San Miguel.\n Si tienes alguna pregunta sobre el motivo de tu baneo o necesitas más información, no dudes en ponerte en contacto con nosotros. Estamos aquí para ayudarte en lo que necesites.\nApreciamos tu comprensión y esperamos un cambio en tus acciones a realizar en futuras ocasiones.\n\nAtentamente,\nLa Administración";
+
+            daosys.enviarCorreo(usuarioBaneado.getCorreoE(), tituloCorreo, cuerpoCorreo);
             vecinosDao.banearVecino(idVecino);
 
             response.sendRedirect(request.getContextPath() + "/Serenazgo?action=listaVecinos");
-
         }else if(action.equals("eliminarIncidenciaPas")){
 
             String idParam = request.getParameter("id");
