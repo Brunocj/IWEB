@@ -279,21 +279,40 @@
 
         function confirmarYEnviar(formId) {
           let confirmMessage = "";
+
           if (formId.startsWith("falsaAlarmaForm")) {
             confirmMessage = "¿Estás seguro de declarar la incidencia como falsa alarma?";
           }
 
+          // Mostrar el pop-up con un campo de texto para el motivo
           Swal.fire({
             title: confirmMessage,
             icon: 'warning',
+            input: 'textarea',  // Campo de texto para el motivo
+            inputPlaceholder: 'Ingrese el motivo aquí...',
             showCancelButton: true,
             confirmButtonColor: '#00913f',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Sí',
-            cancelButtonText: 'Cancelar'
+            cancelButtonText: 'Cancelar',
+            preConfirm: (motivo) => {
+              if (!motivo) {
+                Swal.showValidationMessage('Debe ingresar un motivo');
+              }
+              return motivo;
+            }
           }).then((result) => {
             if (result.isConfirmed) {
-              document.getElementById(formId).submit();
+              // Crear un input oculto en el formulario con el motivo
+              let form = document.getElementById(formId);
+              let input = document.createElement('input');
+              input.type = 'hidden';
+              input.name = 'motivo';
+              input.value = result.value;  // El valor del campo de texto
+              form.appendChild(input);
+
+              // Enviar el formulario
+              form.submit();
             }
           });
 

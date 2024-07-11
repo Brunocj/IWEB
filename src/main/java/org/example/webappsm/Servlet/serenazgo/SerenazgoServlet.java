@@ -251,6 +251,7 @@ public class SerenazgoServlet extends HttpServlet {
         }else if(action.equals("falsaAlarma")){
             String idFA = request.getParameter("idIncidencia");
             String idUser = request.getParameter("idUsuario");
+            String motivo = request.getParameter(("motivo"));
             if (idFA != null && idUser != null) {
                 try {
                     int idIncidenciaFA = Integer.parseInt(idFA);
