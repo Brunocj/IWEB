@@ -411,47 +411,49 @@ public class VecinosDao extends BaseDao{
             throw new RuntimeException(e);
         }
     }
-    public void editarEstadoAprobado(int idUsuario){
+    public void editarEstadoAprobado(int idUsuario, String nuevaContrasena) {
         int idAprobado = 2;
         String query = "UPDATE Usuario AS U " +
-                "SET U.Estado_idEstado = ? " +
+                "SET U.Estado_idEstado = ?, U.contrasena = ? " +
                 "WHERE U.idUsuario = ?";
 
         try (Connection conn = this.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)){
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setInt(1, idAprobado);
-            pstmt.setInt(2, idUsuario);
-
+            pstmt.setString(2, nuevaContrasena); // Establecer la nueva contraseña
+            pstmt.setInt(3, idUsuario);
 
             pstmt.executeUpdate();
-        }catch( SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    public void editarRol(int idUsuario, int idArea){
+    public void editarRol(int idUsuario, int idArea, String nuevaContrasena) {
         int idNuevoRol = 4;
         int idEstado = 1;
 
-        try (Connection conn = this.getConnection()){
+        try (Connection conn = this.getConnection()) {
             String queryRol = "UPDATE Usuario AS U " +
-                    "SET U.idRol = ?, U.idArea = ? " +
+                    "SET U.idRol = ?, U.idArea = ?, U.contrasena = ? " +
                     "WHERE U.idUsuario = ?";
             try (PreparedStatement pstmtRol = conn.prepareStatement(queryRol);) {
-                pstmtRol.setInt(1,idNuevoRol);
-                pstmtRol.setInt(2,idArea );
-                pstmtRol.setInt(3,idUsuario );
+                pstmtRol.setInt(1, idNuevoRol);
+                pstmtRol.setInt(2, idArea);
+                pstmtRol.setString(3, nuevaContrasena); // Establecer la nueva contraseña
+                pstmtRol.setInt(4, idUsuario);
                 pstmtRol.executeUpdate();
             }
             String queryEstado = "UPDATE solicitudCoordinador SET estado = ? WHERE idUsuario = ?";
             try (PreparedStatement pstmtEstado = conn.prepareStatement(queryEstado);) {
-                pstmtEstado.setInt(1,idEstado);
-                pstmtEstado.setInt(2,idUsuario );
+                pstmtEstado.setInt(1, idEstado);
+                pstmtEstado.setInt(2, idUsuario);
                 pstmtEstado.executeUpdate();
             }
-        }catch( SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
     public void  eliminarSolicitud(int idUsuario) {
 
         String sql = "DELETE FROM solicitudcoordinador WHERE idUsuario = ?";

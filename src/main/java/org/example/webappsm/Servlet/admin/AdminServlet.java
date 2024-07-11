@@ -392,14 +392,16 @@ public class AdminServlet extends HttpServlet {
         }else if(action.equals("opcionAcceso")){
             String opcionSeleccionada = request.getParameter("opcionSeleccionada");
             int id = Integer.parseInt(request.getParameter("idUser"));
-
+            SystemDao system= new SystemDao();
+            // Generar la nueva contraseña (puedes ajustar esto según tus necesidades)
+            String nuevaContrasena = system.generarContra();
             VecinosDao vecinosDao = new VecinosDao();
             Usuario usuario = vecinosDao.obtenerUsuarioPorId(id);
             String tituloCorreo = request.getParameter("tituloCorreo"); // Recuperar el título del correo
             String cuerpoCorreo = request.getParameter("cuerpoCorreo"); // Recuperar el cuerpo del correo
             SystemDao daosys = new SystemDao();
             if (opcionSeleccionada.equals("aprobar")) {
-                vecinosDao.editarEstadoAprobado(id);
+                vecinosDao.editarEstadoAprobado(id, nuevaContrasena);
                 daosys.enviarCorreo(usuario.getCorreoE(), tituloCorreo, cuerpoCorreo);
             } else if (opcionSeleccionada.equals("denegar")) {
                 vecinosDao.eliminarUsuarioPorId(id);
@@ -420,10 +422,12 @@ public class AdminServlet extends HttpServlet {
             System.out.println(tituloCorreo);
             System.out.println(cuerpoCorreo);
 
+            SystemDao system= new SystemDao();
+            // Generar la nueva contraseña (puedes ajustar esto según tus necesidades)
+            String nuevaContrasena = system.generarContra();
 
             if (opcionSeleccionada.equals("aprobar")) {
-                vecinosDao.editarRol(id, idArea);
-
+                vecinosDao.editarRol(id, idArea, nuevaContrasena);
                 daosys.enviarCorreo(usuario.getCorreoE(), tituloCorreo, cuerpoCorreo);
 
             } else if (opcionSeleccionada.equals("denegar")) {
