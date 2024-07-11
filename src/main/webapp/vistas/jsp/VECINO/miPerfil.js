@@ -2,18 +2,25 @@ function openChangePasswordPopup(userId) {
     Swal.fire({
         title: "Cambiar Contraseña",
         html: `
-                    <input id="old-password" type="password" class="swal2-input" placeholder="Contraseña Antigua">
-                    <input id="new-password" type="password" class="swal2-input" placeholder="Nueva Contraseña">
-                    <input id="confirm-password" type="password" class="swal2-input" placeholder="Confirmar Nueva Contraseña">
-                `,
+            <input id="old-password" type="password" class="swal2-input" placeholder="Contraseña Antigua">
+            <input id="new-password" type="password" class="swal2-input" placeholder="Nueva Contraseña">
+            <input id="confirm-password" type="password" class="swal2-input" placeholder="Confirmar Nueva Contraseña">
+        `,
         focusConfirm: false,
         showCancelButton: true,
         cancelButtonText: 'Cancelar',
         confirmButtonText: 'Cambiar',
+        confirmButtonColor: '#12bd52', // Green color for Confirm button
+        cancelButtonColor: '#f60606', // Red color for Cancel button
         preConfirm: () => {
             const oldPassword = document.getElementById("old-password").value;
             const newPassword = document.getElementById("new-password").value;
             const confirmPassword = document.getElementById("confirm-password").value;
+
+            if (!oldPassword || !newPassword || !confirmPassword) {
+                Swal.showValidationMessage("Por favor ingrese todos los datos");
+                return false;
+            }
 
             if (newPassword !== confirmPassword) {
                 Swal.showValidationMessage("Las contraseñas no coinciden");
@@ -28,6 +35,7 @@ function openChangePasswordPopup(userId) {
         }
     });
 }
+
 function validateOldPassword(userId, oldPassword, newPassword) {
     const params = new URLSearchParams();
     params.append('userId', userId);
