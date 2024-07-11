@@ -136,7 +136,7 @@ public class IncidenciasDao extends BaseDao{
 
     public void eliminarIncidenciaPasada(int idIncidenciaPas){
 
-        String query = "DELETE FROM incidencia WHERE idEstado = 3 AND idSerenazgo = ?;";
+        String query = "DELETE FROM incidencia WHERE idEstado = 3 AND idIncidencia = ?;";
 
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)){
