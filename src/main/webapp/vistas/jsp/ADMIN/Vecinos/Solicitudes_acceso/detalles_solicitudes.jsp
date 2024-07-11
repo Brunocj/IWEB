@@ -3,6 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <% Usuario usuario=(Usuario) request.getAttribute("usuarioVer");%>
+<% String contra = (String) request.getAttribute("contra");%>
 <% int idUser =(int) request.getAttribute("id");%>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,32 +87,29 @@
 
                                 <label for="telefono" style="font-size: 12px; color: gray;">Número de Teléfono</label>
                                 <input type="text" id="telefono" value="<%=usuario.getNumContacto()%>" style="margin-bottom: 5px;background-color: rgb(241, 241, 241);">
-
-
                             </div>
 
-
+                            <label for="solicitud" style="font-size: 16px; color: rgb(5, 0, 0); padding: 5px; float:left; font-weight: bold;">Solicitud de acceso:</label>
                             <hr style="margin-top: 60px;margin-bottom: 0px; ">
 
                             <label style="color: black; float:left; cursor: pointer;">
-                                <input type="radio" name="opcion" value="aprobar" style="margin-top: 15px;cursor: pointer;" onclick="showApproveContent('<%=usuario.getNombre()%>')"> Aprobar
+                                <input type="radio" name="opcion" value="aprobar" style="margin-top: 15px;cursor: pointer;" onclick="showApproveContent('<%=usuario.getNombre()%>','<%=contra%>')"> Aprobar
                             </label>
 
                             <label style="color: black; float:left; margin-left: 20px; cursor: pointer;">
                                 <input type="radio" name="opcion" value="denegar" style="margin-left: 5px;margin-top: 15px;cursor: pointer;" onclick="showDenyContent('<%=usuario.getNombre()%>')"> Denegar
                             </label>
 
-                            //Parámetros ocultos
+
                             <input type="hidden" id="tituloCorreo" name="tituloCorreo" value="">
-
                             <input type="hidden" id="cuerpoCorreo" name="cuerpoCorreo" value="">
-
+                            <input type="hidden" id="contra" name="contra" value="<%=contra%>">
                             <br>
                             <br>
 
 
                             <a class="mdi mdi-alert-box" style="color: rgb(182, 1, 1); font-size: 20px; vertical-align: middle; float:left;"></a>
-
+                            <label for="solicitud" style="font-size: 14px; color: rgb(182, 1, 1); padding: 5px; float:left;">Deberá rellenar/modificar obligatoriamente los siguientes campos:</label>
 
                             <div class="inputs">
                                 <label for="titulo" style="font-size: 12px; color: gray; margin-top:35px;">Asunto de correo:</label>
@@ -162,12 +160,12 @@
 
         /* Funciones para que el texto cambie de acuerdo a lo indicado*/
 
-        function showApproveContent(nombreUsuario) {
+        function showApproveContent(nombreUsuario, contra) {
 
             document.getElementById("opcionSeleccionada").value = "aprobar";
 
             var tituloTexto  = "SOLICITUD ACEPTADA- Registro exitoso (Eventos- San Miguel)";
-            var cuerpoTexto= "Estimado " + nombreUsuario + ",\n\nNos complace informarte que tu solicitud de registro ha sido aceptada para los Eventos San Miguel. Agradecemos sinceramente tu interés en participar y unirte a nuestros emocionantes eventos.\nPara comenzar, aquí está tu contraseña temporal para acceder a la página: Contraseña temporal: X35&%1*DS. Recuerda que es importante mantener esta contraseña segura y cambiarla después de iniciar sesión por primera vez.\nSi tienes alguna pregunta o necesitas asistencia en cualquier momento, no dudes en contactarnos. Estamos aquí para ayudarte.\n\n¡Bienvenido a la comunidad de Eventos San Miguel!\n\nAtentamente,\nLa Administración";
+            var cuerpoTexto= "Estimado " + nombreUsuario + ",\n\nNos complace informarte que tu solicitud de registro ha sido aceptada para los Eventos San Miguel. Agradecemos sinceramente tu interés en participar y unirte a nuestros emocionantes eventos.\nPara comenzar, aquí está tu contraseña temporal para acceder a la página: Contraseña temporal: " + contra + ". Recuerda que es importante mantener esta contraseña segura y cambiarla después de iniciar sesión por primera vez.\nSi tienes alguna pregunta o necesitas asistencia en cualquier momento, no dudes en contactarnos. Estamos aquí para ayudarte.\n\n¡Bienvenido a la comunidad de Eventos San Miguel!\n\nAtentamente,\nLa Administración";
 
 
 

@@ -8,6 +8,7 @@
 <%@ page import="org.example.webappsm.model.beans.Usuario" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% Usuario usuario =(Usuario) request.getAttribute("usuarioVerCoordi");%>
+<% String contra = (String) request.getAttribute("contra");%>
 <% int idPostulacion =(int) request.getAttribute("id");%>
 <!DOCTYPE html>
 <html lang="en">
@@ -111,17 +112,19 @@
                             <hr style="margin-top: 60px;margin-bottom: 0px; ">
 
                             <label style="color: black; float:left; cursor: pointer;">
-                                <input type="radio" name="opcion" value="aprobar" style="margin-top: 15px;cursor: pointer;" onclick="showApproveContent('<%=usuario.getNombre()%>', '<%=usuario.getArea()%>')"> Aprobar
+                                <input type="radio" name="opcion" value="aprobar" style="margin-top: 15px;cursor: pointer;" onclick="showApproveContent('<%=usuario.getNombre()%>', '<%=usuario.getArea()%>', '<%=contra%>')"> Aprobar
                             </label>
 
                             <label style="color: black; float:left; margin-left: 20px; cursor: pointer;">
                                 <input type="radio" name="opcion" value="denegar" style="margin-left: 5px;margin-top: 15px;cursor: pointer;" onclick="showDenyContent('<%=usuario.getNombre()%>', '<%=usuario.getArea()%>')"> Denegar
                             </label>
-                            //Parámetros ocultos
+
+
+
+
                             <input type="hidden" id="tituloCorreo" name="tituloCorreo" value="">
-
                             <input type="hidden" id="cuerpoCorreo" name="cuerpoCorreo" value="">
-
+                            <input type="hidden" id="contra" name="contra" value="<%=contra%>">
 
 
                             <br>
@@ -180,11 +183,11 @@
 
         /* Funciones para que el texto cambie de acuerdo a lo indicado*/
 
-        function showApproveContent(nombreUsuario, area) {
+        function showApproveContent(nombreUsuario, area,contra) {
             document.getElementById("opcionSeleccionada").value = "aprobar";
 
             var tituloTexto = "SOLICITUD ACEPTADA- Solicitud para coordinación de " + area + " exitosa (Eventos- San Miguel)";
-            var cuerpoTexto = "Estimado/a " + nombreUsuario + ",\n\nNos complace informarte que tu solicitud para el rol de coordinador en " + area + " ha sido aceptada. Esperamos con entusiasmo trabajar contigo para fortalecer nuestra comunidad y llevar a cabo diversos proyectos.\n\nTu nueva contraseña para acceder al sistema es: ZAXB#17%W. Reinicia la página y cambia a una contraseña segura tan pronto como sea posible. Si tienes alguna pregunta o necesitas asistencia, no dudes en contactarnos.\nBienvenido coordinador y gracias por tu compromiso con el distrito de San Miguel.\n\nAtentamente,\nLa administración";
+            var cuerpoTexto = "Estimado/a " + nombreUsuario + ",\n\nNos complace informarte que tu solicitud para el rol de coordinador en " + area + " ha sido aceptada. Esperamos con entusiasmo trabajar contigo para fortalecer nuestra comunidad y llevar a cabo diversos proyectos.\n\nTu nueva contraseña para acceder al sistema es: " + contra + ". Reinicia la página y cambia a una contraseña segura tan pronto como sea posible. Si tienes alguna pregunta o necesitas asistencia, no dudes en contactarnos.\nBienvenido coordinador y gracias por tu compromiso con el distrito de San Miguel.\n\nAtentamente,\nLa administración";
 
             // Establecer los valores de los campos ocultos
             document.getElementById("tituloCorreo").value = tituloTexto;

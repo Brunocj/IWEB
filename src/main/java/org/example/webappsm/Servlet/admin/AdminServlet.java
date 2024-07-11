@@ -178,9 +178,11 @@ public class AdminServlet extends HttpServlet {
                 VecinosDao vecinosDao2 = new VecinosDao();
 
                 Usuario usuario = vecinosDao2.obtenerUsuarioPorId(idUsuario);
-
+                SystemDao system1= new SystemDao();
+                String nuevaContrasena1 = system1.generarContra();
                 request.setAttribute("usuarioVer", usuario);
                 request.setAttribute("id",idUsuario);
+                request.setAttribute("contra",nuevaContrasena1);
 
                 vista = "vistas/jsp/ADMIN/Vecinos/Solicitudes_acceso/detalles_solicitudes.jsp";
                 rd = request.getRequestDispatcher(vista);
@@ -193,9 +195,13 @@ public class AdminServlet extends HttpServlet {
                 VecinosDao vecinosDaoS = new VecinosDao();
 
                 Usuario usuario1 = vecinosDaoS.obtenerSolCoordiPorId(idUsuarioCoordi);
+                SystemDao system= new SystemDao();
+                // Generar la nueva contraseña (puedes ajustar esto según tus necesidades)
+                String nuevaContrasena = system.generarContra();
 
                 request.setAttribute("usuarioVerCoordi", usuario1);
                 request.setAttribute("id",idUsuarioCoordi);
+                request.setAttribute("contra",nuevaContrasena);
 
                 vista = "vistas/jsp/ADMIN/Vecinos/Postulaciones_coordinacion/detalles_postulaciones.jsp";
                 rd = request.getRequestDispatcher(vista);
@@ -392,13 +398,15 @@ public class AdminServlet extends HttpServlet {
         }else if(action.equals("opcionAcceso")){
             String opcionSeleccionada = request.getParameter("opcionSeleccionada");
             int id = Integer.parseInt(request.getParameter("idUser"));
-            SystemDao system= new SystemDao();
-            // Generar la nueva contraseña (puedes ajustar esto según tus necesidades)
-            String nuevaContrasena = system.generarContra();
+
+
             VecinosDao vecinosDao = new VecinosDao();
             Usuario usuario = vecinosDao.obtenerUsuarioPorId(id);
-            String tituloCorreo = request.getParameter("tituloCorreo"); // Recuperar el título del correo
-            String cuerpoCorreo = request.getParameter("cuerpoCorreo"); // Recuperar el cuerpo del correo
+            String tituloCorreo = request.getParameter("tituloCorreo");
+            String cuerpoCorreo = request.getParameter("cuerpoCorreo");
+            String nuevaContrasena = request.getParameter("contra");
+            System.out.println(nuevaContrasena);
+
             SystemDao daosys = new SystemDao();
             if (opcionSeleccionada.equals("aprobar")) {
                 vecinosDao.editarEstadoAprobado(id, nuevaContrasena);
@@ -415,16 +423,14 @@ public class AdminServlet extends HttpServlet {
             int idArea = Integer.parseInt(request.getParameter("idArea"));
             VecinosDao vecinosDao = new VecinosDao();
             Usuario usuario = vecinosDao.obtenerUsuarioPorId(id);
-            String tituloCorreo = request.getParameter("tituloCorreo"); // Recuperar el título del correo
-            String cuerpoCorreo = request.getParameter("cuerpoCorreo"); // Recuperar el cuerpo del correo
+            String tituloCorreo = request.getParameter("tituloCorreo");
+            String cuerpoCorreo = request.getParameter("cuerpoCorreo");
             SystemDao daosys = new SystemDao();
+            String nuevaContrasena = request.getParameter("contra");
 
-            System.out.println(tituloCorreo);
-            System.out.println(cuerpoCorreo);
 
-            SystemDao system= new SystemDao();
-            // Generar la nueva contraseña (puedes ajustar esto según tus necesidades)
-            String nuevaContrasena = system.generarContra();
+
+
 
             if (opcionSeleccionada.equals("aprobar")) {
                 vecinosDao.editarRol(id, idArea, nuevaContrasena);
