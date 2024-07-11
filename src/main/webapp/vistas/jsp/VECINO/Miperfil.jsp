@@ -13,6 +13,9 @@
     Usuario usuario = (Usuario) request.getAttribute("usuario");
 %>
 
+<%
+    String contextPath = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,6 +38,9 @@
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" />
     <!--JS para los popups-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="${pageContext.request.contextPath}/vistas/jsp/VECINO/miPerfil.js"></script>
+
 </head>
 <body>
 <div class="container-scroller">
@@ -97,7 +103,7 @@
                                 <tbody>
                                 <tr>
                                     <td><i class="mdi mdi-lock" style="font-size:25px"></i></td>
-                                    <td><a href="${pageContext.request.contextPath}/sys?action=chPass&id=<%=usuarioLogueado.getId()%>" style ="color: black;">Cambiar contraseña</a></td>
+                                    <td><a href="#" onclick="openChangePasswordPopup('<%=usuarioLogueado.getId()%>')" style="color: black;">Cambiar contraseña</a></td>
                                 </tr>
                                 <tr>
                                     <td><i class="mdi mdi-phone" style="font-size:25px"></i></td>

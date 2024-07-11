@@ -175,7 +175,35 @@ public class SystemServlet extends HttpServlet {
                 request.getRequestDispatcher("vistas/jsp/LOGIN/PhoneSuccess.jsp").forward(request,response);
 
                 break;
+
+                //CASE PARA EL CAMBIO DE CONTRASEÑA CON POPUP
+
+            case "validatePassword":
+                int userId = Integer.parseInt(request.getParameter("userId"));
+                String oldPassword = request.getParameter("oldPassword");
+                Usuario usuario1 = userDao.mostrarUsuarioID(userId);
+
+                System.out.println("Contraseña recibida: " + oldPassword);
+                System.out.println("Contraseña almacenada: " + usuario1.getContrasena());
+
+                if (usuario1.getContrasena().equals(oldPassword)) {
+                    response.getWriter().write("valid");
+                } else {
+                    response.getWriter().write("invalid");
+                }
+                break;
+
+
+            case "updatePassword":
+                int userId1 = Integer.parseInt(request.getParameter("userId"));
+                String newPassword = request.getParameter("newPassword");
+                systemDao.actualizarContra(userId1, newPassword);
+                response.getWriter().write("success");
+                break;
+
         }
+
+
 
 
 
