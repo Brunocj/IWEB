@@ -75,7 +75,7 @@
         <li class="nav-item menu-items" onclick="return mostrarPopupCerrarSesion();">
             <a class="nav-link" href="#"> <!-- Cambiar href de acuerdo a lo necesario -->
                 <span class="menu-icon">
-                <i class="mdi mdi-speedometer"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
+                <i class="mdi mdi-logout"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
                 <span class="menu-title" style="color: white;">Cerrar sesión</span>
             </a>
@@ -114,3 +114,22 @@
             </button>
         </div>
     </nav>
+
+    <script>
+        function mostrarPopupCerrarSesion() {
+            Swal.fire({
+                title: 'Cerrar sesión',
+                text: '¿Estás seguro de que deseas cerrar sesión?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#00913f',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, cerrar sesión',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "${pageContext.request.contextPath}/sys?action=logout"; //Cambiar la ubicacion del login de acuerdo a lo necesario
+                }
+            });
+        }
+    </script>
