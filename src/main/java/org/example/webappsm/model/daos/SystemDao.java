@@ -204,4 +204,42 @@ public class SystemDao extends BaseDao{
         }
     }
 
+    public boolean validarCambioContra(String correo, String documento) throws SQLException {
+        String sql ="SELECT * FROM usuario where correo = ? and nroDocumento = ?";
+        boolean exito = false;
+        try(Connection connection = this.getConnection();
+            PreparedStatement pstmt =connection.prepareStatement(sql)){
+            pstmt.setString(1,correo);
+            pstmt.setString(2,documento);
+
+            try(ResultSet rs = pstmt.executeQuery()){
+                if(rs.next()){
+                    exito = true;
+                }
+            }
+
+        }
+        return exito;
+    }
+
+    public void cambiarContra(String contra, String documento) {
+        String sql = "UPDATE usuario SET contrasena = ? WHERE nroDocumento = ?;";
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, contra);
+            pstmt.setString(2, documento);
+            int filasActualizadas = pstmt.executeUpdate();
+
+            if (filasActualizadas > 0) {
+                System.out.printf("Se cambió exitosamente la contraseña para el documento %s%n", documento);
+            } else {
+                System.out.printf("No se encontró el usuario con el documento %s%n", documento);
+            }
+
+        } catch (SQLException e) {
+            System.err.printf("Error al cambiar la contraseña para el documento %s: %s%n", documento, e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
 }

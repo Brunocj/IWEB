@@ -15,6 +15,7 @@ import org.example.webappsm.model.daos.VecinosDao;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.EventListener;
 
@@ -50,6 +51,11 @@ public class SystemServlet extends HttpServlet {
                 //Usuario usuario = userDao.mostrarUsuarioID(idUsuarioPh);
                 request.setAttribute("idUsuario", idUsuarioPh);
                 vista = "vistas/jsp/LOGIN/chPhone.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+            case "recvPass":
+                vista = "vistas/jsp/LOGIN/recvPass.jsp";
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
@@ -162,6 +168,31 @@ public class SystemServlet extends HttpServlet {
                   request.getRequestDispatcher("vistas/jsp/LOGIN/chPass.jsp").forward(request,response);
                 }
 
+                break;
+            case "recvPassPOST":
+                String dni = request.getParameter("dni");
+                String correo2 = request.getParameter("correo");
+                String asunto = "Solicitud de cambio de contraseña aceptada";
+                String nuevaContra = systemDao.generarContra();
+                String cuerpo = "Estimado usuario, su nueva contraseña es: " + nuevaContra + ". Si desea, puede cambiarla desde la página 'Mi Perfil'";
+                System.out.printf("Ingresado: " + dni + " y " + correo2);
+                try {
+                    if (systemDao.validarCambioContra(correo2, dni)) {
+                        systemDao.cambiarContra(nuevaContra, dni); // Cambia aquí el segundo parámetro a dni
+                        systemDao.enviarCorreo(correo2, asunto, cuerpo);
+                        msg = "Sus datos fueron actualizados correctamente, revise su correo";
+                        request.setAttribute("msg", msg);
+                        request.getRequestDispatcher("vistas/jsp/LOGIN/login.jsp").forward(request, response);
+                        System.out.println("se ha enviado el correo");
+
+                    } else {
+                        msg = "Ingrese correctamente sus datos";
+                        request.setAttribute("msg", msg);
+                        request.getRequestDispatcher("vistas/jsp/LOGIN/recvPass.jsp").forward(request, response);
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
                 break;
 
             case "chPhonePOST":

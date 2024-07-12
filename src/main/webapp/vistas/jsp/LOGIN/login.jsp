@@ -37,7 +37,7 @@
           <!-- Remind Passowrd -->
           <div id="formFooter">
               <p style="color: black">No tienes una cuenta? <a class="underlineHover" href="${pageContext.request.contextPath}/sys?action=register"><span>Regístrate aquí</span></a></p>
-            <p><a class="underlineHover" href="recvPass.jsp">Olvidaste tu contraseña?</a></p>
+            <p><a class="underlineHover" href="${pageContext.request.contextPath}/sys?action=recvPass">Olvidaste tu contraseña?</a></p>
           </div>
       
         </div>
