@@ -71,21 +71,21 @@
 
               <div class="opcion">
                 <label style="font-size: 18px; display: block; margin-bottom: 10px;">
-                  <input type="checkbox" name="clasificacion" value="1" style="transform: scale(1.5); vertical-align: middle;" onclick="limitarSeleccion(this)"> Leve
+                  <input type="radio" name="clasificacion" value="1" style="transform: scale(1.5); vertical-align: middle; margin-right: 5px;" onclick="limitarSeleccion(this)"> Leve
                 </label>
 
               </div>
 
               <div class="opcion">
                 <label style="font-size: 18px; display: block; margin-bottom: 10px;">
-                  <input type="checkbox" name="clasificacion" value="2" style="transform: scale(1.5); vertical-align: middle;" onclick="limitarSeleccion(this)"> Moderada
+                  <input type="radio" name="clasificacion" value="2" style="transform: scale(1.5); vertical-align: middle; margin-right: 5px;" onclick="limitarSeleccion(this)"> Moderada
                 </label>
 
               </div>
 
               <div class="opcion">
                 <label style="font-size: 18px; display: block; margin-bottom: 10px;">
-                  <input type="checkbox" name="clasificacion" value="3" style="transform: scale(1.5); vertical-align: middle;" onclick="limitarSeleccion(this)"> Grave
+                  <input type="radio" name="clasificacion" value="3" style="transform: scale(1.5); vertical-align: middle; margin-right: 5px;" onclick="limitarSeleccion(this)"> Grave
                 </label>
 
               </div>

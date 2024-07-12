@@ -99,11 +99,11 @@
                             <tbody>
                                 <tr>
                                     <td><i class="mdi mdi-lock" style="font-size:25px"></i></td>
-                                    <td><a href="#" onclick="return contra();">Cambiar contraseña</a></td>
+                                    <td><a href="#" onclick="openChangePasswordPopup('<%=usuariologueado.getId()%>')">Cambiar contraseña</a></td>
                                 </tr>
                                 <tr>
                                     <td><i class="mdi mdi-phone" style="font-size:25px"></i></td>
-                                    <td><a href="#" onclick="return telefono();">Cambiar número telefónico</a></td>
+                                    <td><a href="#" onclick="openChangePhonePopup('<%=usuariologueado.getId()%>')">Cambiar número telefónico</a></td>
                                     
                                 </tr>
                             </tbody>
@@ -165,38 +165,151 @@
             }
         });
     }
-    function telefono() {
-        Swal.fire({
-            title: 'Cambiar número de teléfono',
-            text: '¿Estás seguro de que deseas cambiar el número de teléfono?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#00913f',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, cambiar número',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = "../../LOGIN/chPhone_serenazgo.html"; //Cambiar la ubicacion del login de acuerdo a lo necesario
-            }
-        });
-    }
-    function contra() {
-        Swal.fire({
-            title: 'Cambiar contraseña',
-            text: '¿Estás seguro de que deseas cambiar la contraseña?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#00913f',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, cambiar contraseña',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = "../../LOGIN/chPass_serenazgo.html"; //Cambiar la ubicacion del login de acuerdo a lo necesario
-            }
-        });
-    }
+      function openChangePasswordPopup(userId) {
+          Swal.fire({
+              title: "Cambiar Contraseña",
+              html: `
+            <input id="old-password" type="password" class="swal2-input" placeholder="Contraseña Antigua">
+            <input id="new-password" type="password" class="swal2-input" placeholder="Nueva Contraseña">
+            <input id="confirm-password" type="password" class="swal2-input" placeholder="Confirmar Nueva Contraseña">
+        `,
+              focusConfirm: false,
+              showCancelButton: true,
+              cancelButtonText: 'Cancelar',
+              confirmButtonText: 'Cambiar',
+              confirmButtonColor: '#12bd52', // Green color for Confirm button
+              cancelButtonColor: '#f60606', // Red color for Cancel button
+              preConfirm: () => {
+                  const oldPassword = document.getElementById("old-password").value;
+                  const newPassword = document.getElementById("new-password").value;
+                  const confirmPassword = document.getElementById("confirm-password").value;
+
+                  if (!oldPassword || !newPassword || !confirmPassword) {
+                      Swal.showValidationMessage("Por favor ingrese todos los datos");
+                      return false;
+                  }
+
+                  if (newPassword !== confirmPassword) {
+                      Swal.showValidationMessage("Las contraseñas no coinciden");
+                      return false;
+                  }
+
+                  return { oldPassword, newPassword };
+              }
+          }).then((result) => {
+              if (result.isConfirmed) {
+                  validateOldPassword(userId, result.value.oldPassword, result.value.newPassword);
+              }
+          });
+      }
+
+      function validateOldPassword(userId, oldPassword, newPassword) {
+          const params = new URLSearchParams();
+          params.append('userId', userId);
+          params.append('oldPassword', oldPassword);
+
+          const contextPath = window.location.pathname.split('/')[1]; // Obtener el contexto
+
+          fetch(`/${contextPath}/sys?action=validatePassword`, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              body: params.toString()
+          })
+              .then(response => response.text())
+              .then(data => {
+                  if (data === "valid") {
+                      updatePassword(userId, newPassword);
+                  } else {
+                      Swal.fire('Error', 'La contraseña antigua es incorrecta', 'error');
+                  }
+              })
+              .catch(error => {
+                  Swal.fire('Error', 'Hubo un problema al validar la contraseña antigua', 'error');
+              });
+      }
+
+      function openChangePhonePopup(userId) {
+          Swal.fire({
+              title: "Cambiar Número de Teléfono",
+              html: `
+            <input id="old-phoneNumber" type="tel" class="swal2-input" placeholder="Número Antiguo">
+            <input id="new-phoneNumber" type="tel" class="swal2-input" placeholder="Nuevo Número">
+        `,
+              focusConfirm: false,
+              showCancelButton: true,
+              cancelButtonText: 'Cancelar',
+              confirmButtonText: 'Cambiar',
+              confirmButtonColor: '#12bd52', // Green color for Confirm button
+              cancelButtonColor: '#f60606', // Red color for Cancel button
+              preConfirm: () => {
+                  const oldPhNumber = document.getElementById("old-phoneNumber").value;
+                  const newPhNumber = document.getElementById("new-phoneNumber").value;
+
+                  if (!oldPhNumber || !newPhNumber) {
+                      Swal.showValidationMessage("Por favor ingrese todos los datos");
+                  }   return { oldPhNumber, newPhNumber };
+              }
+          }).then((result) => {
+              if (result.isConfirmed) {
+                  validateOldPhNumber(userId, result.value.oldPhNumber, result.value.newPhNumber);
+              }
+          });
+      }
+      function validateOldPhNumber(userId, oldPhNumber, newPhNumber) {
+          const params = new URLSearchParams();
+          params.append('userId', userId);
+          params.append('oldPhNumber', oldPhNumber);
+
+          const contextPath = window.location.pathname.split('/')[1]; // Obtener el contexto
+
+          fetch(`/${contextPath}/sys?action=validateNumber`, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              body: params.toString()
+          })
+              .then(response => response.text())
+              .then(data => {
+                  if (data === "valid") {
+                      updatePhNumber(userId, newPhNumber);
+                  } else {
+                      Swal.fire('Error', 'El número de contacto antiguo es incorrecto', 'error');
+                  }
+              })
+              .catch(error => {
+                  Swal.fire('Error', 'Hubo un problema al validar el número antiguo', 'error');
+              });
+      }
+
+      function updatePhNumber(userId, newPhNumber) {
+          const params = new URLSearchParams();
+          params.append('userId', userId);
+          params.append('newPhNumber', newPhNumber);
+
+          const contextPath = window.location.pathname.split('/')[1]; // Obtener el contexto
+
+          fetch(`/${contextPath}/sys?action=updateNumber`, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              body: params.toString()
+          })
+              .then(response => response.text())
+              .then(data => {
+                  if (data === "success") {
+                      Swal.fire('Éxito', 'El número de teléfono ha sido actualizado', 'success');
+                  } else {
+                      Swal.fire('Error', 'Hubo un problema al actualizar el número de teléfono', 'error');
+                  }
+              })
+              .catch(error => {
+                  Swal.fire('Error', 'Hubo un problema al actualizar el número de teléfono', 'error');
+              });
+      }
 
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
