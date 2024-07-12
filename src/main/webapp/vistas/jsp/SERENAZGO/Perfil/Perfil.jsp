@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%@ page import ="org.example.webappsm.model.beans.Usuario" %>
+<%Usuario usuariologueado = (Usuario) session.getAttribute("usuarioLogueado");%>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -34,13 +37,13 @@
     if (userRole == null) {
       userRole = "Serenazgo"; // Por defecto, si no hay rol en la sesión
     }
-    String menuadmin = "/vistas/jsp/Utilidades/menu_" + userRole + ".jsp";
+    String menuserenazgo = "/vistas/jsp/Utilidades/menu_" + userRole + ".jsp";
   %>
 
 
-        <jsp:include page="<%= menuadmin %>">
-            <jsp:param name="activePage" value="perfil"/>
-        </jsp:include>
+    <jsp:include page="<%= menuserenazgo %>">
+        <jsp:param name="activePage" value="perfil"/>
+    </jsp:include>
 
         <!-- partial -->
         <div class="main-panel">
@@ -61,27 +64,27 @@
                                 <tr>
                                     <td>Nombre(s)</td>
                                     <td>:</td>
-                                    <td>Ricardo </td>
+                                    <td><%= usuariologueado.getNombre() %> </td>
                                 </tr>
                                 <tr>
                                     <td>Apellidos</td>
                                     <td>:</td>
-                                    <td>Calderón Rodríguez</td>
+                                    <td><%= usuariologueado.getApellido() %> </td>
                                 </tr>
                                 <tr>
                                     <td>Correo</td>
                                     <td>:</td>
-                                    <td>calderon.thanos@gmail.com</td>
+                                    <td><%= usuariologueado.getCorreoE() %> </td>
                                 </tr>
                                 <tr>
                                     <td>DNI</td>
                                     <td>:</td>
-                                    <td>71627121</td>
+                                    <td><%= usuariologueado.getDocumento() %> </td>
                                 </tr>
                                 <tr>
                                     <td>Número telefónico</td>
                                     <td>:</td>
-                                    <td>952530495</td>
+                                    <td><%= usuariologueado.getNumContacto() %> </td>
                                 </tr>
                                 
                             </tbody>
