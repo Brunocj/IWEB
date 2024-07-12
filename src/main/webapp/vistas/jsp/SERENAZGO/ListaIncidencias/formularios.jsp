@@ -187,7 +187,7 @@
           <div class ="opcion">
             <div>
               <label>
-                <input type="checkbox" name="opcion" value="bomberos"> Bomberos
+                <input type="checkbox" name="bomberos" value="bomberos"> Bomberos
               </label>
 
 
@@ -204,7 +204,7 @@
 
       <div class="opcion descripcion-container">
         <label for="descripcion">Ingrese una breve descripción de la solución a dar:</label>
-        <textarea id="descripcion" name="descripcion" placeholder="Ingrese aquí la descripción (Opcional)" required></textarea>
+        <textarea id="descripcion" name="descripcion" placeholder="Ingrese aquí la descripción" required></textarea>
       </div>
 
 
@@ -297,7 +297,7 @@
     if (!clasificacionSeleccionada) {
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
+        title: 'Error',
         text: 'Por favor, clasifique la incidencia antes de confirmar.'
       });
       return false; // Evitar que el formulario se envíe si no hay clasificación seleccionada
@@ -307,8 +307,8 @@
     if (descripcion === '') {
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
-        text: 'Por favor, complete todos los campos antes de confirmar.'
+        title: 'Error',
+        text: 'Por favor, rellene el campo de la descripción.'
       });
       return false; // Evitar que el formulario se envíe si falta la descripción
     }

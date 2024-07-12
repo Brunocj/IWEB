@@ -51,7 +51,7 @@
 
             <!-- partial -->
                 <div class="main-panel">
-                    <div class="content-wrapper" style ="background-color: #d6e9ff;"> <!--Cambiar al color mas claro-->
+                    <div class="content-wrapper" style ="background-color: #fffff6;"> <!--Cambiar al color mas claro-->
                         <!--CONTENIDO-->
                         <div class="card" style="background-color: white; color: black;">
                             <h2 style="color: black;">Información de la incidencia:</h2>

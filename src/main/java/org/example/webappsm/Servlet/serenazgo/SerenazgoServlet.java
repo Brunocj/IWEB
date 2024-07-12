@@ -338,6 +338,10 @@ public class SerenazgoServlet extends HttpServlet {
                 serenazgoDao.setNecesitaBombero(idIncidencia, bomberos);
                 System.out.println("Se solicitó bomberos");
             }
+            String descripcion = request.getParameter("descripcion");
+
+            serenazgoDao.setDescripcion(idIncidencia, descripcion);
+
             incidenciasDao.incidenciaEnProceso(idIncidencia);
             response.sendRedirect(request.getContextPath() + "/Serenazgo?action=listaIncidencias");
         }else{
