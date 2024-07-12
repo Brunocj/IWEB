@@ -231,21 +231,7 @@ public class SystemServlet extends HttpServlet {
                 systemDao.actualizarContra(userId1, newPassword);
                 response.getWriter().write("success");
                 break;
-            case "validateNumber":
-                int userIdN = Integer.parseInt(request.getParameter("userId"));
-                String oldPhNumber = request.getParameter("oldPhNumber");
-                Usuario usuarioN = userDao.mostrarUsuarioID(userIdN);
-
-                System.out.println("Contraseña recibida: " + oldPhNumber);
-                System.out.println("Contraseña almacenada: " + usuarioN.getContrasena());
-
-                if (usuarioN.getContrasena().equals(oldPhNumber)) {
-                    response.getWriter().write("valid");
-                } else {
-                    response.getWriter().write("invalid");
-                }
-                break;
-            case "updatePhNumber":
+            case "updateNumber":
                 int userId2 = Integer.parseInt(request.getParameter("userId"));
                 String newPhNumber = request.getParameter("newPhNumber");
                 systemDao.actualizarTelefono(userId2, newPhNumber);

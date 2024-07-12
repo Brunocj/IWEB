@@ -229,69 +229,14 @@
                   Swal.fire('Error', 'Hubo un problema al validar la contraseña antigua', 'error');
               });
       }
-
-      function openChangePhonePopup(userId) {
-          Swal.fire({
-              title: "Cambiar Número de Teléfono",
-              html: `
-            <input id="old-phoneNumber" type="tel" class="swal2-input" placeholder="Número Antiguo">
-            <input id="new-phoneNumber" type="tel" class="swal2-input" placeholder="Nuevo Número">
-        `,
-              focusConfirm: false,
-              showCancelButton: true,
-              cancelButtonText: 'Cancelar',
-              confirmButtonText: 'Cambiar',
-              confirmButtonColor: '#12bd52', // Green color for Confirm button
-              cancelButtonColor: '#f60606', // Red color for Cancel button
-              preConfirm: () => {
-                  const oldPhNumber = document.getElementById("old-phoneNumber").value;
-                  const newPhNumber = document.getElementById("new-phoneNumber").value;
-
-                  if (!oldPhNumber || !newPhNumber) {
-                      Swal.showValidationMessage("Por favor ingrese todos los datos");
-                  }   return { oldPhNumber, newPhNumber };
-              }
-          }).then((result) => {
-              if (result.isConfirmed) {
-                  validateOldPhNumber(userId, result.value.oldPhNumber, result.value.newPhNumber);
-              }
-          });
-      }
-      function validateOldPhNumber(userId, oldPhNumber, newPhNumber) {
+      function updatePassword(userId, newPassword) {
           const params = new URLSearchParams();
           params.append('userId', userId);
-          params.append('oldPhNumber', oldPhNumber);
+          params.append('newPassword', newPassword);
 
           const contextPath = window.location.pathname.split('/')[1]; // Obtener el contexto
 
-          fetch(`/${contextPath}/sys?action=validateNumber`, {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/x-www-form-urlencoded'
-              },
-              body: params.toString()
-          })
-              .then(response => response.text())
-              .then(data => {
-                  if (data === "valid") {
-                      updatePhNumber(userId, newPhNumber);
-                  } else {
-                      Swal.fire('Error', 'El número de contacto antiguo es incorrecto', 'error');
-                  }
-              })
-              .catch(error => {
-                  Swal.fire('Error', 'Hubo un problema al validar el número antiguo', 'error');
-              });
-      }
-
-      function updatePhNumber(userId, newPhNumber) {
-          const params = new URLSearchParams();
-          params.append('userId', userId);
-          params.append('newPhNumber', newPhNumber);
-
-          const contextPath = window.location.pathname.split('/')[1]; // Obtener el contexto
-
-          fetch(`/${contextPath}/sys?action=updateNumber`, {
+          fetch(`/${contextPath}/sys?action=updatePassword`, {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/x-www-form-urlencoded'
@@ -301,12 +246,84 @@
               .then(response => response.text())
               .then(data => {
                   if (data === "success") {
+                      Swal.fire('Éxito', 'La contraseña ha sido cambiada', 'success');
+                  } else {
+                      Swal.fire('Error', 'No se pudo cambiar la contraseña', 'error');
+                  }
+              })
+              .catch(error => {
+                  Swal.fire('Error', 'Hubo un problema al cambiar la contraseña', 'error');
+              });
+      }
+
+      function openChangePhonePopup(userId) {
+          Swal.fire({
+              title: "Cambiar Número de Teléfono",
+              html: `
+            <input id="new-phoneNumber" type="tel" class="swal2-input" placeholder="Nuevo Número">
+            <input id="confirm-phoneNumber" type="tel" class="swal2-input" placeholder="Confirmar Nuevo Número">
+        `,
+              focusConfirm: false,
+              showCancelButton: true,
+              cancelButtonText: 'Cancelar',
+              confirmButtonText: 'Cambiar',
+              confirmButtonColor: '#12bd52', // Green color for Confirm button
+              cancelButtonColor: '#f60606', // Red color for Cancel button
+              preConfirm: () => {
+                  const newPhNumber = document.getElementById("new-phoneNumber").value;
+                  const confirmPhNumber = document.getElementById("confirm-phoneNumber").value;
+
+                  if (!newPhNumber || !confirmPhNumber) {
+                      Swal.showValidationMessage("Por favor ingrese todos los datos");
+                      return false; // Prevents the pop-up from closing
+                  } else if (newPhNumber !== confirmPhNumber) {
+                      Swal.showValidationMessage("Los números no coinciden");
+                      return false; // Prevents the pop-up from closing
+                  } else if (!/^\d+$/.test(newPhNumber)) {
+                      Swal.showValidationMessage("Por favor ingrese solo números");
+                      return false; // Prevents the pop-up from closing
+                  }
+
+                  return { newPhNumber };
+              }
+          }).then((result) => {
+              if (result.isConfirmed) {
+                  updatePhNumber(userId, result.value.newPhNumber);
+              }
+          });
+      }
+
+      function updatePhNumber(userId, newPhNumber) {
+          console.log("Updating phone number:", userId, newPhNumber);
+
+          const params = new URLSearchParams();
+          params.append('userId', userId);
+          params.append('newPhNumber', newPhNumber);
+
+          const contextPath = window.location.pathname.split('/')[1]; // Obtener el contexto
+          console.log("Context path:", contextPath);
+
+          fetch(`/${contextPath}/sys?action=updateNumber`, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              body: params.toString()
+          })
+              .then(response => {
+                  console.log("Response status:", response.status);
+                  return response.text();
+              })
+              .then(data => {
+                  console.log("Response data:", data);
+                  if (data === "success") {
                       Swal.fire('Éxito', 'El número de teléfono ha sido actualizado', 'success');
                   } else {
                       Swal.fire('Error', 'Hubo un problema al actualizar el número de teléfono', 'error');
                   }
               })
               .catch(error => {
+                  console.error("Fetch error:", error);
                   Swal.fire('Error', 'Hubo un problema al actualizar el número de teléfono', 'error');
               });
       }
