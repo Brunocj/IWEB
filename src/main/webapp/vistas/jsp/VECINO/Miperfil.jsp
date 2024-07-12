@@ -103,11 +103,13 @@
                                 <tbody>
                                 <tr>
                                     <td><i class="mdi mdi-lock" style="font-size:25px"></i></td>
-                                    <td><a href="#" onclick="openChangePasswordPopup('<%=usuarioLogueado.getId()%>')" style="color: black;">Cambiar contraseña</a></td>
+                                    <td><a href="#" onclick="openChangePasswordPopup('<%=usuarioLogueado.getId()%>')">Cambiar contraseña</a></td>
+
                                 </tr>
                                 <tr>
                                     <td><i class="mdi mdi-phone" style="font-size:25px"></i></td>
-                                    <td><a href="${pageContext.request.contextPath}/sys?action=chPhone&id=<%=usuarioLogueado.getId()%>" style ="color: black;">Cambiar número telefónico</a></td>
+                                    <td><a href="#" onclick="openChangePhonePopup('<%=usuarioLogueado.getId()%>')">Cambiar número telefónico</a></td>
+
                                 </tr>
                                 </tbody>
                             </table>

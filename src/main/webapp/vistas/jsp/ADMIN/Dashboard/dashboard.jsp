@@ -112,7 +112,7 @@
 
                                                 <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
                                                     <div class="card-shadow">
-                                                        <div class="card1" style="border-radius: 15px; overflow: hidden; background: linear-gradient(109deg, #a780ef, #b65959); color: #fff;">
+                                                        <div class="card1" style="border-radius: 15px; overflow: hidden; background: linear-gradient(135deg, #FFB3BA, #FFDFBA); color: #fff;">
                                                             <div class="card-header" style="padding: 0;">
                                                                 <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/promedios1.png" alt="header image" style="width: 100%; height: 210px; object-fit: cover;">
                                                             </div>
@@ -132,7 +132,7 @@
 
 
                                                 <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                                                    <div class="card1" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; background:linear-gradient(332deg, #94cdde, #0173ff); color: #fff;">
+                                                    <div class="card1" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; background: linear-gradient(135deg, #FFDFBA, #FFFFBA); color: #fff;">
                                                         <div class="card-header" style="padding: 0;">
                                                             <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/promedio2.png" alt="header image" style="width: 100%; height: 210px; object-fit: cover;">
                                                         </div>
@@ -155,7 +155,7 @@
 
 
                                                 <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                                                    <div class="card1" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; background: linear-gradient(270deg, #f39c12, #e74c3c); color: #fff;">
+                                                    <div class="card1" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; background: linear-gradient(135deg, #FFFFBA, #BAFFC9); color: #fff;">
                                                         <div class="card-header" style="padding: 0;">
                                                             <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/urbanizacion2.jpg" alt="header image" style="width: 100%; height: 210px; object-fit: cover;">
                                                         </div>
@@ -185,7 +185,7 @@
 
 
                                                 <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                                                    <div class="card1" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; background: linear-gradient(270deg, #3498db, #2ecc71); color: #fff;">
+                                                    <div class="card1" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;background: linear-gradient(135deg, #FFB3FF, #FFD1DC); color: #fff;">
                                                         <div class="card-header" style="padding: 0;">
                                                             <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/urbanizacion1.jpg" alt="header image" style="width: 100%; height: 210px; object-fit: cover;">
                                                         </div>
@@ -221,7 +221,7 @@
 
 
                                                 <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                                                    <div class="card1" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; background: linear-gradient(103deg, #ccef09, #378f51); color: #fff;">
+                                                    <div class="card1" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;  background: linear-gradient(135deg, #FFB347, #FFDFBA);color: #fff;">
                                                         <div class="card-header" style="padding: 0;">
                                                             <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/incidenciaAtender.jpg" alt="header image" style="width: 100%; height: 210px; object-fit: cover;">
                                                         </div>
@@ -241,7 +241,7 @@
                                                 </div>
 
                                                 <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                                                    <div class="card1" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; background: linear-gradient(177deg, #00017d, #8e44ad); color: #fff;">
+                                                    <div class="card1" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; background: linear-gradient(135deg, #FFD1DC, #FFB3BA); color: #fff;">
                                                         <div class="card-header" style="padding: 0;">
                                                             <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/incidenciaComun.jpg" alt="header image" style="width: 100%; height: 210px; object-fit: cover;">
                                                         </div>
@@ -261,7 +261,7 @@
                                                 </div>
 
                                                 <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                                                    <div class="card1" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; background: linear-gradient(135deg, #2822e6, #f29500); color: #fff;">
+                                                    <div class="card1" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; background: linear-gradient(135deg, #C3B1E1, #BAE1FF); color: #fff;">
                                                         <div class="card-header" style="padding: 0;">
                                                             <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/sancionados2.jpg" alt="header image" style="width: 100%; height: 210px; object-fit: cover;">
                                                         </div>
@@ -282,7 +282,7 @@
 
 
                                                 <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                                                    <div class="card1" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; background: linear-gradient(155deg, #ff1800, #b519ab); color: #fff;">
+                                                    <div class="card1" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; background: linear-gradient(135deg, #FFB3FF, #FFD1DC); color: #fff;">
                                                         <div class="card-header" style="padding: 0;">
                                                             <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/sancionados.jpg" alt="header image" style="width: 100%; height: 210px; object-fit: cover;">
                                                         </div>
@@ -306,7 +306,7 @@
 
                                             <div class="row">
                                                 <div class="col-lg-6 grid-margin stretch-card">
-                                                    <div class="card" style="background: linear-gradient(135deg, #5d3400, #e9bb5d, white);">
+                                                    <div class="card" style="background: linear-gradient(135deg, #B0EACD, #C9FFCF);">
                                                         <div class="card-body">
                                                             <h2 class="card-title text-center" style="color: #000000;">Tipos de incidencias reportadas</h2>
                                                             <canvas id="barChart" style="height:230px"></canvas>
@@ -315,7 +315,7 @@
                                                 </div>
 
                                                 <div class="col-lg-6 grid-margin stretch-card">
-                                                    <div class="card" style="background:linear-gradient(210deg, #046800, #77c741, white);">
+                                                    <div class="card" style="background: linear-gradient(135deg, #B2F0E8, #BAE1FF);">
                                                         <div class="card-body">
                                                             <h2 class="card-title text-center" style="color: #000000">Cantidad de incidencias</h2>
                                                             <canvas id="areachartMulti" style="height:250px"></canvas>
@@ -326,7 +326,7 @@
 
                                             <div class="row">
                                                 <div class="col-lg-6 grid-margin stretch-card">
-                                                    <div class="card" style="background: linear-gradient(22deg, #450000, #df1069, white);">
+                                                    <div class="card" style="background: linear-gradient(135deg, #FFC4E1, #FFD1DC);">
                                                         <div class="card-body">
                                                             <h2 class="card-title text-center" style="color: #000000">Distribución de incidencias</h2>
                                                             <canvas id="doughnutChart" style="height:250px"></canvas>
@@ -335,7 +335,7 @@
                                                 </div>
 
                                                 <div class="col-lg-6 grid-margin stretch-card">
-                                                    <div class="card" style="background: linear-gradient(331deg, #00c0f6, #cfd629, white);">
+                                                    <div class="card" style="background: linear-gradient(139deg, #b398f6, #eedecc);">
                                                         <div class="card-body">
                                                             <h2 class="card-title text-center" style="color: #000000">Cantidad de incidencias por urbanizacion</h2>
                                                             <canvas id="barChart2" style="height:230px"></canvas>
