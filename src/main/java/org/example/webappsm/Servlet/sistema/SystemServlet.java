@@ -231,6 +231,7 @@ public class SystemServlet extends HttpServlet {
                 systemDao.actualizarContra(userId1, newPassword);
                 response.getWriter().write("success");
                 break;
+
             case "updateNumber":
                 int userId2 = Integer.parseInt(request.getParameter("userId"));
                 String newPhNumber = request.getParameter("newPhNumber");

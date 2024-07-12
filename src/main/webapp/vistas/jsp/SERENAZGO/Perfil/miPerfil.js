@@ -1,3 +1,19 @@
+function mostrarPopupCerrarSesion() {
+    Swal.fire({
+        title: 'Cerrar sesión',
+        text: '¿Estás seguro de que deseas cerrar sesión?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#00913f',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, cerrar sesión',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "../../LOGIN/login.html"; //Cambiar la ubicacion del login de acuerdo a lo necesario
+        }
+    });
+}
 function openChangePasswordPopup(userId) {
     Swal.fire({
         title: "Cambiar Contraseña",
@@ -62,14 +78,6 @@ function validateOldPassword(userId, oldPassword, newPassword) {
             Swal.fire('Error', 'Hubo un problema al validar la contraseña antigua', 'error');
         });
 }
-
-
-
-
-
-
-
-
 function updatePassword(userId, newPassword) {
     const params = new URLSearchParams();
     params.append('userId', userId);
@@ -96,8 +104,6 @@ function updatePassword(userId, newPassword) {
             Swal.fire('Error', 'Hubo un problema al cambiar la contraseña', 'error');
         });
 }
-
-
 
 function openChangePhonePopup(userId) {
     Swal.fire({
@@ -170,4 +176,3 @@ function updatePhNumber(userId, newPhNumber) {
             Swal.fire('Error', 'Hubo un problema al actualizar el número de teléfono', 'error');
         });
 }
-

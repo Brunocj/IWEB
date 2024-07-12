@@ -11,12 +11,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Pagina en blanco</title>
     <!-- plugins:css -->
-      <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/SERENAZGO/ListaIncidencias/styles_tabla.css">
+      <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/SERENAZGO/Perfil/styles_Perfil.css">
       <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/mdi/css/materialdesignicons.min.css">
       <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/SERENAZGO/Perfil/styles_Perfil.css">
-    
-    <!-- endinject -->
+      <script src="${pageContext.request.contextPath}/vistas/jsp/SERENAZGO/Perfil/miPerfil.js"></script>
+
+      <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End Plugin css for this page -->
     <!-- inject:css -->
@@ -26,7 +26,10 @@
       <!-- End layout styles -->
       <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" />
     <!--JS para los popups-->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+
   </head>
   <body>
     <div class="container-scroller">
@@ -45,16 +48,12 @@
         <jsp:param name="activePage" value="perfil"/>
     </jsp:include>
 
+
+
         <!-- partial -->
         <div class="main-panel">
             <div class="content-wrapper" style ="background-color: #fffff6;margin-top: -30px"> <!--Cambiar al color mas claro-->
-            <!--CONTENIDO-->  
-        </div>
-        
-        
-
-        <div class="container">
-            <div class="card">
+            <!--CONTENIDO-->
               <div class="main-table">
                 <h2>Datos personales:</h2>
                 <div class="card-table">
@@ -114,225 +113,30 @@
             </div>
 
 
+            </div>
+            <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
     <!-- container-scroller -->
     <!-- plugins:js -->
-    <script src="../../../../assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <!-- End plugin js for this page -->
     <!-- inject:js -->
-    <script src="../../../../assets/js/off-canvas.js"></script>
-    <script src="../../../../assets/js/hoverable-collapse.js"></script>
-    <script src="../../../../assets/js/misc.js"></script>
-    <script src="../../../../assets/js/settings.js"></script>
-    <script src="../../../../assets/js/todolist.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
-    <script>
-      function mostrarPopupCerrarSesion() {
-        Swal.fire({
-            title: 'Cerrar sesión',
-            text: '¿Estás seguro de que deseas cerrar sesión?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#00913f',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, cerrar sesión',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = "../../LOGIN/login.html"; //Cambiar la ubicacion del login de acuerdo a lo necesario
-            }
-        });
-    }
-      function openChangePasswordPopup(userId) {
-          Swal.fire({
-              title: "Cambiar Contraseña",
-              html: `
-            <input id="old-password" type="password" class="swal2-input" placeholder="Contraseña Antigua">
-            <input id="new-password" type="password" class="swal2-input" placeholder="Nueva Contraseña">
-            <input id="confirm-password" type="password" class="swal2-input" placeholder="Confirmar Nueva Contraseña">
-        `,
-              focusConfirm: false,
-              showCancelButton: true,
-              cancelButtonText: 'Cancelar',
-              confirmButtonText: 'Cambiar',
-              confirmButtonColor: '#12bd52', // Green color for Confirm button
-              cancelButtonColor: '#f60606', // Red color for Cancel button
-              preConfirm: () => {
-                  const oldPassword = document.getElementById("old-password").value;
-                  const newPassword = document.getElementById("new-password").value;
-                  const confirmPassword = document.getElementById("confirm-password").value;
 
-                  if (!oldPassword || !newPassword || !confirmPassword) {
-                      Swal.showValidationMessage("Por favor ingrese todos los datos");
-                      return false;
-                  }
-
-                  if (newPassword !== confirmPassword) {
-                      Swal.showValidationMessage("Las contraseñas no coinciden");
-                      return false;
-                  }
-
-                  return { oldPassword, newPassword };
-              }
-          }).then((result) => {
-              if (result.isConfirmed) {
-                  validateOldPassword(userId, result.value.oldPassword, result.value.newPassword);
-              }
-          });
-      }
-
-      function validateOldPassword(userId, oldPassword, newPassword) {
-          const params = new URLSearchParams();
-          params.append('userId', userId);
-          params.append('oldPassword', oldPassword);
-
-          const contextPath = window.location.pathname.split('/')[1]; // Obtener el contexto
-
-          fetch(`/${contextPath}/sys?action=validatePassword`, {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/x-www-form-urlencoded'
-              },
-              body: params.toString()
-          })
-              .then(response => response.text())
-              .then(data => {
-                  if (data === "valid") {
-                      updatePassword(userId, newPassword);
-                  } else {
-                      Swal.fire('Error', 'La contraseña antigua es incorrecta', 'error');
-                  }
-              })
-              .catch(error => {
-                  Swal.fire('Error', 'Hubo un problema al validar la contraseña antigua', 'error');
-              });
-      }
-      function updatePassword(userId, newPassword) {
-          const params = new URLSearchParams();
-          params.append('userId', userId);
-          params.append('newPassword', newPassword);
-
-          const contextPath = window.location.pathname.split('/')[1]; // Obtener el contexto
-
-          fetch(`/${contextPath}/sys?action=updatePassword`, {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/x-www-form-urlencoded'
-              },
-              body: params.toString()
-          })
-              .then(response => response.text())
-              .then(data => {
-                  if (data === "success") {
-                      Swal.fire('Éxito', 'La contraseña ha sido cambiada', 'success');
-                  } else {
-                      Swal.fire('Error', 'No se pudo cambiar la contraseña', 'error');
-                  }
-              })
-              .catch(error => {
-                  Swal.fire('Error', 'Hubo un problema al cambiar la contraseña', 'error');
-              });
-      }
-
-      function openChangePhonePopup(userId) {
-          Swal.fire({
-              title: "Cambiar Número de Teléfono",
-              html: `
-            <input id="new-phoneNumber" type="tel" class="swal2-input" placeholder="Nuevo Número">
-            <input id="confirm-phoneNumber" type="tel" class="swal2-input" placeholder="Confirmar Nuevo Número">
-        `,
-              focusConfirm: false,
-              showCancelButton: true,
-              cancelButtonText: 'Cancelar',
-              confirmButtonText: 'Cambiar',
-              confirmButtonColor: '#12bd52', // Green color for Confirm button
-              cancelButtonColor: '#f60606', // Red color for Cancel button
-              preConfirm: () => {
-                  const newPhNumber = document.getElementById("new-phoneNumber").value;
-                  const confirmPhNumber = document.getElementById("confirm-phoneNumber").value;
-
-                  if (!newPhNumber || !confirmPhNumber) {
-                      Swal.showValidationMessage("Por favor ingrese todos los datos");
-                      return false; // Prevents the pop-up from closing
-                  } else if (newPhNumber !== confirmPhNumber) {
-                      Swal.showValidationMessage("Los números no coinciden");
-                      return false; // Prevents the pop-up from closing
-                  } else if (!/^\d+$/.test(newPhNumber)) {
-                      Swal.showValidationMessage("Por favor ingrese solo números");
-                      return false; // Prevents the pop-up from closing
-                  }
-
-                  return { newPhNumber };
-              }
-          }).then((result) => {
-              if (result.isConfirmed) {
-                  updatePhNumber(userId, result.value.newPhNumber);
-              }
-          });
-      }
-
-      function updatePhNumber(userId, newPhNumber) {
-          console.log("Updating phone number:", userId, newPhNumber);
-
-          const params = new URLSearchParams();
-          params.append('userId', userId);
-          params.append('newPhNumber', newPhNumber);
-
-          const contextPath = window.location.pathname.split('/')[1]; // Obtener el contexto
-          console.log("Context path:", contextPath);
-
-          fetch(`/${contextPath}/sys?action=updateNumber`, {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/x-www-form-urlencoded'
-              },
-              body: params.toString()
-          })
-              .then(response => {
-                  console.log("Response status:", response.status);
-                  return response.text();
-              })
-              .then(data => {
-                  console.log("Response data:", data);
-                  if (data === "success") {
-                      Swal.fire('Éxito', 'El número de teléfono ha sido actualizado', 'success');
-                  } else {
-                      Swal.fire('Error', 'Hubo un problema al actualizar el número de teléfono', 'error');
-                  }
-              })
-              .catch(error => {
-                  console.error("Fetch error:", error);
-                  Swal.fire('Error', 'Hubo un problema al actualizar el número de teléfono', 'error');
-              });
-      }
-
-    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script src = "script_tabla.js"></script>
-    <script src="cancelaciones.js"></script>
+
     <!-- End custom js for this page -->
   </body>
 </html>
