@@ -28,6 +28,8 @@
     String porcentajesJSON = new Gson().toJson(porcentajes);
 
 %>
+<%@ page import ="org.example.webappsm.model.beans.Usuario" %>
+<%Usuario usuariologueado = (Usuario) session.getAttribute("usuarioLogueado");%>
 
 <!DOCTYPE html>
 <html lang="en">

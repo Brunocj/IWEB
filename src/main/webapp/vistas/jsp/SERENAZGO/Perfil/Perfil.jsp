@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%@ page import ="org.example.webappsm.model.beans.Usuario" %>
+<%Usuario usuariologueado = (Usuario) session.getAttribute("usuarioLogueado");%>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -61,27 +64,27 @@
                                 <tr>
                                     <td>Nombre(s)</td>
                                     <td>:</td>
-                                    <td>Ricardo </td>
+                                    <td><%= usuariologueado.getNombre() %> </td>
                                 </tr>
                                 <tr>
                                     <td>Apellidos</td>
                                     <td>:</td>
-                                    <td>Calderón Rodríguez</td>
+                                    <td><%= usuariologueado.getApellido() %> </td>
                                 </tr>
                                 <tr>
                                     <td>Correo</td>
                                     <td>:</td>
-                                    <td>calderon.thanos@gmail.com</td>
+                                    <td><%= usuariologueado.getCorreoE() %> </td>
                                 </tr>
                                 <tr>
                                     <td>DNI</td>
                                     <td>:</td>
-                                    <td>71627121</td>
+                                    <td><%= usuariologueado.getDocumento() %> </td>
                                 </tr>
                                 <tr>
                                     <td>Número telefónico</td>
                                     <td>:</td>
-                                    <td>952530495</td>
+                                    <td><%= usuariologueado.getNumContacto() %> </td>
                                 </tr>
                                 
                             </tbody>

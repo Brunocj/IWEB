@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%@ page import ="org.example.webappsm.model.beans.Usuario" %>
+<%Usuario usuariologueado = (Usuario) session.getAttribute("usuarioLogueado");%>
+
 <%
     int idProvisional = 10; //CAMBIAR ESTE ID POR EL DE UN USUARIO CON IDROL 2 (SI NO TIENEN EN SU DB, CREEN UNO)
     //CAMBIEN LOS ITEMS DE LA BARRA LATERAL DE ACUERDO A LO QUE VAYAN PONIENDO EN SU SERVLET DE SERENAZGO
@@ -120,7 +123,7 @@
                     <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                         <div class="navbar-profile">
                             <div class="Header-nav-item">
-                                <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default; text-align: right;">Ricardo Calderón Rodríguez</h2>
+                                <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default; text-align: right;"><%= usuariologueado.getNombre() + "" + usuariologueado.getApellido() %>  </h2>
                                 <h5 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 15px; font-weight:500; cursor: default;">Serenazgo de San Miguel, Lima</h5>
                             </div>
                             <img class="img-xs rounded-circle" src="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
