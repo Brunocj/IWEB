@@ -1,4 +1,4 @@
-<%--
+<%@ page import="org.example.webappsm.model.beans.Usuario" %><%--
   Created by IntelliJ IDEA.
   User: bruno
   Date: 27/05/2024
@@ -43,7 +43,7 @@
     }
     String menuadmin = "/vistas/jsp/Utilidades/menu_" + userRole + ".jsp";
   %>
-
+  <%Usuario usuariologueado= (Usuario) session.getAttribute("usuarioLogueado");%>
 
   <jsp:include page="<%= menuadmin %>">
     <jsp:param name="activePage" value="pagPrincipal"/>
@@ -53,7 +53,7 @@
     <div class="main-panel">
       <div class="content-wrapper" style="background-color: #f7d4d3;">
         <div class="title-pp">
-          <h2>Bienvenido Admin Pedro!</h2>
+          <h2>Bienvenido Admin <%=usuariologueado.getNombre()%>!</h2>
         </div>
         <div class="RowWrapper">
           <div class="row-1">
