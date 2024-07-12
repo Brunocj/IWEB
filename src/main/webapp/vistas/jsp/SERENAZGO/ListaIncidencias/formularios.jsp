@@ -156,10 +156,10 @@
                   <!-- Formulario de policía -->
                   <div class="form-policia" style="display: none;">
                     <div class ="inputs">
-                      <select id="comisaría">
+                      <select id="comisaría" name="nombreComisaria">
                         <option value="default">Escoja una comisaría</option>
-                        <option name="nombreComisaria" value="1">Maranga</option>
-                        <option name="nombreComisaria" value="2">San Miguel</option>
+                        <option value="Maranga">Maranga</option>
+                        <option value="San Miguel">San Miguel</option>
                       </select>
                     </div>
                     <div class="inWrapper">
@@ -172,7 +172,7 @@
                 <div class ="opcion">
                   <div>
                     <label>
-                      <input type="checkbox" name="bomberos" value="bomberos"> Bomberos
+                      <input type="checkbox" name="opcion" value="bomberos"> Bomberos
                     </label>
 
 
