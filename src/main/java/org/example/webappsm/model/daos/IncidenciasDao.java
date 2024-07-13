@@ -18,6 +18,7 @@ public class IncidenciasDao extends BaseDao{
         String sql = "SELECT \n" +
                 "    i.idIncidencia, \n" +
                 "    i.nombre, \n" +
+                "    i.idTipoSerenazgo,\n" +
                 "    c.nombreClasificacion\n" +
                 "FROM \n" +
                 "    incidencia i\n" +
@@ -38,6 +39,7 @@ public class IncidenciasDao extends BaseDao{
                 incidencia.setIdIncidencia(rs.getInt("idIncidencia"));
                 incidencia.setNombre(rs.getString("nombre"));
                 incidencia.setClasificacion(rs.getString("nombreClasificacion"));
+                incidencia.setIdTipoSerenazgo(rs.getInt("idTipoSerenazgo"));
 
                 listaIncidenciasPasadas.add(incidencia);
 
@@ -59,7 +61,13 @@ public class IncidenciasDao extends BaseDao{
                 "    e.nombreEstado,\n" +
                 "    c.nombreClasificacion,\n" +
                 "    CONCAT(u.apellidos, ', ', u.nombres) AS nombreCompleto,\n" +
-                "    i.idUsuario\n" +
+                "    i.idUsuario\n," +
+                "    i.fecha,\n" +
+                "    i.idTipoSerenazgo,\n" +
+                "    i.personalAmbulancia,\n" +
+                "    i.motivoAmbulancia,\n" +
+                "    i.motivoPolicia,\n" +
+                "    i.idComisaria\n" +
                 "FROM \n" +
                 "    incidencia i\n" +
                 "JOIN \n" +
@@ -79,11 +87,18 @@ public class IncidenciasDao extends BaseDao{
                 Incidencia incidencia = new Incidencia();
 
 
-                incidencia.setIdIncidencia(rs.getInt(1));
-                incidencia.setEstado(rs.getString(2));
-                incidencia.setClasificacion(rs.getString(3));
-                incidencia.setNombreUsuarioIncidencia(rs.getString(4));
-                incidencia.setIdUsuario(rs.getInt(5));
+                incidencia.setIdIncidencia(rs.getInt("idIncidencia"));
+                incidencia.setEstado(rs.getString("nombreEstado"));
+                incidencia.setClasificacion(rs.getString("nombreClasificacion"));
+                incidencia.setNombreUsuarioIncidencia(rs.getString("nombreCompleto"));
+                incidencia.setIdUsuario(rs.getInt("idUsuario"));
+                incidencia.setFechaIncidencia(rs.getTimestamp("fecha"));
+                incidencia.setIdTipoSerenazgo(rs.getInt("idTipoSerenazgo"));
+                incidencia.setPersonalAmbulancia(rs.getString("personalAmbulancia"));
+                incidencia.setMotivoAmbulancia(rs.getString("motivoAmbulancia"));
+                incidencia.setMotivoPolicia(rs.getString("motivoPolicia"));
+                incidencia.setIdComisaria(rs.getInt("idComisaria"));
+                incidencia.setClasificacion(rs.getString("nombreClasificacion"));
                 listaIncidencias.add(incidencia);
 
             }
@@ -102,7 +117,7 @@ public class IncidenciasDao extends BaseDao{
 
         Incidencia incidencia = new Incidencia();
 
-        String sql = "SELECT idIncidencia,nombre,lugar,referencia,contacto,evidencia FROM sanmiguel.incidencia WHERE idIncidencia=?";
+        String sql = "SELECT idIncidencia,nombre,lugar,descripcion,idTipoSerenazgo,contacto,evidencia,fecha FROM sanmiguel.incidencia WHERE idIncidencia=?";
 
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -116,10 +131,11 @@ public class IncidenciasDao extends BaseDao{
 
                     incidencia.setNombre(rs.getString(2));
                     incidencia.setLugar(rs.getString(3));
-                    incidencia.setReferencia(rs.getString(4));
-                    incidencia.setContactoO(rs.getString(5));
-                    incidencia.setImgEvidencia(rs.getBytes(6));
-
+                    incidencia.setDescripcion(rs.getString(4));
+                    incidencia.setIdTipoSerenazgo(rs.getInt(5));
+                    incidencia.setContactoO(rs.getString(6));
+                    incidencia.setImgEvidencia(rs.getBytes(7));
+                    incidencia.setFechaIncidencia(rs.getTimestamp(8));
                 }
             }
 
@@ -158,6 +174,25 @@ public class IncidenciasDao extends BaseDao{
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 incidencia.setIdIncidencia(idIncidencia);
+                incidencia.setNombre(rs.getString("nombre"));
+                incidencia.setIdTipo(rs.getInt("idTipoIncidencia"));
+                incidencia.setLugar(rs.getString("lugar"));
+                incidencia.setIdTipoSerenazgo(rs.getInt("idTipoSerenazgo"));
+                incidencia.setPersonalAmbulancia(rs.getString("personalAmbulancia"));
+                incidencia.setMotivoAmbulancia(rs.getString("motivoAmbulancia"));
+                incidencia.setMotivoPolicia(rs.getString("motivoPolicia"));
+                incidencia.setIdComisaria(rs.getInt("idComisaria"));
+                incidencia.setBomberoI(rs.getBoolean("NecesitaBombero"));
+                incidencia.setDescripcion(rs.getString("descripcion"));
+                String clasif = "";
+                if(rs.getInt("idClasificacin") == 1){
+                    clasif = "Leve";
+                }else if(rs.getInt("idClasificacin") == 2){
+                    clasif = "Moderada";
+                }else if(rs.getInt("idClasificacin") == 3){
+                    clasif = "Grave";
+                }
+                incidencia.setClasificacion(clasif);
             }
         }catch(SQLException e){
             throw new RuntimeException(e);

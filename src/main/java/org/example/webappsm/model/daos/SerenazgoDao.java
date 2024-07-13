@@ -30,6 +30,7 @@ public class SerenazgoDao extends BaseDao {
                 serenazgo.setTipo(rs.getString("tipo"));
                 serenazgo.setTurno(rs.getString("Turno"));
 
+
                 listaSerenazgo.add(serenazgo);
 
             }
@@ -215,6 +216,7 @@ public class SerenazgoDao extends BaseDao {
             throw new RuntimeException(e);
         }
     }
+
     public ArrayList<Turno> listarTurnos(){
         ArrayList<Turno> listaTurnos = new ArrayList<>();
 

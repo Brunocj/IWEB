@@ -1,6 +1,7 @@
 <%@ page import="org.example.webappsm.model.beans.Incidencia" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.ArrayList" %>
+
 <%
   ArrayList<Incidencia> incidencias = (ArrayList<Incidencia>) request.getAttribute("listaIncidencias");
 %>
@@ -152,9 +153,11 @@
                       <select name="accion" id="acciones_<%= incidencia.getIdIncidencia() %>" class="btn btn-secondary dropdown-toggle" onchange="redirectAction('<%= incidencia.getIdIncidencia() %>')">
                         <option value="">--Seleccionar acción--</option>
                         <option value="info">Ver Incidencia</option>
-                        <option value="clasificarProceder">Clasificar y Proceder</option>
                         <% if (incidencia.getEstado().equals("En proceso")) { %>
-                        <option value="finalizar">Finalizar</option>
+                        <option value="gestionar">Gestionar incidencia</option>
+                          <option value="finalizar">Finalizar</option>
+                        <% }else{ %>
+                          <option value="clasificarProceder">Clasificar y Proceder</option>
                         <% } %>
                       </select>
                       <input type="hidden" name="idIncidencia" value="<%= incidencia.getIdIncidencia() %>">
@@ -240,6 +243,9 @@
               break;
             case 'clasificarProceder':
               window.location.href = '<%= request.getContextPath() %>/Serenazgo?action=proceder&idProceder=' + idIncidencia;
+              break;
+            case 'gestionar':
+              window.location.href = '<%= request.getContextPath() %>/Serenazgo?action=gestionarIncidencia&idGestionar=' + idIncidencia;
               break;
             case 'finalizar':
               Swal.fire({

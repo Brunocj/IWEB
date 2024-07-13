@@ -14,6 +14,13 @@ public class Incidencia {
     private int idUrbanizacion;
     private String urbanizacion;
     private String contactoO;
+    private int idTipoSerenazgo;
+    private String personalAmbulancia;
+    private String motivoAmbulancia;
+    private String motivoPolicia;
+    private int idComisaria;
+    private boolean bomberoI;
+    public String descripcion;
     private byte[] imgEvidencia; //Almacenar la imagen
     private boolean ambulanciaI; //si al registrar la incidencia requeria ambulancia
     private Timestamp fechaIncidencia;
