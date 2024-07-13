@@ -38,21 +38,29 @@ public class RoleFilter implements Filter {
                 case 1: // Admin
                     if (requestURI.contains("/Admin") || requestURI.contains("/common")) {
                         accessAllowed = true;
+                    }else {
+                        accessAllowed = false;
                     }
                     break;
                 case 2: // Serenazgo
                     if (requestURI.contains("/Serenazgo") || requestURI.contains("/common")) {
                         accessAllowed = true;
+                    }else {
+                        accessAllowed = false;
                     }
                     break;
                 case 3: // Vecino
                     if (requestURI.contains("/Vecino") || requestURI.contains("/common")) {
                         accessAllowed = true;
+                    }else {
+                        accessAllowed = false;
                     }
                     break;
                 case 4: // Coordinador
                     if (requestURI.contains("/Coordinador") || requestURI.contains("/common")) {
                         accessAllowed = true;
+                    }else {
+                        accessAllowed = false;
                     }
                     break;
                 default:
@@ -63,7 +71,9 @@ public class RoleFilter implements Filter {
 
         if (session == null || role == null || !accessAllowed) {
             //Se redirige al usuario al login (por malcriado)
+
             response.sendRedirect(request.getContextPath() + "/vistas/jsp/LOGIN/login.jsp");
+            request.getSession().invalidate();
         } else {
             //Continuar
             filterChain.doFilter(servletRequest, servletResponse);
