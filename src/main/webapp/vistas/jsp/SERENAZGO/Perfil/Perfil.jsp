@@ -3,6 +3,10 @@
 <%@ page import ="org.example.webappsm.model.beans.Usuario" %>
 <%Usuario usuariologueado = (Usuario) session.getAttribute("usuarioLogueado");%>
 
+<%
+    Usuario usuario = (Usuario) request.getAttribute("usuario");
+%>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -63,27 +67,27 @@
                                 <tr>
                                     <td>Nombre(s)</td>
                                     <td>:</td>
-                                    <td><%= usuariologueado.getNombre() %> </td>
+                                    <td><%= usuario.getNombre() %> </td>
                                 </tr>
                                 <tr>
                                     <td>Apellidos</td>
                                     <td>:</td>
-                                    <td><%= usuariologueado.getApellido() %> </td>
+                                    <td><%= usuario.getApellido() %> </td>
                                 </tr>
                                 <tr>
                                     <td>Correo</td>
                                     <td>:</td>
-                                    <td><%= usuariologueado.getCorreoE() %> </td>
+                                    <td><%= usuario.getCorreoE() %> </td>
                                 </tr>
                                 <tr>
                                     <td>DNI</td>
                                     <td>:</td>
-                                    <td><%= usuariologueado.getDocumento() %> </td>
+                                    <td><%= usuario.getDocumento() %> </td>
                                 </tr>
                                 <tr>
                                     <td>Número telefónico</td>
                                     <td>:</td>
-                                    <td><%= usuariologueado.getNumContacto() %> </td>
+                                    <td><%= usuario.getNumContacto() %> </td>
                                 </tr>
                                 
                             </tbody>

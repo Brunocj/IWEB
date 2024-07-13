@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@ page import ="org.example.webappsm.model.beans.Usuario" %>
-<%Usuario usuariologueado = (Usuario) session.getAttribute("usuarioLogueado");%>
+<jsp:useBean id="usuarioLogueado" scope="session" type="org.example.webappsm.model.beans.Usuario"/>
+
 
 <%
     int idProvisional = 10; //CAMBIAR ESTE ID POR EL DE UN USUARIO CON IDROL 2 (SI NO TIENEN EN SU DB, CREEN UNO)
@@ -39,7 +39,7 @@
 
 
         <li class="nav-item menu-items <%= activePage.equals("perfil") ? "active" : "" %>">
-            <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=perfil">
+            <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=perfil&id=<%=usuarioLogueado.getId()%>">
               <span class="menu-icon">
                 <i class="mdi mdi-account"></i>
               </span>
