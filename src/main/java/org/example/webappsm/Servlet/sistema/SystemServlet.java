@@ -133,107 +133,114 @@ public class SystemServlet extends HttpServlet {
                 break;
 
             case "registerPOST":
-
-                String nombre = request.getParameter("nombre").trim();
-                String apellido = request.getParameter("apellido").trim();
-                int idDocumento = Integer.parseInt(request.getParameter("idDoc"));
-                String nroDocumento = request.getParameter("documento").trim();
-                String direccion = request.getParameter("direccion").trim();
-                String distrito = request.getParameter("distrito").trim();
-                String urbanizacion = request.getParameter("urbanizacion").trim();
-                String correo1 = request.getParameter("correo").trim();
-                int idRol = Integer.parseInt(request.getParameter("idrol"));
-                boolean baneado = Boolean.parseBoolean(request.getParameter("baneado"));
-                int idEstado = Integer.parseInt(request.getParameter("idestado"));
-                int falsasAlarmas = Integer.parseInt(request.getParameter("falsasAlarmas"));
-                String contacto = request.getParameter("contacto").trim();
-                String contra = systemDao.generarContra();
-
-                boolean hasError = false;
-
-                // Validación de nombre
-                if (nombre == null || nombre.isEmpty() || nombre.length() > 45 || !nombre.matches("[\\p{L}\\s]+")) {
-                    request.setAttribute("err1", "Debe ingresar un nombre válido");
-                    hasError = true;
-                }
-
-                // Validación de apellido
-                if (apellido == null || apellido.isEmpty() || apellido.length() > 45 || !apellido.matches("[\\p{L}\\s]+")) {
-                    request.setAttribute("err2", "Debe ingresar un apellido válido");
-                    hasError = true;
-                }
-
-                // Validación de número de documento
-                if (idDocumento == 1 && (nroDocumento == null || !nroDocumento.matches("\\d{8}"))) {
-                    request.setAttribute("err3", "El número de documento debe tener 8 dígitos.");
-                    hasError = true;
-                } else if (idDocumento == 2 && (nroDocumento == null || !nroDocumento.matches("\\d{1,15}"))) {
-                    request.setAttribute("err4", "Debe ingresar un número de documento válido");
-                    hasError = true;
-                } else if (idDocumento == 3 && (nroDocumento == null || !nroDocumento.matches("\\d{1,15}"))) {
-                    request.setAttribute("err5", "Debe ingresar un número de documento válido");
-                    hasError = true;
-                }
-
-                // Validación de dirección
-                if (direccion == null || direccion.isEmpty() || direccion.length() > 45) {
-                    request.setAttribute("err6", "No debe sobrepasar los 45 caracteres");
-                    hasError = true;
-                }
-
-                // Validación de distrito
-                if (distrito == null || distrito.isEmpty() || distrito.length() > 45) {
-                    request.setAttribute("err7", "No debe sobrepasar los 45 caracteres");
-                    hasError = true;
-                }
-
-                // Validación de urbanización
-                if (urbanizacion == null || urbanizacion.isEmpty() || urbanizacion.length() > 45) {
-                    request.setAttribute("err8", "No debe sobrepasar los 45 caracteres");
-                    hasError = true;
-                }
-                if (correo1 == null || correo1.isEmpty() || !correo1.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) {
-                    request.setAttribute("err9", "Correo electrónico no válido");
-                    hasError = true;
-                }
-                // Validación de contacto
-                if (contacto == null || contacto.isEmpty() || !contacto.matches("\\d{9}")) {
-                    request.setAttribute("err10", "Número de contacto no válido");
-                    hasError = true;
-                }
-                // Validación de existencia de DNI
                 try {
-                    if (systemDao.verificarDni(nroDocumento)) {
-                        request.setAttribute("err3", "El DNI ingresado ya está registrado en el sistema");
+                    String nombre = request.getParameter("nombre").trim();
+                    String apellido = request.getParameter("apellido").trim();
+                    int idDocumento = Integer.parseInt(request.getParameter("idDoc"));
+                    String nroDocumento = request.getParameter("documento").trim();
+                    String direccion = request.getParameter("direccion").trim();
+                    String distrito = request.getParameter("distrito").trim();
+                    String urbanizacion = request.getParameter("urbanizacion").trim();
+                    String correo1 = request.getParameter("correo").trim();
+                    int idRol = Integer.parseInt(request.getParameter("idrol"));
+                    boolean baneado = Boolean.parseBoolean(request.getParameter("baneado"));
+                    int idEstado = Integer.parseInt(request.getParameter("idestado"));
+                    int falsasAlarmas = Integer.parseInt(request.getParameter("falsasAlarmas"));
+                    String contacto = request.getParameter("contacto").trim();
+                    String contra = systemDao.generarContra();
+
+                    boolean hasError = false;
+
+                    // Validaciones
+                    if (nombre == null || nombre.isEmpty() || nombre.length() > 45 || !nombre.matches("[\\p{L}\\s]+")) {
+                        request.setAttribute("err1", "Debe ingresar un nombre válido");
                         hasError = true;
                     }
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
 
-                // Validación de existencia de correo electrónico
-                try {
-                    if (systemDao.verificarCorreoExistente(correo1)) {
-                        request.setAttribute("err9", "El correo electrónico ingresado ya está registrado en el sistema");
+                    if (apellido == null || apellido.isEmpty() || apellido.length() > 45 || !apellido.matches("[\\p{L}\\s]+")) {
+                        request.setAttribute("err2", "Debe ingresar un apellido válido");
                         hasError = true;
                     }
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-                if (hasError) {
+
+                    if (idDocumento == 1 && (nroDocumento == null || !nroDocumento.matches("\\d{8}"))) {
+                        request.setAttribute("err3", "El número de documento debe tener 8 dígitos.");
+                        hasError = true;
+                    } else if (idDocumento == 2 && (nroDocumento == null || !nroDocumento.matches("\\d{1,15}"))) {
+                        request.setAttribute("err4", "Debe ingresar un número de documento válido");
+                        hasError = true;
+                    } else if (idDocumento == 3 && (nroDocumento == null || !nroDocumento.matches("\\d{1,15}"))) {
+                        request.setAttribute("err5", "Debe ingresar un número de documento válido");
+                        hasError = true;
+                    }
+
+                    if (direccion == null || direccion.isEmpty() || direccion.length() > 45) {
+                        request.setAttribute("err6", "No debe sobrepasar los 45 caracteres");
+                        hasError = true;
+                    }
+
+                    if (distrito == null || distrito.isEmpty() || distrito.length() > 45) {
+                        request.setAttribute("err7", "No debe sobrepasar los 45 caracteres");
+                        hasError = true;
+                    }
+
+                    if (urbanizacion == null || urbanizacion.isEmpty() || urbanizacion.length() > 45) {
+                        request.setAttribute("err8", "No debe sobrepasar los 45 caracteres");
+                        hasError = true;
+                    }
+
+                    if (correo1 == null || correo1.isEmpty() || !correo1.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) {
+                        request.setAttribute("err9", "Correo electrónico no válido");
+                        hasError = true;
+                    }
+
+                    if (contacto == null || contacto.isEmpty() || !contacto.matches("\\d{9}")) {
+                        request.setAttribute("err10", "Número de contacto no válido");
+                        hasError = true;
+                    }
+
+                    try {
+                        if (systemDao.verificarDni(nroDocumento)) {
+                            request.setAttribute("err3", "El DNI ingresado ya está registrado en el sistema");
+                            hasError = true;
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        request.setAttribute("errorMessage", "Error al verificar el DNI. Por favor, inténtelo de nuevo más tarde.");
+                        request.getRequestDispatcher("vistas/jsp/LOGIN/register.jsp").forward(request, response);
+                        break;
+                    }
+
+                    try {
+                        if (systemDao.verificarCorreoExistente(correo1)) {
+                            request.setAttribute("err9", "El correo electrónico ingresado ya está registrado en el sistema");
+                            hasError = true;
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        request.setAttribute("errorMessage", "Error al verificar el correo electrónico. Por favor, inténtelo de nuevo más tarde.");
+                        request.getRequestDispatcher("vistas/jsp/LOGIN/register.jsp").forward(request, response);
+                        break;
+                    }
+
+                    if (hasError) {
+                        request.getRequestDispatcher("vistas/jsp/LOGIN/register.jsp").forward(request, response);
+                    } else {
+                        try {
+                            systemDao.registrarUsuario(nombre, apellido, idDocumento, nroDocumento, direccion, distrito, urbanizacion, correo1, idRol, baneado, idEstado, falsasAlarmas, contacto, contra);
+                            request.setAttribute("msg", "confirmacion");
+                            request.getRequestDispatcher("vistas/jsp/LOGIN/register.jsp").forward(request, response);
+                        } catch (RuntimeException e) {
+                            e.printStackTrace();
+                            request.setAttribute("errorMessage", "Error al registrar el usuario. Por favor, inténtelo de nuevo más tarde.");
+                            request.getRequestDispatcher("vistas/jsp/LOGIN/register.jsp").forward(request, response);
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    request.setAttribute("errorMessage", "Se produjo un error en el servidor. Inténtelo de nuevo más tarde.");
                     request.getRequestDispatcher("vistas/jsp/LOGIN/register.jsp").forward(request, response);
-                } else {
-                    // Si no hay errores, proceder con el registro
-                    // Código para guardar los datos en la base de datos
-                    systemDao.registrarUsuario(nombre, apellido, idDocumento, nroDocumento, direccion, distrito, urbanizacion, correo1, idRol, baneado, idEstado, falsasAlarmas, contacto, contra);
-
-                    request.setAttribute("msg","confirmacion");
-                    request.getRequestDispatcher("vistas/jsp/LOGIN/register.jsp").forward(request,response);
-
-                    break;
-
-
                 }
+                break;
 
 
 
