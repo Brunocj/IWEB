@@ -1,6 +1,8 @@
 <%@ page import="org.example.webappsm.model.beans.Incidencia" %>
 <%@ page import="org.example.webappsm.model.beans.TipoSerenazgo" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import ="org.example.webappsm.model.beans.Usuario" %>
+<%Usuario usuariologueado = (Usuario) session.getAttribute("usuarioLogueado");%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -13,7 +15,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Sección Proceder</title>
+  <title>Proceder con la Incidencia</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/SERENAZGO/ListaIncidencias/styles_tabla.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/mdi/css/materialdesignicons.min.css">
@@ -37,7 +39,7 @@
     }
 
     .descripcion-container textarea {
-      width: 100%;
+      width: 400px;
       height: 150px;
       padding: 10px;
       font-size: 16px;

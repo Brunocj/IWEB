@@ -1,8 +1,15 @@
 <%@ page import="org.example.webappsm.model.beans.Incidencia" %>
-
+<%@ page import="org.example.webappsm.model.beans.Serenazgo" %>
+<%@ page import="java.sql.Timestamp" %>
+<%@ page import="java.sql.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 
 <%
     Incidencia incidencia = (Incidencia) request.getAttribute("incidencia");
+%>
+
+<%
+    String serenazgoEncargado = (String) request.getAttribute("serenazgo");
 %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -69,20 +76,35 @@
                                                 <td>:</td>
                                                 <td><%= incidencia.getLugar() %></td>
                                             </tr>
+                                                <%
+                                            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+                                            // Convertir Timestamp a Date
+                                            Date date = new Date(timestamp.getTime());
+
+                                            // Formatear la fecha
+                                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                            String formattedDate = sdf.format(date);
+                                                %>
                                             <tr>
-                                                <td>Referencia</td>
+                                                <td>Fecha de la incidencia</td>
                                                 <td>:</td>
-                                                <td><%= incidencia.getReferencia() %></td>
+                                                <td><%= formattedDate %></td>
                                             </tr>
                                             <tr>
-                                                <td>Contacto (o)</td>
+                                                <td>Tipo de serenazgo Encargado</td>
                                                 <td>:</td>
-                                                <td><%= incidencia.getContactoO() %></td>
+                                                <td><%= serenazgoEncargado %></td>
                                             </tr>
                                             <tr>
-                                                <td>Requiere ambulancia?</td>
+                                                <td>Se necesitó Ambulancia?</td>
                                                 <td>:</td>
-                                                <td>Si</td>
+                                                <td><%= incidencia.isAmbulanciaI() ? "Sí" : "No" %></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Descripción final</td>
+                                                <td>:</td>
+                                                <td><%= incidencia.getDescripcion() %></td>
                                             </tr>
                                             <tr td colspan="3">
                                                 <td style="border-bottom: none;">Imagen de referencia:</td>
