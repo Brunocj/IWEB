@@ -30,6 +30,7 @@ public class SerenazgoDao extends BaseDao {
                 serenazgo.setTipo(rs.getString("tipo"));
                 serenazgo.setTurno(rs.getString("Turno"));
 
+
                 listaSerenazgo.add(serenazgo);
 
             }
@@ -192,6 +193,18 @@ public class SerenazgoDao extends BaseDao {
             throw new RuntimeException(e);
         }
     }
+    public void setDescripcion(int idIncidencia, String descripcion){
+        String sql = "UPDATE incidencia SET descripcion = ? WHERE idIncidencia = ?";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1, descripcion);
+            pstmt.setInt(2, idIncidencia);
+            pstmt.executeUpdate();
+        }catch( SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+
     public void setTipoSerenazgo(int idTipo, int idIncidencia){
         String sql = "UPDATE incidencia SET idTipoSerenazgo = ? WHERE idIncidencia = ?";
         try (Connection conn = this.getConnection();
@@ -203,6 +216,7 @@ public class SerenazgoDao extends BaseDao {
             throw new RuntimeException(e);
         }
     }
+
     public ArrayList<Turno> listarTurnos(){
         ArrayList<Turno> listaTurnos = new ArrayList<>();
 

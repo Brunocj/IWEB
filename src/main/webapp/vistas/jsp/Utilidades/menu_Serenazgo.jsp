@@ -39,7 +39,7 @@
 
 
         <li class="nav-item menu-items <%= activePage.equals("perfil") ? "active" : "" %>">
-            <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=perfil">
+            <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=perfil&id=<%=usuariologueado.getId()%>">
               <span class="menu-icon">
                 <i class="mdi mdi-account"></i>
               </span>
@@ -123,7 +123,7 @@
                     <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                         <div class="navbar-profile">
                             <div class="Header-nav-item">
-                                <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default; text-align: right;"><%= usuariologueado.getNombre() + "" + usuariologueado.getApellido() %>  </h2>
+                                <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default; text-align: right;"><%= usuariologueado.getNombre() + " " + usuariologueado.getApellido() %>  </h2>
                                 <h5 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 15px; font-weight:500; cursor: default;">Serenazgo de San Miguel, Lima</h5>
                             </div>
                             <img class="img-xs rounded-circle" src="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->

@@ -9,7 +9,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    int idProvisional = 10;
     ArrayList<Incidencia> listaIncidencias = (ArrayList<Incidencia>) request.getAttribute("listaincidencias");
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 %>

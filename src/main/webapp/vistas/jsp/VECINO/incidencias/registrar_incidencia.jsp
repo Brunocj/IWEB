@@ -79,7 +79,7 @@
                         <center><h2 class="active" style="color: black;">Registro de incidencia</h2></center>
                         <!-- Icon -->
                         <!-- Login Form -->
-                        <form id="incidenciaRegistro" action ="${pageContext.request.contextPath}/Vecino?action=registrarIncidencia" method="POST" enctype="multipart/form-data">
+                        <form id="incidenciaRegistro" action ="${pageContext.request.contextPath}/Vecino?action=registrarIncidenciaPOST" method="POST" enctype="multipart/form-data">
                             <div class="inputs">
                                 <input type="text" id="nombreIncidencia" name ="nombreIncidencia" class="input-field" placeholder="Nombre de la incidencia" required>
                                 <input type="text" id="lugar" name="lugar" class="input-field" placeholder="Lugar en dónde la incidencia" required>
@@ -122,7 +122,7 @@
                                 </div>
                             </div>
                             <div class="buttons">
-                                <input type="submit" class="sbmt green" value="Registrar incidencia" onclick="return confirmarRegistro();">
+                                <input type="submit" class="sbmt green" value="Registrar incidencia">
                                 <input  type="submit" class="sbmt red" value="Cancelar" onclick="return cancelarRegistro();">
                             </div>
                         </form>
@@ -150,22 +150,6 @@
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script>
-        function mostrarPopupCerrarSesion() {
-            Swal.fire({
-                title: 'Cerrar sesión',
-                text: '¿Estás seguro de que deseas cerrar sesión?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#00913f',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, cerrar sesión',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = "../../LOGIN/login.jsp"; //Cambiar la ubicacion del login de acuerdo a lo necesario
-                }
-            });
-        }
 
         function cancelarRegistro() {
             Swal.fire({

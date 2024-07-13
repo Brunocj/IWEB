@@ -22,6 +22,7 @@ public class SerenazgoServlet extends HttpServlet {
 
         String vista;
         RequestDispatcher rd;
+        UserDao userDao  = new UserDao();
 
         switch (action){
 
@@ -31,6 +32,10 @@ public class SerenazgoServlet extends HttpServlet {
                 rd.forward(request,response);
                 break;
             case "perfil":
+                int idusuario = Integer.parseInt(request.getParameter("id"));
+                Usuario u = userDao.mostrarUsuarioID(idusuario);
+
+                request.setAttribute("usuario", u);
                 vista = "vistas/jsp/SERENAZGO/Perfil/Perfil.jsp";
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
@@ -114,12 +119,25 @@ public class SerenazgoServlet extends HttpServlet {
             case "mostrarDescripcion":
 
                 IncidenciasDao daoMostrarDescripcion = new IncidenciasDao();
+
                 String idIncidenciaString = request.getParameter("idIncidencia");
                 int idIncidencia = Integer.parseInt(idIncidenciaString);
 
                 Incidencia incidencia = daoMostrarDescripcion.descripcion(idIncidencia);
+                int idTipoSerenazgo = incidencia.getIdTipoSerenazgo();
+                String nombreSerenazgo = ":o";
+                if(idTipoSerenazgo== 1){
+                    nombreSerenazgo = "Bicicleta";
+                }else if(idTipoSerenazgo== 2){
+                    nombreSerenazgo = "A pie";
+                }else if(idTipoSerenazgo== 3){
+                    nombreSerenazgo = "Canino";
+                }else if(idTipoSerenazgo== 4){
+                    nombreSerenazgo = "Vehículo";
+                }
 
                 request.setAttribute("incidencia",incidencia);
+                request.setAttribute("serenazgo",nombreSerenazgo);
 
                 vista = "vistas/jsp/SERENAZGO/ListaPasadas/infoDescripcionPasada.jsp";
 
@@ -190,6 +208,42 @@ public class SerenazgoServlet extends HttpServlet {
 
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
+                break;
+            case "gestionarIncidencia":
+
+                IncidenciasDao incidenciasGestionar = new IncidenciasDao();
+
+                int idIncidenciaGestionar = Integer.parseInt(request.getParameter("idGestionar"));
+                Incidencia incidenciaGestionar = incidenciasGestionar.obtenerIncidenciaPorId(idIncidenciaGestionar);
+
+                int indicadorPolicia = 1;
+                if (incidenciaGestionar.getMotivoPolicia() == null) {
+                    indicadorPolicia = 0;
+                }
+
+                int indicadorAmbulancia = 1;
+                if (incidenciaGestionar.getMotivoAmbulancia() == null) {
+                    indicadorAmbulancia = 0;
+                }
+
+                ArrayList<TipoSerenazgo> listaTiposGestionar = incidenciasGestionar.listarTipos();
+
+                // Depuración
+                System.out.println("idIncidenciaGestionar: " + idIncidenciaGestionar);
+                System.out.println("incidenciaGestionar: " + incidenciaGestionar);
+                System.out.println("indicadorPolicia: " + indicadorPolicia);
+                System.out.println("indicadorAmbulancia: " + indicadorAmbulancia);
+                System.out.println("listaTiposGestionar size: " + listaTiposGestionar.size());
+
+                request.setAttribute("idIncidencia", idIncidenciaGestionar);
+                request.setAttribute("incidencia", incidenciaGestionar);
+                request.setAttribute("listaTipos", listaTiposGestionar);
+                request.setAttribute("policia", indicadorPolicia);
+                request.setAttribute("ambulancia", indicadorAmbulancia);
+
+                vista = "vistas/jsp/SERENAZGO/ListaIncidencias/gestionarInc.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request, response);
                 break;
             case "descripcionFinal":
                 IncidenciasDao incidenciasDF = new IncidenciasDao();
@@ -338,7 +392,31 @@ public class SerenazgoServlet extends HttpServlet {
                 serenazgoDao.setNecesitaBombero(idIncidencia, bomberos);
                 System.out.println("Se solicitó bomberos");
             }
+            String descripcion = request.getParameter("descripcion");
+
+            serenazgoDao.setDescripcion(idIncidencia, descripcion);
+
+
+
             incidenciasDao.incidenciaEnProceso(idIncidencia);
+            response.sendRedirect(request.getContextPath() + "/Serenazgo?action=listaIncidencias");
+        }else if(action.equals("gestionarIncidencia")){
+            SerenazgoDao serenazgoDao = new SerenazgoDao();
+            IncidenciasDao incidenciasDao = new IncidenciasDao();
+
+            String idIncidenciaGest = request.getParameter("id");
+            String clasificacionUpd = request.getParameter("clasificacion");
+            String descripcionGest = request.getParameter("descripcion");
+
+            int idIncidencia = Integer.parseInt(idIncidenciaGest);
+
+            if (clasificacionUpd != null){
+                int clasificacionId = Integer.parseInt(clasificacionUpd);
+
+                incidenciasDao.actualizarClasificacion(clasificacionId, idIncidencia);
+            }
+
+            serenazgoDao.setDescripcion(idIncidencia, descripcionGest);
             response.sendRedirect(request.getContextPath() + "/Serenazgo?action=listaIncidencias");
         }else{
             response.sendRedirect(request.getContextPath() + "/Serenazgo");
