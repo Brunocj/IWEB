@@ -3,6 +3,7 @@ package org.example.webappsm.Servlet.vecino;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,6 +27,7 @@ import java.util.EventListener;
 import static org.example.webappsm.Servlet.coordinador.CoordinadorServlet.obtenerImagenComoByteArray;
 
 @WebServlet(name ="VecinoServlet" , value = "/Vecino")
+@MultipartConfig
 public class VecinoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
