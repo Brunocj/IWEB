@@ -39,7 +39,7 @@
 
 
         <li class="nav-item menu-items <%= activePage.equals("perfil") ? "active" : "" %>">
-            <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=perfil">
+            <a class="nav-link" href="<%=request.getContextPath()%>/Serenazgo?action=perfil&id=<%=usuariologueado.getId()%>">
               <span class="menu-icon">
                 <i class="mdi mdi-account"></i>
               </span>

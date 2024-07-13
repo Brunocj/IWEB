@@ -6,7 +6,7 @@
   Time: 17:39
   To change this template use File | Settings | File Templates.
 --%>
-<jsp:useBean id="usuarioLogueado" scope="session" type="org.example.webappsm.model.beans.Usuario"/>
+
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
@@ -103,12 +103,12 @@
                                 <tbody>
                                 <tr>
                                     <td><i class="mdi mdi-lock" style="font-size:25px"></i></td>
-                                    <td><a href="#" onclick="openChangePasswordPopup('<%=usuarioLogueado.getId()%>')">Cambiar contraseña</a></td>
+                                    <td><a href="#" onclick="openChangePasswordPopup('<%=usuario.getId()%>')">Cambiar contraseña</a></td>
 
                                 </tr>
                                 <tr>
                                     <td><i class="mdi mdi-phone" style="font-size:25px"></i></td>
-                                    <td><a href="#" onclick="openChangePhonePopup('<%=usuarioLogueado.getId()%>')">Cambiar número telefónico</a></td>
+                                    <td><a href="#" onclick="openChangePhonePopup('<%=usuario.getId()%>')">Cambiar número telefónico</a></td>
 
                                 </tr>
                                 </tbody>
