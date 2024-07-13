@@ -36,7 +36,9 @@ public class RoleFilter implements Filter {
         if (role != null) {
             switch (role) {
                 case 1: // Admin
-                    accessAllowed = true;
+                    if (requestURI.contains("/Admin") || requestURI.contains("/common")) {
+                        accessAllowed = true;
+                    }
                     break;
                 case 2: // Serenazgo
                     if (requestURI.contains("/Serenazgo") || requestURI.contains("/common")) {
