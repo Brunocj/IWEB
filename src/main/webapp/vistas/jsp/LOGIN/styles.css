@@ -54,7 +54,7 @@ font-size: 16px;
 font-weight: 600;
 text-transform: uppercase;
 display:inline-block;
-margin: 40px 8px 10px 8px; 
+margin: 40px 8px 10px 8px;
 color: #cccccc;
 }
 
@@ -64,7 +64,7 @@ h1 {
   font-weight: 600;
   text-transform: uppercase;
   display:inline-block;
-  margin: 40px 8px 10px 8px; 
+  margin: 40px 8px 10px 8px;
   color: #cccccc;
   }
 
@@ -74,7 +74,7 @@ h1 {
 position:fixed;
 display: flex;
 align-items: center;
-flex-direction: column; 
+flex-direction: column;
 justify-content: center;
 width: 100%;
 min-height: 100%;
@@ -268,24 +268,47 @@ animation-delay: 0.6s;
   -moz-animation-delay: 0.8s;
   animation-delay: 0.8s;
   }
-  
+
   .fadeIn.fourth {
   -webkit-animation-delay: 1s;
   -moz-animation-delay: 1s;
   animation-delay: 1s;
-  
+    width: 86%;
+    margin-left: 12px;
+
   }
   .fadeIn.fifth {
     -webkit-animation-delay: 1s;
     -moz-animation-delay: 1s;
-    animation-delay: 1s;  
+    animation-delay: 1s;
   }
   .fadeIn.sixth {
     -webkit-animation-delay: 1s;
     -moz-animation-delay: 1s;
     animation-delay: 1s;
-    
+    width: 86%;
+    margin-left: 12px;
   }
+
+.fadeIn.seven {
+  -webkit-animation-delay: 1s;
+  -moz-animation-delay: 1s;
+  animation-delay: 1s;
+  width: 86%;
+  margin-left: 12px;
+  margin-right: 5px;
+}
+
+.fadeIn.eight {
+  -webkit-animation-delay: 1s;
+  -moz-animation-delay: 1s;
+  animation-delay: 1s;
+  width: 85%;
+  margin-left: 12px;
+  margin-right: 10px;
+}
+
+
 
 /* Simple CSS3 Fade-in Animation */
 .underlineHover:after {
@@ -313,7 +336,7 @@ width: 100%;
 
 *:focus {
   outline: none;
-} 
+}
 
 #icon {
 width:40%;
@@ -349,14 +372,13 @@ input[type=submit] {
 input#distrito,
 input#docList,
 input#nombre {
-  margin-left: 34px; /* Reducir el ancho para dejar espacio entre los inputs */
-  width: 100%;
+  margin-left: 32px; /* Reducir el ancho para dejar espacio entre los inputs */
 }
 input#urbanizacion,
 input#documento,
 input#apellido {
-  margin-right: 34px; 
-  width: 100%; /* Reducir el ancho para dejar espacio entre los inputs */
+  margin-right: 34px;
+  /* Reducir el ancho para dejar espacio entre los inputs */
 
 }
 .flex {
@@ -372,8 +394,8 @@ input#apellido {
   padding: 12px 28px;
   font-size: 16px;
   margin-left: 34px;
-  margin-right: 6px;
-  width: 100%; /* Cambia el ancho a 100% para que sea igual al input de nombre */
+  margin-top: -6px;
+  width: 84%; /* Cambia el ancho a 100% para que sea igual al input de nombre */
 }
 .flexform .flex {
   display: flex;
