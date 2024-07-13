@@ -190,7 +190,6 @@ public class VecinoServlet extends HttpServlet {
                 if (idUrbanizacionStr != null && !idUrbanizacionStr.isEmpty() &&
                         idTipoStr != null && !idTipoStr.isEmpty() &&
                         idUsuarioIncidenciaStr != null && !idUsuarioIncidenciaStr.isEmpty()) {
-
                     int idUrbanizacion = Integer.parseInt(idUrbanizacionStr);
                     int idTipo = Integer.parseInt(idTipoStr);
                     int idUsuarioIncidencia = Integer.parseInt(idUsuarioIncidenciaStr);
