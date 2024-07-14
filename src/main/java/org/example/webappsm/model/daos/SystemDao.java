@@ -15,6 +15,7 @@ import java.security.NoSuchAlgorithmException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
+
 public class SystemDao extends BaseDao{
 
     public void registrarUsuario(String nombre, String apellido, int idDocumento, String nroDocumento, String direccion, String distrito, String urbanizacion, String correo, int idRol, boolean baneado, int idEstado, int falsasAlarmas, String contacto, String contra){
@@ -156,11 +157,16 @@ public class SystemDao extends BaseDao{
         String from = "sm.4dmin@gmail.com";
         String pass = "jrnj deve irvb munz";
         String host = "smtp.gmail.com";
+
         Properties properties = System.getProperties();
         properties.put("mail.smtp.host", host);
         properties.put("mail.smtp.port", "587");
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.ssl.trust", "smtp.gmail.com"); // Confía en el servidor SMTP
+
+        // Habilitar depuración para obtener más detalles
+        properties.put("mail.debug", "true");
 
         Session session = Session.getInstance(properties, new jakarta.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -181,6 +187,7 @@ public class SystemDao extends BaseDao{
             Transport.send(message);
             System.out.println("Correo enviado exitosamente...");
         } catch (MessagingException mex) {
+            System.err.println("Error al enviar el correo: " + mex.getMessage());
             mex.printStackTrace();
         }
     }
