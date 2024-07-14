@@ -242,4 +242,42 @@ public class SystemDao extends BaseDao{
         }
     }
 
+    public boolean verificarDni(String documento) throws SQLException {
+        String sql = "SELECT * FROM usuario WHERE nroDocumento = ?";
+        boolean existe = false;
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, documento);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    existe = true; // Si existe algún registro con ese número de documento
+                }
+            }
+        }
+
+        return existe;
+    }
+
+    public boolean verificarCorreoExistente(String correo) throws SQLException {
+        String sql = "SELECT * FROM usuario WHERE correo = ?";
+        boolean existe = false;
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, correo);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    existe = true; // Si existe algún registro con ese correo electrónico
+                }
+            }
+        }
+
+        return existe;
+    }
+
+
+
 }

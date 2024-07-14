@@ -22,7 +22,7 @@
           <form method="POST" action="${pageContext.request.contextPath}/sys?action=recvPassPOST">
               <input type="text" id="dni" class="fadeIn second" name="dni" placeholder="Ingrese su DNI">
               <input type="email" id="correo" class="fadeIn second" name="correo" placeholder="Ingrese el correo de su cuenta">
-            <input type="submit" class="fadeIn fourth" value="Solicitar cambio de contraseña">
+            <input type="submit" class="fadeIn eight" value="Solicitar cambio de contraseña">
             
           </form>
       

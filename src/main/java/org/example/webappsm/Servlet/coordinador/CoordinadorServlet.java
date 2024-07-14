@@ -185,39 +185,64 @@ public class CoordinadorServlet extends HttpServlet {
             case "registrarIncidencia":
                 Incidencia incidencia = new Incidencia();
                 String nombreIncidencia = request.getParameter("nombreIncidencia");
-                String lugarIncidencia = request.getParameter("lugar");
+                String lugarIn = request.getParameter("lugar");
                 String referencia = request.getParameter("ref");
-                int idUrbanizacion = Integer.parseInt(request.getParameter("idUrb"));
                 String contacto = request.getParameter("contacto");
-                Boolean necesitaAmbulancia = Boolean.parseBoolean(request.getParameter("ambulanciaSN"));
-                byte[] evidencia = obtenerImagenComoByteArray((request.getPart("foto").getInputStream()));
                 String fechaStr = request.getParameter("fecha");
+                String necesitaAmbulanciaStr = request.getParameter("ambulanciaSN");
+                String idUrbanizacionStr = request.getParameter("urbanizacionId");
+                String idTipoStr = request.getParameter("idTipoIncidencia");
+                String idUsuarioIncidenciaStr = request.getParameter("idUsuario");
 
-                try {
-                    // Definir el formato de la fecha/hora
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    // Parsear la cadena a un objeto java.util.Date
-                    Date fechaUtil = sdf.parse(fechaStr);
-                    // Convertir el objeto java.util.Date a java.sql.Timestamp
-                    Timestamp fechaSql = new Timestamp(fechaUtil.getTime());
-                    incidencia.setFechaIncidencia(fechaSql);
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                // Imprimir todos los parámetros recibidos
+                System.out.println("Parámetros recibidos:");
+                System.out.println("Nombre de la incidencia: " + nombreIncidencia);
+                System.out.println("Lugar: " + lugarIn);
+                System.out.println("Referencia: " + referencia);
+                System.out.println("Contacto: " + contacto);
+                System.out.println("Fecha: " + fechaStr);
+                System.out.println("Necesita ambulancia: " + necesitaAmbulanciaStr);
+                System.out.println("ID de urbanización: " + idUrbanizacionStr);
+                System.out.println("ID de tipo de incidencia: " + idTipoStr);
+                System.out.println("ID de usuario: " + idUsuarioIncidenciaStr);
+
+                if (idUrbanizacionStr != null && !idUrbanizacionStr.isEmpty() &&
+                        idTipoStr != null && !idTipoStr.isEmpty() &&
+                        idUsuarioIncidenciaStr != null && !idUsuarioIncidenciaStr.isEmpty()) {
+                    int idUrbanizacion = Integer.parseInt(idUrbanizacionStr);
+                    int idTipo = Integer.parseInt(idTipoStr);
+                    int idUsuarioIncidencia = Integer.parseInt(idUsuarioIncidenciaStr);
+                    Boolean necesitaAmbulancia = Boolean.parseBoolean(necesitaAmbulanciaStr);
+                    byte[] evidencia = obtenerImagenComoByteArray(request.getPart("foto").getInputStream());
+
+                    try {
+                        // Definir el formato de la fecha/hora
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        // Parsear la cadena a un objeto java.util.Date
+                        Date fechaUtil = sdf.parse(fechaStr);
+                        // Convertir el objeto java.util.Date a java.sql.Timestamp
+                        Timestamp fechaSql = new Timestamp(fechaUtil.getTime());
+                        incidencia.setFechaIncidencia(fechaSql);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    incidencia.setNombre(nombreIncidencia);
+                    incidencia.setLugar(lugarIn);
+                    incidencia.setReferencia(referencia);
+                    incidencia.setIdUrbanizacion(idUrbanizacion);
+                    incidencia.setContactoO(contacto);
+                    incidencia.setAmbulanciaI(necesitaAmbulancia);
+                    incidencia.setImgEvidencia(evidencia);
+                    incidencia.setIdTipo(idTipo);
+                    incidencia.setIdUsuario(idUsuarioIncidencia);
+                    userDao.agregarIncidencia(incidencia);
+                    response.sendRedirect(request.getContextPath() + "/Vecino?action=incidencias");
+                } else {
+                    System.out.println("Uno o más parámetros requeridos están vacíos o nulos.");
+                    //FALTA mandar mensaje de error al usuario si es que alguno de los parametros es nulo
+                    response.sendRedirect(request.getContextPath() + "/Vecino?action=incidencias");
                 }
-
-                int idTipo = Integer.parseInt(request.getParameter("idTipoIncidencia"));
-                int idUsuarioIncidencia = Integer.parseInt(request.getParameter("idUsuario"));
-                incidencia.setNombre(nombreIncidencia);
-                incidencia.setLugar(lugarIncidencia);
-                incidencia.setReferencia(referencia);
-                incidencia.setIdUrbanizacion(idUrbanizacion);
-                incidencia.setContactoO(contacto);
-                incidencia.setAmbulanciaI(necesitaAmbulancia);
-                incidencia.setImgEvidencia(evidencia);
-                incidencia.setIdTipo(idTipo);
-                incidencia.setIdUsuario(idUsuarioIncidencia);
-                userDao.agregarIncidencia(incidencia);
-                response.sendRedirect(request.getContextPath() + "/Coordinador?action=incidencias");
                 break;
 
             default:
