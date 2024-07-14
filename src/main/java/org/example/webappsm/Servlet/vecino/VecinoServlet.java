@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.webappsm.model.beans.*;
+import org.example.webappsm.model.daos.CoordinadorDao;
 import org.example.webappsm.model.daos.ProfesorDao;
 import org.example.webappsm.model.daos.UserDao;
 import org.example.webappsm.model.daos.VecinosDao;
@@ -21,6 +22,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.EventListener;
 
@@ -55,6 +57,76 @@ public class VecinoServlet extends HttpServlet {
                 vista = "vistas/jsp/VECINO/solicitud/solicitarCoordinador.jsp";
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
+                break;
+
+            case "incidencias":
+                ArrayList<Incidencia> listaIncidencias = userDao.listarIncidencias();
+                request.setAttribute("listaincidencias", listaIncidencias);
+
+                vista = "vistas/jsp/VECINO/incidencias/incidencia_vecino.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+            case "registroIncidencia":
+                ArrayList<Urbanizacion> listaUrbanizaciones = userDao.listarUrbanizaciones();
+                ArrayList<Tipos> tiposIncidencias = userDao.listarTiposIncidencias();
+                request.setAttribute("listaUrbanizaciones", listaUrbanizaciones);
+                request.setAttribute("tiposIncidencias", tiposIncidencias);
+                vista = "vistas/jsp/VECINO/incidencias/registrar_incidencia.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+            case "infoIncidencia":
+                int idIncidencia = Integer.parseInt(request.getParameter("idIncidencia"));
+                Incidencia incidencia = userDao.getIncidenciaId(idIncidencia);
+                request.setAttribute("incidencia", incidencia);
+                vista = "vistas/jsp/VECINO/incidencias/incidencia_info.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+            case "EventosPasados":
+                VecinosDao vecinosDaolistaPasados = new VecinosDao();
+                int idusuario2 = 10; // posteriormente obtener mediante un request.getParameter
+                ArrayList<Evento> listaEventosPasados = vecinosDaolistaPasados.listarEventosPasados(idusuario2);
+                request.setAttribute("listaEventosPasados", listaEventosPasados);
+
+                vista = "vistas/jsp/VECINO/eventos/eventos_pasados.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+            case "verEventoPasado":
+                try {
+                    int idEvento = Integer.parseInt(request.getParameter("id"));
+                    System.out.println("ID del evento recibido: " + idEvento);
+
+                    CoordinadorDao eventoDAOedit = new CoordinadorDao();
+                    VecinosDao eventoDaoImag = new VecinosDao();
+                    Evento evento = eventoDAOedit.obtenerEventoPorId(idEvento);
+
+                    ArrayList<String> materiales = eventoDAOedit.obtenerNombresMaterialesPorIdEvento(idEvento);
+                    System.out.println("Materiales obtenidos: " + materiales);
+
+                    ArrayList<String> imagenesEvento = eventoDaoImag.obtenerImagenesPorIdEvento(idEvento);
+                    System.out.println("Número de imágenes obtenidas: " + imagenesEvento.size());
+                    for (String imagen : imagenesEvento) {
+                        System.out.println("Imagen base64: " + imagen.substring(0, 50) + "...");
+                    }
+
+                    if (evento.getImagenes() != null) {
+                        String base64Image = Base64.getEncoder().encodeToString(evento.getImagenes());
+                        request.setAttribute("base64Image", base64Image);
+                    }
+
+                    request.setAttribute("evento", evento);
+                    request.setAttribute("materiales", materiales);
+                    request.setAttribute("imagenesEvento", imagenesEvento);
+                    vista = "/vistas/jsp/VECINO/eventos/detalles_eventos_pasados.jsp";
+                    rd = request.getRequestDispatcher(vista);
+                    rd.forward(request, response);
+                } catch (NumberFormatException e) {
+                    System.out.println("ID del empleado no es un número válido");
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID del empleado no es válido");
+                }
                 break;
             case "eventos":
                 VecinosDao vecinosDao = new VecinosDao();
@@ -121,31 +193,6 @@ public class VecinoServlet extends HttpServlet {
                     System.out.println("ID del profesor no es un número válido");
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID del profesor no es válido");
                 }
-                break;
-            case "incidencias":
-                ArrayList<Incidencia> listaIncidencias = userDao.listarIncidencias();
-                request.setAttribute("listaincidencias", listaIncidencias);
-
-                vista = "vistas/jsp/VECINO/incidencias/incidencia_vecino.jsp";
-                rd = request.getRequestDispatcher(vista);
-                rd.forward(request,response);
-                break;
-            case "registroIncidencia":
-                ArrayList<Urbanizacion> listaUrbanizaciones = userDao.listarUrbanizaciones();
-                ArrayList<Tipos> tiposIncidencias = userDao.listarTiposIncidencias();
-                request.setAttribute("listaUrbanizaciones", listaUrbanizaciones);
-                request.setAttribute("tiposIncidencias", tiposIncidencias);
-                vista = "vistas/jsp/VECINO/incidencias/registrar_incidencia.jsp";
-                rd = request.getRequestDispatcher(vista);
-                rd.forward(request,response);
-                break;
-            case "infoIncidencia":
-                int idIncidencia = Integer.parseInt(request.getParameter("idIncidencia"));
-                Incidencia incidencia = userDao.getIncidenciaId(idIncidencia);
-                request.setAttribute("incidencia", incidencia);
-                vista = "vistas/jsp/VECINO/incidencias/incidencia_info.jsp";
-                rd = request.getRequestDispatcher(vista);
-                rd.forward(request,response);
                 break;
 
         }
