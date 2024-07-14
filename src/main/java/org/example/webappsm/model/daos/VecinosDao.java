@@ -532,7 +532,7 @@ public class VecinosDao extends BaseDao{
     public boolean desinscribirUsuarioDeEvento(int idUsuario, int idEvento) {
         String sql = "DELETE FROM inscripcion WHERE idUsuario = ? AND idEvento = ?";
 
-        try (Connection conn = getConnection();
+        try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, idUsuario);
