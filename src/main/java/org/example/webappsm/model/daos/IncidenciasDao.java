@@ -202,7 +202,7 @@ public class IncidenciasDao extends BaseDao{
 
     public void actualizarClasificacion(int categoriaId,int id){
 
-        String query = "UPDATE Incidencia AS i " +
+        String query = "UPDATE incidencia AS i " +
                 "SET idClasificacin = ? " +
                 "WHERE i.idIncidencia = ?";
 
@@ -217,7 +217,7 @@ public class IncidenciasDao extends BaseDao{
     }
     public void finalizarIncidencia(int id){
         int idFinalizar = 3;
-        String query = "UPDATE Incidencia AS i " +
+        String query = "UPDATE incidencia AS i " +
                 "SET i.idEstado = ? " +
                 "WHERE i.idIncidencia = ?";
 
@@ -232,7 +232,7 @@ public class IncidenciasDao extends BaseDao{
     }
     public void incidenciaEnProceso(int id){
         int idEnProceso = 2;
-        String query = "UPDATE Incidencia AS i " +
+        String query = "UPDATE incidencia AS i " +
                 "SET i.idEstado = ? " +
                 "WHERE i.idIncidencia = ?";
 
@@ -249,7 +249,7 @@ public class IncidenciasDao extends BaseDao{
         int idFalsaAlarma = 4;
         UserDao userDao = new UserDao();
         try (Connection conn = this.getConnection()) {
-            String queryUpd = "UPDATE Incidencia AS i " +
+            String queryUpd = "UPDATE incidencia AS i " +
                     "SET idEstado = ? " +
                     "WHERE i.idIncidencia = ?";
 
@@ -258,7 +258,7 @@ public class IncidenciasDao extends BaseDao{
                     pstmt.setInt(2, id);
                     pstmt.executeUpdate();
                 }
-            String queryUpdUser = "UPDATE Usuario AS u " +
+            String queryUpdUser = "UPDATE usuario AS u " +
                 "SET falsasAlarmas = ? " +
                 "WHERE u.idUsuario = ?";
 
@@ -278,7 +278,7 @@ public class IncidenciasDao extends BaseDao{
     public ArrayList<TipoSerenazgo> listarTipos(){
         ArrayList<TipoSerenazgo> listaTipos = new ArrayList<>();
 
-        String sql = "SELECT * from Tiposerenazgo";
+        String sql = "SELECT * from tiposerenazgo";
 
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();

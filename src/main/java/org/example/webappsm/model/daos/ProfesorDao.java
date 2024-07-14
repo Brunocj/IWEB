@@ -11,7 +11,7 @@ public class ProfesorDao extends BaseDao{
 
         ArrayList<Profesor> listaProfesores = new ArrayList<Profesor>();
 
-        String sql = " select * from Profesor" ;
+        String sql = " select * from profesor" ;
 
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
@@ -41,7 +41,7 @@ public class ProfesorDao extends BaseDao{
     }
     public void eliminarProfesor(int idProfesor) {
 
-        String sql = "DELETE FROM Profesor WHERE idProfesor = ?";
+        String sql = "DELETE FROM profesor WHERE idProfesor = ?";
 
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -55,7 +55,7 @@ public class ProfesorDao extends BaseDao{
     }
     public void agregarProfesor(Profesor profesor) {
 
-        String sql = "INSERT INTO Profesor (apellidos, nombres, curso, idArea) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO profesor (apellidos, nombres, curso, idArea) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -78,7 +78,7 @@ public class ProfesorDao extends BaseDao{
     public Profesor obtenerProfesorPorId(int id) {
         Profesor profesor = null;
 
-        String sql = "SELECT * FROM Profesor WHERE idProfesor = ?";
+        String sql = "SELECT * FROM profesor WHERE idProfesor = ?";
 
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -101,7 +101,7 @@ public class ProfesorDao extends BaseDao{
     }
     public void actualizarProfesor(Profesor profesor) {
 
-        String sql = "UPDATE Profesor SET apellidos = ?, nombres = ?, curso = ? ,idArea = ? WHERE idProfesor = ?";
+        String sql = "UPDATE profesor SET apellidos = ?, nombres = ?, curso = ? ,idArea = ? WHERE idProfesor = ?";
 
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

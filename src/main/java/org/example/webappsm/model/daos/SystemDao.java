@@ -262,6 +262,7 @@ public class SystemDao extends BaseDao{
 
     //hasheo de contraseña
 
+
     public String hashPassword(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");

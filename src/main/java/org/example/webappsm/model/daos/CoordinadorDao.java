@@ -274,7 +274,7 @@ public class CoordinadorDao extends BaseDao {
 
     public ArrayList<Profesor> listarProfesoresTablaDisponibilidad(Date fechaEvento, Time horaEvento, Time horaEvento2, int idArea) {
         ArrayList<Profesor> listaProfesores = new ArrayList<>();
-        String sql = "SELECT *, ? AS Disponibilidad FROM Profesor WHERE idArea = ?";
+        String sql = "SELECT *, ? AS Disponibilidad FROM profesor WHERE idArea = ?";
 
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

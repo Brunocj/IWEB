@@ -14,7 +14,7 @@ public class UserDao extends BaseDao{
 
     public Usuario mostrarUsuarioID (int userid){
         Usuario usuario = new Usuario();
-        String sql = "SELECT idUsuario, nombres AS Nombre, apellidos AS Apellido, correo AS Correo, nroDocumento AS Documento, contrasena AS contra,numeroContacto AS NumeroTelefonico FROM Usuario WHERE idUsuario = ?";
+        String sql = "SELECT idUsuario, nombres AS Nombre, apellidos AS Apellido, correo AS Correo, nroDocumento AS Documento, contrasena AS contra,numeroContacto AS NumeroTelefonico FROM usuario WHERE idUsuario = ?";
         try(Connection conn = this.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
         ){
@@ -40,7 +40,7 @@ public class UserDao extends BaseDao{
 
 
     public void enviarSolicitud(int idUsuario, int idArea){
-        String sql = "INSERT INTO SolicitudCoordinador (idUsuario, idArea, estado) VALUES (?, ?, 0)";
+        String sql = "INSERT INTO solicitudCoordinador (idUsuario, idArea, estado) VALUES (?, ?, 0)";
         try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 

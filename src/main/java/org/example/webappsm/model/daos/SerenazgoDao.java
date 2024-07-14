@@ -13,9 +13,9 @@ public class SerenazgoDao extends BaseDao {
         ArrayList<Serenazgo> listaSerenazgo = new ArrayList<>();
 
         String sql = "SELECT  s.idSerenazgo, s.nombre, s.apellido, ts.nombreTipo AS tipo, t.nombreTurno AS turno " +
-                "FROM Serenazgo s " +
-                "JOIN TipoSerenazgo ts ON s.idTipoSerenazgo = ts.idTipoSerenazgo " +
-                "JOIN Turno t ON s.idTurno = t.idTurno";
+                "FROM serenazgo s " +
+                "JOIN tipoSerenazgo ts ON s.idTipoSerenazgo = ts.idTipoSerenazgo " +
+                "JOIN turno t ON s.idTurno = t.idTurno";
 
         try (Connection conn= this.getConnection();
              Statement stmt = conn.createStatement();
@@ -43,7 +43,7 @@ public class SerenazgoDao extends BaseDao {
     }
     public void agregarSerenazgo(Serenazgo serenazgo, Integer turnoId, Integer tipoId){
 
-        String query = "INSERT INTO Serenazgo (nombre, apellido, dni, direccion, telefono, idTurno, idTipoSerenazgo, fNacimiento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO serenazgo (nombre, apellido, dni, direccion, telefono, idTurno, idTipoSerenazgo, fNacimiento) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)){
@@ -75,7 +75,7 @@ public class SerenazgoDao extends BaseDao {
     }
     public void eliminarSerenazgo(int idSerenazgo){
 
-        String query = "DELETE FROM Serenazgo WHERE idSerenazgo = ?";
+        String query = "DELETE FROM serenazgo WHERE idSerenazgo = ?";
 
         try (Connection conn= this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)){
@@ -90,9 +90,9 @@ public class SerenazgoDao extends BaseDao {
         Serenazgo serenazgo = new Serenazgo();
 
         String query = "SELECT s.idSerenazgo, s.nombre, s.apellido, s.dni, s.direccion, s.telefono, s.fNacimiento, " +
-                "(SELECT ts.nombreTipo FROM Tiposerenazgo ts WHERE ts.idTipoSerenazgo = s.idTipoSerenazgo) AS tipo, " +
-                "(SELECT t.nombreTurno FROM Turno t WHERE t.idTurno = s.idTurno) AS turno " +
-                "FROM Serenazgo s " +
+                "(SELECT ts.nombreTipo FROM tiposerenazgo ts WHERE ts.idTipoSerenazgo = s.idTipoSerenazgo) AS tipo, " +
+                "(SELECT t.nombreTurno FROM turno t WHERE t.idTurno = s.idTurno) AS turno " +
+                "FROM serenazgo s " +
                 "WHERE s.idSerenazgo = ?";
 
         try (Connection conn= this.getConnection();
@@ -117,7 +117,7 @@ public class SerenazgoDao extends BaseDao {
     }
     public void editarSerenazgo(Serenazgo serenazgo, Integer turnoId, Integer tipoId){
 
-        String query = "UPDATE Serenazgo AS S " +
+        String query = "UPDATE serenazgo AS S " +
                 "SET S.nombre = ?, " +
                 "    S.apellido = ?, " +
                 "    S.dni = ?, " +
@@ -220,7 +220,7 @@ public class SerenazgoDao extends BaseDao {
     public ArrayList<Turno> listarTurnos(){
         ArrayList<Turno> listaTurnos = new ArrayList<>();
 
-        String sql = "SELECT * from Turno";
+        String sql = "SELECT * from turno";
 
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
@@ -244,7 +244,7 @@ public class SerenazgoDao extends BaseDao {
     public ArrayList<TipoSerenazgo> listarTipos(){
         ArrayList<TipoSerenazgo> listaTipos = new ArrayList<>();
 
-        String sql = "SELECT * from Tiposerenazgo";
+        String sql = "SELECT * from tiposerenazgo";
 
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();

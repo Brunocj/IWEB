@@ -14,7 +14,7 @@ public class DashboardDao extends BaseDao{
 
 
 
-        String sql = "SELECT * FROM Usuario WHERE baneado = 1";
+        String sql = "SELECT * FROM usuario WHERE baneado = 1";
 
 
         try (Connection conn = this.getConnection();
@@ -44,7 +44,7 @@ public class DashboardDao extends BaseDao{
 
 
         String sql = "SELECT COUNT(*) AS total_vecinos_baneados " +
-                "FROM Usuario " +
+                "FROM usuario " +
                 "WHERE idRol = 3 AND baneado = 1;";
 
         try (Connection conn = this.getConnection();
@@ -72,7 +72,7 @@ public class DashboardDao extends BaseDao{
         String sql = "SELECT ROUND(AVG(incidencias_por_dia), 2) AS promedio_incidencias_por_dia \n" +
                 "FROM (\n" +
                 "    SELECT DATE(fecha) AS fecha_dia, COUNT(*) AS incidencias_por_dia \n" +
-                "    FROM Incidencia \n" +
+                "    FROM incidencia \n" +
                 "    GROUP BY fecha_dia\n" +
                 ") AS incidencias_diarias;";
 
@@ -172,7 +172,7 @@ public class DashboardDao extends BaseDao{
 
 
         String sql = "SELECT COUNT(*) AS cantidad_incidencias_pendientes " +
-                "FROM Incidencia " +
+                "FROM incidencia " +
                 "WHERE idEstado = 1;";
 
         try (Connection conn = this.getConnection();
@@ -197,8 +197,8 @@ public class DashboardDao extends BaseDao{
 
 
         String sql = "SELECT nombreUrbanizacion, COUNT(*) AS cantidad_incidencias " +
-                "FROM Incidencia " +
-                "JOIN Urbanizacion ON Incidencia.idUrbanizacion = Urbanizacion.idUrbanizacion " +
+                "FROM incidencia " +
+                "JOIN urbanizacion ON incidencia.idUrbanizacion = urbanizacion.idUrbanizacion " +
                 "GROUP BY nombreUrbanizacion " +
                 "ORDER BY cantidad_incidencias DESC " +
                 "LIMIT 1;";
@@ -225,8 +225,8 @@ public class DashboardDao extends BaseDao{
 
 
         String sql = "SELECT nombreUrbanizacion, COUNT(*) AS cantidad_incidencias " +
-                "FROM Incidencia " +
-                "JOIN Urbanizacion ON Incidencia.idUrbanizacion = Urbanizacion.idUrbanizacion " +
+                "FROM incidencia " +
+                "JOIN urbanizacion ON incidencia.idUrbanizacion = urbanizacion.idUrbanizacion " +
                 "GROUP BY nombreUrbanizacion " +
                 "ORDER BY cantidad_incidencias ASC " +
                 "LIMIT 1;";
@@ -252,8 +252,8 @@ public class DashboardDao extends BaseDao{
 
 
         String sql = "SELECT nombreTipo, COUNT(*) AS cantidad_incidencias " +
-                "FROM Incidencia " +
-                "JOIN TipoIncidencia ON Incidencia.idTipoIncidencia = TipoIncidencia.idTipoIncidencia " +
+                "FROM incidencia " +
+                "JOIN tipoIncidencia ON incidencia.idTipoIncidencia = tipoIncidencia.idTipoIncidencia " +
                 "GROUP BY nombreTipo " +
                 "ORDER BY cantidad_incidencias DESC";
 
@@ -277,7 +277,7 @@ public class DashboardDao extends BaseDao{
         ArrayList<Incidencia> listaIncidencias = new ArrayList<>();
 
 
-        String sql = "SELECT * FROM Incidencia WHERE idEstado = ?";
+        String sql = "SELECT * FROM incidencia WHERE idEstado = ?";
 
         try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -303,8 +303,8 @@ public class DashboardDao extends BaseDao{
 
 
         String sql = "SELECT nombreUrbanizacion, COUNT(*) AS cantidad_incidencias " +
-                "FROM Incidencia " +
-                "JOIN Urbanizacion ON Incidencia.idUrbanizacion = Urbanizacion.idUrbanizacion " +
+                "FROM incidencia " +
+                "JOIN urbanizacion ON incidencia.idUrbanizacion = urbanizacion.idUrbanizacion " +
                 "GROUP BY nombreUrbanizacion " +
                 "ORDER BY cantidad_incidencias DESC";
 
@@ -329,15 +329,15 @@ public class DashboardDao extends BaseDao{
 
     public void incidenciasPorTipo(ArrayList<String> Tipos, ArrayList<Integer> Cantidades){
 
-        String sql = "SELECT " +
-                "ti.nombreTipo AS tipo_incidencia, " +
-                "COUNT(i.idIncidencia) AS cantidad_incidencias " +
-                "FROM " +
-                "SanMiguel.TipoIncidencia ti " +
-                "LEFT JOIN " +
-                "SanMiguel.Incidencia i ON ti.idTipoIncidencia = i.idTipoIncidencia " +
-                "GROUP BY " +
-                "ti.nombreTipo;";
+        String sql = "SELECT \n" +
+                "    ti.nombreTipo AS tipo_incidencia, \n" +
+                "    COUNT(i.idIncidencia) AS cantidad_incidencias \n" +
+                "FROM \n" +
+                "    sanmiguel.tipoincidencia ti \n" +
+                "LEFT JOIN \n" +
+                "    sanmiguel.incidencia i ON ti.idTipoIncidencia = i.idTipoIncidencia \n" +
+                "GROUP BY \n" +
+                "    ti.nombreTipo;";
 
         try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -357,15 +357,15 @@ public class DashboardDao extends BaseDao{
 
     public void incidenciasPorUrbanizacion(ArrayList<String> Urbanizaciones, ArrayList<Integer> Cantidades){
 
-        String sql = "SELECT " +
-                "u.nombreUrbanizacion AS nombreUrb, " +
-                "COUNT(i.idIncidencia) AS cantidad_incidencias " +
-                "FROM " +
-                "Urbanizacion u " +
-                "LEFT JOIN " +
-                "SanMiguel.Incidencia i ON u.idUrbanizacion = i.idTipoIncidencia " +
-                "GROUP BY " +
-                "u.nombreUrbanizacion;";
+        String sql = "SELECT \n" +
+                "    u.nombreUrbanizacion AS nombreUrb, \n" +
+                "    COUNT(i.idIncidencia) AS cantidad_incidencias \n" +
+                "FROM \n" +
+                "    urbanizacion u \n" +
+                "LEFT JOIN \n" +
+                "    sanmiguel.incidencia i ON u.idUrbanizacion = i.idUrbanizacion \n" +
+                "GROUP BY \n" +
+                "    u.nombreUrbanizacion;";
 
         try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -385,15 +385,15 @@ public class DashboardDao extends BaseDao{
 
     public void incidenciasPorEstado(ArrayList<String> Estados, ArrayList<Double> Porcentajes){
 
-        String sql = "SELECT " +
-                "e.nombreEstado, " +
-                "(COUNT(i.idIncidencia) * 100.0 / (SELECT COUNT(*) FROM Incidencia)) AS porcentaje " +
-                "FROM " +
-                "EstadoIncidencia e " +
-                "LEFT JOIN " +
-                "Incidencia i ON e.idEstado = i.idEstado " +
-                "GROUP BY " +
-                "e.nombreEstado;";
+        String sql = "SELECT \n" +
+                "    e.nombreEstado, \n" +
+                "    (COUNT(i.idIncidencia) * 100.0 / (SELECT COUNT(*) FROM incidencia)) AS porcentaje \n" +
+                "FROM \n" +
+                "    estadoincidencia e \n" +
+                "LEFT JOIN \n" +
+                "    incidencia i ON e.idEstado = i.idEstado \n" +
+                "GROUP BY \n" +
+                "    e.nombreEstado;";
 
         try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -413,27 +413,27 @@ public class DashboardDao extends BaseDao{
 
     public void incidenciasRegistradas (ArrayList<String> Labels, ArrayList<Integer>IncidenciasRegistradas, ArrayList<Integer>IncidenciasResueltas){
 
-        String sql = "WITH Days AS (" +
-                "SELECT 1 AS DayNumber, 'Lunes' AS DayName " +
-                "UNION ALL SELECT 2, 'Martes' " +
-                "UNION ALL SELECT 3, 'Miercoles' " +
-                "UNION ALL SELECT 4, 'Jueves' " +
-                "UNION ALL SELECT 5, 'Viernes' " +
-                "UNION ALL SELECT 6, 'Sábado' " +
-                "UNION ALL SELECT 7, 'Domingo' " +
-                ") " +
-                "SELECT " +
-                "d.DayName AS Dia, " +
-                "COALESCE(SUM(CASE WHEN DAYOFWEEK(i.fecha) = d.DayNumber THEN 1 ELSE 0 END), 0) AS IncidenciasReportadas, " +
-                "COALESCE(SUM(CASE WHEN i.idEstado IN (3, 4) AND DAYOFWEEK(i.fecha) = d.DayNumber THEN 1 ELSE 0 END), 0) AS IncidenciasResueltas " +
-                "FROM " +
-                "Days d " +
-                "LEFT JOIN " +
-                "Incidencia i ON YEARWEEK(i.fecha, 1) = YEARWEEK(CURDATE(), 1) AND DAYOFWEEK(i.fecha) = d.DayNumber " +
-                "GROUP BY " +
-                "d.DayNumber, d.DayName " +
-                "ORDER BY " +
-                "d.DayNumber;";
+        String sql = "WITH Days AS (\n" +
+                "    SELECT 1 AS DayNumber, 'Lunes' AS DayName\n" +
+                "    UNION ALL SELECT 2, 'Martes'\n" +
+                "    UNION ALL SELECT 3, 'Miércoles'\n" +
+                "    UNION ALL SELECT 4, 'Jueves'\n" +
+                "    UNION ALL SELECT 5, 'Viernes'\n" +
+                "    UNION ALL SELECT 6, 'Sábado'\n" +
+                "    UNION ALL SELECT 7, 'Domingo'\n" +
+                ")\n" +
+                "SELECT \n" +
+                "    d.DayName AS Dia,\n" +
+                "    COALESCE(SUM(CASE WHEN DAYOFWEEK(i.fecha) = d.DayNumber THEN 1 ELSE 0 END), 0) AS IncidenciasReportadas,\n" +
+                "    COALESCE(SUM(CASE WHEN i.idEstado IN (3, 4) AND DAYOFWEEK(i.fecha) = d.DayNumber THEN 1 ELSE 0 END), 0) AS IncidenciasResueltas\n" +
+                "FROM \n" +
+                "    Days d\n" +
+                "LEFT JOIN \n" +
+                "    incidencia i ON YEARWEEK(i.fecha, 1) = YEARWEEK(CURDATE(), 1) AND DAYOFWEEK(i.fecha) = d.DayNumber\n" +
+                "GROUP BY \n" +
+                "    d.DayNumber, d.DayName\n" +
+                "ORDER BY \n" +
+                "    d.DayNumber;";
 
         try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
