@@ -1,3 +1,5 @@
+<%@ page import="org.example.webappsm.model.beans.Evento" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -21,6 +23,80 @@
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" />
     <!--JS para los popups-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+      .badge-success {
+        background-color: #28a745;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        display: inline-block;
+        margin-bottom: 10px;
+      }
+
+      .badge-finished {
+        background-color: #ff0000; /* Red color */
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+
+      .cardEvent {
+        width: 100%;
+        max-width: 300px;
+        height: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        overflow: hidden;
+        margin: auto;
+      }
+
+      .cardEvent img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .cardEvent .card-body {
+        padding: 15px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .cardEvent .card-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .cardEvent .card-text {
+        flex: 1;
+        font-size: 14px;
+        color: #555;
+      }
+
+      .cardEvent .btn-bottom-right {
+        margin-top: 10px;
+        align-self: flex-end;
+      }
+
+      .row-cols-1 > .col,
+      .row-cols-md-2 > .col,
+      .row-cols-lg-4 > .col {
+        padding: 15px;
+      }
+    </style>
   </head>
   <body>
     <div class="container-scroller">
@@ -42,176 +118,53 @@
           <div class="content-wrapper" style ="background-color: #bdf1f5;"> <!--Cambiar al color mas claro-->
             <!-- Sección de contenido -->
             <section class="py-3">
-              <div class="container">
-                <div class="row justify-content-center">
-                  <div class="col-md-4">
-                    <a href="eventos.jsp" class="btn btn-primary btn-lg d-block mb-3 topBtn" style ="background-color: #000f22;">Eventos</a> <!--Cambiar el color de acuerdo al que este seleccionado (el codigo de color de estalinea es el que se debe usar para cuando se encuentra una pestaña seleccionada; en coordinador, usar otro color, pero que sea más oscuro)-->
-                  </div>
-                  <div class="col-md-4">
-                    <a href="eventospasados.jsp" class="btn btn-primary btn-lg d-block mb-3" style ="background-color: #183d6c;">Eventos Pasados</a>
-                  </div>
-                </div>
-              </div>
+              <h2 style ="color:#000f22; font-size: 30px; font-weight: bold; margin-bottom: 20px;">Eventos | Eventos por agregar nota</h2>
             </section>
+            <hr style="color:#000f22; border: none; border-top: 3px solid black; margin-top: -15px; border-radius: 10px;">
             <section class="py-5" >
-              <div class="container" style ="padding-top: 0px;">
+              <%
+                // Suponiendo que eventos es un ArrayList<Evento> que proviene del servlet o controlador
+                ArrayList<Evento> eventos = (ArrayList<Evento>) request.getAttribute("listaEventosNota");
+
+                int columnasPorFila = 4;
+                int contador = 0;
+
+                // Iterar sobre la lista de eventos
+                for (Evento evento : eventos) {
+                  // Abrir un nuevo container y row cada 4 eventos
+                  if (contador % columnasPorFila == 0) {
+              %>
+              <div class="container" style="padding-top: 0px;">
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                  <% } %>
+
+                  <%-- Inicio de una columna para cada evento --%>
                   <div class="col">
-                    <div class="cardEvent" data-event-id="1">
-                      <img src="../../img/Eventos/foto1.png" class="card-img-top" alt="...">
+                    <div class="cardEvent" data-event-id="<%= evento.getIdEvento() %>">
+                      <img src="data:image/jpeg;base64, <%= new String(org.apache.commons.codec.binary.Base64.encodeBase64(evento.getImagenes())) %>" class="card-img-top" alt="...">
                       <div class="card-body">
+                        <span class="badge-finished">Evento Finalizado</span>
                         <div class="d-flex justify-content-between align-items-center">
-                          <h5 class="card-title">Título de la Tarjeta</h5>
+
+                          <h5 class="card-title"><%= evento.getTitulo() %></h5>
                         </div>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <!-- Botón en la parte inferior derecha -->
-                        <a href ="detalleseventospasados.jsp?eventId=1" class="btn btn-primary btn-sm btn-bottom-right">Agregar nota</a>
+                        <div class="event-date">
+                          <i class="mdi mdi-calendar"></i> <%= evento.getFecha() %> - <i class="mdi mdi-clock"></i> <%= evento.getHora() %>
+                        </div>
+                        <a href ="${pageContext.request.contextPath}/Coordinador?action=verEventoNota&id=<%= evento.getIdEvento() %>" class="btn btn-primary btn-sm btn-bottom-right">Agregar Nota</a>
                       </div>
                     </div>
                   </div>
-                  
-                  <div class="col">
-                    <div class="cardEvent" data-event-id="2" >
-                      <img src="../../img/Eventos/foto1.png" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <h5 class="card-title">Título de la Tarjeta</h5>
-                        </div>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <a href ="detalleseventospasados.jsp?eventId=2" class="btn btn-primary btn-sm btn-bottom-right">Agregar nota</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="cardEvent" data-event-id="3">
-                      <img src="../../img/Eventos/foto1.png" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <h5 class="card-title">Título de la Tarjeta</h5>
-                        </div>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <a href ="detalleseventospasados.jsp?eventId=3" class="btn btn-primary btn-sm btn-bottom-right">Agregar nota</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="cardEvent" data-event-id="4">
-                      <img src="../../img/Eventos/foto1.png" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <h5 class="card-title">Título de la Tarjeta</h5>
-                        </div>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <a href ="detalleseventospasados.jsp?eventId=4" class="btn btn-primary btn-sm btn-bottom-right">Agregar nota</a>
-                      </div>
-                    </div>
-                  </div>
-                  
-                </div>
-                
-              </div>
-              
-              <div class="container">
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-                  
-                  <div class="col">
-                    <div class="cardEvent" data-event-id="5">
-                      <img src="../../img/Eventos/foto2.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <h5 class="card-title">Título de la Tarjeta</h5>
-                        </div>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <a href="detalleseventospasados.jsp?eventId=5" class="btn btn-primary btn-sm btn-bottom-right">Agregar nota</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="cardEvent" data-event-id="6">
-                      
-                      <img src="../../img/Eventos/foto2.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <h5 class="card-title">Título de la Tarjeta</h5>
-                        </div>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <a href="detalleseventospasados.jsp?eventId=6" class="btn btn-primary btn-sm btn-bottom-right">Agregar nota</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="cardEvent" data-event-id="7">
-                      
-                      <img src="../../img/Eventos/foto2.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <h5 class="card-title">Título de la Tarjeta</h5>
-                        </div>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <a href="detalleseventospasados.jsp?eventId=7" class="btn btn-primary btn-sm btn-bottom-right">Agregar nota</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="cardEvent" data-event-id="8">
-                      <img src="../../img/Eventos/foto2.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <h5 class="card-title">Título de la Tarjeta</h5>
-                        </div>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <a href="detalleseventospasados.jsp?eventId=8" class="btn btn-primary btn-sm btn-bottom-right">Agregar nota</a>
-                      </div>
-                    </div>
-                  </div>
-                  
-                </div>
-                
-              </div>
-              
-              <div class="container">
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-                  
-                  <div class="col">
-                    <div class="cardEvent" data-event-id="9">
-                      <img src="../../img/Eventos/foto3.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <h5 class="card-title">Título de la Tarjeta</h5>
-                        </div>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <a href="detalleseventospasados.jsp?eventId=9" class="btn btn-primary btn-sm btn-bottom-right">Agregar nota</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="cardEvent" data-event-id="10">
-                     
-                      <img src="../../img/Eventos/foto3.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <h5 class="card-title">Título de la Tarjeta</h5>
-                        </div>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <a href="detalleseventospasados.jsp?eventId=10" class="btn btn-primary btn-sm btn-bottom-right">Agregar nota</a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="cardEvent" data-event-id="11">
-                     
-                      <img src="../../img/Eventos/foto3.jpg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <h5 class="card-title">Título de la Tarjeta</h5>
-                        </div>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <a href="detalleseventospasados.jsp?eventId=11" class="btn btn-primary btn-sm btn-bottom-right">Agregar nota</a>
-                      </div>
-                    </div>
-                  </div>
-              </div>
-            
+
+                  <%-- Cerrar el container y row al final de cada grupo de 4 eventos o al final de la lista --%>
+                  <% if ((contador + 1) % columnasPorFila == 0 || contador == eventos.size() - 1) { %>
+                </div> <!-- Cerrar row -->
+              </div> <!-- Cerrar container -->
+              <% } %>
+
+              <% contador++;
+              } %>
+
             </section>
             <nav>
               <ul class="pagination justify-content-center">
@@ -220,7 +173,7 @@
                 </li>
                 <li class="page-item active"><a class="page-link page-button" href="#" data-page="1">1</a></li>
                 <li class="page-item"><a class="page-link page-button" href="#" data-page="2">2</a></li>
-          
+
                 <!-- Repite este bloque para más números de página si es necesario -->
                 <li class="page-item" id="nextPage">
                   <a class="page-link" href="#">Siguiente</a>
@@ -252,9 +205,9 @@
     <!-- Custom js for this page -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <script src = "${pageContext.request.contextPath}/vistas/jsp/COORDINADOR/js/Eventos/script_eventos.js"></script>
-    
+
     <!-- End custom js for this page -->
   </body>
 </html>

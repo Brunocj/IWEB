@@ -297,6 +297,7 @@ animation-delay: 0.6s;
   width: 86%;
   margin-left: 12px;
   margin-right: 5px;
+  cursor: pointer;
 }
 
 .fadeIn.eight {
@@ -306,6 +307,7 @@ animation-delay: 0.6s;
   width: 85%;
   margin-left: 12px;
   margin-right: 10px;
+  cursor: pointer;
 }
 
 

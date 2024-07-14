@@ -139,7 +139,7 @@
     margin-top: 0px;
   }
   .cardTransicion[for="c1"] {
-    background-image: url('fotos/foto9.jpg'); 
+    background-image: url('fotos/foto.jpg');
   }
   
   .cardTransicion[for="c2"] {
@@ -164,9 +164,9 @@
   }
   .addEvent a{
     margin: 0px;
-    font-size: 144px;
+    font-size: 120px;
     color: black;
   }
   .addEvent .card-body{
-    padding-top: 0px;
+    padding-top: 0px !important;
   }

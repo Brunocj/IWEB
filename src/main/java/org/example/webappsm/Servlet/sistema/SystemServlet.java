@@ -84,21 +84,23 @@ public class SystemServlet extends HttpServlet {
             case "loginPOST":
                 String correo = request.getParameter("user");
                 String password = request.getParameter("passwd");
+                String passwordHasheada = systemDao.hashPassword(password);
                 System.out.println("username: " + correo + " | password: " + password);
 
                 if (correo == null || correo.isEmpty()) {
                     request.setAttribute("err", "Debe ingresar el correo electrónico asociado a su cuenta");
                     request.getRequestDispatcher("vistas/jsp/LOGIN/login.jsp").forward(request, response);
 
-                } else if (password == null || password.isEmpty()) {
+                } else if (passwordHasheada == null || passwordHasheada.isEmpty()) {
                     request.setAttribute("err", "Debe ingresar su contraseña");
                     request.setAttribute("user", correo);  // Mantener el correo en el formulario
                     request.getRequestDispatcher("vistas/jsp/LOGIN/login.jsp").forward(request, response);
-                } else if (!systemDao.validarUsuarioPassword(correo, password)) {
+                } else if (!systemDao.validarUsuarioPassword(correo, passwordHasheada)) {
 
                     request.setAttribute("err", "Credenciales incorrectas");
                     request.setAttribute("err2", "Nombre de usuario o contraseña no válidos ");
                     request.getRequestDispatcher("vistas/jsp/LOGIN/login.jsp").forward(request, response);
+                    System.out.println("password: " + passwordHasheada);
 
                 } else {
                     System.out.println("usuario y password válidos");
@@ -147,7 +149,11 @@ public class SystemServlet extends HttpServlet {
                     int idEstado = Integer.parseInt(request.getParameter("idestado"));
                     int falsasAlarmas = Integer.parseInt(request.getParameter("falsasAlarmas"));
                     String contacto = request.getParameter("contacto").trim();
+
+
                     String contra = systemDao.generarContra();
+                    String contraHasheada = systemDao.hashPassword(contra);
+
 
                     boolean hasError = false;
 
@@ -246,14 +252,20 @@ public class SystemServlet extends HttpServlet {
 
 
 
-
+            //cambio de contra cuando se ingresa con la contra mandada por correo (idEstado=2)
             case "chPassPOST":
                 int idUsuario = Integer.parseInt(request.getParameter("id"));
                 Usuario usuario = userDao.mostrarUsuarioID(idUsuario);
                 String contraIngresada = request.getParameter("currentPass");
-                if(contraIngresada.equals(usuario.getContrasena())){ //falta adaptar para cuando la contraseña este hasheada
+
+                String contraHasheada= systemDao.hashPassword(contraIngresada);
+
+                if(contraHasheada.equals(usuario.getContrasena())){ //falta adaptar para cuando la contraseña este hasheada
                     String nuevaContra = request.getParameter("newPassword");
-                    systemDao.actualizarContra(idUsuario, nuevaContra);
+
+                    String contraHasheadaNueva= systemDao.hashPassword(nuevaContra);
+
+                    systemDao.actualizarContra(idUsuario, contraHasheadaNueva);
                     String passSuccess = "Se actualizo correctamente su contraseña";
                     Usuario usuariohttp = systemDao.getUsuarioCorreo(usuario.getCorreoE());
                     if(usuariohttp.getIdEstado()==2){
@@ -281,7 +293,9 @@ public class SystemServlet extends HttpServlet {
                 System.out.printf("Ingresado: " + dni + " y " + correo2);
                 try {
                     if (systemDao.validarCambioContra(correo2, dni)) {
-                        systemDao.cambiarContra(nuevaContra, dni); // Cambia aquí el segundo parámetro a dni
+
+                        String nuevaContraRecuperacion= systemDao.hashPassword(nuevaContra);
+                        systemDao.cambiarContra(nuevaContraRecuperacion, dni); // Cambia aquí el segundo parámetro a dni
                         systemDao.enviarCorreo(correo2, asunto, cuerpo);
                         msg = "Sus datos fueron actualizados correctamente, revise su correo";
                         request.setAttribute("msg", msg);
@@ -311,16 +325,20 @@ public class SystemServlet extends HttpServlet {
                 break;
 
                 //CASE PARA EL CAMBIO DE CONTRASEÑA CON POPUP
-
+//
             case "validatePassword":
                 int userId = Integer.parseInt(request.getParameter("userId"));
                 String oldPassword = request.getParameter("oldPassword");
                 Usuario usuario1 = userDao.mostrarUsuarioID(userId);
 
+
+                System.out.println("Id de usuario: " + userId);
                 System.out.println("Contraseña recibida: " + oldPassword);
                 System.out.println("Contraseña almacenada: " + usuario1.getContrasena());
 
-                if (usuario1.getContrasena().equals(oldPassword)) {
+                String oldPasswordHash= systemDao.hashPassword(oldPassword);
+
+                if (usuario1.getContrasena().equals(oldPasswordHash)) {
                     response.getWriter().write("valid");
                 } else {
                     response.getWriter().write("invalid");
@@ -331,7 +349,8 @@ public class SystemServlet extends HttpServlet {
             case "updatePassword":
                 int userId1 = Integer.parseInt(request.getParameter("userId"));
                 String newPassword = request.getParameter("newPassword");
-                systemDao.actualizarContra(userId1, newPassword);
+                String newPasswordHash= systemDao.hashPassword(newPassword);
+                systemDao.actualizarContra(userId1, newPasswordHash);
                 response.getWriter().write("success");
                 break;
 

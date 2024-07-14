@@ -40,14 +40,38 @@
             </a>
         </li>
 
-        <li class="nav-item menu-items ${"eventos".equals(request.getParameter("action")) ? "active" : ""}">
-            <a class="nav-link" href="<%=request.getContextPath()%>/Coordinador?action=eventos"><!-- Cambiar href de acuerdo a lo necesario -->
-                <span class="menu-icon">
+
+
+
+        <li class="nav-item menu-items">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-icon">
                 <i class="mdi mdi-earth"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
               </span>
-                <span class="menu-title" style="color: white;">Eventos</span>
+                <span class="menu-title vecinos" style="color: white;">Eventos</span>
+                <i class="menu-arrow" style="color: white;"></i>
             </a>
+
+            <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu"><!-- Colocar items de la sublista -->
+
+                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/Coordinador?action=eventos">
+                  <span class="menu-icon">
+                    <i class="mdi mdi-calendar-plus"></i>
+                  </span>
+                        Eventos creados</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/Coordinador?action=EventosNota">
+                    <span class="menu-icon">
+                    <i class="mdi mdi-calendar-text"></i>
+                  </span>
+                        Eventos pendientes</a></li>
+                </ul>
+            </div>
         </li>
+
+
+
+
         <li class="nav-item menu-items ${"incidencias".equals(request.getParameter("action")) ? "active" : ""}">
             <a class="nav-link" href="<%=request.getContextPath()%>/Coordinador?action=incidencias"> <!-- Cambiar href de acuerdo a lo necesario -->
                 <span class="menu-icon">
@@ -87,7 +111,7 @@
                         <div class="navbar-profile">
                             <div class="Header-nav-item">
                                 <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default;">Nombre del coordinador</h2> <!--Posteriormente obtener mediante querys -->
-                                <h5 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 15px; font-weight:500; cursor: default;">Coordinador Sanmiguelino</h5>
+                                <h5 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 15px; font-weight:500; cursor: default;">Coordinador de Cultura</h5>
                             </div>
                             <img class="img-xs rounded-circle" src="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
 
@@ -101,3 +125,4 @@
             </button>
         </div>
     </nav>
+

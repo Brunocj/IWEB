@@ -30,7 +30,7 @@
             </a>
         </li>
         <li class="nav-item menu-items">
-            <a class="nav-link" href="https://mail.google.com/mail/u/0/#inbox">
+            <a class="nav-link" href="https://mail.google.com/mail/u/1/?ogbl#search/sm.4dmin">
               <span class="menu-icon">
                 <i class="mdi mdi-email"></i>
               </span>

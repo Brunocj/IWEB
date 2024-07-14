@@ -10,6 +10,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 import jakarta.mail.internet.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 public class SystemDao extends BaseDao{
 
@@ -65,29 +69,6 @@ public class SystemDao extends BaseDao{
         return exito;
     }
 
-    public boolean validarUsuarioPasswordHashed(String username, String password){
-
-        String sql = "SELECT * FROM usuario where correo = ? and contrasena = sha2(?,256)";
-
-        boolean exito = false;
-
-        try(Connection connection = this.getConnection();
-            PreparedStatement pstmt = connection.prepareStatement(sql)){
-
-            pstmt.setString(1,username);
-            pstmt.setString(2,password);
-
-            try(ResultSet rs = pstmt.executeQuery()){
-                if(rs.next()){
-                    exito = true;
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        return exito;
-    }
     public Usuario getUsuarioCorreo(String correo){
         Usuario usuario = new Usuario();
         String sql = "SELECT * FROM usuario WHERE correo = ?;";
@@ -278,6 +259,44 @@ public class SystemDao extends BaseDao{
         return existe;
     }
 
+
+    //hasheo de contraseña
+
+    public String hashPassword(String password) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+            return Base64.getEncoder().encodeToString(hash);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
+    public boolean validarUsuarioPasswordHashed(String username, String password){
+
+        String sql = "SELECT * FROM usuario where correo = ? and contrasena = sha2(?,256)";
+
+        boolean exito = false;
+
+        try(Connection connection = this.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement(sql)){
+
+            pstmt.setString(1,username);
+            pstmt.setString(2,password);
+
+            try(ResultSet rs = pstmt.executeQuery()){
+                if(rs.next()){
+                    exito = true;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return exito;
+    }
 
 
 }

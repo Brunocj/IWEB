@@ -32,6 +32,80 @@
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" />
     <!--JS para los popups-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .badge-success {
+            background-color: #28a745;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .badge-finished {
+            background-color: #ff0000; /* Red color */
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            display: inline-block;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .cardEvent {
+            width: 100%;
+            max-width: 300px;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin: auto;
+        }
+
+        .cardEvent img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .cardEvent .card-body {
+            padding: 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cardEvent .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .cardEvent .card-text {
+            flex: 1;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .cardEvent .btn-bottom-right {
+            margin-top: 10px;
+            align-self: flex-end;
+        }
+
+        .row-cols-1 > .col,
+        .row-cols-md-2 > .col,
+        .row-cols-lg-4 > .col {
+            padding: 15px;
+        }
+    </style>
 </head>
 <body>
 <div class="container-scroller">
@@ -52,20 +126,9 @@
             <div class="content-wrapper" style ="background-color: #d6e9ff;"> <!--Cambiar al color mas claro-->
                 <!-- Sección de contenido -->
                 <section class="py-3">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-md-4">
-                                <a href="${pageContext.request.contextPath}/Vecino?action=misEventos" class="btn btn-primary btn-lg d-block mb-3" style ="background-color: #000f22;">Mis Eventos</a>
-                            </div>
-                            <div class="col-md-4">
-                                <a href="${pageContext.request.contextPath}/Vecino?action=eventos" class="btn btn-primary btn-lg d-block mb-3 topBtn" style ="background-color: #183d6c;">Eventos</a> <!--Cambiar el color de acuerdo al que este seleccionado (el codigo de color de estalinea es el que se debe usar para cuando se encuentra una pestaña seleccionada; en coordinador, usar otro color, pero que sea más oscuro)-->
-                            </div>
-                            <div class="col-md-4">
-                                <a href="${pageContext.request.contextPath}/vistas/jsp/VECINO/eventos/eventos_pasados.jsp" class="btn btn-primary btn-lg d-block mb-3" style ="background-color: #000f22;">Eventos Pasados</a>
-                            </div>
-                        </div>
-                    </div>
+                    <h2 style ="color:#000f22; font-size: 30px; font-weight: bold; margin-bottom: 20px;">Eventos | Eventos por elegir</h2>
                 </section>
+                <hr style="color:#000f22; border: none; border-top: 3px solid black; margin-top: -15px; border-radius: 10px;">
                 <section class="py-5" >
                     <%
                         // Suponiendo que eventos es un ArrayList<Evento> que proviene del servlet o controlador
@@ -91,7 +154,9 @@
                                         <div class="d-flex justify-content-between align-items-center">
                                             <h5 class="card-title"><%= evento.getTitulo() %></h5>
                                         </div>
-                                        <p class="card-text"><%= evento.getDescripcion() %></p>
+                                        <div class="event-date">
+                                            <i class="mdi mdi-calendar"></i> <%= evento.getFecha() %> - <i class="mdi mdi-clock"></i> <%= evento.getHora() %>
+                                        </div>
                                         <a href ="${pageContext.request.contextPath}/Vecino?action=verEvento&id=<%= evento.getIdEvento() %>" class="btn btn-primary btn-sm btn-bottom-right">Ver evento</a>
                                     </div>
                                 </div>

@@ -98,16 +98,38 @@ $(document).ready(function () {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-  var checkboxes = document.querySelectorAll('input[name="opcion"]');
-  checkboxes.forEach(function(checkbox) {
-      checkbox.addEventListener('click', function() {
-          checkboxes.forEach(function(cb) {
-              if (cb !== checkbox) {
-                  cb.checked = false;
-              }
-          });
-      });
-  });
+    const checkboxes = document.querySelectorAll('input[name="opcion"]');
+    const botonEscoger = document.getElementById('escogerProfesor');
+    const idProfesorSeleccionado = document.getElementById('idProfesorSeleccionado');
+
+    checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            checkboxes.forEach(function(cb) {
+                cb.checked = (cb === checkbox && cb.checked);
+            });
+        });
+    });
+
+    botonEscoger.addEventListener('click', function() {
+        const checkboxSeleccionado = document.querySelector('input[name="opcion"]:checked');
+
+        if (!checkboxSeleccionado) {
+            seleccionar();
+            return;
+        }
+
+        const fila = checkboxSeleccionado.closest('tr');
+        const disponibilidad = fila.getAttribute('data-disponibilidad');
+
+        if (disponibilidad === 'Disponible') {
+            idProfesorSeleccionado.value = checkboxSeleccionado.value;
+            document.getElementById('profesorForm').submit();
+        } else if (disponibilidad === 'No Disponible') {
+            no_disponible();
+        } else if (disponibilidad === 'Falta filtrar') {
+            falta_filtrar();
+        }
+    });
 });
 
 
@@ -139,21 +161,40 @@ document.addEventListener('DOMContentLoaded', function() {
       } else {
           no_disponible();
       }
+      if (disponibilidad === 'Falta filtrar')
+      {
+          falta_filtrar();
+      }
   });
 });
+function falta_filtrar() {
+    Swal.fire({
+        title: "Alerta",
+        text: "Tienes que utilizar los parámetros de fecha y hora para poder elegir al profesor",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#00913f",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "ok"
+    });
 
+    // Evitar que el formulario se envíe automáticamente
+    return false;
+}
 function disponible() {
   Swal.fire({
       title: "Estás seguro?",
-      text: "Una vez agregue a un docente, se actualizará la información en la base de datos",
+      text: "Una vez agregue a un docente, se actualizará el registro del profesor",
       icon: "warning",
       showCancelButton: true,
+      confirmButtonText: "Sí, agregar",
+      cancelButtonText: "Cancelar",
       confirmButtonColor: "#00913f",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Sí, agregar"
+
   }).then((result) => {
       if (result.isConfirmed) {
-        window.history.back();;      
+        window.history.back();
       }
   });
 
