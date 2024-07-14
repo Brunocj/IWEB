@@ -325,7 +325,7 @@ public class SystemServlet extends HttpServlet {
                 break;
 
                 //CASE PARA EL CAMBIO DE CONTRASEÑA CON POPUP
-
+//
             case "validatePassword":
                 int userId = Integer.parseInt(request.getParameter("userId"));
                 String oldPassword = request.getParameter("oldPassword");
