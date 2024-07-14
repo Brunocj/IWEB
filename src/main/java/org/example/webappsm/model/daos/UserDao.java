@@ -14,7 +14,7 @@ public class UserDao extends BaseDao{
 
     public Usuario mostrarUsuarioID (int userid){
         Usuario usuario = new Usuario();
-        String sql = "SELECT nombres AS Nombre, apellidos AS Apellido, correo AS Correo, nroDocumento AS Documento, contrasena AS contra,numeroContacto AS NumeroTelefonico FROM Usuario WHERE idUsuario = ?";
+        String sql = "SELECT idUsuario, nombres AS Nombre, apellidos AS Apellido, correo AS Correo, nroDocumento AS Documento, contrasena AS contra,numeroContacto AS NumeroTelefonico FROM Usuario WHERE idUsuario = ?";
         try(Connection conn = this.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
         ){
@@ -22,6 +22,7 @@ public class UserDao extends BaseDao{
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 usuario = new Usuario();
+                usuario.setId(rs.getInt("idUsuario"));
                 usuario.setNombre(rs.getString("Nombre"));
                 usuario.setApellido(rs.getString("Apellido"));
                 usuario.setCorreoE(rs.getString("Correo"));

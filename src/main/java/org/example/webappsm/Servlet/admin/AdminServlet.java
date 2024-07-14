@@ -399,17 +399,19 @@ public class AdminServlet extends HttpServlet {
             String opcionSeleccionada = request.getParameter("opcionSeleccionada");
             int id = Integer.parseInt(request.getParameter("idUser"));
 
-
+            SystemDao daosys = new SystemDao();
             VecinosDao vecinosDao = new VecinosDao();
             Usuario usuario = vecinosDao.obtenerUsuarioPorId(id);
             String tituloCorreo = request.getParameter("tituloCorreo");
             String cuerpoCorreo = request.getParameter("cuerpoCorreo");
             String nuevaContrasena = request.getParameter("contra");
+            String nuevaContraHash = daosys.hashPassword(nuevaContrasena);
+
             System.out.println(nuevaContrasena);
 
-            SystemDao daosys = new SystemDao();
+
             if (opcionSeleccionada.equals("aprobar")) {
-                vecinosDao.editarEstadoAprobado(id, nuevaContrasena);
+                vecinosDao.editarEstadoAprobado(id, nuevaContraHash);
                 daosys.enviarCorreo(usuario.getCorreoE(), tituloCorreo, cuerpoCorreo);
             } else if (opcionSeleccionada.equals("denegar")) {
                 vecinosDao.eliminarUsuarioPorId(id);
@@ -428,13 +430,12 @@ public class AdminServlet extends HttpServlet {
             SystemDao daosys = new SystemDao();
             String nuevaContrasena = request.getParameter("contra");
 
-
-
-
-
             if (opcionSeleccionada.equals("aprobar")) {
                 vecinosDao.editarRol(id, idArea, nuevaContrasena);
                 daosys.enviarCorreo(usuario.getCorreoE(), tituloCorreo, cuerpoCorreo);
+
+                String contraHasheada = daosys.hashPassword(nuevaContrasena);
+                daosys.actualizarContra(id,contraHasheada);
 
             } else if (opcionSeleccionada.equals("denegar")) {
                 vecinosDao.eliminarSolicitud(id);
