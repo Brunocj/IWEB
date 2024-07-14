@@ -185,7 +185,7 @@ public class CoordinadorServlet extends HttpServlet {
             case "registrarIncidencia":
                 Incidencia incidencia = new Incidencia();
                 String nombreIncidencia = request.getParameter("nombreIncidencia");
-                String lugarIn = request.getParameter("lugar");
+                String lugar1 = request.getParameter("lugar");
                 String referencia = request.getParameter("ref");
                 String contacto = request.getParameter("contacto");
                 String fechaStr = request.getParameter("fecha");
@@ -194,10 +194,26 @@ public class CoordinadorServlet extends HttpServlet {
                 String idTipoStr = request.getParameter("idTipoIncidencia");
                 String idUsuarioIncidenciaStr = request.getParameter("idUsuario");
 
+                boolean validacionContacto = true;
+                if (contacto != null && !contacto.trim().isEmpty()) {
+                    if (contacto.length() != 9) {
+                        validacionContacto = false;
+                    } else {
+                        try {
+                            int contactoInt = Integer.parseInt(contacto);
+                        } catch (NumberFormatException e) {
+                            validacionContacto = false;
+                        }
+                    }
+                } else {
+                    validacionContacto = false;
+                }
+
+
                 // Imprimir todos los parámetros recibidos
                 System.out.println("Parámetros recibidos:");
                 System.out.println("Nombre de la incidencia: " + nombreIncidencia);
-                System.out.println("Lugar: " + lugarIn);
+                System.out.println("Lugar: " + lugar1);
                 System.out.println("Referencia: " + referencia);
                 System.out.println("Contacto: " + contacto);
                 System.out.println("Fecha: " + fechaStr);
@@ -206,8 +222,8 @@ public class CoordinadorServlet extends HttpServlet {
                 System.out.println("ID de tipo de incidencia: " + idTipoStr);
                 System.out.println("ID de usuario: " + idUsuarioIncidenciaStr);
 
-                if (idUrbanizacionStr != null && !idUrbanizacionStr.isEmpty() &&
-                        idTipoStr != null && !idTipoStr.isEmpty() &&
+                if (idUrbanizacionStr != null && !idUrbanizacionStr.isEmpty() && validacionContacto &&
+                        idTipoStr != null && !idTipoStr.isEmpty() && nombreIncidencia.length()<=100 && lugar1.length()<=100 && referencia.length() <=70 &&
                         idUsuarioIncidenciaStr != null && !idUsuarioIncidenciaStr.isEmpty()) {
                     int idUrbanizacion = Integer.parseInt(idUrbanizacionStr);
                     int idTipo = Integer.parseInt(idTipoStr);
@@ -226,9 +242,13 @@ public class CoordinadorServlet extends HttpServlet {
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
+                    if(contacto.trim().isEmpty()){
+                        contacto = null;
+                    }
+
 
                     incidencia.setNombre(nombreIncidencia);
-                    incidencia.setLugar(lugarIn);
+                    incidencia.setLugar(lugar1);
                     incidencia.setReferencia(referencia);
                     incidencia.setIdUrbanizacion(idUrbanizacion);
                     incidencia.setContactoO(contacto);
@@ -241,6 +261,8 @@ public class CoordinadorServlet extends HttpServlet {
                 } else {
                     System.out.println("Uno o más parámetros requeridos están vacíos o nulos.");
                     //FALTA mandar mensaje de error al usuario si es que alguno de los parametros es nulo
+                    String msg = "Ingrese correctamente los datos de la incidencia y llene los campos obligatorios";
+                    request.setAttribute("msg", msg);
                     response.sendRedirect(request.getContextPath() + "/Vecino?action=incidencias");
                 }
                 break;

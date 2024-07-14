@@ -9,6 +9,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+    String msg = (String) request.getAttribute("msg");
+%>
+<%
     ArrayList<Incidencia> listaIncidencias = (ArrayList<Incidencia>) request.getAttribute("listaincidencias");
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 %>
@@ -31,7 +34,6 @@
     <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
-
     <!-- End layout styles -->
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" />
     <!--JS para los popups-->
@@ -51,62 +53,59 @@
     <jsp:include page="<%= menu %>">
         <jsp:param name="activePage" value="eventos"/>
     </jsp:include>
-        <!-- partial -->
-        <div class="main-panel">
-            <div class="content-wrapper" style ="background-color: #d6e9ff;"> <!--Cambiar al color mas claro-->
-                <!--CONTENIDO-->
+    <!-- partial -->
+    <div class="main-panel">
+        <div class="content-wrapper" style ="background-color: #d6e9ff;"> <!--Cambiar al color mas claro-->
+            <!--CONTENIDO-->
 
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <h2 class="tabla-title" style="color: #000f22; margin-bottom: 0px;">Incidencias</h2>
-                    <button class="btnTable" style="display: flex; align-items: center;" onclick="window.location.href='<%=request.getContextPath()%>/Vecino?action=registroIncidencia';">
-                        Agregar Incidencia
-                        <a class="mdi mdi-plus" style="color: #ffffff; font-size: 20px; margin-left: 5px;"></a>
-                    </button>
-                </div>
-
-
-
-                <table id="miTabla" class="table" style="margin-bottom:15px;">
-                    <thead style="background-color: #000f22;"> <!--Cambiar al color de fondo (claro) de la pagina, pero un poco mas oscuro-->
-                    <tr style="text-align: center; font-weight:800;">
-                        <th style ="color: white;">Descripción</th>
-                        <th style ="color: white;">Fecha</th>
-                        <th style ="color: white;">Estado</th>
-                        <th style="width: 20px; color: white;"></th>
-                    </tr>
-                    </thead>
-                    <tbody style="text-align: center; color: black;">
-                    <%
-                        if (listaIncidencias == null || listaIncidencias.isEmpty()) {
-                    %>
-                    <p>No hay incidencias registradas</p>
-                    <%
-                    } else {
-                        for(Incidencia incidencia : listaIncidencias){
-                            String fechaFormateada = sdf.format(incidencia.getFechaIncidencia());
-
-                    %>
-                    <tr style="text-align: center;">
-                        <td><%=incidencia.getNombre()%></td>
-                        <td><%=fechaFormateada %></td>
-                        <td><%=incidencia.getEstado()%></td>
-                        <td><a href='<%=request.getContextPath()%>/Vecino?action=infoIncidencia&idIncidencia=<%=incidencia.getIdIncidencia()%>'><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
-                    </tr>
-                    <%
-                            }
-                        }
-                    %>
-
-                    </tbody>
-                </table>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 class="tabla-title" style="color: #000f22; margin-bottom: 0px;">Incidencias</h2>
+                <button class="btnTable" style="display: flex; align-items: center;" onclick="window.location.href='<%=request.getContextPath()%>/Vecino?action=registroIncidencia';">
+                    Agregar Incidencia
+                    <a class="mdi mdi-plus" style="color: #ffffff; font-size: 20px; margin-left: 5px;"></a>
+                </button>
             </div>
-            <!-- content-wrapper ends -->
-            <!-- partial:../../partials/_footer.jsp -->
-            <!-- partial -->
+
+            <table id="miTabla" class="table" style="margin-bottom:15px;">
+                <thead style="background-color: #000f22;"> <!--Cambiar al color de fondo (claro) de la pagina, pero un poco mas oscuro-->
+                <tr style="text-align: center; font-weight:800;">
+                    <th style ="color: white;">Descripción</th>
+                    <th style ="color: white;">Fecha</th>
+                    <th style ="color: white;">Estado</th>
+                    <th style="width: 20px; color: white;"></th>
+                </tr>
+                </thead>
+                <tbody style="text-align: center; color: black;">
+                <%
+                    if (listaIncidencias == null || listaIncidencias.isEmpty()) {
+                %>
+                <p>No hay incidencias registradas</p>
+                <%
+                } else {
+                    for(Incidencia incidencia : listaIncidencias){
+                        String fechaFormateada = sdf.format(incidencia.getFechaIncidencia());
+
+                %>
+                <tr style="text-align: center;">
+                    <td><%=incidencia.getNombre()%></td>
+                    <td><%=fechaFormateada %></td>
+                    <td><%=incidencia.getEstado()%></td>
+                    <td><a href='<%=request.getContextPath()%>/Vecino?action=infoIncidencia&idIncidencia=<%=incidencia.getIdIncidencia()%>'><span class="menu-icon"><i class="mdi mdi-eye"></i> </span></a></td>
+                </tr>
+                <%
+                        }
+                    }
+                %>
+                </tbody>
+            </table>
         </div>
-        <!-- main-panel ends -->
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.jsp -->
+        <!-- partial -->
     </div>
-    <!-- page-body-wrapper ends -->
+    <!-- main-panel ends -->
+</div>
+<!-- page-body-wrapper ends -->
 </div>
 <!-- container-scroller -->
 <!-- plugins:js -->
@@ -122,7 +121,16 @@
 <script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
 <!-- endinject -->
 <!-- Custom js for this page -->
-
+<script>
+    <% if (msg != null) { %>
+    // Mostrar el popup con SweetAlert si la variable error no es null
+    Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: '<%= msg %>'
+    });
+    <% } %>
+</script>
 <!-- End custom js for this page -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
