@@ -45,7 +45,7 @@
         }
 
         .descripcion-container textarea {
-            width: 1000px;
+            width: 960px;
             height: 150px;
             padding: 10px;
             font-size: 16px;
@@ -53,6 +53,7 @@
             border-radius: 4px;
             resize: none;
             margin-bottom: 100px;
+            margin-left: 50px;
         }
     </style>
 

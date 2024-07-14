@@ -6,6 +6,9 @@
   ArrayList<Incidencia> listaIncidencias = (ArrayList<Incidencia>) request.getAttribute("listaincidencias");
   SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 %>
+<%
+  String msg = (String) request.getAttribute("msg");
+%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -117,6 +120,16 @@
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script src="${pageContext.request.contextPath}/vistas/jsp/COORDINADOR/js/Incidencias/script_cerrar_sesion.js"></script>
+    <script>
+      <% if (msg != null) { %>
+      // Mostrar el popup con SweetAlert si la variable error no es null
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: '<%= msg %>'
+      });
+      <% } %>
+    </script>
     <!-- End custom js for this page -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>

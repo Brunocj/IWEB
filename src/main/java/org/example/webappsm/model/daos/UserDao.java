@@ -134,10 +134,12 @@ public class UserDao extends BaseDao{
             pstmt.setString(1,incidencia.getNombre());
             pstmt.setString(2,incidencia.getLugar());
             pstmt.setInt(3,incidencia.getIdUrbanizacion());
-            if(incidencia.getContactoO() != null){
-                pstmt.setString(4, incidencia.getContactoO());
-            } else {
+            if(incidencia.getContactoO()  != null && incidencia.getContactoO().trim().isEmpty()){
+
                 pstmt.setString(4, null);
+            } else {
+                pstmt.setString(4, incidencia.getContactoO());
+
             }
             pstmt.setString(5, incidencia.getReferencia());
             pstmt.setBoolean(6,incidencia.isAmbulanciaI());
