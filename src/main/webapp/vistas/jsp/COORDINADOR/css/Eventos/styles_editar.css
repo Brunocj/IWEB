@@ -1,6 +1,11 @@
+.event-image-container img {
+  width: 800px;
+  height: 500px;
+  object-fit: cover; /* Para asegurar que la imagen se recorte adecuadamente */
+}
 
-  
-  .nombreRol {
+
+.nombreRol {
   margin: 10px;
   display: flex;
   flex-direction: column;
@@ -18,7 +23,7 @@
     border: 1px solid rgba(0, 0, 0, 0.5); /* Color del borde con transparencia */
     padding: 20px;
     margin-bottom: 20px;
-    background-color: rgba(248, 249, 250, 0.5); /* Color de fondo con transparencia */
+    background-color: transparent; /* Color de fondo con transparencia */
     border-radius: 10px; /* Borde redondeado */
     width: 600;
   }
@@ -33,7 +38,6 @@
   }
   #fechas.custom-container{
       margin-top: 20px;
-      height: 350px;
       color: #000;
   }
   #descripcion{
@@ -111,9 +115,10 @@
 
   
   #container-image.custom-container  {
+    margin-top: 20px;
   position: relative; /* Añadimos posición relativa */
   border: none; /* Quitamos el borde */
-  background-color: transparent; /* Hacemos el fondo transparente */
+  background-color: black; /* Hacemos el fondo transparente */
   }
   
   #botoncarga {

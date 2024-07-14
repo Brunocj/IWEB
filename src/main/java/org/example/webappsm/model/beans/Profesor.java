@@ -11,4 +11,5 @@ public class Profesor {
     private String curso;
     private int idArea;
     private String nombreArea;
+    private int disponibilidad;
 }

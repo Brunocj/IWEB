@@ -70,60 +70,7 @@
   });
 
   // Función para obtener la URL de la imagen del evento
-  function obtenerURLImagen(eventId) {
-    // Aquí puedes definir la lógica para obtener la URL de la imagen del evento
-    // Por ejemplo, puedes tener un objeto o una base de datos que mapee eventId a la URL de la imagen
-    // Devuelve la URL de la imagen correspondiente al eventId
-    // Este es solo un ejemplo de cómo podrías hacerlo, deberías adaptarlo a tu propia lógica de datos
-    switch(eventId) {
-      case '1':
-        return '../../img/Eventos/foto1.png';
-      case '2':
-        return '../../img/Eventos/foto1.png';
-      case '3':
-        return '../../img/Eventos/foto1.png';
-      case '4':
-        return '../../img/Eventos/foto1.png';
-      case '5':
-        return '../../img/Eventos/foto2.jpg';
-      case '6':
-        return '../../img/Eventos/foto2.jpg';
-      case '7':
-        return '../../img/Eventos/foto2.jpg';
-      case '8':
-        return '../../img/Eventos/foto2.jpg';
-      case '9':
-        return '../../img/Eventos/foto3.jpg';
-      case '10':
-        return '../../img/Eventos/foto3.jpg';
-      case '11':
-        return '../../img/Eventos/foto3.jpg';
-      case '12':
-        return '../../img/Eventos/foto4.jpg';
-      case '13':
-        return '../../img/Eventos/foto4.jpg';
-      case '14':
-        return '../../img/Eventos/foto4.jpg';
-      case '15':
-        return '../../img/Eventos/foto4.jpg';
-      case '16':
-        return '../../img/Eventos/foto5.jpg';
-      case '17':
-        return '../../img/Eventos/foto5.jpg';
-      case '18':
-        return '../../img/Eventos/foto5.jpg';
-      case '19':
-        return '../../img/Eventos/foto5.jpg';
-      case '20':
-        return '../../img/Eventos/foto6.png';
-      case '21':
-        return '../../img/Eventos/foto6.png';
-      case '22':
-        return '../../img/Eventos/foto6.png';
-      case '23':
-      return '../../img/Eventos/foto6.png';
-    }
-  }
+
 
 
   function InscribirPopUp() {
@@ -292,7 +239,7 @@ element.focus();
            text: `¡Tu registro de salida ha sido procesado correctamente!`,
            icon: 'success'
          });
-       }, 1000); // Simulación de carga de 1 segundo 
+       }, 1000); // Simulación de carga de 1 segundo
      }
    });
  }

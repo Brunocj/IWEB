@@ -35,18 +35,14 @@ color: black; /* Color del texto */
 }
 #container-image.custom-container  {
   border: none; /* Quitamos el borde */
-  background-color: transparent; /* Hacemos el fondo transparente */
+  background-color: black; /* Hacemos el fondo transparente */
 }
 .event-image {
   max-width: 100%;
   height: auto;
   border-radius: 10px; /* Borde redondeado */
 }
-#fechas.custom-container{
-    margin-top: 93px;
-    height: 350px;
-    color: #000;
-}
+
 /* Tamaño de fuente más grande */
 .custom-container p {
   font-size: 22px; /* Cambia este valor según tu preferencia */
@@ -262,7 +258,7 @@ color: rgb(164, 164, 164); /*cambiarcolor*/
 #container-image.custom-container  {
 position: relative; /* Añadimos posición relativa */
 border: none; /* Quitamos el borde */
-background-color: transparent; /* Hacemos el fondo transparente */
+background-color: black; /* Hacemos el fondo transparente */
 }
 .center-text-reg {
     font-size: 24px; /* Tamaño de fuente deseado */

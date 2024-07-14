@@ -1,27 +1,4 @@
-function Eliminacion() {
-  Swal.fire({
-    title: "Estás seguro?",
-    text: "Una vez elimine al vecino del evento, este proceso será irreversible.",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#00913f",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Si, eliminar",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      Swal.fire({
-        title: "Eliminado!",
-        text: "El vecino ha sido eliminado con éxito",
-        icon: "success",
-      }).then(() => {
-        window.history.back();; //Cambiar href de acuerdo a lo necesrio
-      });
-    }
-  });
 
-  // Evitar que el formulario se envíe automáticamente
-  return false;
-}
 
 $(document).ready(function () {
   var table = $("#miTabla").DataTable({

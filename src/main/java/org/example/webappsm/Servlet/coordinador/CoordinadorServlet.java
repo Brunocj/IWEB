@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 import org.example.webappsm.model.beans.*;
 import org.example.webappsm.model.daos.CoordinadorDao;
 import org.example.webappsm.model.daos.UserDao;
@@ -15,10 +16,13 @@ import java.io.IOException;
 import java.io.InputStream;
 
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.Date;
 
 @WebServlet(name ="CoordinadorServlet" , value = "/Coordinador")
@@ -71,8 +75,75 @@ public class CoordinadorServlet extends HttpServlet {
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
+            case "tablaInscritos":
+                try {
+                    int idEvento = Integer.parseInt(request.getParameter("id"));
 
+                    CoordinadorDao coordinadorDaolista = new CoordinadorDao();
+                    ArrayList<Usuario> listaincritos = coordinadorDaolista.listarInscritos(idEvento);
 
+                    request.setAttribute("listaInscritos", listaincritos);
+                    request.setAttribute("idEvento", idEvento); // Añadir el idEvento como atributo
+                    vista = "vistas/jsp/COORDINADOR/html/Eventos/tabla_inscritos.jsp";
+                    rd = request.getRequestDispatcher(vista);
+                    rd.forward(request, response);
+                } catch (NumberFormatException e) {
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID del profesor no es válido");
+                }
+                break;
+            case "tablaProfesores":
+                CoordinadorDao coordinadorDao = new CoordinadorDao();
+                int idArea = 1;
+                String fechaString = request.getParameter("fechadispo");
+                java.sql.Date fechaEvento = null;
+
+                if (fechaString != null && !fechaString.isEmpty()) {
+                    try {
+                        java.util.Date utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(fechaString);
+                        fechaEvento = new java.sql.Date(utilDate.getTime());  // Convertir java.util.Date a java.sql.Date
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+
+                String horaString = request.getParameter("horaIniciodispo");
+                java.sql.Time horaEvento = null;
+
+                if (horaString != null && !horaString.isEmpty()) {
+                    try {
+                        if (!horaString.matches("^\\d{2}:\\d{2}$")) {
+                            throw new IllegalArgumentException("Formato de hora inválido, debería ser HH:mm");
+                        }
+                        horaString += ":00";
+                        horaEvento = java.sql.Time.valueOf(horaString);
+                    } catch (IllegalArgumentException e) {
+                        throw new RuntimeException("Formato de hora inválido, debería ser HH:mm", e);
+                    }
+                }
+
+                String horaString2 = request.getParameter("horaFindispo");
+                java.sql.Time horaEvento2 = null;
+
+                if (horaString2 != null && !horaString2.isEmpty()) {
+                    try {
+                        if (!horaString2.matches("^\\d{2}:\\d{2}$")) {
+                            throw new IllegalArgumentException("Formato de hora inválido, debería ser HH:mm");
+                        }
+                        horaString2 += ":00";
+                        horaEvento2 = java.sql.Time.valueOf(horaString2);
+                    } catch (IllegalArgumentException e) {
+                        throw new RuntimeException("Formato de hora inválido, debería ser HH:mm", e);
+                    }
+                }
+
+                ArrayList<Profesor> list = coordinadorDao.listarProfesoresTablaDisponibilidad(fechaEvento, horaEvento, horaEvento2,idArea);
+
+                request.setAttribute("listaprofesor", list);
+
+                vista = "vistas/jsp/COORDINADOR/html/Eventos/tabla_docentes.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request, response);
+                break;
 
 
             case "eventos":
@@ -84,10 +155,97 @@ public class CoordinadorServlet extends HttpServlet {
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
-            case  "escogerProfesor":
-                vista = "vistas/jsp/COORDINADOR/html/Eventos/tabla_docentes.jsp";
+            case "agregarNota":
+                int idEventoNota = Integer.parseInt(request.getParameter("id"));
+                System.out.println("ID del evento recibido: " + idEventoNota);
+
+                CoordinadorDao eventoDAONota2 = new CoordinadorDao();
+                Evento evento2 = eventoDAONota2.obtenerEventoPorId(idEventoNota);
+
+                if (evento2.getImagenes() != null) {
+                    String base64Image = Base64.getEncoder().encodeToString(evento2.getImagenes());
+                    request.setAttribute("base64Image", base64Image);
+                }
+
+                request.setAttribute("eventoNota", evento2);
+
+                vista = "vistas/jsp/COORDINADOR/html/Eventos/agregarnota.jsp";
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
+                break;
+            case "EventosNota":
+                CoordinadorDao coordinadorDaonota = new CoordinadorDao();
+                int idCoordinador2 = 3; // posteriormente obtener mediante un request.getParameter
+                ArrayList<Evento> listarEventosNotas = coordinadorDaonota.listarEventosNota(idCoordinador2);
+                request.setAttribute("listaEventosNota", listarEventosNotas);
+
+                vista = "vistas/jsp/COORDINADOR/html/Eventos/eventospasados.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+            case  "editarEvento":
+                try {
+                    int idEvento = Integer.parseInt(request.getParameter("id"));
+                    System.out.println("ID del evento recibido: " + idEvento);
+
+                    CoordinadorDao eventoDAOedit = new CoordinadorDao();
+                    Evento evento = eventoDAOedit.obtenerEventoPorId(idEvento);
+
+                    ArrayList<String> materiales = eventoDAOedit.obtenerNombresMaterialesPorIdEvento(idEvento);
+                    System.out.println("Materiales obtenidos: " + materiales);
+                    if (evento.getImagenes() != null) {
+                        String base64Image = Base64.getEncoder().encodeToString(evento.getImagenes());
+                        request.setAttribute("base64Image", base64Image);
+                    }
+
+                    request.setAttribute("evento", evento);
+                    request.setAttribute("materiales", materiales);
+                    vista = "/vistas/jsp/COORDINADOR/html/Eventos/editar_evento.jsp";
+                    rd = request.getRequestDispatcher(vista);
+                    rd.forward(request, response);
+                } catch (NumberFormatException e) {
+                    System.out.println("ID del empleado no es un número válido");
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID del empleado no es válido");
+                }
+                break;
+            case "profesorEscogido":
+                String idProfesorStr = request.getParameter("idProfesor");
+                if (idProfesorStr == null || idProfesorStr.isEmpty()) {
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "El ID del profesor no puede ser nulo o vacío.");
+                    return;
+                }
+
+                try {
+                    int idProfesor = Integer.parseInt(idProfesorStr);
+                    request.setAttribute("idProfesor", idProfesor);
+                    vista = "vistas/jsp/COORDINADOR/html/Eventos/registroevento.jsp";
+                    rd = request.getRequestDispatcher(vista);
+                    rd.forward(request, response);
+                } catch (NumberFormatException e) {
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "El ID del profesor no es válido.");
+                }
+                break;
+            case  "verEventoNota":
+                int idEvento = Integer.parseInt(request.getParameter("id"));
+                System.out.println("ID del evento recibido: " + idEvento);
+
+                CoordinadorDao eventoDAONota = new CoordinadorDao();
+                Evento evento = eventoDAONota.obtenerEventoPorId(idEvento);
+
+                ArrayList<String> materiales = eventoDAONota.obtenerNombresMaterialesPorIdEvento(idEvento);
+                System.out.println("Materiales obtenidos: " + materiales);
+                if (evento.getImagenes() != null) {
+                    String base64Image = Base64.getEncoder().encodeToString(evento.getImagenes());
+                    request.setAttribute("base64Image", base64Image);
+                }
+
+                request.setAttribute("evento", evento);
+                request.setAttribute("materiales", materiales);
+
+                vista = "vistas/jsp/COORDINADOR/html/Eventos/detalleseventospasados.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+
                 break;
         }
     }
@@ -98,6 +256,31 @@ public class CoordinadorServlet extends HttpServlet {
         String action = request.getParameter("action");
         UserDao userDao = new UserDao();
         switch (action) {
+            case "pasoEventoPasado":
+                Part fotoPartimg1 = request.getPart("img1");
+                Part fotoPartimg2 = request.getPart("img2");
+                String nota = request.getParameter("texto");
+                int idEventoPasado = Integer.parseInt(request.getParameter("idEvento"));
+                byte[] img1 = obtenerImagenComoByteArray(fotoPartimg1.getInputStream());
+                byte[] img2 = obtenerImagenComoByteArray(fotoPartimg2.getInputStream());
+
+
+                CoordinadorDao coordinadorDaoregisPasado = new CoordinadorDao();
+                coordinadorDaoregisPasado.registroNotas(img1, img2, idEventoPasado,nota);
+
+                response.sendRedirect(request.getContextPath() + "/Coordinador?action=eventos");
+                break;
+            case "registrarSalida":
+                Part fotoPart = request.getPart("foto");
+                byte[] imagensalida = obtenerImagenComoByteArray(fotoPart.getInputStream());
+                int idEvento5 = Integer.parseInt(request.getParameter("idEvento"));
+
+                CoordinadorDao coordinadorDaoregis = new CoordinadorDao();
+                coordinadorDaoregis.registrarSalida(idEvento5, imagensalida);
+
+                response.sendRedirect(request.getContextPath() + "/Coordinador?action=verEventoNota&id=" + idEvento5);
+                break;
+
             case "registrarEvento":
                 CoordinadorDao coordinadorDao = new CoordinadorDao();
                 String nombre_evento = request.getParameter("nombre_evento");
@@ -110,13 +293,11 @@ public class CoordinadorServlet extends HttpServlet {
                 String vacantesStr = request.getParameter("vacantes");
                 String recurrenciaStr = request.getParameter("recurrencia");
 
-                // Verificar si los parámetros son nulos o vacíos
                 if (idCoordinadorStr == null || idCoordinadorStr.isEmpty() ||
                         idProfesorStr == null || idProfesorStr.isEmpty() ||
                         vacantesStr == null || vacantesStr.isEmpty() ||
                         recurrenciaStr == null || recurrenciaStr.isEmpty()) {
 
-                    // Redirigir a una página de error o enviar un mensaje de error
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Todos los campos son obligatorios");
                     return;
                 }
@@ -133,7 +314,6 @@ public class CoordinadorServlet extends HttpServlet {
                 String fechaString = request.getParameter("fecha");
                 Date fechaEvento = null;
 
-                // Parsear la fecha si se proporcionó
                 if (fechaString != null && !fechaString.isEmpty()) {
                     try {
                         fechaEvento = new SimpleDateFormat("yyyy-MM-dd").parse(fechaString);
@@ -141,30 +321,65 @@ public class CoordinadorServlet extends HttpServlet {
                         throw new RuntimeException(e);
                     }
                 }
-                String fechaString2 = "2000-03-31";
-                Date entrada = null;
-                if (fechaString2 != null && !fechaString2.isEmpty()) {
+
+                String horaString = request.getParameter("hora");
+                Time horaEvento = null;
+
+                if (horaString != null && !horaString.isEmpty()) {
                     try {
-                        entrada = new SimpleDateFormat("yyyy-MM-dd").parse(fechaString2);
-                    } catch (ParseException e) {
-                        throw new RuntimeException(e);
+                        if (!horaString.matches("^\\d{2}:\\d{2}$")) {
+                            throw new IllegalArgumentException("Formato de hora inválido, debería ser HH:mm");
+                        }
+
+                        horaString += ":00";
+
+                        horaEvento = Time.valueOf(horaString);
+                    } catch (IllegalArgumentException e) {
+                        throw new RuntimeException("Formato de hora inválido 2, debería ser HH:mm", e);
                     }
+                } else {
+                    throw new RuntimeException("La hora del evento no fue seleccionada correctamente");
                 }
-                String fechaString3 = "2000-03-31";
-                Date salida = null;
-                if (fechaString3 != null && !fechaString3.isEmpty()) {
+
+                if (horaEvento == null) {
+                    throw new RuntimeException("La hora del evento no fue seleccionada correctamente");
+                }
+
+                String horaString2 = request.getParameter("horaFin");
+                Time horaEvento2 = null;
+
+                if (horaString2 != null && !horaString2.isEmpty()) {
                     try {
-                        salida = new SimpleDateFormat("yyyy-MM-dd").parse(fechaString3);
-                    } catch (ParseException e) {
-                        throw new RuntimeException(e);
+                        if (!horaString2.matches("^\\d{2}:\\d{2}$")) {
+                            throw new IllegalArgumentException("Formato de hora inválido, debería ser HH:mm");
+                        }
+
+                        horaString2 += ":00";
+
+                        horaEvento2 = Time.valueOf(horaString2);
+                    } catch (IllegalArgumentException e) {
+                        throw new RuntimeException("Formato de hora inválido 2, debería ser HH:mm", e);
                     }
+                } else {
+                    throw new RuntimeException("La hora del evento no fue seleccionada correctamente");
                 }
-                String material = "material prueba";
+
+                if (horaEvento2 == null) {
+                    throw new RuntimeException("La hora del evento no fue seleccionada correctamente");
+                }
+
+                byte[] entrada = null;
+                byte[] salida = null;
+
+                String materiales = request.getParameter("materiales");
+                System.out.println("Materiales recibidos: " + materiales); // Log para verificar
 
                 Evento evento = new Evento();
                 evento.setTitulo(nombre_evento);
                 evento.setDescripcion(descripcion);
-                evento.setFechaYHora(fechaEvento);
+                evento.setFecha(fechaEvento);
+                evento.setHora(horaEvento);
+                evento.setHoraFin(horaEvento2);
                 evento.setUbicacion(lugar);
                 evento.setRecurrencia(recurrencia);
                 evento.setImagenes(imagen);
@@ -177,10 +392,38 @@ public class CoordinadorServlet extends HttpServlet {
                 evento.setIdArea(idArea);
                 evento.setResumen(resumen);
                 boolean exito;
-                coordinadorDao.registrarEvento(evento);
+                int idEventoGenerado = coordinadorDao.registrarEvento(evento);
 
-                // Redireccionar a la página de eventos después de procesar la inscripción
+                if (materiales != null && !materiales.trim().isEmpty()) {
+                    String[] materialesArray = materiales.split(",");
+                    for (String material : materialesArray) {
+                        if (!material.trim().isEmpty()) {
+                            coordinadorDao.registrarMaterial(idEventoGenerado, material.trim());
+                        }
+                    }
+                }
+
                 response.sendRedirect(request.getContextPath() + "/Coordinador?action=eventos");
+                break;
+            case "borrarEvento":
+                int idEvento = Integer.parseInt(request.getParameter("id"));
+
+                CoordinadorDao coordinadorDao1 = new CoordinadorDao();
+
+                coordinadorDao1.eliminarEvento(idEvento);
+
+                response.sendRedirect(request.getContextPath() + "/Coordinador?action=eventos");
+                ;
+                break;
+            case "eliminarInscrito":
+                int idUsuario_elim = Integer.parseInt(request.getParameter("idUsuario"));
+                int idEvento_elim = Integer.parseInt(request.getParameter("idEvento"));
+                CoordinadorDao coordinadorDaoelim = new CoordinadorDao();
+                coordinadorDaoelim.eliminarInscrito(idUsuario_elim, idEvento_elim);
+                response.sendRedirect(request.getContextPath() + "/Coordinador?action=tablaInscritos&id=" + idEvento_elim);
+                break;
+            case "actualizarEvento":
+                actualizarEvento(request, response);
                 break;
             case "registrarIncidencia":
                 Incidencia incidencia = new Incidencia();
@@ -281,6 +524,169 @@ public class CoordinadorServlet extends HttpServlet {
         }
         buffer.flush();
         return buffer.toByteArray();
+    }
+
+    private void actualizarEvento(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        try {
+            int idEvento = Integer.parseInt(request.getParameter("idEvento"));
+            CoordinadorDao coordinadorDao2 = new CoordinadorDao();
+            String nombre_evento2 = request.getParameter("nombre_evento");
+
+            // Verificar y manejar la imagen
+            Part filePart = request.getPart("imagenEvento");
+            byte[] imagen2 = null;
+            if (filePart != null && filePart.getSize() > 0) {
+                imagen2 = obtenerImagenComoByteArray(filePart.getInputStream());
+            } else {
+                // Si no se proporciona una nueva imagen, usar la imagen existente
+                Evento eventoExistente = coordinadorDao2.obtenerEventoPorId(idEvento);
+                imagen2 = eventoExistente.getImagenes();
+            }
+
+            String descripcion2 = request.getParameter("descripcion");
+            String lugar2 = request.getParameter("lugar");
+
+            String idCoordinadorStr2 = request.getParameter("idCoordinador");
+            String idProfesorStr2 = request.getParameter("idProfesor");
+            String vacantesStr2 = request.getParameter("vacantes");
+            String recurrenciaStr2 = request.getParameter("recurrencia");
+
+            int idCoordinador2 = Integer.parseInt(idCoordinadorStr2);
+            int idProfesor2 = Integer.parseInt(idProfesorStr2);
+            int vacantes2 = Integer.parseInt(vacantesStr2);
+            int recurrencia2 = Integer.parseInt(recurrenciaStr2);
+
+            int idEstadoEvento2 = 1;
+            int idArea2 = 2;
+            String resumen2 = "Resumen";
+
+            String fechaString5 = request.getParameter("fecha");
+            Date fechaEvento2 = null;
+
+            if (fechaString5 != null && !fechaString5.isEmpty()) {
+                try {
+                    fechaEvento2 = new SimpleDateFormat("yyyy-MM-dd").parse(fechaString5);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            String horaString5 = request.getParameter("hora");
+            Time horaEvento5 = null;
+
+            if (horaString5 != null && !horaString5.isEmpty()) {
+                try {
+                    if (!horaString5.matches("^\\d{2}:\\d{2}$")) {
+                        throw new IllegalArgumentException("Formato de hora inválido, debería ser HH:mm");
+                    }
+
+                    horaString5 += ":00";
+                    horaEvento5 = Time.valueOf(horaString5);
+                } catch (IllegalArgumentException e) {
+                    throw new RuntimeException("Formato de hora inválido 2, debería ser HH:mm", e);
+                }
+            } else {
+                throw new RuntimeException("La hora del evento no fue seleccionada correctamente");
+            }
+
+            if (horaEvento5 == null) {
+                throw new RuntimeException("La hora del evento no fue seleccionada correctamente");
+            }
+
+            String horaString6 = request.getParameter("horaFin");
+            Time horaEvento6 = null;
+
+            if (horaString6 != null && !horaString6.isEmpty()) {
+                try {
+                    if (!horaString6.matches("^\\d{2}:\\d{2}$")) {
+                        throw new IllegalArgumentException("Formato de hora inválido, debería ser HH:mm");
+                    }
+
+                    horaString6 += ":00";
+                    horaEvento6 = Time.valueOf(horaString6);
+                } catch (IllegalArgumentException e) {
+                    throw new RuntimeException("Formato de hora inválido 2, debería ser HH:mm", e);
+                }
+            } else {
+                throw new RuntimeException("La hora del evento no fue seleccionada correctamente");
+            }
+
+            if (horaEvento6 == null) {
+                throw new RuntimeException("La hora del evento no fue seleccionada correctamente");
+            }
+
+            // Verificar y manejar la imagen
+            Part filePart2 = request.getPart("imagenEntrada");
+            byte[] entrada2 = null;
+            if (filePart != null && filePart.getSize() > 0) {
+                entrada2 = obtenerImagenComoByteArray(filePart2.getInputStream());
+            } else {
+                // Si no se proporciona una nueva imagen, usar la imagen existente
+                Evento eventoExistente2 = coordinadorDao2.obtenerEventoPorId(idEvento);
+                entrada2 = eventoExistente2.getIngreso();
+            }
+
+            byte[] salida2 = null;
+            String materiales2 = request.getParameter("materiales");
+            System.out.println("Materiales recibidos: " + materiales2); // Log para verificar
+
+            Evento eventoedit = new Evento();
+            eventoedit.setIdEvento(idEvento); // Necesario para la actualización
+            eventoedit.setTitulo(nombre_evento2);
+            eventoedit.setDescripcion(descripcion2);
+            eventoedit.setFecha(fechaEvento2);
+            eventoedit.setHora(horaEvento5);
+            eventoedit.setHoraFin(horaEvento6);
+            eventoedit.setUbicacion(lugar2);
+            eventoedit.setRecurrencia(recurrencia2);
+            eventoedit.setImagenes(imagen2);
+            eventoedit.setVacantes(vacantes2);
+            eventoedit.setIngreso(entrada2);
+            eventoedit.setSalida(salida2);
+            eventoedit.setIdProfesor(idProfesor2);
+            eventoedit.setIdCoordinador(idCoordinador2);
+            eventoedit.setIdEstadoEvento(idEstadoEvento2);
+            eventoedit.setIdArea(idArea2);
+            eventoedit.setResumen(resumen2);
+
+            coordinadorDao2.actualizarEvento(eventoedit);
+            actualizarMaterialesEvento(idEvento, materiales2, coordinadorDao2);
+
+            // Redirigir antes de cualquier operación de escritura
+            response.sendRedirect(request.getContextPath() + "/Coordinador?action=eventos");
+            return; // Asegúrate de no ejecutar más código después de la redirección
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            throw new ServletException("Formato de número inválido", e);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void actualizarMaterialesEvento(int idEvento, String nuevosMateriales, CoordinadorDao coordinadorDao) {
+        ArrayList<String> materialesActuales = coordinadorDao.obtenerNombresMaterialesPorIdEvento(idEvento);
+
+        // Convertir los nuevos materiales en una lista
+        ArrayList<String> nuevosMaterialesList = new ArrayList<>(Arrays.asList(nuevosMateriales.split(",")));
+
+        // Identificar materiales a eliminar y a añadir
+        ArrayList<String> materialesAEliminar = new ArrayList<>(materialesActuales);
+        ArrayList<String> materialesAAñadir = nuevosMaterialesList;
+
+        materialesAEliminar.removeAll(nuevosMaterialesList); // Materiales a eliminar
+        materialesAAñadir.removeAll(materialesActuales); // Materiales a añadir
+
+        // Eliminar materiales
+        for (String material : materialesAEliminar) {
+            coordinadorDao.eliminarMaterial(idEvento, material.trim());
+        }
+
+        // Añadir nuevos materiales
+        for (String material : materialesAAñadir) {
+            if (!material.trim().isEmpty()) {
+                coordinadorDao.registrarMaterial(idEvento, material.trim());
+            }
+        }
     }
 
 }
