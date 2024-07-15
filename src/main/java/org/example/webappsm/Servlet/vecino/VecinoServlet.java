@@ -84,10 +84,10 @@ public class VecinoServlet extends HttpServlet {
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
-            case "EventosPasados":
+            case "eventosPasados":
                 VecinosDao vecinosDaolistaPasados = new VecinosDao();
-                int idusuario2 = 10; // posteriormente obtener mediante un request.getParameter
-                ArrayList<Evento> listaEventosPasados = vecinosDaolistaPasados.listarEventosPasados(idusuario2);
+                int idusuarioeventospasados = Integer.parseInt(request.getParameter("id"));
+                ArrayList<Evento> listaEventosPasados = vecinosDaolistaPasados.listarEventosPasados(idusuarioeventospasados);
                 request.setAttribute("listaEventosPasados", listaEventosPasados);
 
                 vista = "vistas/jsp/VECINO/eventos/eventos_pasados.jsp";
@@ -130,7 +130,7 @@ public class VecinoServlet extends HttpServlet {
                 break;
             case "eventos":
                 VecinosDao vecinosDao = new VecinosDao();
-                int idusuarioeventos = 10;
+                int idusuarioeventos = Integer.parseInt(request.getParameter("id"));
                 ArrayList<Evento> listarEventos = vecinosDao.listarEventos(idusuarioeventos);
                 request.setAttribute("listaEventos", listarEventos);
 
@@ -140,7 +140,7 @@ public class VecinoServlet extends HttpServlet {
                 break;
             case "misEventos":
                 VecinosDao vecinosDao2 = new VecinosDao();
-                int idusuariomiseventos = 10;
+                int idusuariomiseventos = Integer.parseInt(request.getParameter("id"));
                 ArrayList<Evento> listarEventos2 = vecinosDao2.listarMisEventos(idusuariomiseventos);
                 request.setAttribute("listaMisEventos", listarEventos2);
 
@@ -310,7 +310,7 @@ public class VecinoServlet extends HttpServlet {
                 }
 
                 // Redireccionar a la página de eventos después de procesar la inscripción
-                response.sendRedirect(request.getContextPath() + "/Vecino?action=eventos");
+                response.sendRedirect(request.getContextPath() + "/Vecino?action=eventos&id="+usuarioId);
                 break;
             case "desinscribir":
                 VecinosDao vecinosDao2 = new VecinosDao();
@@ -326,7 +326,7 @@ public class VecinoServlet extends HttpServlet {
                 }
 
                 // Redireccionar a la página de eventos después de procesar la inscripción
-                response.sendRedirect(request.getContextPath() + "/Vecino?action=misEventos");
+                response.sendRedirect(request.getContextPath() + "/Vecino?action=misEventos&id="+usuarioId1);
                 break;
 
         }

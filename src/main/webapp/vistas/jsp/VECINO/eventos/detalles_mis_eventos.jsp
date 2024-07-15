@@ -9,9 +9,9 @@
 <%@ page import="org.example.webappsm.model.beans.Evento" %>
 <%@ page import="org.example.webappsm.model.daos.CoordinadorDao" %>
 <%@ page import="java.util.ArrayList" %>
-<%
-    int idProvisional = 10;
-%>
+<%@ page import="org.example.webappsm.model.beans.Usuario" %>
+<%Usuario usuariologueado= (Usuario) session.getAttribute("usuarioLogueado");%>
+<% int idUsuario = usuariologueado.getId(); %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,7 +110,7 @@
                                 <div class="text-center">
                                     <form id="desinscripcionForm" action="<%= request.getContextPath() %>/Vecino" method="POST" style="display:none;">
                                         <input type="hidden" name="action" value="desinscribir">
-                                        <input type="hidden" name="idUsuario" value="<%= idProvisional %>">
+                                        <input type="hidden" name="idUsuario" value="<%= idUsuario %>">
                                         <input type="hidden" name="idEvento" value="<%= evento.getIdEvento() %>">
                                     </form>
                                     <button type="button" class="btn btn-danger custom-btn" style="right: 1px; font-size: 18px; font-weight: bold;" id="btn-inscribirse" onclick="return AnularPopUp();">Anular Inscripción</button>
@@ -158,7 +158,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="${pageContext.request.contextPath}/Vecino?action=misEventos" class="btn btn-primary fixed-button" style="position: absolute; bottom: 20px; right: 20px; font-size: 18px; font-weight: bold;">Volver a Mis Eventos</a> <!-- Alineación del botón a la derecha -->
+                    <a href="${pageContext.request.contextPath}/Vecino?action=misEventos&id=<%=idUsuario%>" class="btn btn-primary fixed-button" style="position: absolute; bottom: 20px; right: 20px; font-size: 18px; font-weight: bold;">Volver a Mis Eventos</a> <!-- Alineación del botón a la derecha -->
                 </div>
 
             </div>

@@ -1,7 +1,10 @@
 <%@ page import="org.example.webappsm.model.beans.Evento" %>
 <%@ page import="org.example.webappsm.model.daos.CoordinadorDao" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="org.example.webappsm.model.beans.Usuario" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%Usuario usuariologueado= (Usuario) session.getAttribute("usuarioLogueado");%>
+<% int idUsuario = usuariologueado.getId(); %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -75,6 +78,7 @@
             <jsp:include page="<%= menuvecino %>">
                 <jsp:param name="activePage" value="eventos"/>
             </jsp:include>
+
             <!-- partial -->
             <div class="main-panel">
                 <%
@@ -133,7 +137,7 @@
 
                         <% } %>
 
-                        <a href="${pageContext.request.contextPath}/Vecino?action=eventos" class="btn btn-primary fixed-button" style="position: absolute; bottom: 20px; right: 20px; font-size: 18px; font-weight: bold;">Volver a Eventos</a> <!-- Alineación del botón a la derecha -->
+                        <a href="${pageContext.request.contextPath}/Vecino?action=eventosPasados&id=<%=idUsuario%>" class="btn btn-primary fixed-button" style="position: absolute; bottom: 20px; right: 20px; font-size: 18px; font-weight: bold;">Volver a Eventos Pasados</a> <!-- Alineación del botón a la derecha -->
                     </div>
                 </div>
             </div>

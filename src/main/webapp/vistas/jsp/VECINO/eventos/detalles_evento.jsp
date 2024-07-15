@@ -1,6 +1,7 @@
 <%@ page import="org.example.webappsm.model.beans.Evento" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="org.example.webappsm.model.daos.CoordinadorDao" %><%--
+<%@ page import="org.example.webappsm.model.daos.CoordinadorDao" %>
+<%@ page import="org.example.webappsm.model.beans.Usuario" %><%--
   Created by IntelliJ IDEA.
   User: bruno
   Date: 28/05/2024
@@ -8,9 +9,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-    int idProvisional = 10;
-%>
+<%Usuario usuariologueado= (Usuario) session.getAttribute("usuarioLogueado");%>
+<% int idUsuario = usuariologueado.getId(); %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -109,7 +109,7 @@
                                 <div class="text-center">
                                     <form id="inscripcionForm" action="<%= request.getContextPath() %>/Vecino" method="POST" style="display:none;">
                                         <input type="hidden" name="action" value="inscribir">
-                                        <input type="hidden" name="idUsuario" value="<%= idProvisional %>">
+                                        <input type="hidden" name="idUsuario" value="<%= idUsuario %>">
                                         <input type="hidden" name="idEvento" value="<%= evento.getIdEvento() %>">
                                     </form>
                                     <button type="button" class="btn btn-primary custom-btn" style="right: 1px; font-size: 18px; font-weight: bold;" id="btn-inscribirse" onclick="return InscribirPopUp();">Inscribirse</button>
@@ -157,7 +157,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="${pageContext.request.contextPath}/Vecino?action=eventos" class="btn btn-primary fixed-button" style="position: absolute; bottom: 20px; right: 20px; font-size: 18px; font-weight: bold;">Volver a Eventos</a> <!-- Alineación del botón a la derecha -->
+                    <a href="${pageContext.request.contextPath}/Vecino?action=eventos&id=<%=idUsuario%>" class="btn btn-primary fixed-button" style="position: absolute; bottom: 20px; right: 20px; font-size: 18px; font-weight: bold;">Volver a Eventos</a> <!-- Alineación del botón a la derecha -->
                 </div>
 
             </div>

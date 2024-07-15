@@ -57,17 +57,17 @@
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu"><!-- Colocar items de la sublista -->
 
-                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/Vecino?action=eventos">
+                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/Vecino?action=eventos&id=<%=usuarioLogueado.getId()%>">
                   <span class="menu-icon">
                     <i class="mdi mdi-earth"></i>
                   </span>
                         Eventos</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/Vecino?action=misEventos">
+                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/Vecino?action=misEventos&id=<%=usuarioLogueado.getId()%>">
                     <span class="menu-icon">
                     <i class="mdi mdi-account-check"></i>
                   </span>
                         Mis eventos</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/Vecino?action=eventosPasados">
+                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/Vecino?action=eventosPasados&id=<%=usuarioLogueado.getId()%>">
                     <span class="menu-icon">
                     <i class="mdi mdi-backup-restore"></i>
                   </span>
