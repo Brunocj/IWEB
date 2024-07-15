@@ -104,9 +104,7 @@
                 <a href="<%=request.getContextPath()%>/Serenazgo?action=listaIncidencias" class="button" style =" background-color: #000f22;" >Regresar</a>
 
               </div>
-              <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
-                <a href="<%=request.getContextPath()%>/Serenazgo?action=proceder&idProceder=<%=incidencia.getIdIncidencia()%>" class="button" style="background-color: #195199; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Proceder</a>
-              </div>
+
             </div>
 
           </div>
