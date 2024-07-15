@@ -2,6 +2,11 @@
 
 
 <jsp:useBean id="usuarioLogueado" scope="session" type="org.example.webappsm.model.beans.Usuario"/>
+
+<%
+    String activePage = request.getParameter("activePage"); // Obtener activePage de la petición
+%>
+
 <nav class="sidebar sidebar-offcanvas" id="sidebar" style ="background-color: #000f22;">  <!--Cambiar al color mas oscuro-->
 
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top" style ="background-color: #000f22;">
@@ -12,7 +17,7 @@
 
     <ul class="nav" style="position: fixed">
         <!-- Codigo para un item de la barra lateral que no tiene sublista -->
-        <li class="nav-item menu-items ${"pagPrincipal".equals(request.getParameter("action")) ? "active" : ""}">
+        <li class="nav-item menu-items <%= activePage.equals("pagPrincipal") ? "active" : "" %>">
             <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=pagPrincipal"> <!-- Cambiar href de acuerdo a lo necesario -->
                 <span class="menu-icon">
                 <i class="mdi mdi-home"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
@@ -21,7 +26,7 @@
             </a>
         </li>
 
-        <li class="nav-item menu-items ${"miPerfil".equals(request.getParameter("action")) ? "active" : ""}">
+        <li class="nav-item menu-items <%= activePage.equals("miPerfil") ? "active" : "" %>">
             <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=miPerfil&id=<%=usuarioLogueado.getId()%>">
               <span class="menu-icon">
                 <i class="mdi mdi-account"></i>
@@ -37,7 +42,7 @@
                 <span class="menu-title" style="color: white;">Correo</span>
             </a>
         </li>
-        <li class="nav-item menu-items ${"solCoordinador".equals(request.getParameter("action")) ? "active" : ""}">
+        <li class="nav-item menu-items <%= activePage.equals("solCoordinador") ? "active" : "" %>">
             <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=solCoordinador">
               <span class="menu-icon">
                 <i class="mdi mdi-key-change"></i>
@@ -45,7 +50,7 @@
                 <span class="menu-title" style="color: white;">Sol. coordinador(a)</span>
             </a>
         </li>
-        <li class="nav-item menu-items">
+        <li class="nav-item menu-items <%= activePage.equals("eventos") ? "active" : "" %>">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <span class="menu-icon">
                 <i class="mdi mdi-earth"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
@@ -57,17 +62,17 @@
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu"><!-- Colocar items de la sublista -->
 
-                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/Vecino?action=eventos&id=<%=usuarioLogueado.getId()%>">
+                    <li class="nav-item <%= activePage.equals("eventos") ? "active" : "" %>"> <a class="nav-link" href="${pageContext.request.contextPath}/Vecino?action=eventos&id=<%=usuarioLogueado.getId()%>">
                   <span class="menu-icon">
                     <i class="mdi mdi-earth"></i>
                   </span>
                         Eventos</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/Vecino?action=misEventos&id=<%=usuarioLogueado.getId()%>">
+                    <li class="nav-item <%= activePage.equals("misEventos") ? "active" : "" %>"> <a class="nav-link" href="${pageContext.request.contextPath}/Vecino?action=misEventos&id=<%=usuarioLogueado.getId()%>">
                     <span class="menu-icon">
                     <i class="mdi mdi-account-check"></i>
                   </span>
                         Mis eventos</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/Vecino?action=eventosPasados&id=<%=usuarioLogueado.getId()%>">
+                    <li class="nav-item <%= activePage.equals("eventosPasados") ? "active" : "" %>"> <a class="nav-link" href="${pageContext.request.contextPath}/Vecino?action=eventosPasados&id=<%=usuarioLogueado.getId()%>">
                     <span class="menu-icon">
                     <i class="mdi mdi-backup-restore"></i>
                   </span>
@@ -75,7 +80,7 @@
                 </ul>
             </div>
         </li>
-        <li class="nav-item menu-items ${"incidencias".equals(request.getParameter("action")) ? "active" : ""}">
+        <li class="nav-item menu-items <%= activePage.equals("incidencias") ? "active" : "" %>">
             <a class="nav-link" href="<%=request.getContextPath()%>/Vecino?action=incidencias"> <!-- Cambiar href de acuerdo a lo necesario -->
                 <span class="menu-icon">
                 <i class="mdi mdi-alert"></i> <!-- Cambiar icono de acuerdo a lo necesario -->

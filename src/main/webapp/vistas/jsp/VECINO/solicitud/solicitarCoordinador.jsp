@@ -101,7 +101,7 @@
 
     <%-- Incluir el menú y pasar el parámetro de la página activa --%>
     <jsp:include page="<%= menu %>">
-        <jsp:param name="activePage" value="eventos"/>
+        <jsp:param name="activePage" value="solCoordinador"/>
     </jsp:include>
         <!-- partial -->
         <div class="main-panel">

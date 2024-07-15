@@ -9,6 +9,10 @@
 %>
 <%Usuario usuariologueado= (Usuario) session.getAttribute("usuarioLogueado");%>o
 
+<%
+    String activePage = request.getParameter("activePage"); // Obtener activePage de la petición
+%>
+
 <nav class="sidebar sidebar-offcanvas" id="sidebar" style ="background-color: #000f22;">  <!--Cambiar al color mas oscuro-->
 
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top" style ="background-color: #000f22;">
@@ -19,7 +23,7 @@
 
     <ul class="nav" style="position: fixed">
         <!-- Codigo para un item de la barra lateral que no tiene sublista -->
-        <li class="nav-item menu-items ${"pagPrincipal".equals(request.getParameter("action")) ? "active" : ""}">
+        <li class="nav-item menu-items <%= activePage.equals("pagPrincipal") ? "active" : "" %>">
             <a class="nav-link" href="<%=request.getContextPath()%>/Coordinador?action=pagPrincipal"> <!-- Cambiar href de acuerdo a lo necesario -->
                 <span class="menu-icon">
                 <i class="mdi mdi-home"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
@@ -28,7 +32,7 @@
             </a>
         </li>
 
-        <li class="nav-item menu-items ${"miPerfil".equals(request.getParameter("action")) ? "active" : ""}">
+        <li class="nav-item menu-items <%= activePage.equals("miPerfil") ? "active" : "" %>">
             <a class="nav-link" href="<%=request.getContextPath()%>/Coordinador?action=miPerfil&id=<%=usuariologueado.getId()%>">
               <span class="menu-icon">
                 <i class="mdi mdi-account"></i>
@@ -48,7 +52,7 @@
 
 
 
-        <li class="nav-item menu-items">
+        <li class="nav-item menu-items <%= activePage.equals("eventos") ? "active" : "" %>">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <span class="menu-icon">
                 <i class="mdi mdi-earth"></i> <!-- Cambiar icono de acuerdo a lo necesario -->
@@ -60,12 +64,12 @@
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu"><!-- Colocar items de la sublista -->
 
-                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/Coordinador?action=eventos&id=<%=usuariologueado.getId()%>">
+                    <li class="nav-item <%= activePage.equals("eventos") ? "active" : "" %>"> <a class="nav-link" href="${pageContext.request.contextPath}/Coordinador?action=eventos&id=<%=usuariologueado.getId()%>">
                   <span class="menu-icon">
                     <i class="mdi mdi-calendar-plus"></i>
                   </span>
                         Eventos creados</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/Coordinador?action=EventosNota&id=<%=usuariologueado.getId()%>">
+                    <li class="nav-item <%= activePage.equals("EventosNota") ? "active" : "" %>"> <a class="nav-link" href="${pageContext.request.contextPath}/Coordinador?action=EventosNota&id=<%=usuariologueado.getId()%>">
                     <span class="menu-icon">
                     <i class="mdi mdi-calendar-text"></i>
                   </span>
@@ -77,7 +81,7 @@
 
 
 
-        <li class="nav-item menu-items ${"incidencias".equals(request.getParameter("action")) ? "active" : ""}">
+        <li class="nav-item menu-items <%= activePage.equals("incidencias") ? "active" : "" %>">
             <a class="nav-link" href="<%=request.getContextPath()%>/Coordinador?action=incidencias"> <!-- Cambiar href de acuerdo a lo necesario -->
                 <span class="menu-icon">
                 <i class="mdi mdi-alert"></i> <!-- Cambiar icono de acuerdo a lo necesario -->

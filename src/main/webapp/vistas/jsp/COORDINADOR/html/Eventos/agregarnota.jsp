@@ -46,7 +46,7 @@
       <!-- partial -->
       <div class="main-panel">
         <%
-          Evento evento = (Evento) request.getAttribute("eventoNota");
+          Evento evento = (Evento) request.getAttribute("EventosNota");
           int idEvento = evento.getIdEvento();
         %>
         <div class="content-wrapper" style ="background-color: #bdf1f5;"> <!--Cambiar al color mas claro-->

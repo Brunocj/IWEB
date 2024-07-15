@@ -99,7 +99,7 @@
 
             <%-- Incluir el menú y pasar el parámetro de la página activa --%>
             <jsp:include page="<%= menuvecino %>">
-                <jsp:param name="activePage" value="eventos"/>
+                <jsp:param name="activePage" value="eventosPasados"/>
             </jsp:include>
 
             <!-- partial -->
