@@ -17,8 +17,8 @@ function mostrarPopupVecino() {
       text: '¿A qué lista de solicitudes deseas acceder?',
       icon: 'question',
       showCancelButton: true,
-      confirmButtonColor: '#26DADA',
-      cancelButtonColor: '#26DADA',
+      confirmButtonColor: '#3c72f3',
+      cancelButtonColor: '#3c72f3',
       confirmButtonText: 'Solicitudes de acceso',
       cancelButtonText: 'Solicitudes a coordinador',
       customClass: {
@@ -26,10 +26,21 @@ function mostrarPopupVecino() {
     }
   }).then((result) => {
       if (result.isConfirmed) {
-          window.location.href = "../ADMIN/Vecinos/Solicitudes a acceso/tabla_solicitudes.html"; //Cambiar la ubicacion del login de acuerdo a lo necesario
+
+          const contextPath = window.location.pathname.split('/')[1]; // Obtener el contexto de la aplicación
+          console.log("Context path:", contextPath);
+          const url = `/${contextPath}/Admin?action=tablaAcceso`;
+          window.location.href = url;
+
+
       }else if (result.dismiss === Swal.DismissReason.cancel) {
         // Acción a realizar si se cancela el cierre de sesión
-        window.location.href = "../ADMIN/Vecinos/Postulaciones a coordinacion/tabla_postulaciones.html";
+
+          const contextPath = window.location.pathname.split('/')[1]; // Obtener el contexto de la aplicación
+          console.log("Context path:", contextPath);
+          const url = `/${contextPath}/Admin?action=tablaCoordinador`;
+          window.location.href = url;
+
     }
   });
 }

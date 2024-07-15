@@ -3,6 +3,7 @@
 <%@ page import ="org.example.webappsm.model.beans.Turno" %>
 <%@ page import ="org.example.webappsm.model.beans.TipoSerenazgo" %>
 <%@ page import="java.util.ArrayList" %>
+
 <%Serenazgo serenazgo = (Serenazgo) request.getAttribute("serenazgoEdit");%>
 <%ArrayList<Turno> listaTurnos= (ArrayList<Turno>) request.getAttribute("listaTurnos");%>
 <%ArrayList<TipoSerenazgo> listaTipos= (ArrayList<TipoSerenazgo>) request.getAttribute("listaTipos");%>
@@ -63,24 +64,23 @@
                         <form action="${pageContext.request.contextPath}/Admin?action=registrarSerenazgo" method="post">
                             <div class="inputs">
                                 <label for="nombre">Nombre:</label>
-                                <input type="text" id="nombre" name="nombreS" placeholder="Nombre" >
-
+                                <input type="text" id="nombre" name="nombreS" placeholder="Nombre" required>
                                 <label for="apellido">Apellidos:</label>
-                                <input type="text" id="apellido"  name="apellidoS" placeholder="Apellidos">
+                                <input type="text" id="apellido"  name="apellidoS" placeholder="Apellidos" required>
 
                                 <label for="dni">DNI:</label>
-                                <input type="text" id="dni" name="dniS" placeholder="DNI">
+                                <input type="text" id="dni" name="dniS" placeholder="DNI" required>
 
                                 <label for="direccion">Dirección:</label>
-                                <input type="text" id="direccion" name="direccionS" placeholder="Dirección">
+                                <input type="text" id="direccion" name="direccionS" placeholder="Dirección" required>
 
                                 <label for="telefono">Teléfono:</label>
-                                <input type="text" id="telefono" name="telefonoS" placeholder="Teléfono">
+                                <input type="text" id="telefono" name="telefonoS" placeholder="Teléfono"required>
 
                                 <div class="form-group">
                                     <label for="turnoS">Turno:</label>
                                     <select id="turnoS" name="turnoS" class="form-combo" required>
-                                        <option value="null">--Seleccione un turno--</option>
+                                        <option value="">--Seleccione un turno--</option>
                                         <%
                                             for (Turno turno : listaTurnos) {
                                         %>
@@ -94,7 +94,7 @@
                                 <div class="form-group">
                                     <label for="tipoS">Tipo:</label>
                                     <select id="tipoS" name="tipoS" class="form-combo" required>
-                                        <option value="null">--Seleccione un tipo de serenazgo--</option>
+                                        <option value="">--Seleccione un tipo de serenazgo--</option>
                                         <%
                                             for (TipoSerenazgo tipo : listaTipos) {
                                         %>
@@ -112,7 +112,7 @@
 
                             <div class = "buttons">
                                 <input type="submit" class="green" value="Registrar personal" onclick="return Confirmacion();">
-                                <input type="submit" class="red" value="Cancelar" onclick="return Cancelar();">
+                                <input type="submit" class="red" value="Cancelar" onclick="return Cancelar('<%= request.getContextPath() %>');">
                             </div>
 
                         </form>
@@ -144,21 +144,6 @@
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script>
-        function mostrarPopupCerrarSesion() {
-            Swal.fire({
-                title: 'Cerrar sesión',
-                text: '¿Estás seguro de que deseas cerrar sesión?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#00913f',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, cerrar sesión'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = "../../LOGIN/login.jsp"; //Cambiar la ubicacion del login de acuerdo a lo necesario
-                }
-            });
-        }
 
         function Confirmacion() {
             Swal.fire({
@@ -189,8 +174,7 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script src ="script_tabla.js"></script>
-    <script src="cancelaciones.js"></script>
+    <script src="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Serenazgo/script_tabla.js"></script>
     <!-- End custom js for this page -->
 </body>
 </html>

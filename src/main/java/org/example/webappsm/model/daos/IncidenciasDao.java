@@ -64,6 +64,7 @@ public class IncidenciasDao extends BaseDao{
                 "    i.idUsuario\n," +
                 "    i.fecha,\n" +
                 "    i.idTipoSerenazgo,\n" +
+                "    i.referencia,\n" +
                 "    i.personalAmbulancia,\n" +
                 "    i.motivoAmbulancia,\n" +
                 "    i.motivoPolicia,\n" +
@@ -99,6 +100,7 @@ public class IncidenciasDao extends BaseDao{
                 incidencia.setMotivoPolicia(rs.getString("motivoPolicia"));
                 incidencia.setIdComisaria(rs.getInt("idComisaria"));
                 incidencia.setClasificacion(rs.getString("nombreClasificacion"));
+                incidencia.setReferencia(rs.getString("referencia"));
                 listaIncidencias.add(incidencia);
 
             }
@@ -117,7 +119,7 @@ public class IncidenciasDao extends BaseDao{
 
         Incidencia incidencia = new Incidencia();
 
-        String sql = "SELECT idIncidencia,nombre,lugar,descripcion,idTipoSerenazgo,contacto,evidencia,fecha FROM sanmiguel.incidencia WHERE idIncidencia=?";
+        String sql = "SELECT idIncidencia,nombre,lugar,descripcion,idTipoSerenazgo,contacto,evidencia,fecha,referencia FROM sanmiguel.incidencia WHERE idIncidencia=?";
 
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -136,6 +138,7 @@ public class IncidenciasDao extends BaseDao{
                     incidencia.setContactoO(rs.getString(6));
                     incidencia.setImgEvidencia(rs.getBytes(7));
                     incidencia.setFechaIncidencia(rs.getTimestamp(8));
+                    incidencia.setReferencia(rs.getString(9));
                 }
             }
 
