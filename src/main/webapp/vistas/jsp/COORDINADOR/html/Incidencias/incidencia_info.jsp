@@ -100,7 +100,7 @@
                     <tr>
                       <td class = "info" colspan="3" style="text-align: center;">
                         <div class="image-container">
-                          <img src="data:image/jpeg;base64, <%= new String(org.apache.commons.codec.binary.Base64.encodeBase64(incidencia.getImgEvidencia())) %>">
+                          <img style="height: 35vh; max-width: 62.2vh; border-radius: 10px" src="data:image/jpeg;base64, <%= new String(org.apache.commons.codec.binary.Base64.encodeBase64(incidencia.getImgEvidencia())) %>">
                         </div>
                       </td>
                     </tr>
