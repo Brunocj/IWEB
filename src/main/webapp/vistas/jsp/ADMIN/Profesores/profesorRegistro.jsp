@@ -62,6 +62,25 @@
 
                         <!-- Icon -->
                         <!-- Icon -->
+                        <!-- Mostrar errores -->
+                        <% String[] errorAttributes = {"err1", "err2", "err3"};
+                            String firstError = null;
+
+                            // Buscar el primer error que esté presente
+                            for (String errorAttr : errorAttributes) {
+                                if (request.getAttribute(errorAttr) != null) {
+                                    firstError = (String) request.getAttribute(errorAttr);
+                                    break;  // Salir del bucle al encontrar el primer error
+                                }
+                            }
+                        %>
+
+                        <% if (firstError != null) { %>
+                        <div class="alert alert-danger" role="alert">
+                            <%= firstError %>
+                        </div>
+                        <% } %>
+
                         <!-- Login Form -->
                         <form action="${pageContext.request.contextPath}/Admin?action=registrarDocente" method="post">
 
@@ -85,7 +104,7 @@
                             </div>
 
                             <div class = "buttons">
-                                <input type="submit" class="green" value="Registrar docente" onclick="return Confirmacion();">
+                                <input type="submit" class="green" value="Registrar docente">
                                 <input type="submit" class="red" value="Cancelar" onclick="return Cancelar();">
                             </div>
 
@@ -114,6 +133,23 @@
     <script src="../../../../assets/js/misc.js"></script>
     <script src="<%=request.getContextPath()%>/assets/js/settings.js"></script>
     <script src="<%=request.getContextPath()%>/assets/js/todolist.js"></script>
+
+
+    <script>
+        <% if (request.getAttribute("msg") != null && "confirmacion".equals(request.getAttribute("msg"))) { %>
+        Swal.fire({
+            title: "Registro exitoso",
+            text: "Se ha registrado correctamente al personal de docencia",
+            icon: "success",
+            confirmButtonText: "OK"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '<%= request.getContextPath() %>/Admin?action=tablaProfesores';
+            }
+        });
+        <% } %>
+    </script>
+
 
 
 <!-- endinject -->

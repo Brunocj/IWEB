@@ -107,6 +107,14 @@ public class AdminServlet extends HttpServlet {
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
+
+            case "agregarProfesor":
+                vista = "vistas/jsp/ADMIN/Profesores/profesorRegistro.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
+
+
             case "editarSerenazgo":
                 int idSerenazgoEditar = Integer.parseInt(request.getParameter("idEditar"));
 
@@ -231,23 +239,60 @@ public class AdminServlet extends HttpServlet {
 
         // Verificar si la acción es registrar un nuevo profesor
         if(action.equals("registrarDocente")) {
-            String apellido = request.getParameter("apellido");
-            String nombre = request.getParameter("nombre");
-            String curso = request.getParameter("curso");
-            // Obtener el valor del parámetro "area" como un entero
-            int idArea = Integer.parseInt(request.getParameter("area"));
 
-            Profesor nuevoProfesor = new Profesor();
-            nuevoProfesor.setApellido(apellido);
-            nuevoProfesor.setNombre(nombre);
-            nuevoProfesor.setCurso(curso);
-            nuevoProfesor.setIdArea(idArea);
+            try {
 
-            ProfesorDao profesorDao = new ProfesorDao();
-            profesorDao.agregarProfesor(nuevoProfesor);
+                String apellido = request.getParameter("apellido");
+                String nombre = request.getParameter("nombre");
+                String curso = request.getParameter("curso");
+                // Obtener el valor del parámetro "area" como un entero
+                int idArea = Integer.parseInt(request.getParameter("area"));
 
-            // Redireccionar a la página de tablaProfesores después de completar el registro
-            response.sendRedirect(request.getContextPath() + "/Admin?action=tablaProfesores");
+                //////// Validaciones
+
+                boolean hasError = false;
+
+                if (apellido == null || apellido.isEmpty() || apellido.length() > 45 || !apellido.matches("[\\p{L}\\s]+")) {
+                    request.setAttribute("err2", "Apellido inválido");
+                    hasError = true;
+                }
+                if (nombre == null || nombre.isEmpty() || nombre.length() > 45 || !nombre.matches("[\\p{L}\\s]+")) {
+                    request.setAttribute("err1", "Nombre inválido");
+                    hasError = true;
+                }
+                if (curso == null || curso.isEmpty() || curso.length() > 45 ) {
+                    request.setAttribute("err3", "Debe ingresar hasta 45 caracteres");
+                    hasError = true;
+                }
+
+                if (hasError) {
+
+                    // Mantener los valores ingresados para mostrar en el formulario
+                    request.setAttribute("apellido", apellido);
+                    request.setAttribute("nombre", nombre);
+                    request.setAttribute("curso", curso);
+
+                    request.getRequestDispatcher("vistas/jsp/ADMIN/Profesores/profesorRegistro.jsp").forward(request, response);
+                }else {
+
+                    Profesor nuevoProfesor = new Profesor();
+                    nuevoProfesor.setApellido(apellido);
+                    nuevoProfesor.setNombre(nombre);
+                    nuevoProfesor.setCurso(curso);
+                    nuevoProfesor.setIdArea(idArea);
+
+                    ProfesorDao profesorDao = new ProfesorDao();
+                    profesorDao.agregarProfesor(nuevoProfesor);
+
+                    request.setAttribute("msg", "confirmacion");
+                    // Redireccionar a la página de tablaProfesores después de completar el registro
+                    request.getRequestDispatcher("vistas/jsp/ADMIN/Profesores/profesorRegistro.jsp").forward(request, response);
+                }
+            }catch (Exception e) {
+                e.printStackTrace();
+                request.setAttribute("errGlobal", "Ocurrió un error en el servidor. Por favor, inténtelo de nuevo más tarde.");
+                request.getRequestDispatcher("vistas/jsp/ADMIN/Profesores/profesorRegistro.jsp").forward(request, response);
+            }
         }
         // Verificar si la acción es eliminar un profesor
         else if(action.equals("eliminarProfesor")) {

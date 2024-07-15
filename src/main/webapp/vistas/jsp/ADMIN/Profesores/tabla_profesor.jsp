@@ -84,14 +84,10 @@
                                         </button>
                                     </div>
                                     <div style="display: flex; align-items: center; justify-content: center;">
-                                        <a href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Profesores/profesorRegistro.jsp" style="color: inherit; text-decoration: none;">
-
-                                            <button class="btnTable" style="display: flex; align-items: center;" onclick="window.location.href = '${pageContext.request.contextPath}/vistas/jsp/ADMIN/Profesores/profesorRegistro.jsp';">
-
+                                            <button id="agregarDocente" class="btnTable" style="display: flex; align-items: center;">
                                                 Agregar Docente
                                                 <a class="mdi mdi-account-plus" style="color: #ffffff; font-size: 20px; margin-left: 5px;"></a>
                                             </button>
-                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -167,23 +163,14 @@
     <!-- endinject -->
         <!-- Custom js for this page -->
 
-        <script>
-            function mostrarPopupCerrarSesion() {
-                Swal.fire({
-                    title: 'Cerrar sesión',
-                    text: '¿Estás seguro de que deseas cerrar sesión?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#00913f',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Sí, cerrar sesión'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "../../LOGIN/login.jsp"; //Cambiar la ubicacion del login de acuerdo a lo necesario
-                    }
-                });
-            }
-        </script>
+    <script>
+
+        document.getElementById("agregarDocente").addEventListener("click", function() {
+            window.location.href = "<%=request.getContextPath()%>/Admin?action=agregarProfesor";
+        });
+    </script>
+
+
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
         <script src = "${pageContext.request.contextPath}/vistas/jsp/ADMIN/Profesores/script_tabla.js"></script>

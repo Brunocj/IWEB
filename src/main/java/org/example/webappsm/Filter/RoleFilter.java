@@ -20,6 +20,7 @@ public class RoleFilter implements Filter {
             "agregarSerenazgo", "editarSerenazgo", "tablaProfesores",
             "editarProfesor", "tablaAcceso", "tablaCoordinador",
             "solicitudAcceso", "solicitudCoordi", "deleteVecino",
+            "agregarProfesor", "registrarDocente", "eliminarProfesor",
 
             // CoordinadorServlet actions
             "pagPrincipal", "miPerfil", "incidencias", "registroIncidencia",
