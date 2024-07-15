@@ -22,6 +22,9 @@ public class BaseDao {
         return DriverManager.getConnection(url, user, pass);
     }
     public byte[] readImagenes(InputStream is) throws IOException {
+        if (is == null) {
+            return null;
+        }
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         int nRead;
         byte[] data = new byte[1024];

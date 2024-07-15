@@ -217,7 +217,7 @@
                           String nombreProfesor = coordinadorDao.obtenerNombreCompletoPorId(idProfesor);
                         %>
                         <input type="hidden" id="idProfesor" name="idProfesor" value="<%= idProfesor %>">
-
+                        <input type="hidden" name="idCoordi" value="<%= usuariologueado.getId()%>">
                         <p><%= nombreProfesor %></p>
                       </div>
                     </div>
