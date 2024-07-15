@@ -65,7 +65,7 @@ public class UserDao extends BaseDao{
                 "FROM " +
                 "incidencia i " +
                 "JOIN " +
-                "estado e ON i.idEstado = e.idEstado; ";
+                "estadoincidencia e ON i.idEstado = e.idEstado; ";
         try(Connection conn = this.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
