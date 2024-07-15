@@ -1,4 +1,7 @@
+<%@ page import="org.example.webappsm.model.beans.Usuario" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%Usuario usuariologueado= (Usuario) session.getAttribute("usuarioLogueado");%>
+<% int idCoordinador = usuariologueado.getId(); %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -43,7 +46,7 @@
         <div class="main-panel">
           <div class="content-wrapper" style ="background-color: #bdf1f5;"> <!--Cambiar al color mas claro-->
                 <div class="title-pp">
-                  <h2>Bienvenido Coordinador Adrián!</h2>
+                  <h2>Bienvenido Coordinador <%=usuariologueado.getNombre()+" "+usuariologueado.getApellido()%>>!</h2>
                 </div>
                 <div  class="RowWrapper">
                   <div class="row-1">
@@ -72,7 +75,7 @@
                         </div>
                       </div>
                       <div class="card-name">
-                        <a href="../Eventos/eventos.jsp" style="color: black; font-weight: bold;"> Sección <br> Eventos</a>
+                        <a href="${pageContext.request.contextPath}/Coordinador?action=eventos&id=<%=usuariologueado.getId()%>" style="color: black; font-weight: bold;"> Sección <br> Eventos</a>
                       </div>
                     </div>
                     <div class="col-md-4">
@@ -87,7 +90,7 @@
                         </div>
                       </div>
                       <div class="card-name">
-                        <a href="../Incidencias/incidencia_coordinador.jsp" style="color: black; font-weight: bold;">Registrar <br> Incidencia </a>
+                        <a href="${pageContext.request.contextPath}/Coordinador?action=incidencias" style="color: black; font-weight: bold;">Registrar <br> Incidencia </a>
                     </div>
               </div>
             </div>

@@ -553,6 +553,16 @@ public class CoordinadorServlet extends HttpServlet {
                 Evento eventoExistente = coordinadorDao2.obtenerEventoPorId(idEvento);
                 imagen2 = eventoExistente.getImagenes();
             }
+            // Verificar y manejar la imagen
+            Part filePart2 = request.getPart("imagenEntrada");
+            byte[] entrada2 = null;
+            if (filePart2 != null && filePart2.getSize() > 0) {
+                entrada2 = obtenerImagenComoByteArray(filePart2.getInputStream());
+            } else {
+                // Si no se proporciona una nueva imagen, usar la imagen existente
+                Evento eventoExistente2 = coordinadorDao2.obtenerEventoPorId(idEvento);
+                entrada2 = eventoExistente2.getIngreso();
+            }
 
             String descripcion2 = request.getParameter("descripcion");
             String lugar2 = request.getParameter("lugar");
@@ -626,16 +636,7 @@ public class CoordinadorServlet extends HttpServlet {
                 throw new RuntimeException("La hora del evento no fue seleccionada correctamente");
             }
 
-            // Verificar y manejar la imagen
-            Part filePart2 = request.getPart("imagenEntrada");
-            byte[] entrada2 = null;
-            if (filePart != null && filePart.getSize() > 0) {
-                entrada2 = obtenerImagenComoByteArray(filePart2.getInputStream());
-            } else {
-                // Si no se proporciona una nueva imagen, usar la imagen existente
-                Evento eventoExistente2 = coordinadorDao2.obtenerEventoPorId(idEvento);
-                entrada2 = eventoExistente2.getIngreso();
-            }
+
 
             byte[] salida2 = null;
             String materiales2 = request.getParameter("materiales");
