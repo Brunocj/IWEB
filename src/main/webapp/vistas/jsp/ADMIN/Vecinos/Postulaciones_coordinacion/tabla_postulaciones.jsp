@@ -140,10 +140,12 @@
         <!-- inject:js -->
         <script src="<%=request.getContextPath()%>/assets/js/off-canvas.js"></script>
         <script src="<%=request.getContextPath()%>/assets/js/hoverable-collapse.js"></script>
-        <script src="<%=request.getContextPath()%>/assets/js/misc.js"></script>
+        <script src="../../../../assets/js/misc.js"></script>
         <script src="<%=request.getContextPath()%>/assets/js/settings.js"></script>
         <script src="<%=request.getContextPath()%>/assets/js/todolist.js"></script>
-        <!-- endinject -->
+
+
+    <!-- endinject -->
         <!-- Custom js for this page -->
         <script>
             function mostrarPopupCerrarSesion() {

@@ -4,6 +4,11 @@
     int idProvisional = 12; //poosteriormente, obtener el id con query
 %>
 <%Usuario usuariologueado= (Usuario) session.getAttribute("usuarioLogueado");%>
+
+<%
+    String activePage = request.getParameter("activePage"); // Obtener activePage de la petición
+%>
+
 <nav class="sidebar sidebar-offcanvas" id="sidebar" style ="background-color: #000f22;">  <!--Cambiar al color mas oscuro-->
 
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top" style ="background-color: #000f22;">
@@ -13,7 +18,7 @@
     <ul class="nav" style = "position: fixed;">
 
         <!-- Codigo para un item de la barra lateral que no tiene sublista -->
-        <li class="nav-item menu-items ${"pagPrincipal".equals(request.getParameter("activePage")) ? "active" : ""}">
+        <li class="nav-item menu-items <%= activePage.equals("pagPrincipal") ? "active" : "" %>">
             <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=pagPrincipal">
         <span class="menu-icon">
             <i class="mdi mdi-home"></i>
@@ -21,7 +26,7 @@
                 <span class="menu-title" style="color: white;">Página principal</span>
             </a>
         </li>
-        <li class="nav-item menu-items ${"dashboard".equals(request.getParameter("activePage")) ? "active" : ""}">
+        <li class="nav-item menu-items <%= activePage.equals("dashboard") ? "active" : "" %>">
             <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=dashboard">
         <span class="menu-icon">
             <i class="mdi mdi-chart-bar"></i>
@@ -29,7 +34,7 @@
                 <span class="menu-title" style="color: white;">Dashboard</span>
             </a>
         </li>
-        <li class="nav-item menu-items ${"tablaSerenazgo".equals(request.getParameter("activePage")) ? "active" : ""}">
+        <li class="nav-item menu-items <%= activePage.equals("tablaSerenazgo") ? "active" : "" %>">
             <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=tablaSerenazgo">
         <span class="menu-icon">
             <i class="mdi mdi-security"></i>
@@ -37,7 +42,7 @@
                 <span class="menu-title" style="color: white;">Serenazgo</span>
             </a>
         </li>
-        <li class="nav-item menu-items ${"tablaProfesores".equals(request.getParameter("activePage")) ? "active" : ""}">
+        <li class="nav-item menu-items <%= activePage.equals("tablaProfesores") ? "active" : "" %>">
             <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=tablaProfesores">
         <span class="menu-icon">
             <i class="mdi mdi-teach"></i>
@@ -59,12 +64,12 @@
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu"><!-- Colocar items de la sublista -->
 
-                    <li class="nav-item ${"tablaAcceso".equals(request.getParameter("activePage")) ? "active" : ""}"> <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=tablaAcceso" style="color: white;">
+                    <li class="nav-item <%= activePage.equals("tablaAcceso") ? "active" : "" %>"> <a class="nav-link" href="<%=request.getContextPath()%>/Admin?action=tablaAcceso" style="color: white;">
                   <span class="menu-icon">
                     <i class="mdi mdi-account-alert"></i>
                   </span>
                         Sol. de acceso</a></li>
-                    <li class="nav-item ${"tablaCoordinador".equals(request.getParameter("activePage")) ? "active" : ""}"> <a class="nav-link " href="<%=request.getContextPath()%>/Admin?action=tablaCoordinador" style="color: white;">
+                    <li class="nav-item <%= activePage.equals("tablaCoordinador") ? "active" : "" %>"> <a class="nav-link " href="<%=request.getContextPath()%>/Admin?action=tablaCoordinador" style="color: white;">
                   <span class="menu-icon ">
                     <i class="mdi mdi-account-alert "></i>
                   </span>

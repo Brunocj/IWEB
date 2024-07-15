@@ -362,17 +362,19 @@
         </div>
         <!-- container-scroller -->
         <!-- plugins:js -->
-        <script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
-        <!-- endinject -->
-        <!-- Plugin js for this page -->
-        <!-- End plugin js for this page -->
-        <!-- inject:js -->
-        <script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
-        <!-- scripts de los cuadros -->
+    <script src="<%=request.getContextPath()%>/assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="<%=request.getContextPath()%>/assets/js/off-canvas.js"></script>
+    <script src="<%=request.getContextPath()%>/assets/js/hoverable-collapse.js"></script>
+    <script src="../../../../assets/js/misc.js"></script>
+    <script src="<%=request.getContextPath()%>/assets/js/settings.js"></script>
+    <script src="<%=request.getContextPath()%>/assets/js/todolist.js"></script>
+
+
+    <!-- scripts de los cuadros -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
         <!-- acaba scripts cuadro -->
         <!-- endinject -->
