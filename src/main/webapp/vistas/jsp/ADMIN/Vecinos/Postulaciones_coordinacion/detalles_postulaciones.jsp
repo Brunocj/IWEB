@@ -176,10 +176,12 @@
     <!-- inject:js -->
     <script src="<%=request.getContextPath()%>/assets/js/off-canvas.js"></script>
     <script src="<%=request.getContextPath()%>/assets/js/hoverable-collapse.js"></script>
-    <script src="<%=request.getContextPath()%>/assets/js/misc.js"></script>
+    <script src="../../../../assets/js/misc.js"></script>
     <script src="<%=request.getContextPath()%>/assets/js/settings.js"></script>
     <script src="<%=request.getContextPath()%>/assets/js/todolist.js"></script>
-    <script>
+
+
+<script>
 
         /* Funciones para que el texto cambie de acuerdo a lo indicado*/
 
