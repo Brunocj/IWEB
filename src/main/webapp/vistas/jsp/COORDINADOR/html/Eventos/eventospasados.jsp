@@ -168,16 +168,10 @@
             </section>
             <nav>
               <ul class="pagination justify-content-center">
-                <li class="page-item" id="previousPage">
-                  <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
-                </li>
+
                 <li class="page-item active"><a class="page-link page-button" href="#" data-page="1">1</a></li>
                 <li class="page-item"><a class="page-link page-button" href="#" data-page="2">2</a></li>
 
-                <!-- Repite este bloque para más números de página si es necesario -->
-                <li class="page-item" id="nextPage">
-                  <a class="page-link" href="#">Siguiente</a>
-                </li>
               </ul>
             </nav>
           </div>
