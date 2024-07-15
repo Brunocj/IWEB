@@ -28,12 +28,14 @@ import java.util.Date;
 @WebServlet(name ="CoordinadorServlet" , value = "/Coordinador")
 @MultipartConfig
 public class CoordinadorServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action") == null? "pagPrincipal" : request.getParameter("action");
         String vista;
         RequestDispatcher rd ;
         UserDao userDao  = new UserDao();
+
 
         switch (action){
             case "pagPrincipal":
@@ -93,7 +95,7 @@ public class CoordinadorServlet extends HttpServlet {
                 break;
             case "tablaProfesores":
                 CoordinadorDao coordinadorDao = new CoordinadorDao();
-                int idArea = 1;
+                int idArea = Integer.parseInt(request.getParameter("id"));
                 String fechaString = request.getParameter("fechadispo");
                 java.sql.Date fechaEvento = null;
 
@@ -148,7 +150,9 @@ public class CoordinadorServlet extends HttpServlet {
 
             case "eventos":
                 CoordinadorDao coordinadorDao2 = new CoordinadorDao();
-                int idCoordinador = 3;
+                int idusuarioeventos = Integer.parseInt(request.getParameter("id"));
+                Usuario usuarioevento = userDao.mostrarUsuarioID(idusuarioeventos);
+                int idCoordinador = usuarioevento.getId();
                 ArrayList<Evento> listarEventoscreadoss = coordinadorDao2.listarEventosCreados(idCoordinador);
                 request.setAttribute("listaEventos", listarEventoscreadoss);
                 vista = "vistas/jsp/COORDINADOR/html/Eventos/eventos.jsp";
@@ -175,7 +179,9 @@ public class CoordinadorServlet extends HttpServlet {
                 break;
             case "EventosNota":
                 CoordinadorDao coordinadorDaonota = new CoordinadorDao();
-                int idCoordinador2 = 3; // posteriormente obtener mediante un request.getParameter
+                int idusuarionota = Integer.parseInt(request.getParameter("id"));
+                Usuario usuarionota = userDao.mostrarUsuarioID(idusuarionota);
+                int idCoordinador2 = usuarionota.getId(); // posteriormente obtener mediante un request.getParameter
                 ArrayList<Evento> listarEventosNotas = coordinadorDaonota.listarEventosNota(idCoordinador2);
                 request.setAttribute("listaEventosNota", listarEventosNotas);
 
@@ -283,6 +289,8 @@ public class CoordinadorServlet extends HttpServlet {
 
             case "registrarEvento":
                 CoordinadorDao coordinadorDao = new CoordinadorDao();
+                int idusuarioregistro = Integer.parseInt(request.getParameter("id"));
+                Usuario usuarioevento = userDao.mostrarUsuarioID(idusuarioregistro);
                 String nombre_evento = request.getParameter("nombre_evento");
                 byte[] imagen = obtenerImagenComoByteArray((request.getPart("imagenEvento").getInputStream()));
                 String descripcion = request.getParameter("descripcion");
@@ -308,7 +316,7 @@ public class CoordinadorServlet extends HttpServlet {
                 int recurrencia = Integer.parseInt(recurrenciaStr);
 
                 int idEstadoEvento = 1;
-                int idArea = 2;
+                int idArea = usuarioevento.getIdArea();
                 String resumen = "Resumen";
 
                 String fechaString = request.getParameter("fecha");
@@ -403,7 +411,7 @@ public class CoordinadorServlet extends HttpServlet {
                     }
                 }
 
-                response.sendRedirect(request.getContextPath() + "/Coordinador?action=eventos");
+                response.sendRedirect(request.getContextPath() + "/Coordinador?action=eventos&id="+idusuarioregistro);
                 break;
             case "borrarEvento":
                 int idEvento = Integer.parseInt(request.getParameter("id"));
