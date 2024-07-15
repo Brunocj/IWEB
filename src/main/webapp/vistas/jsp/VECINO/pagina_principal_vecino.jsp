@@ -101,7 +101,7 @@ int idProvisional = 12;
                                 </div>
                             </div>
                             <div class="card-name">
-                                <a href="solicitarCoordinador.jsp" style="color: black; font-weight: bold;"> Solicitud para <br> Coordinador</a>
+                                <a href="<%=request.getContextPath()%>/Vecino?action=solCoordinador" style="color: black; font-weight: bold;"> Solicitud para <br> Coordinador</a>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -117,7 +117,7 @@ int idProvisional = 12;
                                 </div>
                             </div>
                             <div class="card-name">
-                                <a href="eventos/eventos.jsp" style="color: black; font-weight: bold;"> Visualizar <br> Eventos</a>
+                                <a href="<%=request.getContextPath()%>/Vecino?action=eventos" style="color: black; font-weight: bold;"> Visualizar <br> Eventos</a>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -133,7 +133,7 @@ int idProvisional = 12;
                                 </div>
                             </div>
                             <div class="card-name">
-                                <a href="incidencias/incidencia_vecino.jsp" style="color: black; font-weight: bold;">Registrar <br> Incidencia </a>
+                                <a href="<%=request.getContextPath()%>/Vecino?action=incidencias"  style="color: black; font-weight: bold;">Registrar <br> Incidencia </a>
                             </div>
                         </div>
                     </div>
