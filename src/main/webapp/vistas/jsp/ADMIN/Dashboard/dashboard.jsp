@@ -19,9 +19,6 @@
     String incidenciasPorAtender = (String) request.getAttribute("incidenciasatender");
     String incidenciasUrbMax = (String) request.getAttribute("incidenciasurbmax");
     String incidenciasUrbMin = (String) request.getAttribute("incidenciasurbmin");
-    String totalIncidencias = (String) request.getAttribute("totalincidencias");
-    String incidenciasComunMax = (String) request.getAttribute("incidenciascomunmax");
-    String incidenciasComunMin = (String) request.getAttribute("incidenciascomunmin");
     ArrayList<Usuario> listaBaneados = (ArrayList<Usuario>) request.getAttribute("listabaneados");
     ArrayList<String> tipoIncidencias = (ArrayList<String>) request.getAttribute("tipoincidencias");
     ArrayList<Integer> cantidadTipo = (ArrayList<Integer>) request.getAttribute("cantidadtipo");
@@ -122,9 +119,9 @@
                                                                     <h1 style="margin: 0;"><span class="mdi mdi-chart-areaspline" style="font-size: 2.5rem; color:#062779;"></span></h1>
                                                                 </div>
                                                                 <div class="d-flex align-items-center justify-content-center">
-                                                                    <h3 class="mb-0" style="font-size: 2.5rem; font-weight: bold; color:black; margin-top: 10px;"><%= totalIncidencias != null ? totalIncidencias : '0' %></h3>
+                                                                    <h3 class="mb-0" style="font-size: 2.5rem; font-weight: bold; color:black; margin-top: 10px;"><%= incidenciasMes != null ? incidenciasMes : '0' %></h3>
                                                                 </div>
-                                                                <h4 class="text-muted font-weight-normal mt-2 text-center" style="color: black !important; font-size: 1.5rem !important; font-weight: 500 !important;">Cantidad total de incidencias</h4>
+                                                                <h4 class="text-muted font-weight-normal mt-2 text-center" style="color: black !important; font-size: 1.5rem !important; font-weight: 500 !important;">Cantidad de incidencias este mes</h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -143,9 +140,9 @@
 
                                                             </div>
                                                             <div class="d-flex align-items-center justify-content-center">
-                                                                <h3 class="mb-0" style="font-size: 2.5rem; font-weight: bold; color: black; margin-top: 10px;"><%= avgIncidencias != null ? avgIncidencias : '0' %></h3>
+                                                                <h3 class="mb-0" style="font-size: 2.5rem; font-weight: bold; color: black; margin-top: 10px;"><%= incidenciasSemana != null ? incidenciasSemana : '0' %></h3>
                                                             </div>
-                                                            <h4 class="text-muted font-weight-normal mt-2 text-center" style="color: black !important; font-size: 1.5rem !important; font-weight: 500 !important;">Promedio de incidencias por día</h4>
+                                                            <h4 class="text-muted font-weight-normal mt-2 text-center" style="color: black !important; font-size: 1.5rem !important; font-weight: 500 !important;">Cantidad de incidencias esta semana</h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -232,10 +229,10 @@
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-12 d-flex justify-content-center">
-                                                                    <h3 class="mb-0" style="font-size: 2.5rem; font-weight: bold; color:black;"><%= incidenciasPorAtender != null ? incidenciasPorAtender : "0" %></h3>
+                                                                    <h3 class="mb-0" style="font-size: 2.5rem; font-weight: bold; color:black;"><%= incidenciasHoy != null ? incidenciasHoy : "0" %></h3>
                                                                 </div>
                                                             </div>
-                                                            <h4 class="text-muted font-weight-normal mt-2 text-center" style="color: black !important; font-size: 1.5rem !important; font-weight: 500 !important;">Cantidad de incidencias por atender</h4>
+                                                            <h4 class="text-muted font-weight-normal mt-2 text-center" style="color: black !important; font-size: 1.5rem !important; font-weight: 500 !important;">Cantidad de incidencias hoy</h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -252,10 +249,10 @@
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-12 d-flex justify-content-center">
-                                                                    <h3 class="mb-0" style="font-size: 2.5rem; font-weight: bold; color:black;"><%= incidenciasComunMax != null ? incidenciasComunMax : "No hay" %></h3>
+                                                                    <h3 class="mb-0" style="font-size: 2.5rem; font-weight: bold; color:black;"><%= avgIncidencias != null ? avgIncidencias : "No hay" %></h3>
                                                                 </div>
                                                             </div>
-                                                            <h4 class="text-muted font-weight-normal mt-2 text-center" style="color: black !important; font-size: 1.5rem !important; font-weight: 500 !important;">Tipo de incidencia más común</h4>
+                                                            <h4 class="text-muted font-weight-normal mt-2 text-center" style="color: black !important; font-size: 1.5rem !important; font-weight: 500 !important;">Promedio de incidencias por día</h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -272,10 +269,10 @@
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-12 d-flex justify-content-center">
-                                                                    <h3 class="mb-0" style="font-size: 2.5rem; font-weight: bold; color:black;"><%= incidenciasComunMin != null ? incidenciasComunMin : "No hay" %></h3>
+                                                                    <h3 class="mb-0" style="font-size: 2.5rem; font-weight: bold; color:black;"><%= incidenciasPorAtender != null ? incidenciasPorAtender : "No hay" %></h3>
                                                                 </div>
                                                             </div>
-                                                            <h4 class="text-muted font-weight-normal mt-2 text-center" style="color: black !important; font-size: 1.5rem !important; font-weight: 500 !important;">Tipo de incidencia menos común</h4>
+                                                            <h4 class="text-muted font-weight-normal mt-2 text-center" style="color: black !important; font-size: 1.5rem !important; font-weight: 500 !important;">Cantidad de incidencias por atender</h4>
                                                         </div>
                                                     </div>
                                                 </div>
