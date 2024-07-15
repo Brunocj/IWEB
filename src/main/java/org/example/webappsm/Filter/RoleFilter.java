@@ -34,7 +34,7 @@ public class RoleFilter implements Filter {
             "pagPrincipal", "perfil", "dashboard", "listaVecinos",
             "listaIncidenciasPasadas", "mostrarDescripcion", "listaIncidencias",
             "leerDescripcion", "clasificar", "proceder", "gestionarIncidencia",
-            "descripcionFinal",
+            "descripcionFinal","banearVecino",
 
             // VecinoServlet actions
             "pagPrincipal", "miPerfil", "solCoordinador", "incidencias",
