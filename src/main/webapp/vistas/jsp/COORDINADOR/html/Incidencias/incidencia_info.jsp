@@ -110,7 +110,7 @@
               </div>
               <div class="button-container">
                 <!-- Botón con enlace "#" -->
-                <a href="<%=request.getContextPath()%>/Vecino?action=incidencias" class="button" style =" background-color: #000f22;" >Regresar</a>
+                <a href="<%=request.getContextPath()%>/Coordinador?action=incidencias" class="button" style =" background-color: #000f22;" >Regresar</a>
               </div>
             </div>
             

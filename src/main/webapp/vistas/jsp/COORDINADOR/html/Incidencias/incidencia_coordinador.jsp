@@ -142,7 +142,7 @@
             text: 'No puedes registrar una incidencia porque estás baneado.',
           });
         } else {
-          window.location.href = '<%=request.getContextPath()%>/Vecino?action=registroIncidencia';
+          window.location.href = '<%=request.getContextPath()%>/Coordinador?action=registroIncidencia';
         }
       }
     </script>

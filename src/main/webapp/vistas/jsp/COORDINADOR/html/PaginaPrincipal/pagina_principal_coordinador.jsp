@@ -116,7 +116,6 @@
       <script src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/paginas_principales.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
-    <script src="${pageContext.request.contextPath}/vistas/jsp/COORDINADOR/js/PaginaPrincipal/script_cerrar_sesion.js"></script>
 
     <!-- End custom js for this page -->
   </body>

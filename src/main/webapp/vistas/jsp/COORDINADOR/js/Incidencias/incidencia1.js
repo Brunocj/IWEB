@@ -62,24 +62,4 @@ const menuToggle = document.getElementById('menuToggle');
 
     // Función para mostrar un popup de confirmación antes de cerrar sesión
 
-      function mostrarPopupCerrarSesion() {
-        Swal.fire({
-          title: '¿Estás seguro de que deseas cerrar sesión?',
-          text: 'Este proceso será irreversible',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#00913f',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Sí, cerrar sesión',
-          cancelButtonText: 'Cancelar', // Cambio realizado aquí
-          customClass: {
-            title: 'swal2-title',
-            content: 'swal2-content',
-        }
-        }).then((result) => {
-          if (result.isConfirmed) {
-            window.location.href = "../../../LOGIN/login.jsp"; // Cambiar la ubicacion del login de acuerdo a lo necesario
-          }
-        });
-      }
 
