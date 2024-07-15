@@ -7,6 +7,8 @@
   Time: 18:06
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import ="org.example.webappsm.model.beans.Usuario" %>
+<%Usuario usuariologueado = (Usuario) session.getAttribute("usuarioLogueado");%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String msg = (String) request.getAttribute("msg");
@@ -58,9 +60,14 @@
         <div class="content-wrapper" style ="background-color: #d6e9ff;"> <!--Cambiar al color mas claro-->
             <!--CONTENIDO-->
 
+            <%
+                // Obtener si el usuario está baneado
+                boolean isUserBanned = usuariologueado.isBaneado();
+            %>
+
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                 <h2 class="tabla-title" style="color: #000f22; margin-bottom: 0px;">Incidencias</h2>
-                <button class="btnTable" style="display: flex; align-items: center;" onclick="window.location.href='<%=request.getContextPath()%>/Vecino?action=registroIncidencia';">
+                <button class="btnTable" style="display: flex; align-items: center;" onclick="checkUserStatus(<%= isUserBanned %>);">
                     Agregar Incidencia
                     <a class="mdi mdi-plus" style="color: #ffffff; font-size: 20px; margin-left: 5px;"></a>
                 </button>
@@ -130,6 +137,18 @@
         text: '<%= msg %>'
     });
     <% } %>
+
+    function checkUserStatus(isUserBanned) {
+        if (isUserBanned) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Acceso Denegado',
+                text: 'No puedes registrar una incidencia porque estás baneado.',
+            });
+        } else {
+            window.location.href = '<%=request.getContextPath()%>/Vecino?action=registroIncidencia';
+        }
+    }
 </script>
 <!-- End custom js for this page -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
