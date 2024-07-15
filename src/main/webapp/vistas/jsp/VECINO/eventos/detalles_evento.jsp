@@ -40,9 +40,61 @@
             object-fit: cover;
         }
 
+
+        .custom-container {
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .event-image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .titulo-evento {
+            font-size: 36px; /* Aumentado el tamaño de la fuente */
+            font-weight: bold;
+            color: #333;
+            text-align: center; /* Centrado */
+            margin-bottom: 20px;
+        }
+        .datos-evento {
+            font-size: 24px; /* Aumentado el tamaño de la fuente */
+            color: #333;
+
+            text-align: left;
+        }
+        .descripcion-evento {
+            font-size: 36px; /* Aumentado el tamaño de la fuente */
+            color: #333;
+            font-weight: bold;
+            line-height: 1.6;
+            text-align: center; /* Centrado */
+            margin-bottom: 20px;
+        }
+        .custom-btn {
+            background-color: #00913f;
+            color: #fff;
+            font-size: 50px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 24px;
+            transition: background-color 0.3s ease;
+        }
+        .custom-btn:hover {
+            background-color:#193255;
+        }
     </style>
+
+
+
 </head>
 <body>
+
 <div class="container-scroller">
     <!-- partial:../../partials/_sidebar.html -->
     <%
@@ -78,11 +130,11 @@
                         </div>
                         <div class="col-md-6">
                             <div class="custom-container rounded-3" id="fechas" style="font-size: 28px;">
-                                <h4 class="mb-4 center-text"><%=evento.getTitulo()%></h4>
-                                <p><strong>Fecha:</strong> <%=evento.getFecha()%></p>
-                                <p><strong>Hora:</strong> <%=evento.getHora()%> </p>
-                                <p><strong>Lugar:</strong> <%=evento.getUbicacion()%></p>
-                                <p><strong>Recurrencia:</strong> <span id="recurrencia-seleccionada">
+                                <h4 class="titulo-evento mb-4 center-text"><%=evento.getTitulo()%></h4>
+                                <p class="datos-evento"><strong>Fecha:</strong> <%=evento.getFecha()%></p>
+                                <p class="datos-evento"><strong>Hora:</strong> <%=evento.getHora()%> </p>
+                                <p class="datos-evento"><strong>Lugar:</strong> <%=evento.getUbicacion()%></p>
+                                <p class="datos-evento"><strong>Recurrencia:</strong> <span id="recurrencia-seleccionada">
   <%
       Integer recurrencia = evento.getRecurrencia();
       if (recurrencia != null) {
@@ -112,23 +164,23 @@
                                         <input type="hidden" name="idUsuario" value="<%= idUsuario %>">
                                         <input type="hidden" name="idEvento" value="<%= evento.getIdEvento() %>">
                                     </form>
-                                    <button type="button" class="btn btn-primary custom-btn" style="right: 1px; font-size: 18px; font-weight: bold;" id="btn-inscribirse" onclick="return InscribirPopUp();">Inscribirse</button>
+                                    <button type="button" class="btn btn-primary custom-btn" style="right: 1px; font-size: 28px; font-weight: bold; " id="btn-inscribirse" onclick="return InscribirPopUp();">Inscribirse</button>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="custom-container rounded-3" id="descripcion">
-                                <h4 class="mb-4">Descripción del Evento</h4>
-                                <p><%=evento.getDescripcion()%></p>
-                                <h4 class="mb-4">Materiales </h4>
+                                <h4 class="datos-evento mb-4">Descripción del Evento:</h4>
+                                <p class="datos-evento mb-4"><%=evento.getDescripcion()%></p>
+                                <h4 class="datos-evento mb-4 font-weight: bold">Materiales para usar: </h4>
                                 <div id="opcion-material">
-                                    <ul id="lista-materiales">
+                                    <ul class="datos-evento mb-4">
                                         <%
                                             ArrayList<String> nombresMateriales = (ArrayList<String>) request.getAttribute("materiales");
                                             if (nombresMateriales != null && !nombresMateriales.isEmpty()) {
                                                 for (String nombreMaterial : nombresMateriales) {
                                         %>
-                                        <li class="material-item">
+                                        <li class="datos-evento ">
                                             <span><%= nombreMaterial %></span>
                                         </li>
                                         <%
@@ -146,18 +198,18 @@
                                         }
                                     %>
                                 </div>
-                                <h4 class="mb-4">Profesor</h4>
+                                <h4 class="datos-evento mb-4">Profesor asignado:</h4>
                                 <%
                                     CoordinadorDao coordinadorDao = new CoordinadorDao();
                                     Integer idProfesor = evento.getIdProfesor();
 
                                     String nombreProfesor = coordinadorDao.obtenerNombreCompletoPorId(idProfesor);
                                 %>
-                                <p><%=nombreProfesor%></p>
+                                <p class="datos-evento "><%=nombreProfesor%></p>
                             </div>
                         </div>
                     </div>
-                    <a href="${pageContext.request.contextPath}/Vecino?action=eventos&id=<%=idUsuario%>" class="btn btn-primary fixed-button" style="position: absolute; bottom: 20px; right: 20px; font-size: 18px; font-weight: bold;">Volver a Eventos</a> <!-- Alineación del botón a la derecha -->
+                    <a href="${pageContext.request.contextPath}/Vecino?action=eventos&id=<%=idUsuario%>" class="btn custom-btn fixed-button" style="padding: 12px 24px; font-size: 27px ; float: right; backgroundcolor: #00913f ;" >Volver a Eventos</a> <!-- Alineación del botón a la derecha -->
                 </div>
 
             </div>

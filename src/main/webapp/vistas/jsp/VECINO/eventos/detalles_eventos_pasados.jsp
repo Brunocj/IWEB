@@ -60,6 +60,29 @@
                 object-fit: cover;
 
             }
+
+            .datos-evento {
+                font-size: 24px; /* Aumentado el tamaño de la fuente */
+                color: #333;
+
+                text-align: left;
+            }
+
+            .custom-btn {
+                background-color: #00913f;
+                color: #fff;
+                font-size: 50px;
+                font-weight: bold;
+                border: none;
+                border-radius: 50px;
+                padding: 12px 24px;
+                transition: background-color 0.3s ease;
+            }
+            .custom-btn:hover {
+                background-color:#193255;
+            }
+
+
         </style>
     </head>
     <body>
@@ -120,24 +143,24 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="custom-container rounded-3" id="fechas">
-                                    <h4 class="mb-4">Descripción del Evento</h4>
-                                    <p><%= evento.getDescripcion() %></p>
-                                    <h4 class="mb-4">Notas del Evento</h4>
-                                    <p><%= evento.getResumen() %></p>
-                                    <h4 class="mb-4">Staff del Evento</h4>
+                                    <h4 class="datos-evento mb-4">Descripción del Evento</h4>
+                                    <p class="datos-evento mb-4"><%= evento.getDescripcion() %></p>
+                                    <h4 class="datos-evento mb-4">Notas del Evento</h4>
+                                    <p class="datos-evento mb-4"><%= evento.getResumen() %></p>
+                                    <h4 class="datos-evento mb-4">Staff del Evento</h4>
                                     <%
                                         CoordinadorDao coordinadorDao = new CoordinadorDao();
                                         Integer idProfesor = evento.getIdProfesor();
                                         String nombreProfesor = coordinadorDao.obtenerNombreCompletoPorId(idProfesor);
                                     %>
-                                    <p><%= nombreProfesor %></p>
+                                    <p class="datos-evento mb-4"><%= nombreProfesor %></p>
                                 </div>
                             </div>
                         </div>
 
                         <% } %>
 
-                        <a href="${pageContext.request.contextPath}/Vecino?action=eventosPasados&id=<%=idUsuario%>" class="btn btn-primary fixed-button" style="position: absolute; bottom: 20px; right: 20px; font-size: 18px; font-weight: bold;">Volver a Eventos Pasados</a> <!-- Alineación del botón a la derecha -->
+                        <a href="${pageContext.request.contextPath}/Vecino?action=eventosPasados&id=<%=idUsuario%> " class="btn custom-btn fixed-button" style="padding: 12px 24px; font-size: 27px ; float: right; backgroundcolor: #00913f ;margin-top: 303px;">Volver a Eventos Pasados</a> <!-- Alineación del botón a la derecha -->
                     </div>
                 </div>
             </div>

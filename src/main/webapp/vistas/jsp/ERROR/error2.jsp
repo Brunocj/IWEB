@@ -50,28 +50,28 @@
         .border-bottom-jagged {
             position: relative;
             padding-bottom: var(--jaggedDistance);
+        }
 
-            &::after {
-                content: '';
-                display: block;
-                position: absolute;
-                left: calc(-1 * var(--jaggedDistance) / 1.7);
-                bottom: calc(-1 * var(--jaggedDistance) / 3.85);
-                width: calc(100% + var(--jaggedDistance));
-                height: var(--jaggedDistance);
-                background-repeat: repeat-x;
-                background-size: var(--jaggedDistance) var(--jaggedDistance);
-                background-position: left bottom;
-                background-image:
-                        linear-gradient(-45deg, var(--bgColor) calc(var(--jaggedDistance) / 2), transparent 0),
-                        linear-gradient(45deg, var(--bgColor) calc(var(--jaggedDistance) / 2), transparent 0),
-                        linear-gradient(-45deg, var(--booFaceColor) calc(var(--jaggedDistance) / 1.7), transparent 0),
-                        linear-gradient(45deg, var(--booFaceColor) calc(var(--jaggedDistance) / 1.7), transparent 0);
-            }
+        .border-bottom-jagged::after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: calc(-1 * var(--jaggedDistance) / 1.7);
+            bottom: calc(-1 * var(--jaggedDistance) / 3.85);
+            width: calc(100% + var(--jaggedDistance));
+            height: var(--jaggedDistance);
+            background-repeat: repeat-x;
+            background-size: var(--jaggedDistance) var(--jaggedDistance);
+            background-position: left bottom;
+            background-image:
+                    linear-gradient(-45deg, var(--bgColor) calc(var(--jaggedDistance) / 2), transparent 0),
+                    linear-gradient(45deg, var(--bgColor) calc(var(--jaggedDistance) / 2), transparent 0),
+                    linear-gradient(-45deg, var(--booFaceColor) calc(var(--jaggedDistance) / 1.7), transparent 0),
+                    linear-gradient(45deg, var(--booFaceColor) calc(var(--jaggedDistance) / 1.7), transparent 0);
         }
 
         body {
-            background-color: rgba(53,75,125,255);
+            background-color: rgba(53, 75, 125, 255);
             font-family: "Poppins", sans-serif;
             height: 100vh;
             margin: 0;
@@ -84,7 +84,7 @@
             left: 0;
             width: 50%;
             height: 100%;
-            background-color: rgba(109,208,255,255); /* Color de la izquierda */
+            background-color: rgba(109, 208, 255, 255); /* Color de la izquierda */
             z-index: 1;
         }
 

@@ -90,7 +90,7 @@ public class SystemDao extends BaseDao{
                     usuario.setIdRol(rs.getInt(5));
                     usuario.setIdArea(rs.getInt(14));
                     usuario.setIdEstado(rs.getInt(16));
-
+                    usuario.setBaneado(rs.getBoolean(15));
                 }
             }
         } catch (SQLException e) {
