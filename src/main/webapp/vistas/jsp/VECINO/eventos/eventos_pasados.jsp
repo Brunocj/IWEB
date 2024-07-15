@@ -137,7 +137,6 @@
                         int columnasPorFila = 4;
                         int contador = 0;
 
-                        // Iterar sobre la lista de eventos
                         for (Evento evento : eventos) {
                             // Abrir un nuevo container y row cada 4 eventos
                             if (contador % columnasPorFila == 0) {
