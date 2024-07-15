@@ -183,13 +183,14 @@
                                     </div>
                                     <div class="option azul" onclick="seleccionarFoto()">
                                         <i class="fas fa-address-book me-2"></i> Registrar Entrada
+                                        <!-- Campo de archivo oculto -->
+                                        <input type="file" id="upload2" name="imagenEntrada" style="display: none;" accept="image/*">
                                     </div>
                                     <div class="option rojo" onclick="return borrarEvento(<%= evento.getIdEvento() %>, '<%= request.getContextPath() %>',<%=idCoordinador%>);">
                                         <i class="fas fa-trash-alt me-2"></i> Borrar Evento
                                     </div>
                                 </div>
-                                <!-- Campo de archivo oculto -->
-                                <input type="file" id="upload2" name="imagenEntrada" style="display: none;" accept="image/*">
+
                             </div>
                             <div class="row">
                                 <div class="col-md-6" >
@@ -445,6 +446,7 @@
                         dataTransfer.items.add(foto);
                         uploadField.files = dataTransfer.files;
                         console.log('Imagen seleccionada:', foto);
+                        console.log('Upload field files:', uploadField.files);
                         Swal.fire({
                             title: "Registro Exitoso",
                             text: `¡Tu registro de entrada ha sido procesado correctamente!`,

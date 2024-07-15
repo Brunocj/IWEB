@@ -10,7 +10,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Mi perfil</title>
@@ -102,6 +101,19 @@
         .row-cols-lg-4 > .col {
             padding: 15px;
         }
+        .no-events {
+            text-align: center;
+            padding: 50px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+
+        .no-events h3 {
+            font-size: 24px;
+            color: #343a40;
+        }
     </style>
 </head>
 <body>
@@ -133,7 +145,16 @@
                     <%
                         // Suponiendo que eventos es un ArrayList<Evento> que proviene del servlet o controlador
                         ArrayList<Evento> eventos = (ArrayList<Evento>) request.getAttribute("listaMisEventos");
+                        if (eventos == null || eventos.isEmpty()) {
 
+                    %>
+                    <div class="col-12">
+                        <div class="no-events">
+                            <h3>No se ha inscrito a ningún evento</h3>
+                        </div>
+                    </div>
+                    <%
+                    } else {
                         int columnasPorFila = 4;
                         int contador = 0;
 
@@ -167,12 +188,12 @@
 
                     <% contador++;
                     } %>
+                    <% } %>
                 </section>
                 <nav>
                     <ul class="pagination justify-content-center">
 
                         <li class="page-item active"><a class="page-link page-button" href="#" data-page="1">1</a></li>
-                        <li class="page-item" ><a class="page-link page-button" href="#" data-page="2">2</a></li>
 
 
                     </ul>
@@ -195,7 +216,7 @@
 <!-- inject:js -->
 <script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
+<script src="../assets/js/misc.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
 <!-- endinject -->

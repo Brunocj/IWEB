@@ -86,6 +86,43 @@
       .row-cols-lg-4 > .col {
         padding: 15px;
       }
+
+      .no-events {
+        text-align: center;
+        padding: 50px;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        margin: 20px 0;
+      }
+
+      .no-events h3 {
+        font-size: 24px;
+        color: #343a40;
+      }
+
+      .badge-entrada {
+        background-color: red; /* Red color */
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+      .badge-entrada2 {
+        background-color: green; /* Red color */
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
     </style>
   </head>
   <body>
@@ -132,6 +169,15 @@
                     eventos = new ArrayList<>();
                   }
 
+                  if (eventos.isEmpty()) {
+                %>
+                <div class="col-12">
+                  <div class="no-events">
+                    <h3>Aún no hay eventos creados</h3>
+                  </div>
+                </div>
+                <%
+                } else {
                   int columnasPorFila = 4;
                   int contador = 1; // Empezamos en 1 porque ya hay una tarjeta fija
 
@@ -141,6 +187,11 @@
                 %>
                 <div class="col">
                   <div class="cardEvent" data-event-id="<%= evento.getIdEvento() %>">
+                    <% if (evento.getIngreso() == null) { %>
+                    <span class="badge-entrada">Falta registrar Foto de Entrada</span>
+                    <% } else { %>
+                    <span class="badge-entrada2">Registro Entrada Realizado</span>
+                    <% } %>
                     <img src="data:image/jpeg;base64, <%= new String(org.apache.commons.codec.binary.Base64.encodeBase64(evento.getImagenes())) %>" class="card-img-top" alt="...">
                     <div class="card-body">
                       <div class="d-flex justify-content-between align-items-center">
@@ -168,6 +219,11 @@
 
                 <div class="col">
                   <div class="cardEvent" data-event-id="<%= eventos.get(i).getIdEvento() %>">
+                    <% if (eventos.get(i).getIngreso() == null) { %>
+                    <span class="badge-entrada">Falta registrar Foto de Entrada</span>
+                    <% } else { %>
+                    <span class="badge-entrada2">Registro Entrada Realizado</span>
+                    <% } %>
                     <img src="data:image/jpeg;base64, <%= new String(org.apache.commons.codec.binary.Base64.encodeBase64(eventos.get(i).getImagenes())) %>" class="card-img-top" alt="...">
                     <div class="card-body">
                       <div class="d-flex justify-content-between align-items-center">
@@ -193,22 +249,21 @@
                 if ((eventos.size() - (columnasPorFila - 1)) % columnasPorFila != 0) {
               %>
             </div> <!-- Cerrar row final si no se cerró -->
-            <% } %>
+              <% } } %>
 
-          </section>
-          <nav>
-            <ul class="pagination justify-content-center">
-
-              <li class="page-item active"><a class="page-link page-button" href="#" data-page="1">1</a></li>
-              <li class="page-item"><a class="page-link page-button" href="#" data-page="2">2</a></li>
-              </li>
-            </ul>
-          </nav>
         </div>
+        </section>
+        <nav>
+          <ul class="pagination justify-content-center">
+            <li class="page-item active"><a class="page-link page-button" href="#" data-page="1">1</a></li>
+            <li class="page-item"><a class="page-link page-button" href="#" data-page="2">2</a></li>
+          </ul>
+        </nav>
       </div>
-      <!-- content-wrapper ends -->
-      <!-- partial:../../partials/_footer.html -->
-      <!-- partial -->
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:../../partials/_footer.html -->
+    <!-- partial -->
     </div>
     <!-- main-panel ends -->
     </div>
@@ -230,9 +285,7 @@
     <!-- Custom js for this page -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
     <script src="${pageContext.request.contextPath}/vistas/jsp/COORDINADOR/js/Eventos/script_eventos.js"></script>
-
     <!-- End custom js for this page -->
   </body>
 </html>
