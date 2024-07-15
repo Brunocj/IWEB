@@ -113,13 +113,12 @@
       <!-- inject:js -->
       <script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
       <script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
-      <script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
+      <script src="../assets/js/misc.js"></script>
       <script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
       <script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
       <script src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/paginas_principales.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
-    <script src="${pageContext.request.contextPath}/vistas/jsp/COORDINADOR/js/PaginaPrincipal/script_cerrar_sesion.js"></script>
 
     <!-- End custom js for this page -->
   </body>

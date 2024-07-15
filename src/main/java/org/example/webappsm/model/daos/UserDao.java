@@ -41,7 +41,7 @@ public class UserDao extends BaseDao{
 
 
     public void enviarSolicitud(int idUsuario, int idArea){
-        String sql = "INSERT INTO SolicitudCoordinador (idUsuario, idArea, estado) VALUES (?, ?, 0)";
+        String sql = "INSERT INTO solicitudcoordinador (idUsuario, idArea, estado) VALUES (?, ?, 0)";
         try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 

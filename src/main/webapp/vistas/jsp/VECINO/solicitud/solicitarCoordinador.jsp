@@ -126,26 +126,26 @@
                                         <!-- Agregar un campo oculto para el idUsuario -->
                                         <input type="hidden" name="idUsuario" value="<%=id%>">
                                         <!-- Botón que llama a la función de SweetAlert -->
-                                        <button type="button" class="beautiful-button" onclick="confirmSubmit()">Enviar solicitud</button>
+                                        <a type="button" class="buttonasd" onclick="confirmSubmit()">Enviar solicitud</a>
                                     </div>
                                 </form>
                                 <!-- Fin de los cambios en el formulario -->
                                 <div id="cards-container" class="cards-container">
                                     <button id="prev" class="nav-button prev hidden" onclick="changeSlide(-1)">&#10094;</button>
                                     <div class="card card-animation" id="card1">
-                                        <img>
-                                        <h2></h2>
-                                        <p></p>
+                                        <img style="height: 40vh">
+                                        <h2 style="height: 5vh"></h2>
+                                        <p style="height: 6vh"></p>
                                     </div>
                                     <div class="card card-animation" id="card2">
-                                        <img>
-                                        <h2></h2>
-                                        <p></p>
+                                        <img style="height: 40vh">
+                                        <h2 style="height: 5vh"></h2>
+                                        <p style="height: 6vh"></p>
                                     </div>
                                     <div class="card card-animation" id="card3">
-                                        <img>
-                                        <h2></h2>
-                                        <p></p>
+                                        <img style="height: 40vh">
+                                        <h2 style="height: 5vh"></h2>
+                                        <p style="height: 6vh"></p>
                                     </div>
                                     <button id="next" class="nav-button next hidden" onclick="changeSlide(1)">&#10095;</button>
                                 </div>
@@ -164,7 +164,7 @@
 <script src="${pageContext.request.contextPath}/assets/vendors/js/vendor.bundle.base.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
+<script src="../assets/js/misc.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
 

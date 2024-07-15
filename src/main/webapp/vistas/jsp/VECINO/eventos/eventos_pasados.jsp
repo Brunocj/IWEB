@@ -137,7 +137,6 @@
                         int columnasPorFila = 4;
                         int contador = 0;
 
-                        // Iterar sobre la lista de eventos
                         for (Evento evento : eventos) {
                             // Abrir un nuevo container y row cada 4 eventos
                             if (contador % columnasPorFila == 0) {
@@ -176,8 +175,6 @@
                     <ul class="pagination justify-content-center">
 
                         <li class="page-item active"><a class="page-link page-button" href="#" data-page="1">1</a></li>
-                        <li class="page-item"><a class="page-link page-button" href="#" data-page="2">2</a></li>
-
 
                     </ul>
                 </nav>
@@ -199,7 +196,7 @@
 <!-- inject:js -->
 <script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
+<script src="../assets/js/misc.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
 <!-- endinject -->

@@ -104,9 +104,6 @@
     <nav class="navbar p-0 fixed-top d-flex flex-row">
 
         <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch" style ="background-color: #000f22"> <!--Cambiar al color mas oscuro-->
-            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-                <span class="mdi mdi-menu" style="color: white;"></span> <!--Cambiar el color de las 3 rayas de acuerdo a lo necesario (a negro en todo caso)-->
-            </button>
 
             <ul class="navbar-nav navbar-nav-right">
 
@@ -130,4 +127,23 @@
             </button>
         </div>
     </nav>
+    <script>
+        function mostrarPopupCerrarSesion() {
+            Swal.fire({
+                title: 'Cerrar sesión',
+                text: '¿Estás seguro de que deseas cerrar sesión?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#00913f',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, cerrar sesión',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "${pageContext.request.contextPath}/sys?action=logout"; //Cambiar la ubicacion del login de acuerdo a lo necesario
+                }
+            });
+        }
+    </script>
+
 

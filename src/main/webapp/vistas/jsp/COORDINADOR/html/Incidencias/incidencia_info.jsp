@@ -100,7 +100,7 @@
                     <tr>
                       <td class = "info" colspan="3" style="text-align: center;">
                         <div class="image-container">
-                          <img src="data:image/jpeg;base64, <%= new String(org.apache.commons.codec.binary.Base64.encodeBase64(incidencia.getImgEvidencia())) %>">
+                          <img style="height: 35vh; max-width: 62.2vh; border-radius: 10px" src="data:image/jpeg;base64, <%= new String(org.apache.commons.codec.binary.Base64.encodeBase64(incidencia.getImgEvidencia())) %>">
                         </div>
                       </td>
                     </tr>
@@ -110,7 +110,7 @@
               </div>
               <div class="button-container">
                 <!-- Botón con enlace "#" -->
-                <a href="<%=request.getContextPath()%>/Vecino?action=incidencias" class="button" style =" background-color: #000f22;" >Regresar</a>
+                <a href="<%=request.getContextPath()%>/Coordinador?action=incidencias" class="button" style =" background-color: #000f22;" >Regresar</a>
               </div>
             </div>
             
@@ -132,7 +132,7 @@
     <!-- inject:js -->
     <script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
+    <script src="../assets/js/misc.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
     <!-- endinject -->

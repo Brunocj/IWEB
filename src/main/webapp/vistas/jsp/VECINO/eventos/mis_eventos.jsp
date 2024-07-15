@@ -10,7 +10,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Mi perfil</title>
@@ -172,7 +171,6 @@
                     <ul class="pagination justify-content-center">
 
                         <li class="page-item active"><a class="page-link page-button" href="#" data-page="1">1</a></li>
-                        <li class="page-item" ><a class="page-link page-button" href="#" data-page="2">2</a></li>
 
 
                     </ul>
@@ -195,7 +193,7 @@
 <!-- inject:js -->
 <script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
+<script src="../assets/js/misc.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
 <!-- endinject -->

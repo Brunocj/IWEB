@@ -1,6 +1,8 @@
 <%@ page import="org.example.webappsm.model.beans.Incidencia" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="org.example.webappsm.model.beans.Usuario" %>
+<%Usuario usuariologueado = (Usuario) session.getAttribute("usuarioLogueado");%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
   ArrayList<Incidencia> listaIncidencias = (ArrayList<Incidencia>) request.getAttribute("listaincidencias");
@@ -52,10 +54,13 @@
         <div class="main-panel">
           <div class="content-wrapper" style ="background-color: #bdf1f5;"> <!--Cambiar al color mas claro-->
             <!--CONTENIDO-->
-
+            <%
+              // Obtener si el usuario está baneado
+              boolean isUserBanned = usuariologueado.isBaneado();
+            %>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
               <h2 class="tabla-title" style="color: #000f22; margin-bottom: 0px;">Incidencias</h2>
-              <button class="btnTable" style="display: flex; align-items: center;" onclick="window.location.href='<%=request.getContextPath()%>/Coordinador?action=registroIncidencia';">
+              <button class="btnTable" style="display: flex; align-items: center;" onclick="checkUserStatus(<%= isUserBanned %>);">
                   Agregar Incidencia
                   <a class="mdi mdi-plus" style="color: #ffffff; font-size: 20px; margin-left: 5px;"></a>
               </button>
@@ -114,7 +119,7 @@
     <!-- inject:js -->
     <script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
+    <script src="../assets/js/misc.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
     <!-- endinject -->
@@ -129,6 +134,17 @@
         text: '<%= msg %>'
       });
       <% } %>
+      function checkUserStatus(isUserBanned) {
+        if (isUserBanned) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Acceso Denegado',
+            text: 'No puedes registrar una incidencia porque estás baneado.',
+          });
+        } else {
+          window.location.href = '<%=request.getContextPath()%>/Coordinador?action=registroIncidencia';
+        }
+      }
     </script>
     <!-- End custom js for this page -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
