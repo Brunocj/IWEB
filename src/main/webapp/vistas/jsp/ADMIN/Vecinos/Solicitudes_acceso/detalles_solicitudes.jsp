@@ -11,7 +11,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Solicitud de acceso</title>
+    <title>Solicitud de acceso: <%=usuario.getNombre()%></title>
     <!-- plugins:css -->
 
     <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/vendors/mdi/css/materialdesignicons.min.css">
@@ -165,7 +165,7 @@
             document.getElementById("opcionSeleccionada").value = "aprobar";
 
             var tituloTexto  = "SOLICITUD ACEPTADA- Registro exitoso (Eventos- San Miguel)";
-            var cuerpoTexto= "Estimado " + nombreUsuario + ",\n\nNos complace informarte que tu solicitud de registro ha sido aceptada para los Eventos San Miguel. Agradecemos sinceramente tu interés en participar y unirte a nuestros emocionantes eventos.\nPara comenzar, aquí está tu contraseña temporal para acceder a la página: Contraseña temporal: " + contra + ". Recuerda que es importante mantener esta contraseña segura y cambiarla después de iniciar sesión por primera vez.\nSi tienes alguna pregunta o necesitas asistencia en cualquier momento, no dudes en contactarnos. Estamos aquí para ayudarte.\n\n¡Bienvenido a la comunidad de Eventos San Miguel!\n\nAtentamente,\nLa Administración";
+            var cuerpoTexto= "Estimado " + nombreUsuario + ",\n\nNos complace informarte que tu solicitud de registro ha sido aceptada para los Eventos San Miguel. Agradecemos sinceramente tu interés en participar y unirte a nuestros emocionantes eventos.\nPara comenzar, aquí está tu contraseña temporal para acceder a la página: Contraseña temporal: " +  contra  + "  .Recuerda que es importante mantener esta contraseña segura y cambiarla después de iniciar sesión por primera vez.\nSi tienes alguna pregunta o necesitas asistencia en cualquier momento, no dudes en contactarnos. Estamos aquí para ayudarte.\n\n¡Bienvenido a la comunidad de Eventos San Miguel!\n\nAtentamente,\nLa Administración";
 
 
 

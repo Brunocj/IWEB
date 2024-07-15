@@ -37,7 +37,7 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Pagina en blanco</title>
+        <title>Dashboard</title>
         <!-- plugins:css -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Dashboard/styles_tabla.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/mdi/css/materialdesignicons.min.css">
@@ -361,23 +361,7 @@
                 <!-- acaba scripts cuadro -->
                 <!-- endinject -->
                 <!-- Custom js for this page -->
-                <script>
-                    function mostrarPopupCerrarSesion() {
-                        Swal.fire({
-                            title: 'Cerrar sesión',
-                            text: '¿Estás seguro de que deseas cerrar sesión?',
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#00913f',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Sí, cerrar sesión'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = "${pageContext.request.contextPath}/LOGIN/login.jsp"; //Cambiar la ubicacion del login de acuerdo a lo necesario
-                            }
-                        });
-                    }
-                </script>
+
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                 <script src="${pageContext.request.contextPath}/assets/vendors/js/Chart.min.js"></script>
                 <script src="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Dashboard/script_tabla.js"></script>

@@ -14,8 +14,8 @@ public class VecinosDao extends BaseDao{
         ArrayList<Usuario> listaSoli = new ArrayList<>();
 
         String sql = "SELECT u.idUsuario, u.nombres, u.apellidos, u.nroDocumento AS documento, u.correo, e.nombreEstado AS estado " +
-                "FROM Usuario u " +
-                "JOIN Estado e ON u.Estado_idEstado = e.idEstado " +
+                "FROM usuario u " +
+                "JOIN estado e ON u.Estado_idEstado = e.idEstado " +
                 "WHERE e.nombreEstado = 'pendiente'";
 
 
@@ -88,8 +88,8 @@ public class VecinosDao extends BaseDao{
         ArrayList<Usuario> listaVecinos = new ArrayList<>();
 
         String sql = "SELECT u.idUsuario, u.nombres, u.apellidos, u.correo, u.falsasAlarmas, u.baneado, e.nombreEstado AS estado " +
-                "FROM Usuario u " +
-                "JOIN Estado e ON u.Estado_idEstado = e.idEstado " +
+                "FROM usuario u " +
+                "JOIN estado e ON u.Estado_idEstado = e.idEstado " +
                 "WHERE e.nombreEstado = 'aceptado' OR e.nombreEstado = 'activado' AND u.idRol = '3'";
 
         try (Connection conn = this.getConnection();
@@ -119,7 +119,7 @@ public class VecinosDao extends BaseDao{
 
     public void banearVecino(int idVecino){
 
-        String query = "UPDATE Usuario\n" +
+        String query = "UPDATE usuario\n" +
                 "SET baneado = 1\n" +
                 "WHERE idUsuario = ?;";
 
@@ -137,7 +137,7 @@ public class VecinosDao extends BaseDao{
         Usuario usuario = null;
 
 
-        String sql = "SELECT * FROM Usuario WHERE idUsuario = ?";
+        String sql = "SELECT * FROM usuario WHERE idUsuario = ?";
 
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -169,11 +169,11 @@ public class VecinosDao extends BaseDao{
 
         String sql = "SELECT s.idUsuario, s.nombres, s.apellidos, s.nroDocumento, s.direccion, s.numeroContacto, s.falsasAlarmas, " +
                 "s.distrito, s.urbanización, s.correo, " +
-                "(SELECT a.nombreArea FROM Area a WHERE a.idArea = " +
+                "(SELECT a.nombreArea FROM area a WHERE a.idArea = " +
                 "(SELECT sc.idArea " +
                 "FROM solicitudCoordinador sc " +
                 "WHERE sc.idUsuario = s.idUsuario)) AS area " +
-                "FROM Usuario s " +
+                "FROM usuario s " +
                 "WHERE s.idUsuario = ?";
 
         try (Connection conn = this.getConnection();
@@ -211,7 +211,7 @@ public class VecinosDao extends BaseDao{
             String query="";
         }
 
-        String query = "DELETE FROM Usuario";
+        String query = "DELETE FROM usuario";
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)){
 
@@ -239,7 +239,7 @@ public class VecinosDao extends BaseDao{
                 pstmtUpdDepartments.executeUpdate();
             }
 
-            String sql = "DELETE FROM Usuario WHERE idUsuario = ?";
+            String sql = "DELETE FROM usuario WHERE idUsuario = ?";
             try (PreparedStatement pstmt = conn.prepareStatement(sql);) {
 
                 pstmt.setInt(1, idUsuario);
@@ -251,7 +251,7 @@ public class VecinosDao extends BaseDao{
     }
     public void editarEstadoAprobado(int idUsuario, String nuevaContrasena) {
         int idAprobado = 2;
-        String query = "UPDATE Usuario AS U " +
+        String query = "UPDATE usuario AS U " +
                 "SET U.Estado_idEstado = ?, U.contrasena = ? " +
                 "WHERE U.idUsuario = ?";
 
@@ -271,7 +271,7 @@ public class VecinosDao extends BaseDao{
         int idEstado = 1;
 
         try (Connection conn = this.getConnection()) {
-            String queryRol = "UPDATE Usuario AS U " +
+            String queryRol = "UPDATE usuario AS U " +
                     "SET U.idRol = ?, U.idArea = ?, U.contrasena = ? " +
                     "WHERE U.idUsuario = ?";
             try (PreparedStatement pstmtRol = conn.prepareStatement(queryRol);) {

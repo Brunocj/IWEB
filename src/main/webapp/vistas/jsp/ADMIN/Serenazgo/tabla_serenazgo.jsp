@@ -11,7 +11,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Tabla Serenazgo</title>
+    <title>Lista de Serenazgos</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="<%=request.getContextPath()%>/vistas/jsp/ADMIN/Serenazgo/styles_tabla.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/vendors/mdi/css/materialdesignicons.min.css">

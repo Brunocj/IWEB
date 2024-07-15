@@ -12,7 +12,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Lista de profesores</title>
+    <title>Lista de incidencias pasadas</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/SERENAZGO/ListaPasadas/styles_pasadas.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/mdi/css/materialdesignicons.min.css">
@@ -141,23 +141,7 @@
         <script src="../../../../assets/js/todolist.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
-    <script>
-      function mostrarPopupCerrarSesion() {
-        Swal.fire({
-            title: 'Cerrar sesión',
-            text: '¿Estás seguro de que deseas cerrar sesión?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#00913f',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, cerrar sesión'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = "../../LOGIN/login.html"; //Cambiar la ubicacion del login de acuerdo a lo necesario
-            }
-        });
-    }
-    </script>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 
