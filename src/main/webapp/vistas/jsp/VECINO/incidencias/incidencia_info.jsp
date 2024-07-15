@@ -138,7 +138,7 @@ To change this template use File | Settings | File Templates.
 <!-- inject:js -->
 <script src="${pageContext.request.contextPath}/assets/js/off-canvas.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/hoverable-collapse.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/misc.js"></script>
+<script src="../assets/js/misc.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/settings.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/todolist.js"></script>
 <!-- endinject -->
