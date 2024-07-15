@@ -256,7 +256,11 @@ public class SerenazgoServlet extends HttpServlet {
                 rd = request.getRequestDispatcher(vista);
                 rd.forward(request,response);
                 break;
-
+            default:
+                vista = "vistas/jsp/ERROR/error3.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
 
 
 
