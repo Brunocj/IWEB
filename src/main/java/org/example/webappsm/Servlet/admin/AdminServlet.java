@@ -278,49 +278,120 @@ public class AdminServlet extends HttpServlet {
 
             response.sendRedirect(request.getContextPath() + "/Admin?action=tablaProfesores");
             // Verificar otras acciones si es necesario
-        }else if(action.equals("registrarSerenazgo")) {
-            String nombreS = request.getParameter("apellidoS");
-            String apellidoS = request.getParameter("nombreS");
-            String dniS = request.getParameter("dniS");
-            String direccionS = request.getParameter("direccionS");
-            String telefonoS = request.getParameter("telefonoS");
-            String turnoS = request.getParameter("turnoS");
-            String tipoS = request.getParameter("tipoS");
-            String fNacimientoS = request.getParameter("fNacimientoS");
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); // Define el formato de la fecha
-            Date fechaNacimiento = null;
+        }else if (action.equals("registrarSerenazgo")) {
 
-            try {
-                fechaNacimiento = formatter.parse(fNacimientoS);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            Serenazgo nuevoSerenazgo = new Serenazgo();
-            nuevoSerenazgo.setNombre(nombreS);
-            nuevoSerenazgo.setApellido(apellidoS);
-            nuevoSerenazgo.setDni(dniS);
-            nuevoSerenazgo.setDireccion(direccionS);
-            nuevoSerenazgo.setTelefono(telefonoS);
-            Integer turnoId = null;;
-            if ("null".equals(turnoS)) {
-                turnoId = null;
-            } else if (turnoS != null && !turnoS.isEmpty()) {
-                turnoId = Integer.parseInt(turnoS);
-            } else {
-            }
-            Integer tipoId = null;;
-            if ("null".equals(tipoS)) {
-                tipoId = null;
-            } else if (tipoS != null && !tipoS.isEmpty()) {
-                tipoId = Integer.parseInt(tipoS);
-            } else {
-            }
-            nuevoSerenazgo.setFNacimiento(fechaNacimiento);
+                String nombreS = request.getParameter("nombreS").trim();
+                String apellidoS = request.getParameter("apellidoS").trim();
+                String dniS = request.getParameter("dniS").trim();
+                String direccionS = request.getParameter("direccionS").trim();
+                String telefonoS = request.getParameter("telefonoS").trim();
 
-            SerenazgoDao serenazgoDao = new SerenazgoDao();
-            serenazgoDao.agregarSerenazgo(nuevoSerenazgo, turnoId, tipoId);
 
-            response.sendRedirect(request.getContextPath() + "/Admin?action=tablaSerenazgo");
+                // Validaciones
+                boolean hasError = false;
+
+                if (nombreS == null || nombreS.isEmpty() || nombreS.length() > 45 || !nombreS.matches("[\\p{L}\\s]+")) {
+                    request.setAttribute("err1", "Debe ingresar un nombre válido");
+                    hasError = true;
+                    System.out.println("OCURRIO UN ERROR DE NOMBRE");
+                }
+
+                if (apellidoS == null || apellidoS.isEmpty() || apellidoS.length() > 45 || !apellidoS.matches("[\\p{L}\\s]+")) {
+                    request.setAttribute("err2", "Debe ingresar un apellido válido");
+                    hasError = true;
+                    System.out.println("OCURRIO UN ERROR DE APELLIDO");
+                }
+
+                if (dniS == null || !dniS.matches("\\d{8}")) {
+                    request.setAttribute("err3", "El número de DNI debe tener 8 dígitos.");
+                    hasError = true;
+                    System.out.println("OCURRIO UN ERROR DE DNI");
+                }
+
+                if (direccionS == null || direccionS.isEmpty() || direccionS.length() > 45) {
+                    request.setAttribute("err4", "La dirección no debe sobrepasar los 45 caracteres");
+                    hasError = true;
+                    System.out.println("OCURRIO UN ERROR DE DIRECCION");
+                }
+
+                if (telefonoS == null || !telefonoS.matches("\\d{9}")) {
+                    request.setAttribute("err5", "Número de teléfono no válido");
+                    hasError = true;
+                    System.out.println("OCURRIO UN ERROR DE TELEFONO");
+                }
+
+                String turnoS = request.getParameter("turnoS").trim();
+                String tipoS = request.getParameter("tipoS").trim();
+                String fNacimientoS = request.getParameter("fNacimientoS").trim();
+
+                System.out.println("nombre: " +nombreS);
+                System.out.println("apellido: " +apellidoS);
+                System.out.println("dni: " +dniS);
+                System.out.println("direccion: " +direccionS);
+                System.out.println("telefono: " +telefonoS);
+                System.out.println("turno: " +turnoS);
+                System.out.println("tipo: " +tipoS);
+                System.out.println("fecha de naciemiento: " +fNacimientoS);
+
+                Date fNacimientoDate = null;
+                if (fNacimientoS == null || fNacimientoS.isEmpty()) {
+                    request.setAttribute("err6", "Debe ingresar una fecha de nacimiento");
+                    hasError = true;
+                    System.out.println("OCURRIO UN ERROR DE FNACIMIENTO");
+                } else {
+                    try {
+                        // Crear un objeto SimpleDateFormat con el formato de la fecha
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        // Establecer modo estricto para la validación del formato
+                        sdf.setLenient(false);
+                        // Parsear la cadena de fecha a un objeto Date
+                        fNacimientoDate = sdf.parse(fNacimientoS);
+                    } catch (ParseException e) {
+                        // Manejar la excepción en caso de que el formato de fecha sea incorrecto
+                        request.setAttribute("err6", "Formato de fecha incorrecto. Use yyyy-MM-dd");
+                        hasError = true;
+                    }
+                }
+
+                if (turnoS == null || turnoS.isEmpty()) {
+                    request.setAttribute("err7", "Debe seleccionar un turno de serenazgo");
+                    hasError = true;
+                    System.out.println("OCURRIO UN ERROR DE TURNO");
+                }
+
+                if (tipoS == null || tipoS.isEmpty()) {
+                    request.setAttribute("err8", "Debe seleccionar un tipo de serenazgo");
+                    hasError = true;
+                    System.out.println("OCURRIO UN ERROR DE TIPO");
+                }
+
+
+
+
+
+            if (hasError) {
+                    request.getRequestDispatcher("vistas/jsp/ADMIN/Serenazgo/serenazgoRegistro.jsp").forward(request, response);
+                } else {
+
+                    Serenazgo nuevoSerenazgo = new Serenazgo();
+                    nuevoSerenazgo.setNombre(nombreS);
+                    nuevoSerenazgo.setApellido(apellidoS);
+                    nuevoSerenazgo.setDni(dniS);
+                    nuevoSerenazgo.setDireccion(direccionS);
+                    nuevoSerenazgo.setTelefono(telefonoS);
+
+
+                    nuevoSerenazgo.setFNacimiento(fNacimientoDate);
+
+                    int turnoId = Integer.parseInt(turnoS);
+                    int tipoId = Integer.parseInt(tipoS);
+
+
+                    SerenazgoDao serenazgoDao = new SerenazgoDao();
+                    serenazgoDao.agregarSerenazgo(nuevoSerenazgo, turnoId, tipoId);
+
+                    response.sendRedirect(request.getContextPath() + "/Admin?action=tablaSerenazgo");
+                }
 
         }else if(action.equals("editarSerenazgo")){
             SerenazgoDao serenazgoDao = new SerenazgoDao();

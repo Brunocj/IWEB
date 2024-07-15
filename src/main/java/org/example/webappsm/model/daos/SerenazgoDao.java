@@ -14,7 +14,7 @@ public class SerenazgoDao extends BaseDao {
 
         String sql = "SELECT  s.idSerenazgo, s.nombre, s.apellido, ts.nombreTipo AS tipo, t.nombreTurno AS turno " +
                 "FROM serenazgo s " +
-                "JOIN tipoSerenazgo ts ON s.idTipoSerenazgo = ts.idTipoSerenazgo " +
+                "JOIN tiposerenazgo ts ON s.idTipoSerenazgo = ts.idTipoSerenazgo " +
                 "JOIN turno t ON s.idTurno = t.idTurno";
 
         try (Connection conn= this.getConnection();

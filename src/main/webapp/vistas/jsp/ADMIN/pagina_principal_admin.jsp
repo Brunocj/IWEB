@@ -81,6 +81,8 @@
             <span style="font-size: 14px;">Pase el mouse por las siguientes imágenes para más información.</span></h3>
           <div class="row">
             <div class="col-md-4">
+
+
               <div class="card-2">
                 <div class="font">
                   <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/users.png" alt="Vecinos">
@@ -88,13 +90,14 @@
                 <div class="back" style="padding: 10px;">
                       <span style="font-size: 16px; color: black;"> Podrás visualizar las lista de solicitudes de acceso a la plataforma y la lista de solicitudes a coordinador.
                         Debes estar atento a ellas para no dejar ninguna solicitud pendiente <br>
-                        <span style="font-size: 10px; text-decoration: underline;">Haga click en el nombre Vecino Sanmiguelino para dirigirse automáticamente a las listas.</span>
+                        <span style="font-size: 10px; color:red;text-decoration: underline;">Haga click en el nombre Vecino Sanmiguelino para dirigirse automáticamente a las listas.</span>
                       </span>
-                  <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/personas.png" alt="Small Image" style="max-width: 100%; max-height: 100px; margin-top: 10px;">
+                      <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/personas.png" alt="Small Image" style="max-width: 100%; max-height: 100px; margin-top: 10px;">
                 </div>
+
               </div>
               <div class="card-name">
-                <a class="underline-hover" onclick="return mostrarPopupVecino();" style="color: black; font-weight: bold;"> Vecino <br> Sanmiguelino </a>
+                <a class="underline-hover" onclick="return mostrarPopupVecino();" style="color: black; font-weight: bold"> Vecino <br> Sanmiguelino </a>
               </div>
             </div>
             <div class="col-md-4">
@@ -104,7 +107,7 @@
                 </div>
                 <div class="back" style="padding: 10px;">
                       <span style="font-size: 16px; color: black;"> Podrás visualizar la lista de serenazgos para organizar estratégicamente el personal de seguridad del distrito. <br>
-                        <span style="font-size: 10px; text-decoration: underline;">Haga click en el nombre Serenazgo Dispatcher para dirigirse automáticamente a la lista.</span>
+                        <span style="color:red;font-size: 10px; text-decoration: underline;">Haga click en el nombre Serenazgo Dispatcher para dirigirse automáticamente a la lista.</span>
                       </span>
                   <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/insignia.png" alt="Small Image" style="max-width: 100%; max-height: 100px; margin-top: 10px;">
                 </div>
@@ -120,7 +123,7 @@
                 </div>
                 <div class="back" style="padding: 10px;">
                       <span style="font-size: 16px; color: black;"> Podrás visualizar las lista de profesores, donde podrás administrarlos y derivarlos para cada tipo de evento, ya sea para Cultura o Deporte <br>
-                        <span style="font-size: 10px; text-decoration: underline;">Haga click en el nombre Profesores para dirigirse automáticamente a la lista.</span>
+                        <span style="color:red;font-size: 10px; text-decoration: underline;">Haga click en el nombre Profesores para dirigirse automáticamente a la lista.</span>
                       </span>
                   <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/eventos.png" alt="Small Image" style="max-width: 100%; max-height: 100px; margin-top: 10px;">
                 </div>
