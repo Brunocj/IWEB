@@ -255,7 +255,6 @@ h3 {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
-  appearance: none; /* Para quitar los estilos de selección nativos del navegador */
   color: #757575;
 }
 

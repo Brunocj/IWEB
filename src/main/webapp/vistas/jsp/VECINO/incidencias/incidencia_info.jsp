@@ -8,7 +8,6 @@ To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    int idProvisional = 10;
     Incidencia incidencia = (Incidencia) request.getAttribute("incidencia");
 %>
 
@@ -107,7 +106,7 @@ To change this template use File | Settings | File Templates.
                                 <tr>
                                     <td class = "info" colspan="3" style="text-align: center;">
                                         <div class="image-container">
-                                            <img src="data:image/jpeg;base64, <%= new String(org.apache.commons.codec.binary.Base64.encodeBase64(incidencia.getImgEvidencia())) %>">
+                                            <img style="height: 35vh; max-width: 62.2vh; border-radius: 10px" src="data:image/jpeg;base64, <%= new String(org.apache.commons.codec.binary.Base64.encodeBase64(incidencia.getImgEvidencia())) %>">
                                         </div>
                                     </td>
                                 </tr>
