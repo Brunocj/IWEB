@@ -67,7 +67,11 @@ public class SystemServlet extends HttpServlet {
                 response.sendRedirect("vistas/jsp/LOGIN/login.jsp");
 
                 break;
-
+            default:
+                vista = "vistas/jsp/ERROR/error3.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
         }
 
 

@@ -227,6 +227,11 @@ public class AdminServlet extends HttpServlet {
 
 
                 break;
+            default:
+                vista = "vistas/jsp/ERROR/error3.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
         }
 
 

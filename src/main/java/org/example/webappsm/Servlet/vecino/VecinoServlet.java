@@ -194,7 +194,11 @@ public class VecinoServlet extends HttpServlet {
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID del profesor no es válido");
                 }
                 break;
-
+            default:
+                vista = "vistas/jsp/ERROR/error3.jsp";
+                rd = request.getRequestDispatcher(vista);
+                rd.forward(request,response);
+                break;
         }
 //xd
     }
