@@ -265,7 +265,8 @@
                             confirmButtonText: "OK"
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                window.location.href = "${pageContext.request.contextPath}/vistas/jsp/LOGIN/login.jsp";
+
+                                window.location.href = '<%= request.getContextPath() %>/sys?action=login';
                             }
                         });
                         <% } %>

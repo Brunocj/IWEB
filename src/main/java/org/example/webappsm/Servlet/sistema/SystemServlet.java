@@ -231,6 +231,7 @@ public class SystemServlet extends HttpServlet {
 
                     if (hasError) {
                         request.getRequestDispatcher("vistas/jsp/LOGIN/register.jsp").forward(request, response);
+
                     } else {
                         try {
                             systemDao.registrarUsuario(nombre, apellido, idDocumento, nroDocumento, direccion, distrito, urbanizacion, correo1, idRol, baneado, idEstado, falsasAlarmas, contacto, contra);
