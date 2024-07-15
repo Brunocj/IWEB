@@ -88,11 +88,11 @@
                     <tbody>
                       <tr>
                         <td><i class="mdi mdi-lock" style="font-size:25px"></i></td>
-                        <td><a href="../../../LOGIN/chPass.jsp" style ="color: black;">Cambiar contraseña</a></td>
+                        <td><a href="#" onclick="openChangePasswordPopup(<%=usuario.getId()%>)" style="color: black;">Cambiar contraseña</a></td>
                       </tr>
                       <tr>
-                        <td><i class="mdi mdi-phone" style="font-size:25px"></i></td> 
-                        <td><a href="../../../LOGIN/chPhone.jsp" style ="color: black;">Cambiar número telefónico</a></td>
+                        <td><i class="mdi mdi-phone" style="font-size:25px"></i></td>
+                        <td><a href="#" onclick="openChangePhonePopup(<%=usuario.getId()%>)" style="color: black;">Cambiar número telefónico</a></td>
                       </tr>
                     </tbody>
                   </table>
@@ -122,6 +122,7 @@
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script src="${pageContext.request.contextPath}/vistas/jsp/COORDINADOR/js/MiPerfil/script_cerrar_sesion.js"></script>
+    <script src="${pageContext.request.contextPath}/vistas/jsp/COORDINADOR/js/MiPerfil/script_perfil.js"></script> <!-- Agregar el nuevo script -->
     <!-- End custom js for this page -->
   </body>
 </html>
