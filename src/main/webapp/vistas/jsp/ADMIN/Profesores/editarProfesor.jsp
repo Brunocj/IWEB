@@ -67,7 +67,7 @@
                         <%
                             Profesor profesor = (Profesor) request.getAttribute("profesor");
                             if (profesor == null) {
-                                out.print("<p>Error: No se encontró el profesor.</p>");
+                                System.out.println(("<p>Error: No se encontró el profesor.</p>"));
                             } else {
                         %>
                         <form action="${pageContext.request.contextPath}/Admin?action=actualizarProfesor" method="post">
