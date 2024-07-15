@@ -96,10 +96,10 @@
                     <!--CONTENIDO-->
                     <div class="main-panel">
                         <div>
-                            <div class="content-wrapper" style="background-color: #fffff6;"> <!--Cambiar al color mas claro-->
+                            <div class="content-wrapper" style="background-color: #FFEBEE;"> <!--Cambiar al color mas claro-->
                                 <!--CONTENIDO-->
                                 <div class="main-panel">
-                                    <div class="content-wrapper" style="background-color: #fffff6; margin-top: -90px;"> <!--Cambiar al color mas claro-->
+                                    <div class="content-wrapper" style="background-color: #FFEBEE; margin-top: -90px;"> <!--Cambiar al color mas claro-->
                                         <h2 class="tabla-title" style="color:#000f22;">Dashboard</h2>  <!--Cambiar el titulo de la tabla-->
                                         <hr style="border: none; border-top: 3px solid black; margin-top: 0px; border-radius: 10px; margin-bottom: -50px;">
                                         <main class="main-container">
@@ -113,8 +113,8 @@
                                                             <div class="card-header" style="padding: 0;">
                                                                 <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/promedios1.png" alt="header image" style="width: 100%; height: 210px; object-fit: cover;">
                                                             </div>
-                                                            <div class="card-body" style="flex: 1; padding: 20px;">
-                                                                <div class="d-flex align-items-center justify-content-between">
+                                                            <div class="card-body" style="flex: 1; padding: 3em;">
+                                                                <div class="d-flex align-items-center justify-content-between" style="margin-top: -20px">
                                                                     <span class="badge bg-warning" style="margin-bottom: 10px; color: white; border-radius: 10px;">Incidencias</span>
                                                                     <h1 style="margin: 0;"><span class="mdi mdi-chart-areaspline" style="font-size: 2.5rem; color:#062779;"></span></h1>
                                                                 </div>

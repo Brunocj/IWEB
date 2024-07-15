@@ -112,8 +112,8 @@
                                                         <div class="card-header" style="padding: 0;">
                                                             <img src="${pageContext.request.contextPath}/vistas/jsp/PRINCIPAL/promedios1.png" alt="header image" style="width: 100%; height: 210px; object-fit: cover;">
                                                         </div>
-                                                        <div class="card-body" style="flex: 1; padding: 20px;">
-                                                            <div class="d-flex align-items-center justify-content-between">
+                                                        <div class="card-body" style="flex: 1; padding: 3em;">
+                                                            <div class="d-flex align-items-center justify-content-between" style="margin-top: -20px">
                                                                 <span class="badge bg-warning" style="margin-bottom: 10px; color: white; border-radius: 10px;">Incidencias</span>
                                                                 <h1 style="margin: 0;"><span class="mdi mdi-chart-areaspline" style="font-size: 2.5rem; color:#062779;"></span></h1>
                                                             </div>
