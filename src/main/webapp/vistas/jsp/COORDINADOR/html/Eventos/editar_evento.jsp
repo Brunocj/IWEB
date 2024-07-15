@@ -440,18 +440,11 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         const foto = result.value;
-                        const uploadField = document.getElementById('upload');
+                        const uploadField = document.getElementById('upload2');
                         const dataTransfer = new DataTransfer();
                         dataTransfer.items.add(foto);
                         uploadField.files = dataTransfer.files;
-
-                        const preview = document.getElementById('preview');
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            preview.src = e.target.result;
-                        }
-                        reader.readAsDataURL(foto);
-
+                        console.log('Imagen seleccionada:', foto);
                         Swal.fire({
                             title: "Registro Exitoso",
                             text: `¡Tu registro de entrada ha sido procesado correctamente!`,
@@ -460,6 +453,7 @@
                     }
                 });
             }
+
 
             function redirectToURL(url) {
                 window.location.href = url;
