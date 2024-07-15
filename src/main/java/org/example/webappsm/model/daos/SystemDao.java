@@ -88,6 +88,7 @@ public class SystemDao extends BaseDao{
                     usuario.setDocumento(rs.getString(4));
                     usuario.setNumContacto(rs.getString(13));
                     usuario.setIdRol(rs.getInt(5));
+                    usuario.setIdArea(rs.getInt(14));
                     usuario.setIdEstado(rs.getInt(16));
 
                 }

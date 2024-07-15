@@ -1,8 +1,13 @@
+<%@ page import="org.example.webappsm.model.beans.Usuario" %>
+<%@ page import="org.example.webappsm.model.daos.ProfesorDao" %>
+<%@ page import="java.awt.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
     int idProvisional = 12; //poosteriormente, obtener el id con query
+    ProfesorDao profesorDao = new ProfesorDao();
 %>
+<%Usuario usuariologueado= (Usuario) session.getAttribute("usuarioLogueado");%>
 
 <nav class="sidebar sidebar-offcanvas" id="sidebar" style ="background-color: #000f22;">  <!--Cambiar al color mas oscuro-->
 
@@ -24,7 +29,7 @@
         </li>
 
         <li class="nav-item menu-items ${"miPerfil".equals(request.getParameter("action")) ? "active" : ""}">
-            <a class="nav-link" href="<%=request.getContextPath()%>/Coordinador?action=miPerfil&id=<%=idProvisional%>">
+            <a class="nav-link" href="<%=request.getContextPath()%>/Coordinador?action=miPerfil&id=<%=usuariologueado.getId()%>">
               <span class="menu-icon">
                 <i class="mdi mdi-account"></i>
               </span>
@@ -55,12 +60,12 @@
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu"><!-- Colocar items de la sublista -->
 
-                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/Coordinador?action=eventos">
+                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/Coordinador?action=eventos&id=<%=usuariologueado.getId()%>">
                   <span class="menu-icon">
                     <i class="mdi mdi-calendar-plus"></i>
                   </span>
                         Eventos creados</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/Coordinador?action=EventosNota">
+                    <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/Coordinador?action=EventosNota&id=<%=usuariologueado.getId()%>">
                     <span class="menu-icon">
                     <i class="mdi mdi-calendar-text"></i>
                   </span>
@@ -110,8 +115,8 @@
                     <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                         <div class="navbar-profile">
                             <div class="Header-nav-item">
-                                <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default;">Nombre del coordinador</h2> <!--Posteriormente obtener mediante querys -->
-                                <h5 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 15px; font-weight:500; cursor: default;">Coordinador de Cultura</h5>
+                                <h2 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 23px; font-weight:500; cursor: default;"><%=usuariologueado.getNombre() +" "+usuariologueado.getApellido()%></h2> <!--Posteriormente obtener mediante querys -->
+                                <h5 class="mb-0 d-none d-sm-block navbar-profile-name" style ="margin-right: 10px; font-size: 15px; font-weight:500; cursor: default;">Coordinador de <%=profesorDao.obtenerNombreAreaPorId(usuariologueado.getIdArea())%></h5>
                             </div>
                             <img class="img-xs rounded-circle" src="${pageContext.request.contextPath}/vistas/jsp/LogoSM.png" alt="" style ="height: 50px; width: 100%;"> <!--Cambiar la ubicacion para el logo de san miguel (no anden copiando y pegando la imagen a sus carpetas o bala)-->
 

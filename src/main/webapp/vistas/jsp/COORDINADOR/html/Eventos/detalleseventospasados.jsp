@@ -1,7 +1,12 @@
 <%@ page import="org.example.webappsm.model.beans.Evento" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="org.example.webappsm.model.daos.CoordinadorDao" %>
+<%@ page import="org.example.webappsm.model.beans.Usuario" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    Usuario usuariologueado= (Usuario) session.getAttribute("usuarioLogueado");
+%>
+<%  int idUsuario = usuariologueado.getId(); %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -79,7 +84,7 @@
                                     <i class="fas fa-address-book me-2"></i> Registrar Salida
                                 </div>
 
-                                <div class="option rojo" onclick="return borrarEvento(<%= evento.getIdEvento() %>, '<%= request.getContextPath() %>');">
+                                <div class="option rojo" onclick="return borrarEvento(<%= evento.getIdEvento() %>, '<%= request.getContextPath() %>',<%=idUsuario%>);">
                                     <i class="fas fa-trash-alt me-2"></i> Borrar Evento
                                 </div>
                             </div>
@@ -188,7 +193,7 @@
 
                 <% } %>
                 <div class="fixed-buttons">
-                    <button class="btn btn-custom-success" id="danger" onclick="volverpasado('<%= request.getContextPath() %>')" style="background-color: #00913f;">Volver a eventos pasados</button>
+                    <button class="btn btn-custom-success" id="danger" onclick="volverpasado('<%= request.getContextPath() %>',<%=idUsuario%>)" style="background-color: #00913f;">Volver a eventos pasados</button>
                 </div>
 
 
@@ -249,10 +254,10 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         <script src = "${pageContext.request.contextPath}/vistas/jsp/COORDINADOR/js/Eventos/script_detallespasados.js"></script>
         <script>
-            function volverpasado(contextPath) {
-                window.location.href = contextPath+ '/Coordinador?action=EventosNota';
+            function volverpasado(contextPath,id) {
+                window.location.href = contextPath+ '/Coordinador?action=EventosNota&id='+id;
             }
-            function borrarEvento(id, contextPath) {
+            function borrarEvento(id, contextPath,idusuario) {
                 Swal.fire({
                     title: "¿Estás seguro?",
                     text: "Una vez eliminado, la información asociada al evento será eliminada del sistema",
@@ -277,6 +282,13 @@
                         input.value = id;
 
                         form.appendChild(input);
+
+                        const input2 = document.createElement('input');
+                        input2.type = 'hidden';
+                        input2.name = 'idcoordi';
+                        input2.value = idusuario; // Cambia esto por el valor que desees enviar
+                        form.appendChild(input2);
+
                         document.body.appendChild(form);
                         form.submit();
                     }

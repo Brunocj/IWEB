@@ -21,4 +21,5 @@ public class Usuario {
     private int idRol;
     private int idEstado;
     private boolean baneado;
+    private int idArea;
 }

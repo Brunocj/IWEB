@@ -45,8 +45,8 @@ public class VecinoServlet extends HttpServlet {
                 rd.forward(request,response);
                 break;
             case "miPerfil":
-                int idusuario = Integer.parseInt(request.getParameter("id"));
-                Usuario u = userDao.mostrarUsuarioID(idusuario);
+                int idusuarioperfil = Integer.parseInt(request.getParameter("id"));
+                Usuario u = userDao.mostrarUsuarioID(idusuarioperfil);
 
                 request.setAttribute("usuario", u);
                 vista = "vistas/jsp/VECINO/Miperfil.jsp";
@@ -130,8 +130,8 @@ public class VecinoServlet extends HttpServlet {
                 break;
             case "eventos":
                 VecinosDao vecinosDao = new VecinosDao();
-                idusuario = 10;
-                ArrayList<Evento> listarEventos = vecinosDao.listarEventos(idusuario);
+                int idusuarioeventos = 10;
+                ArrayList<Evento> listarEventos = vecinosDao.listarEventos(idusuarioeventos);
                 request.setAttribute("listaEventos", listarEventos);
 
                 vista = "vistas/jsp/VECINO/eventos/eventos.jsp";
@@ -140,8 +140,8 @@ public class VecinoServlet extends HttpServlet {
                 break;
             case "misEventos":
                 VecinosDao vecinosDao2 = new VecinosDao();
-                idusuario = 10;
-                ArrayList<Evento> listarEventos2 = vecinosDao2.listarMisEventos(idusuario);
+                int idusuariomiseventos = 10;
+                ArrayList<Evento> listarEventos2 = vecinosDao2.listarMisEventos(idusuariomiseventos);
                 request.setAttribute("listaMisEventos", listarEventos2);
 
                 vista = "vistas/jsp/VECINO/eventos/mis_eventos.jsp";

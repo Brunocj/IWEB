@@ -1,13 +1,15 @@
 <%@ page import="org.example.webappsm.model.daos.CoordinadorDao" %>
+<%@ page import="org.example.webappsm.model.beans.Usuario" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% int idCoordinador = 3; %>
+<%Usuario usuariologueado= (Usuario) session.getAttribute("usuarioLogueado");%>
+<% int idCoordinador = usuariologueado.getId(); %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Página Principal Coordinador</title>
+    <title>Registro Evento</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/css/vendor.bundle.base.css">
@@ -215,6 +217,7 @@
                           String nombreProfesor = coordinadorDao.obtenerNombreCompletoPorId(idProfesor);
                         %>
                         <input type="hidden" id="idProfesor" name="idProfesor" value="<%= idProfesor %>">
+                        <input type="hidden" name="idCoordi" value="<%= usuariologueado.getId()%>">
                         <p><%= nombreProfesor %></p>
                       </div>
                     </div>
@@ -265,8 +268,8 @@
           </div>
 
           <div class="fixed-buttons">
-            <button class="btn btn-custom-success" id="success" type="button" onclick="confirmarRegistro('<%= request.getContextPath() %>')">Registrar</button>
-            <button class="btn btn-custom-danger" id="danger" type="button" onclick="anularRegistro('<%= request.getContextPath() %>')">Anular Registro</button>
+            <button class="btn btn-custom-success" id="success" type="button" onclick="confirmarRegistro('<%= request.getContextPath() %>',<%= usuariologueado.getId()%>)">Registrar</button>
+            <button class="btn btn-custom-danger" id="danger" type="button" onclick="anularRegistro('<%= request.getContextPath() %>',<%= usuariologueado.getId()%>)">Anular Registro</button>
           </div>
         </form>
       </div>
@@ -305,7 +308,7 @@
     <!-- Custom js for this page -->
     <script src="${pageContext.request.contextPath}/vistas/jsp/COORDINADOR/js/Eventos/script_registro.js"></script>
     <script>
-      function anularRegistro(contextPath) {
+      function anularRegistro(contextPath,id) {
         Swal.fire({
           title: "¿Estás seguro de que deseas anular el registro del evento?",
           icon: "question",
@@ -316,12 +319,12 @@
           cancelButtonText: "Cancelar",
         }).then((result) => {
           if (result.isConfirmed) {
-            window.location.href = contextPath + "/Coordinador?action=eventos";
+            window.location.href = contextPath + "/Coordinador?action=eventos&id="+id;
           }
         });
       }
 
-      function confirmarRegistro(contextPath) {
+      function confirmarRegistro(contextPath,id) {
         Swal.fire({
           title: "¿Estás seguro de que deseas registrar el evento?",
           icon: "question",
@@ -365,7 +368,7 @@
                         console.log(data); // Puedes usar esto para depurar la respuesta del servidor
                         Swal.fire("Éxito", "El evento ha sido registrado correctamente", "success")
                                 .then(() => {
-                                  window.location.href = contextPath + "/Coordinador?action=eventos";
+                                  window.location.href = contextPath + "/Coordinador?action=eventos&id="+id;
                                 });
                       })
                       .catch(error => {

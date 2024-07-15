@@ -1,8 +1,10 @@
 <%@ page import="org.example.webappsm.model.beans.Evento" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="org.example.webappsm.model.daos.CoordinadorDao" %>
+<%@ page import="org.example.webappsm.model.beans.Usuario" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% int idCoordinador = 3; %>
+<%Usuario usuariologueado= (Usuario) session.getAttribute("usuarioLogueado");%>
+<% int idCoordinador = usuariologueado.getId(); %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -182,7 +184,7 @@
                                     <div class="option azul" onclick="seleccionarFoto()">
                                         <i class="fas fa-address-book me-2"></i> Registrar Entrada
                                     </div>
-                                    <div class="option rojo" onclick="return borrarEvento(<%= evento.getIdEvento() %>, '<%= request.getContextPath() %>');">
+                                    <div class="option rojo" onclick="return borrarEvento(<%= evento.getIdEvento() %>, '<%= request.getContextPath() %>',<%=idCoordinador%>);">
                                         <i class="fas fa-trash-alt me-2"></i> Borrar Evento
                                     </div>
                                 </div>
@@ -243,6 +245,7 @@
                                             <div class="profesor-info">
                                                 <input type="hidden" id="idCoordinador" name="idCoordinador" value="<%= idCoordinador %>">
                                                 <input type="hidden" id="idProfesor" name="idProfesor" value="<%= evento.getIdProfesor() %>">
+                                                <input type="hidden" name="idCoordi" value="<%= usuariologueado.getId()%>">
                                                 <%
                                                     CoordinadorDao coordinadorDao = new CoordinadorDao();
                                                     Integer idProfesor = evento.getIdProfesor();
@@ -297,7 +300,7 @@
                 <% } %>
                 <div class="fixed-buttons">
                     <button class="btn btn-custom-success" id="success" onclick="confirmarEdicion()">Guardar cambios</button>
-                    <button class="btn btn-custom-danger" id="danger" onclick="CancelarPopUp('<%= request.getContextPath() %>')">Descartar cambios</button>
+                    <button class="btn btn-custom-danger" id="danger" onclick="CancelarPopUp('<%= request.getContextPath() %>',<%= usuariologueado.getId()%>)">Descartar cambios</button>
                 </div>
             </div>
             <!-- content-wrapper ends -->
@@ -333,7 +336,7 @@
         <script src="${pageContext.request.contextPath}/vistas/jsp/COORDINADOR/js/Eventos/script_editar.js"></script>
         <!-- End custom js for this page -->
         <script>
-            function CancelarPopUp(contextPath) {
+            function CancelarPopUp(contextPath,id) {
                 Swal.fire({
                     title: "¿Estás seguro de que deseas cancelar los cambios?",
                     icon: "question",
@@ -345,7 +348,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         // Redireccionar a evento.html
-                        window.location.href = contextPath+"/Coordinador?action=eventos";
+                        window.location.href = contextPath+"/Coordinador?action=eventos&id="+id;
                         console.log("Cambios cancelados"); // Log para verificar que los cambios se cancelaron
                     }
                 });
@@ -380,7 +383,7 @@
                 });
             }
 
-            function borrarEvento(id, contextPath) {
+            function borrarEvento(id, contextPath,idCoordinador) {
                 Swal.fire({
                     title: "¿Estás seguro?",
                     text: "Una vez eliminado, la información asociada al evento será eliminada del sistema",
@@ -400,8 +403,15 @@
                         input.type = 'hidden';
                         input.name = 'id';
                         input.value = id;
-
                         form.appendChild(input);
+
+                        const input2 = document.createElement('input');
+                        input2.type = 'hidden';
+                        input2.name = 'idcoordi';
+                        input2.value = idCoordinador; // Cambia esto por el valor que desees enviar
+                        form.appendChild(input2);
+
+
                         document.body.appendChild(form);
                         form.submit();
                     }
