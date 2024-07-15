@@ -141,6 +141,7 @@ public class VecinoServlet extends HttpServlet {
             case "misEventos":
                 VecinosDao vecinosDao2 = new VecinosDao();
                 int idusuariomiseventos = Integer.parseInt(request.getParameter("id"));
+
                 ArrayList<Evento> listarEventos2 = vecinosDao2.listarMisEventos(idusuariomiseventos);
                 request.setAttribute("listaMisEventos", listarEventos2);
 
@@ -152,10 +153,12 @@ public class VecinoServlet extends HttpServlet {
                 try {
                     int idEvento = Integer.parseInt(request.getParameter("id"));
                     System.out.println("ID del profesor recibido: " + idEvento);
-
+                    CoordinadorDao eventoDAONota = new CoordinadorDao();
                     VecinosDao vecinosDaovista = new VecinosDao();
                     Evento evento = vecinosDaovista.obtenerEventoporId(idEvento);
 
+                    ArrayList<String> materiales = eventoDAONota.obtenerNombresMaterialesPorIdEvento(idEvento);
+                    System.out.println("Materiales obtenidos: " + materiales);
                     if (evento == null) {
                         System.out.println("Profesor no encontrado en la base de datos");
                         response.sendError(HttpServletResponse.SC_NOT_FOUND, "No se encontró el profesor");
@@ -163,6 +166,8 @@ public class VecinoServlet extends HttpServlet {
                     }
 
                     request.setAttribute("evento", evento);
+                    request.setAttribute("materiales", materiales);
+
                     vista = "vistas/jsp/VECINO/eventos/detalles_evento.jsp";
                     rd = request.getRequestDispatcher(vista);
                     rd.forward(request, response);
@@ -175,9 +180,12 @@ public class VecinoServlet extends HttpServlet {
                 try {
                     int idEvento2 = Integer.parseInt(request.getParameter("id"));
                     System.out.println("ID del profesor recibido: " + idEvento2);
-
+                    CoordinadorDao eventoDAONota2 = new CoordinadorDao();
                     VecinosDao vecinosDaovista3 = new VecinosDao();
                     Evento evento2 = vecinosDaovista3.obtenerEventoporId(idEvento2);
+
+                    ArrayList<String> materiales2 = eventoDAONota2.obtenerNombresMaterialesPorIdEvento(idEvento2);
+                    System.out.println("Materiales obtenidos: " + materiales2);
 
                     if (evento2 == null) {
                         System.out.println("Profesor no encontrado en la base de datos");
@@ -186,6 +194,7 @@ public class VecinoServlet extends HttpServlet {
                     }
 
                     request.setAttribute("evento", evento2);
+                    request.setAttribute("materiales", materiales2);
                     vista = "vistas/jsp/VECINO/eventos/detalles_mis_eventos.jsp";
                     rd = request.getRequestDispatcher(vista);
                     rd.forward(request, response);
