@@ -164,7 +164,7 @@
           confirmButtonText: 'Sí, cerrar sesión'
         }).then((result) => {
           if (result.isConfirmed) {
-            window.location.href = "LOGIN/login.html";
+            window.location.href = "${pageContext.request.contextPath}/sys?action=logout";
           }
         });
       }
