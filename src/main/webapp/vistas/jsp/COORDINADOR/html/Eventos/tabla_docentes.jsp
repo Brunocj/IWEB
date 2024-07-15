@@ -1,13 +1,15 @@
 <%@ page import="org.example.webappsm.model.beans.Profesor" %>
 <%@ page import="java.util.List" %>
 <%@ page import="org.example.webappsm.model.daos.ProfesorDao" %>
+<%@ page import="org.example.webappsm.model.beans.Usuario" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%Usuario usuariologueado= (Usuario) session.getAttribute("usuarioLogueado");%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Pagina en blanco</title>
+    <title>Profesores disponibles para el registro</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/vistas/jsp/COORDINADOR/css/Eventos/styles_tabla_docentes.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendors/css/vendor.bundle.base.css">
@@ -54,6 +56,7 @@
         }
 
         String menuvecino = "/vistas/jsp/Utilidades/menu_" + userRole + ".jsp";
+
       %>
 
       <jsp:include page="<%= menuvecino %>">
@@ -82,6 +85,7 @@
           <div style="margin-bottom: 20px;">
             <form id="filterForm" method="GET" action="${pageContext.request.contextPath}/Coordinador" class="filter-row">
               <input type="hidden" name="action" value="tablaProfesores">
+              <input type="hidden" name="id" value="<%= usuariologueado.getIdArea()%>">
               <label for="fechadispo">Fecha:</label>
               <input type="date" id="fechadispo" name="fechadispo">
               <label for="horaIniciodispo">Hora de Inicio:</label>
@@ -133,7 +137,7 @@
           <br>
           <br>
           <div class="button-container">
-            <button class="button" onclick="goBack('<%= request.getContextPath() %>')">Regresar</button>
+            <button class="button" onclick="goBack('<%= request.getContextPath() %>',<%=usuariologueado.getId() %>)">Regresar</button>
           </div>
 
         </div>
@@ -165,8 +169,8 @@
         });
       }
 
-      function goBack(contextPath) {
-        window.location.href = contextPath+"/Coordinador?action=eventos";
+      function goBack(contextPath,id) {
+        window.location.href = contextPath+"/Coordinador?action=eventos&id="+id;
       }
 
       document.addEventListener('DOMContentLoaded', function() {

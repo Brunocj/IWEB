@@ -1,8 +1,7 @@
-
-function Cancelar() {
+function Cancelar(contextPath) {
     Swal.fire({
-        title: "Estás seguro?",
-        text: "Perdera todo su progreso",
+        title: "¿Estás seguro?",
+        text: "Perderás todo tu progreso",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#00913f",
@@ -16,8 +15,8 @@ function Cancelar() {
                 text: "Se ha cancelado satisfactoriamente",
                 icon: "success"
             }).then(() => {
-                window.location.href = "${pageContext.request.contextPath}/Admin?action=tablaSerenazgo";
-
+                // Construir la URL utilizando el contextPath proporcionado
+                window.location.href = '/Admin?action=eliminarSerenazgo';
             });
         }
     });
@@ -25,7 +24,6 @@ function Cancelar() {
     // Evitar que el formulario se envíe automáticamente
     return false;
 }
-
 
 function eliminarSerenazgo(id,contextPath) {
     Swal.fire({

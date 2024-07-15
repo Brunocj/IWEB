@@ -1,6 +1,8 @@
 <%@ page import="org.example.webappsm.model.beans.Evento" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="org.example.webappsm.model.beans.Usuario" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%Usuario usuariologueado= (Usuario) session.getAttribute("usuarioLogueado");%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -118,7 +120,7 @@
                   <div class="cardEvent addEvent" data-event-id="1">
                     <a href="registroevento.jsp" class="mdi mdi-plus-box"></a>
                     <div class="card-body">
-                      <a href="${pageContext.request.contextPath}/Coordinador?action=tablaProfesores" class="btn btn-primary btn-sm btn-bottom-right">Agregar evento</a>
+                      <a href="${pageContext.request.contextPath}/Coordinador?action=tablaProfesores&id=<%=usuariologueado.getIdArea()%>" class="btn btn-primary btn-sm btn-bottom-right">Agregar evento</a>
                     </div>
                   </div>
                 </div>

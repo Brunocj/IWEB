@@ -171,7 +171,7 @@ public class VecinosDao extends BaseDao{
                 "s.distrito, s.urbanización, s.correo, " +
                 "(SELECT a.nombreArea FROM area a WHERE a.idArea = " +
                 "(SELECT sc.idArea " +
-                "FROM solicitudCoordinador sc " +
+                "FROM solicitudcoordinador sc " +
                 "WHERE sc.idUsuario = s.idUsuario)) AS area " +
                 "FROM usuario s " +
                 "WHERE s.idUsuario = ?";
@@ -281,7 +281,7 @@ public class VecinosDao extends BaseDao{
                 pstmtRol.setInt(4, idUsuario);
                 pstmtRol.executeUpdate();
             }
-            String queryEstado = "UPDATE solicitudCoordinador SET estado = ? WHERE idUsuario = ?";
+            String queryEstado = "UPDATE solicitudcoordinador SET estado = ? WHERE idUsuario = ?";
             try (PreparedStatement pstmtEstado = conn.prepareStatement(queryEstado);) {
                 pstmtEstado.setInt(1, idEstado);
                 pstmtEstado.setInt(2, idUsuario);
