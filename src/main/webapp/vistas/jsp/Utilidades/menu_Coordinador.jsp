@@ -7,7 +7,7 @@
     int idProvisional = 12; //poosteriormente, obtener el id con query
     ProfesorDao profesorDao = new ProfesorDao();
 %>
-<%Usuario usuariologueado= (Usuario) session.getAttribute("usuarioLogueado");%>
+<%Usuario usuariologueado= (Usuario) session.getAttribute("usuarioLogueado");%>o
 
 <nav class="sidebar sidebar-offcanvas" id="sidebar" style ="background-color: #000f22;">  <!--Cambiar al color mas oscuro-->
 

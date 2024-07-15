@@ -1,5 +1,8 @@
 <%@ page import="org.example.webappsm.model.beans.Evento" %>
+<%@ page import="org.example.webappsm.model.beans.Usuario" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%Usuario usuariologueado= (Usuario) session.getAttribute("usuarioLogueado");%>
+<% int idCoordinador = usuariologueado.getId(); %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -65,7 +68,7 @@
               </div>
             </form>
             <div class="fixed-buttons">
-              <button class="btn btn-custom-success" id="success" onclick="return GuardarPopUp('<%= request.getContextPath() %>');">Agregar Nota</button>
+              <button class="btn btn-custom-success" id="success" onclick="return GuardarPopUp('<%= request.getContextPath() %>',<%=idCoordinador%>);">Agregar Nota</button>
               <button class="btn btn-custom-danger" id="danger" onclick="goBack()">Retroceder</button>
             </div>
           </div>
@@ -104,7 +107,7 @@
     <script src = "${pageContext.request.contextPath}/vistas/jsp/COORDINADOR/js/Eventos/script_agregarnota.js"></script>
     <!-- End custom js for this page -->
     <script>
-      function GuardarPopUp(contextPath) {
+      function GuardarPopUp(contextPath,id) {
         Swal.fire({
           title: '¿Estás seguro de que deseas guardar los cambios?',
           icon: 'question',
@@ -140,7 +143,7 @@
                         console.log(data); // Puedes usar esto para depurar la respuesta del servidor
                         Swal.fire("Éxito", "La nota ha sido registrada correctamente", "success")
                                 .then(() => {
-                                  window.location.href = contextPath + "/Coordinador?action=eventos";
+                                  window.location.href = contextPath + "/Coordinador?action=eventos&id="+id;
                                 });
                       })
                       .catch(error => {

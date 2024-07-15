@@ -69,7 +69,7 @@
                                 </div>
                                 <% } else { %>
                                 <div class="alert alert-danger" role="alert"
-                                     style="background-color: white; text-align: center; padding: 0.8em; margin-top: -4px; max-width: 190px; margin-left: 35px; font-size: 12px;color: white;">
+                                     style="background-color: white; text-align: center; padding: 0.3em; margin-top: -4px; max-width: 190px; margin-left: 35px; font-size: 12px;color: white;">
                                     <!-- Este div blanco mantendrá el espacio y la alineación -->
 
                                 </div>
@@ -86,7 +86,7 @@
                                 </div>
                                 <% } else { %>
                                 <div class="alert alert-danger" role="alert"
-                                     style="background-color: white; text-align: center; padding: 0.8em; margin-top: -4px; max-width: 190px; margin-left: 6px; margin-right: 30px; font-size: 12px;color: white;">
+                                     style="background-color: white; text-align: center; padding: 0.3em; margin-top: -4px; max-width: 190px; margin-left: 6px; margin-right: 30px; font-size: 12px;color: white;">
                                     <!-- Cuadro blanco para mantener la alineación -->
 
 
@@ -104,8 +104,10 @@
                                     <option value="2" style="text-align: left;">Carnet de extranjería</option>
                                 </select>
                                 <div class="alert alert-danger" role="alert"
-                                     style="background-color: white; text-align: center; padding: 1.2em; margin-top: -4px; max-width: 190px; margin-left: auto; margin-right: auto; font-size: 12px;color: white;">
+                                     style="background-color: white; text-align: center; padding: 0.8em; margin-top: -17px; max-width: 190px; margin-left: 6px; margin-right: 30px; font-size: 12px;color: white;">
                                     <!-- Cuadro blanco para mantener la alineación -->
+
+
                                 </div>
                             </div>
                             <div style="flex-basis: 50%;">
@@ -127,8 +129,10 @@
                                 </div>
                                 <% } else { %>
                                 <div class="alert alert-danger" role="alert"
-                                     style="background-color: white; text-align: center; padding: 1.5em; margin-top: -4px; max-width: 190px; margin-left: auto; margin-right: auto; font-size: 12px;color: white;">
+                                     style="background-color: white; text-align: center; padding: 0.8em; margin-top: -10px; max-width: 190px; margin-left: 6px; margin-right: 30px; font-size: 12px;color: white;">
                                     <!-- Cuadro blanco para mantener la alineación -->
+
+
                                 </div>
                                 <% } %>
                             </div>
@@ -148,7 +152,7 @@
                                 </div>
                                 <% } else { %>
                                 <div class="alert alert-danger" role="alert"
-                                     style="background-color: white; text-align: center; padding: 1em; margin-top: -4px; max-width: 390px; margin-left: 35px; margin-right: 30px; font-size: 12px;color: white;">
+                                     style="background-color: white; text-align: center; padding: 0.3em; margin-top: -4px; max-width: 390px; margin-left: 35px; margin-right: 30px; font-size: 12px;color: white;">
                                     <!-- Cuadro blanco para mantener la alineación -->
                                 </div>
                                 <% } %>
@@ -170,7 +174,7 @@
                                 </div>
                                 <% } else { %>
                                 <div class="alert alert-danger" role="alert"
-                                     style="background-color: white; text-align: center; padding: 1.2em; margin-top: -4px; max-width: 190px; margin-left: 6px; font-size: 12px;color: white;">
+                                     style="background-color: white; text-align: center; padding: 0.3em; margin-top: -4px; max-width: 190px; margin-left: 6px; font-size: 12px;color: white;">
                                     <!-- Cuadro blanco para mantener la alineación -->
                                 </div>
                                 <% } %>
@@ -187,7 +191,7 @@
                                 </div>
                                 <% } else { %>
                                 <div class="alert alert-danger" role="alert"
-                                     style="background-color: white; text-align: center; padding: 1.2em; margin-top: -4px; max-width: 190px; margin-left: 6px; margin-right: 30px; font-size: 12px;color: white;">
+                                     style="background-color: white; text-align: center; padding: 0.3em; margin-top: -4px; max-width: 190px; margin-left: 6px; margin-right: 30px; font-size: 12px;color: white;">
                                     <!-- Cuadro blanco para mantener la alineación -->
                                 </div>
                                 <% } %>
@@ -214,7 +218,7 @@
                                 </div>
                                 <% } else { %>
                                 <div class="alert alert-danger" role="alert"
-                                     style="background-color: white; text-align: center; padding: 1em; margin-top: -4px; max-width: 390px; margin-left: 35px; margin-right: 30px; font-size: 12px;color: white;">
+                                     style="background-color: white; text-align: center; padding: 0.3em; margin-top: -4px; max-width: 390px; margin-left: 35px; margin-right: 30px; font-size: 12px;color: white;">
                                     <!-- Cuadro blanco para mantener la alineación -->
                                 </div>
                                 <% } %>
@@ -234,7 +238,7 @@
                                 </div>
                                 <% } else { %>
                                 <div class="alert alert-danger" role="alert"
-                                     style="background-color: white; text-align: center; padding: 1em; margin-top: -4px; max-width: 390px; margin-left: 35px; margin-right: 30px; font-size: 12px;color: white;">
+                                     style="background-color: white; text-align: center; padding: 0.3em; margin-top: -4px; max-width: 390px; margin-left: 35px; margin-right: 30px; font-size: 12px;color: white;">
                                     <!-- Cuadro blanco para mantener la alineación -->
                                 </div>
                                 <% } %>
