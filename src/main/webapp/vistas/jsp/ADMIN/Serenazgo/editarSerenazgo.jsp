@@ -55,7 +55,7 @@
                     <div class = "wrapper"id="formContent">
                         <!-- Tabs Titles -->
                         <h2 style="margin-top: 0; margin-bottom: 20px; text-align: left;font-size: 30px;">Editar Serenazgo</h2>
-                        <a href="tabla_serenazgo.jsp" class="button" onclick="return Cancelar();">Regresar</a>
+                        <a href="tabla_serenazgo.jsp" class="button" onclick="return Cancelar1('<%= request.getContextPath() %>');">Regresar</a>
                         <hr style="border: none; border-top: 2px solid black;">
                         <!-- Icon -->
 
@@ -108,7 +108,7 @@
 
                             <div class = "buttons">
                                 <input type="submit" class="green" value="Actualizar personal" onclick="return Actualizar();">
-                                <input type="submit" class="red" value="Cancelar" onclick="return Cancelar();">
+                                <input type="submit" class="red" value="Cancelar" onclick="return Cancelar1('<%= request.getContextPath() %>');">
                             </div>
 
                         </form>
@@ -173,8 +173,8 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script src ="script_tabla.js"></script>
-    <script src="cancelaciones.js"></script>
+    <script src="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Serenazgo/script_tabla.js"></script>
+
     <!-- End custom js for this page -->
 </body>
 </html>

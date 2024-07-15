@@ -49,7 +49,7 @@
 
                 <div class="card2">
                     <h2 style="margin-top: 0; margin-bottom: 20px; text-align: left;  font-size: 30px;">Datos de Serenazgo</h2>
-                    <a  class="button" onclick="return Cancelar();">Regresar</a>
+                    <a class="button" onclick="return Cancelar();" style="cursor: pointer;">Regresar</a>
                     <hr style="border: none; border-top: 2px solid black;">
                     <div class="card-table">
                         <div class="card-body">
