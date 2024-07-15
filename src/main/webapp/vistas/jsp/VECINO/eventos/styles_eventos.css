@@ -9,8 +9,7 @@
 }
 
 .cardEvent:hover {
-  transform: translateY(
-    -10px
+  transform: translateY(-10px);
   ); /* Agregar efecto de levantamiento al pasar el mouse */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
@@ -78,7 +77,7 @@
 }
 #fechas,
 #descripcion {
-  background: #ffffff;
+  background:  rgba(173, 216, 230, 0.7);
   border-radius: 15px;
   padding: 10px;
   color: black;
@@ -157,4 +156,28 @@ input:checked + label {
 input:checked + label .description {
   opacity: 1 !important;
   transform: translateY(0) !important;
+}
+
+
+#titulo-evento {
+  font-size: 36px; /* Tamaño grande para el título */
+  text-align: center; /* Centrar el título */
+}
+
+#datos-evento p {
+  font-size: 24px; /* Tamaño grande para los datos del evento */
+}
+
+#btn-inscribirse {
+  border-radius: 50px; /* Botón redondeado como un borrador */
+  background-color: #5cb85c;
+  border: none;
+  font-size: 25px;
+  font-weight: bold;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease;
+}
+
+#btn-inscribirse:hover {
+  background-color: #000f22;
 }
