@@ -69,7 +69,7 @@
                                 </div>
                                 <% } else { %>
                                 <div class="alert alert-danger" role="alert"
-                                     style="background-color: white; text-align: center; padding: 0.3em; margin-top: -4px; max-width: 190px; margin-left: 35px; font-size: 12px;color: white;">
+                                     style="background-color: white; text-align: center; padding: 0.77em; margin-top: -4px; max-width: 190px; margin-left: 35px; font-size: 12px;color: white;">
                                     <!-- Este div blanco mantendrá el espacio y la alineación -->
 
                                 </div>
@@ -86,7 +86,7 @@
                                 </div>
                                 <% } else { %>
                                 <div class="alert alert-danger" role="alert"
-                                     style="background-color: white; text-align: center; padding: 0.3em; margin-top: -4px; max-width: 190px; margin-left: 6px; margin-right: 30px; font-size: 12px;color: white;">
+                                     style="background-color: white; text-align: center; padding: 0.77em; margin-top: -4px; max-width: 190px; margin-left: 6px; margin-right: 30px; font-size: 12px;color: white;">
                                     <!-- Cuadro blanco para mantener la alineación -->
 
 
@@ -174,7 +174,7 @@
                                 </div>
                                 <% } else { %>
                                 <div class="alert alert-danger" role="alert"
-                                     style="background-color: white; text-align: center; padding: 0.3em; margin-top: -4px; max-width: 190px; margin-left: 6px; font-size: 12px;color: white;">
+                                     style="background-color: white; text-align: center; padding: 1.24em; margin-top: -4px; max-width: 190px; margin-left: 6px; font-size: 12px;color: white;">
                                     <!-- Cuadro blanco para mantener la alineación -->
                                 </div>
                                 <% } %>
@@ -191,7 +191,7 @@
                                 </div>
                                 <% } else { %>
                                 <div class="alert alert-danger" role="alert"
-                                     style="background-color: white; text-align: center; padding: 0.3em; margin-top: -4px; max-width: 190px; margin-left: 6px; margin-right: 30px; font-size: 12px;color: white;">
+                                     style="background-color: white; text-align: center; padding: 1.24em; margin-top: -4px; max-width: 190px; margin-left: 6px; margin-right: 30px; font-size: 12px;color: white;">
                                     <!-- Cuadro blanco para mantener la alineación -->
                                 </div>
                                 <% } %>
