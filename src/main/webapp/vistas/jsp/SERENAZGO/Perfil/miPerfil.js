@@ -119,8 +119,8 @@ function openChangePhonePopup(userId) {
         confirmButtonColor: '#12bd52', // Green color for Confirm button
         cancelButtonColor: '#f60606', // Red color for Cancel button
         preConfirm: () => {
-            const newPhNumber = document.getElementById("new-phoneNumber").value;
-            const confirmPhNumber = document.getElementById("confirm-phoneNumber").value;
+            const newPhNumber = document.getElementById("new-phoneNumber").value.trim();
+            const confirmPhNumber = document.getElementById("confirm-phoneNumber").value.trim();
 
             if (!newPhNumber || !confirmPhNumber) {
                 Swal.showValidationMessage("Por favor ingrese todos los datos");
@@ -128,8 +128,11 @@ function openChangePhonePopup(userId) {
             } else if (newPhNumber !== confirmPhNumber) {
                 Swal.showValidationMessage("Los números no coinciden");
                 return false; // Prevents the pop-up from closing
-            } else if (!/^\d+$/.test(newPhNumber)) {
+            } else if (isNaN(newPhNumber) || isNaN(confirmPhNumber)) {
                 Swal.showValidationMessage("Por favor ingrese solo números");
+                return false; // Prevents the pop-up from closing
+            } else if (newPhNumber.length !== 9) {
+                Swal.showValidationMessage("Por favor ingrese un número de teléfono válido de 9 dígitos");
                 return false; // Prevents the pop-up from closing
             }
 
@@ -141,6 +144,9 @@ function openChangePhonePopup(userId) {
         }
     });
 }
+
+
+
 
 function updatePhNumber(userId, newPhNumber) {
     console.log("Updating phone number:", userId, newPhNumber);
