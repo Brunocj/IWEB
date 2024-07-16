@@ -122,10 +122,14 @@ function openChangePhonePopup(userId) {
             } else if (newPhNumber !== confirmPhNumber) {
                 Swal.showValidationMessage("Los números no coinciden");
                 return false; // Prevents the pop-up from closing
-            } else if (!/^\d+$/.test(newPhNumber)) {
+            } else if (isNaN(newPhNumber) || isNaN(confirmPhNumber)) {
                 Swal.showValidationMessage("Por favor ingrese solo números");
                 return false; // Prevents the pop-up from closing
+            } else if (newPhNumber.length !== 9) {
+                Swal.showValidationMessage("Por favor ingrese un número de teléfono válido de 9 dígitos");
+                return false; // Prevents the pop-up from closing
             }
+
 
             return { newPhNumber };
         }

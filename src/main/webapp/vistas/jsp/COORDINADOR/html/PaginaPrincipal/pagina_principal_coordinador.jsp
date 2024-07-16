@@ -46,7 +46,7 @@
         <div class="main-panel">
           <div class="content-wrapper" style ="background-color: #bdf1f5;"> <!--Cambiar al color mas claro-->
                 <div class="title-pp">
-                  <h2>Bienvenido Coordinador <%=usuariologueado.getNombre()+" "+usuariologueado.getApellido()%>>!</h2>
+                  <h2>Bienvenido Coordinador <%=usuariologueado.getNombre()+" "+usuariologueado.getApellido()%>!</h2>
                 </div>
                 <div  class="RowWrapper">
                   <div class="row-1">
