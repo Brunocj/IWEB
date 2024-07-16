@@ -372,240 +372,240 @@
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                 <script src="${pageContext.request.contextPath}/assets/vendors/js/Chart.min.js"></script>
                 <script src="${pageContext.request.contextPath}/vistas/jsp/ADMIN/Dashboard/script_tabla.js"></script>
-                <script>
+            <script>
 
-                    $(function() {
-                        /* ChartJS
-                         * -------
-                         * Data and config for chartjs
-                         */
-                        'use strict';
+                $(function() {
+                    /* ChartJS
+                     * -------
+                     * Data and config for chartjs
+                     */
+                    'use strict';
 
-                        var data1 = {
-                            labels: JSON.parse('<%= tipoIncidenciasJSON%>'),
-                            datasets: [{
-                                label: '# incidencias: ',
-                                data: JSON.parse('<%= cantidadTipoJSON %>'),
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)',
-                                    'rgba(255, 206, 86, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(153, 102, 255, 0.2)',
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)',
-                                    'rgba(255, 206, 86, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(153, 102, 255, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(153, 102, 255, 0.2)',
-                                    'rgba(255, 159, 64, 0.2)'
-                                ],
-                                borderColor: [
-                                    'rgba(255,99,132,1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255,99,132,1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                ],
-                                borderWidth: 1,
-                                fill: false
-                            }]
-                        };
+                    var data1 = {
+                        labels: JSON.parse('<%= tipoIncidenciasJSON%>'),
+                        datasets: [{
+                            label: '# incidencias: ',
+                            data: JSON.parse('<%= cantidadTipoJSON %>'),
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1,
+                            fill: false
+                        }]
+                    };
 
-                        var data2 = {
-                            labels: JSON.parse('<%= urbanizacionesJSON%>'),
-                            datasets: [{
-                                label: '# of Votes',
-                                data: JSON.parse('<%= cantidadUrbanizacionJSON %>'),
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)',
-                                    'rgba(255, 206, 86, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(153, 102, 255, 0.2)',
-                                    'rgba(255, 159, 64, 0.2)'
-                                ],
-                                borderColor: [
-                                    'rgba(255,99,132,1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                ],
-                                borderWidth: 1,
-                                fill: false
-                            }]
-                        };
+                    var data2 = {
+                        labels: JSON.parse('<%= urbanizacionesJSON%>'),
+                        datasets: [{
+                            label: '# of Votes',
+                            data: JSON.parse('<%= cantidadUrbanizacionJSON %>'),
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1,
+                            fill: false
+                        }]
+                    };
 
-                        var options = {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    },
-                                    gridLines: {
-                                        color: "rgba(0,0,0,0.20)"
-                                    }
-                                }],
-                                xAxes: [{
-                                    gridLines: {
-                                        color: "rgba(0,0,0,0.20)"
-                                    }
-                                }]
-                            },
-                            legend: {
-                                display: false
-                            },
-                            elements: {
-                                point: {
-                                    radius: 0
+                    var options = {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                },
+                                gridLines: {
+                                    color: "rgba(0,0,0,0.20)"
                                 }
-                            }
-                        };
-
-
-                        var doughnutPieData = {
-                            datasets: [{
-                                data: JSON.parse('<%= porcentajesJSON%>'),
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 0.5)',
-                                    'rgba(54, 162, 235, 0.5)',
-                                    'rgba(255, 206, 86, 0.5)',
-                                    'rgba(75, 192, 192, 0.5)',
-                                    'rgba(153, 102, 255, 0.5)',
-                                    'rgba(255, 159, 64, 0.5)'
-                                ],
-                                borderColor: [
-                                    'rgba(255,99,132,1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                ],
                             }],
-
-                            // These labels appear in the legend and in the tooltips when hovering different arcs
-                            labels: JSON.parse('<%= estadosJSON%>')
-                        };
-                        var doughnutPieOptions = {
-                            responsive: true,
-                            animation: {
-                                animateScale: true,
-                                animateRotate: true
+                            xAxes: [{
+                                gridLines: {
+                                    color: "rgba(0,0,0,0.20)"
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        elements: {
+                            point: {
+                                radius: 0
                             }
-                        };
+                        }
+                    };
+
+
+                    var doughnutPieData = {
+                        datasets: [{
+                            data: JSON.parse('<%= porcentajesJSON%>'),
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.5)',
+                                'rgba(54, 162, 235, 0.5)',
+                                'rgba(255, 206, 86, 0.5)',
+                                'rgba(75, 192, 192, 0.5)',
+                                'rgba(153, 102, 255, 0.5)',
+                                'rgba(255, 159, 64, 0.5)'
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                        }],
+
+                        // These labels appear in the legend and in the tooltips when hovering different arcs
+                        labels: JSON.parse('<%= estadosJSON%>')
+                    };
+                    var doughnutPieOptions = {
+                        responsive: true,
+                        animation: {
+                            animateScale: true,
+                            animateRotate: true
+                        }
+                    };
 
 
 
 
-                        var multiAreaData = {
-                            labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"],
-                            datasets: [{
-                                label: 'Facebook',
-                                data: [8, 11, 13, 15, 12, 13, 16, 15, 13, 19, 11, 14],
-                                borderColor: ['rgba(255, 99, 132, 0.5)'],
-                                backgroundColor: ['rgba(255, 99, 132, 0.5)'],
+                    var multiAreaData = {
+                        labels: JSON.parse('<%= labelsChJSON%>'),
+                        datasets: [{
+                            label: 'Incidencias Reportadas',
+                            data: JSON.parse('<%= incidenciasReportadasJSON%>'),
+                            borderColor: ['rgba(255, 99, 132, 0.5)'],
+                            backgroundColor: ['rgba(255, 99, 132, 0.5)'],
+                            borderWidth: 1,
+                            fill: true
+                        },
+                            {
+                                label: 'Incidencias Resueltas',
+                                data: JSON.parse('<%= incidenciasResueltasJSON%>'),
+                                borderColor: ['rgba(54, 162, 235, 0.5)'],
+                                backgroundColor: ['rgba(54, 162, 235, 0.5)'],
                                 borderWidth: 1,
                                 fill: true
-                            },
-                                {
-                                    label: 'Twitter',
-                                    data: [7, 17, 12, 16, 14, 18, 16, 12, 15, 11, 13, 9],
-                                    borderColor: ['rgba(54, 162, 235, 0.5)'],
-                                    backgroundColor: ['rgba(54, 162, 235, 0.5)'],
-                                    borderWidth: 1,
-                                    fill: true
-                                }
-                            ]
-                        };
-
-                        var multiAreaOptions = {
-                            plugins: {
-                                filler: {
-                                    propagate: true
-                                }
-                            },
-                            elements: {
-                                point: {
-                                    radius: 0
-                                }
-                            },
-                            scales: {
-                                xAxes: [{
-                                    gridLines: {
-                                        color: "rgba(0,0,0,0.20)"
-                                    }
-                                }],
-                                yAxes: [{
-                                    gridLines: {
-                                        color: "rgba(0,0,0,0.20)"
-                                    }
-                                }]
                             }
+                        ]
+                    };
+
+                    var multiAreaOptions = {
+                        plugins: {
+                            filler: {
+                                propagate: true
+                            }
+                        },
+                        elements: {
+                            point: {
+                                radius: 0
+                            }
+                        },
+                        scales: {
+                            xAxes: [{
+                                gridLines: {
+                                    color: "rgba(0,0,0,0.20)"
+                                }
+                            }],
+                            yAxes: [{
+                                gridLines: {
+                                    color: "rgba(0,0,0,0.20)"
+                                }
+                            }]
                         }
+                    }
 
 
 
 
-                        // Get context with jQuery - using jQuery's .get() method.
-                        if ($("#barChart").length) {
-                            var barChartCanvas = $("#barChart").get(0).getContext("2d");
-                            // This will get the first returned node in the jQuery collection.
-                            var barChart = new Chart(barChartCanvas, {
-                                type: 'bar',
-                                data: data1,
-                                options: options
-                            });
-                        }
+                    // Get context with jQuery - using jQuery's .get() method.
+                    if ($("#barChart").length) {
+                        var barChartCanvas = $("#barChart").get(0).getContext("2d");
+                        // This will get the first returned node in the jQuery collection.
+                        var barChart = new Chart(barChartCanvas, {
+                            type: 'bar',
+                            data: data1,
+                            options: options
+                        });
+                    }
 
-                        if ($("#barChart2").length) {
-                            var barChartCanvas = $("#barChart2").get(0).getContext("2d");
-                            // This will get the first returned node in the jQuery collection.
-                            var barChart = new Chart(barChartCanvas, {
-                                type: 'bar',
-                                data: data2,
-                                options: options
-                            });
-                        }
-
-
-
-
-                        if ($("#areachartMulti").length) {
-                            var multiAreaCanvas = $("#areachartMulti").get(0).getContext("2d");
-                            var areachartMulti = new Chart(multiAreaCanvas, {
-                                type: 'line',
-                                data: multiAreaData,
-                                options: multiAreaOptions
-                            });
-                        }
-
-                        if ($("#doughnutChart").length) {
-                            var doughnutChartCanvas = $("#doughnutChart").get(0).getContext("2d");
-                            var doughnutChart = new Chart(doughnutChartCanvas, {
-                                type: 'doughnut',
-                                data: doughnutPieData,
-                                options: doughnutPieOptions
-                            });
-                        }
+                    if ($("#barChart2").length) {
+                        var barChartCanvas = $("#barChart2").get(0).getContext("2d");
+                        // This will get the first returned node in the jQuery collection.
+                        var barChart = new Chart(barChartCanvas, {
+                            type: 'bar',
+                            data: data2,
+                            options: options
+                        });
+                    }
 
 
 
 
-                    });
+                    if ($("#areachartMulti").length) {
+                        var multiAreaCanvas = $("#areachartMulti").get(0).getContext("2d");
+                        var areachartMulti = new Chart(multiAreaCanvas, {
+                            type: 'line',
+                            data: multiAreaData,
+                            options: multiAreaOptions
+                        });
+                    }
 
-                </script>
+                    if ($("#doughnutChart").length) {
+                        var doughnutChartCanvas = $("#doughnutChart").get(0).getContext("2d");
+                        var doughnutChart = new Chart(doughnutChartCanvas, {
+                            type: 'doughnut',
+                            data: doughnutPieData,
+                            options: doughnutPieOptions
+                        });
+                    }
+
+
+
+
+                });
+
+            </script>
 
             </div>
     </body>
